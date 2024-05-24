@@ -2,4 +2,4 @@
 
 ## Authors
 
-- Danilo Catone (danilocatone@gmail.com)[mailto://danilocatone@gmail.com]
+- Danilo Catone [danilocatone@gmail.com](mailto://danilocatone@gmail.com)
