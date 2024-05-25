@@ -1,1 +1,0 @@
- C:\\Users\\danil\\Projects\\RES_media\\pokebike\\pokebike\\pokebike_fe\\pokebike\\.dart_tool\\flutter_build\\e9c68aef3aa77599aa4bb05ae9c43b31\\native_assets.yaml: 
