@@ -6,10 +6,10 @@ environment:
   sdk: '>=3.3.3 <4.0.0'
 
 dependencies: 
-  cupertino_icons: ^1.0.6
-  get: 4.6.6
   flutter: 
     sdk: flutter
+  cupertino_icons: ^1.0.6
+  get: 4.6.6
   freezed_annotation: ^2.4.1
   json_annotation: ^4.9.0
 
