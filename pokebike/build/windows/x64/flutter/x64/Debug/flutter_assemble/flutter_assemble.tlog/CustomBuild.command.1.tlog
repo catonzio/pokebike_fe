@@ -1,0 +1,28 @@
+^C:\USERS\DANIL\PROJECTS\RES_MEDIA\POKEBIKE\POKEBIKE\POKEBIKE_FE\POKEBIKE\BUILD\WINDOWS\X64\CMAKEFILES\9605D3F555BB1A687E18CDC79795066C\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\Users\danil\Android\flutter PROJECT_DIR=C:\Users\danil\Projects\RES_media\pokebike\pokebike\pokebike_fe\pokebike FLUTTER_ROOT=C:\Users\danil\Android\flutter FLUTTER_EPHEMERAL_DIR=C:\Users\danil\Projects\RES_media\pokebike\pokebike\pokebike_fe\pokebike\windows\flutter\ephemeral PROJECT_DIR=C:\Users\danil\Projects\RES_media\pokebike\pokebike\pokebike_fe\pokebike FLUTTER_TARGET=C:\Users\danil\Projects\RES_media\pokebike\pokebike\pokebike_fe\pokebike\lib\main.dart DART_DEFINES=RkxVVFRFUl9XRUJfQVVUT19ERVRFQ1Q9dHJ1ZQ==,RkxVVFRFUl9XRUJfQ0FOVkFTS0lUX1VSTD1odHRwczovL3d3dy5nc3RhdGljLmNvbS9mbHV0dGVyLWNhbnZhc2tpdC9lNzZjOTU2NDk4ODQxZTFhYjQ1ODU3N2QzODkyMDAzZTU1M2U0ZjNjLw== DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false PACKAGE_CONFIG=C:\Users\danil\Projects\RES_media\pokebike\pokebike\pokebike_fe\pokebike\.dart_tool\package_config.json C:/Users/danil/Android/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\DANIL\PROJECTS\RES_MEDIA\POKEBIKE\POKEBIKE\POKEBIKE_FE\POKEBIKE\BUILD\WINDOWS\X64\CMAKEFILES\3F29DEF14650CB97AA0D7FF01D4AD20C\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\DANIL\PROJECTS\RES_MEDIA\POKEBIKE\POKEBIKE\POKEBIKE_FE\POKEBIKE\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -SC:/Users/danil/Projects/RES_media/pokebike/pokebike/pokebike_fe/pokebike/windows -BC:/Users/danil/Projects/RES_media/pokebike/pokebike/pokebike_fe/pokebike/build/windows/x64 --check-stamp-file C:/Users/danil/Projects/RES_media/pokebike/pokebike/pokebike_fe/pokebike/build/windows/x64/flutter/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
