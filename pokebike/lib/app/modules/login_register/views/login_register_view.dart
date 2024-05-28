@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
+import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/utils/decoration_image.dart';
 
 import '../controllers/login_register_controller.dart';
 
@@ -17,13 +19,7 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-        image: DecorationImage(
-          image: const AssetImage('assets/images/splash.png'),
-          colorFilter:
-              ColorFilter.mode(Colors.black.withOpacity(0.2), BlendMode.darken),
-          fit: BoxFit.cover,
-        ),
-      ),
+          image: getDecorationImage('assets/images/splash.png', 0.2)),
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -33,51 +29,9 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 16.0),
-                    child: MButton(
-                      onPressed: () => _access(context),
-                      backgroundColor: MColors.secondary,
-                      child: Text("Accedi", style: context.textTheme.bodySmall),
-                    ),
-                  ),
-                  MButton(
-                    onPressed: () => _register(context),
-                    backgroundColor: Colors.white,
-                    child: Text(
-                      "Registrati",
-                      style: context.textTheme.bodySmall!
-                          .copyWith(color: MColors.primaryDark),
-                    ),
-                  ),
-                ],
-              ),
+              _accessRegisterColumn(context),
               const OppureRow(),
-              MButton(
-                onPressed: () => _googleRegister(context),
-                backgroundColor: Colors.white,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/icons/google.png",
-                      height: context.height * 0.04,
-                      fit: BoxFit.contain,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Text(
-                        "Registrati con Google",
-                        style: context.textTheme.bodySmall
-                            ?.copyWith(color: MColors.primaryDark),
-                      ),
-                    )
-                  ],
-                ),
-              )
+              _googleAccessButton(context)
             ],
           ),
         ),
@@ -85,12 +39,62 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
     ));
   }
 
+  MButton _googleAccessButton(BuildContext context) {
+    return MButton(
+      onPressed: () => _googleRegister(context),
+      backgroundColor: Colors.white,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            "assets/icons/google.png",
+            height: context.height * 0.04,
+            fit: BoxFit.contain,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              "Registrati con Google",
+              style: context.textTheme.bodySmall
+                  ?.copyWith(color: MColors.primaryDark),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Column _accessRegisterColumn(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 16.0),
+          child: MButton(
+            onPressed: () => _access(context),
+            backgroundColor: MColors.secondary,
+            child: Text("Accedi", style: context.textTheme.bodySmall),
+          ),
+        ),
+        MButton(
+          onPressed: () => _register(context),
+          backgroundColor: Colors.white,
+          child: Text(
+            "Registrati",
+            style: context.textTheme.bodySmall!
+                .copyWith(color: MColors.primaryDark),
+          ),
+        ),
+      ],
+    );
+  }
+
   _access(BuildContext context) {
-    Navigator.pushNamed(context, Routes.LOGIN);
+    context.navigator.pushNamed(Routes.LOGIN);
   }
 
   _register(BuildContext context) {
-    Navigator.pushNamed(context, Routes.REGISTER);
+    context.navigator.pushNamed(Routes.REGISTER);
   }
 
   _googleRegister(BuildContext context) {}

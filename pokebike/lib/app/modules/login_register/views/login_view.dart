@@ -1,12 +1,17 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
+import 'package:pokebike/app/config/themes.dart';
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/widgets/back_button.dart';
+import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/utils/decoration_image.dart';
+import 'package:pokebike/app/shared/utils/input_decoration.dart';
+import 'package:pokebike/app/shared/widgets/base_app_bar.dart';
+import 'package:pokebike/app/shared/widgets/loading_stack.dart';
 
 import '../controllers/login_controller.dart';
 
@@ -16,41 +21,30 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          leading: MBackButton(
-            onPressed: () =>
-                Navigator.popAndPushNamed(context, Routes.LOGIN_REGISTER),
-          ),
-        ),
+        appBar: BaseAppBar(
+            onBackPressed: () =>
+                context.navigator.popAndPushNamed(Routes.LOGIN_REGISTER)),
         body: Container(
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: const AssetImage('assets/images/login_bg.png'),
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.2), BlendMode.darken),
-              fit: BoxFit.cover,
-            ),
-          ),
+              image: getDecorationImage('assets/images/login_bg.png', 0.3)),
           alignment: Alignment.bottomCenter,
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: _mainBody(context),
-          ),
+              padding: const EdgeInsets.all(16.0),
+              child: LoadingStack(
+                  isLoading: controller.isPerformingLogin,
+                  child: _mainBody(context))),
         ));
   }
 
   Widget _mainBody(BuildContext context) {
-    const TextStyle formTextStyle = TextStyle(
-        color: MColors.primary, fontSize: 14, fontWeight: FontWeight.w400);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         const Text(
-          "Bentornato",
+          "Bentornato!",
           style: TextStyle(
               fontSize: 34,
               fontWeight: FontWeight.bold,
@@ -59,38 +53,11 @@ class LoginView extends GetView<LoginController> {
         SizedBox(
           height: context.height * 0.25,
           child: Form(
+              key: controller.formKey,
               child: DefaultTextStyle(
-            style: formTextStyle,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const Text("E-mail"),
-                TextFormField(
-                    minLines: 1,
-                    maxLines: 1,
-                    style: formTextStyle,
-                    decoration: _inputDecoration("E-mail")),
-                const Text("Password"),
-                Obx(() => TextFormField(
-                    obscureText: controller.obscurePassword,
-                    style: formTextStyle,
-                    minLines: 1,
-                    maxLines: 1,
-                    decoration:
-                        _inputDecoration("Password", isPassword: true))),
-                const SizedBox(
-                  width: double.infinity,
-                  child: Text("Password dimenticata?",
-                      textAlign: TextAlign.end,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400)),
-                ),
-              ],
-            ),
-          )),
+                style: Themes.formTextStyle,
+                child: _formBody(context),
+              )),
         ),
         Column(
           children: [
@@ -102,10 +69,13 @@ class LoginView extends GetView<LoginController> {
                 child: const Text("Accedi"),
               ),
             ),
-            const SizedBox(
+            SizedBox(
               width: double.infinity,
-              child: Text("Non hai un account? Registrati",
-                  textAlign: TextAlign.center),
+              child: InkWell(
+                onTap: () => _onRegister(context),
+                child: const Text("Non hai un account? Registrati",
+                    textAlign: TextAlign.center),
+              ),
             ),
           ],
         )
@@ -113,32 +83,68 @@ class LoginView extends GetView<LoginController> {
     );
   }
 
-  _login(BuildContext context) {}
-
-  _inputDecoration(String hintText, {bool isPassword = false}) {
-    return InputDecoration(
-        filled: true,
-        fillColor: Colors.white,
-        hintStyle: TextStyle(
-            color: MColors.primary.withOpacity(0.4),
-            fontSize: 14,
-            fontWeight: FontWeight.w400),
-        hintText: hintText,
-        contentPadding: const EdgeInsets.all(16),
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(32)),
-          borderSide: BorderSide(color: MColors.secondaryDark, width: 2),
+  Column _formBody(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        const Text("E-mail"),
+        TextFormField(
+            controller: controller.emailController,
+            minLines: 1,
+            maxLines: 1,
+            style: Themes.formTextStyle,
+            validator: controller.emailValidator,
+            decoration: inputDecoration("E-mail")),
+        const Text("Password"),
+        Obx(() => TextFormField(
+            controller: controller.passwordController,
+            obscureText: controller.obscurePassword,
+            minLines: 1,
+            maxLines: 1,
+            style: Themes.formTextStyle,
+            validator: controller.passwordValidator,
+            decoration: inputDecoration("Password",
+                isPassword: true,
+                toggleObscurePassword: controller.toggleObscurePassword))),
+        SizedBox(
+          width: double.infinity,
+          child: InkWell(
+            onTap: () => _passwordForgotten(context),
+            child: const Text("Password dimenticata?",
+                textAlign: TextAlign.end,
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400)),
+          ),
         ),
-        suffix: isPassword
-            ? InkWell(
-                onTap: controller.toggleObscurePassword,
-                child: Image.asset("assets/icons/password_obscure.png",
-                    height: 18, width: 18, fit: BoxFit.contain),
-              )
-            : null,
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(32)),
-          borderSide: BorderSide(color: MColors.secondaryDark, width: 2),
-        ));
+      ],
+    );
+  }
+
+  _login(BuildContext context) async {
+    if (controller.formKey.currentState!.validate()) {
+      bool result = await controller.login();
+      if (context.mounted) {
+        if (result) {
+          context.navigator.popAndPushNamed(Routes.HOME);
+        } else {
+          context.scaffold.showSnackBar(SnackBar(
+            content: const Text("Errore durante il login"),
+            action: SnackBarAction(
+              label: "Ok",
+              onPressed: () => context.scaffold.clearSnackBars(),
+            ),
+          ));
+        }
+      }
+    }
+  }
+
+  _passwordForgotten(BuildContext context) {}
+
+  _onRegister(BuildContext context) {
+    context.navigator.popAndPushNamed(Routes.REGISTER);
   }
 }

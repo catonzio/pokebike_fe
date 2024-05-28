@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:get/get.dart';
 import 'package:pokebike/app/modules/presentation/views/presentation_container.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
+import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/back_button.dart';
 
 import '../controllers/presentation_controller.dart';
@@ -66,7 +66,7 @@ class PresentationView extends GetView<PresentationController> {
   }
 
   _skipPresentation(BuildContext context) {
-    Navigator.popAndPushNamed(context, Routes.LOGIN_REGISTER);
+    context.navigator.popAndPushNamed(Routes.LOGIN_REGISTER);
   }
 
   _onNext(BuildContext context) {

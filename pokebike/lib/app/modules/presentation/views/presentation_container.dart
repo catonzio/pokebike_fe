@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
+import 'package:pokebike/app/shared/utils/decoration_image.dart';
 
 class PresentationContainer extends StatelessWidget {
   final String imagePath;
@@ -23,7 +24,6 @@ class PresentationContainer extends StatelessWidget {
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
           transitionBuilder: (Widget child, Animation<double> animation) {
-            print("animation: ${animation.value}");
             return FadeTransition(
               opacity: animation,
               child: child,
@@ -34,13 +34,7 @@ class PresentationContainer extends StatelessWidget {
             width: context.width,
             height: height,
             decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.2), BlendMode.darken),
-                  image: Image.asset(
-                    imagePath,
-                  ).image),
+              image: getDecorationImage(imagePath, 0.2),
               borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(100),
               ),
