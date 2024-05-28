@@ -26,7 +26,7 @@ class PresentationView extends GetView<PresentationController> {
         body: Stack(
           children: [
             Image.asset(
-              "assets/images/presentation_bg.png",
+              "assets/images/presentation/presentation_bg.png",
               width: context.width,
               height: context.height,
               fit: BoxFit.cover,

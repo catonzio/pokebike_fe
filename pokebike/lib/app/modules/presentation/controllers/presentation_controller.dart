@@ -7,9 +7,9 @@ class PresentationController extends GetxController {
   set index(int value) => _index.value = value;
 
   final List<String> imagesPaths = [
-    "assets/images/presentation_1.png",
-    "assets/images/presentation_2.png",
-    "assets/images/presentation_3.png",
+    "assets/images/presentation/presentation_1.png",
+    "assets/images/presentation/presentation_2.png",
+    "assets/images/presentation/presentation_3.png",
   ];
 
   final List<String> titles = [

@@ -21,6 +21,8 @@ class App extends StatelessWidget {
       title: "Pokebike",
       debugShowCheckedModeBanner: false,
       theme: Themes.dark(),
+      defaultTransition: Transition.native,
+      transitionDuration: const Duration(milliseconds: 300),
       initialBinding: InitialBindings(),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
