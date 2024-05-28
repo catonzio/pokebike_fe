@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:pokebike/app/shared/utils/decoration_image.dart';
+import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
 
 class PresentationContainer extends StatelessWidget {
   final String imagePath;
@@ -63,11 +64,12 @@ class InternalText extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: context.textTheme.displaySmall
-                ?.copyWith(fontWeight: FontWeight.bold),
-          ),
+          ShimmerTitle(text: title),
+          // Text(
+          //   title,
+          //   style: context.textTheme.displaySmall
+          //       ?.copyWith(fontWeight: FontWeight.bold),
+          // ),
           ...[
             for (String text in subtitle.split("\n"))
               Text(text, style: context.textTheme.bodyLarge)

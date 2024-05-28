@@ -11,6 +11,7 @@ import 'package:pokebike/app/shared/utils/decoration_image.dart';
 import 'package:pokebike/app/shared/utils/input_decoration.dart';
 import 'package:pokebike/app/shared/widgets/base_app_bar.dart';
 import 'package:pokebike/app/shared/widgets/loading_stack.dart';
+import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
 
 import '../controllers/register_controller.dart';
 
@@ -42,13 +43,7 @@ class RegisterView extends GetView<RegisterController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const Text(
-          "Benvenuto!",
-          style: TextStyle(
-              fontSize: 34,
-              fontWeight: FontWeight.bold,
-              color: MColors.primary),
-        ),
+        const ShimmerTitle(text: "Benvenuto!"),
         SizedBox(
           height: context.height * 0.35,
           child: Form(

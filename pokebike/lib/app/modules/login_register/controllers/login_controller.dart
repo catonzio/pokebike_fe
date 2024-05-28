@@ -42,7 +42,7 @@ class LoginController extends GetxController {
       // Random r = Random();
       // return r.nextBool();
       isPerformingLogin.value = false;
-      return false;
+      return true;
     });
   }
 }
