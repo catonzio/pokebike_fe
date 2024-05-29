@@ -13,8 +13,10 @@ class LoginController extends GetxController {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController =
+      TextEditingController(text: "email@email.com");
+  final TextEditingController passwordController =
+      TextEditingController(text: "password");
 
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {

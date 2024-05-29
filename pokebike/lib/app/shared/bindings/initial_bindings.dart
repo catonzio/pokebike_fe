@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
+import 'package:pokebike/app/shared/widgets/bottom_navbar.dart';
 
 class InitialBindings extends Bindings {
   @override
   void dependencies() {
-    // Here you can put your initial bindings
+    Get.lazyPut(() => BottomNavbarController());
   }
 }
