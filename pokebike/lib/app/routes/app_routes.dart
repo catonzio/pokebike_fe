@@ -12,6 +12,10 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const REGISTER = _Paths.REGISTER;
   static const CONFIRM_REGISTER = _Paths.CONFIRM_REGISTER;
+  static const GARAGE = _Paths.GARAGE;
+  static const TORNEO = _Paths.TORNEO;
+  static const PROFILE = _Paths.PROFILE;
+  static const FOTOCAMERA = _Paths.FOTOCAMERA;
 }
 
 abstract class _Paths {
@@ -23,4 +27,8 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const REGISTER = '/register';
   static const CONFIRM_REGISTER = '/confirm-register';
+  static const GARAGE = '/garage';
+  static const TORNEO = '/torneo';
+  static const PROFILE = '/profile';
+  static const FOTOCAMERA = '/fotocamera';
 }

@@ -5,21 +5,29 @@ class MIcon extends StatelessWidget {
   final String name;
   final Color color;
   final double? size;
+  final Function()? onTap;
 
   const MIcon(
       {super.key,
       required this.name,
       this.color = Colors.white,
-      this.size = 32});
+      this.onTap,
+      this.size = 20});
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      "assets/icons/$name.svg",
-      width: size,
-      height: size,
-      // colorFilter: ColorFilter.mode(color, BlendMode.srcATop),
-      // fit: BoxFit.fill,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: InkWell(
+        onTap: onTap,
+        child: SvgPicture.asset(
+          "assets/icons/$name.svg",
+          width: size,
+          height: size,
+          // colorFilter: ColorFilter.mode(color, BlendMode.srcATop),
+          // fit: BoxFit.fill,
+        ),
+      ),
     );
   }
 }
