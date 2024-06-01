@@ -16,6 +16,7 @@ abstract class Routes {
   static const TORNEO = _Paths.TORNEO;
   static const PROFILE = _Paths.PROFILE;
   static const FOTOCAMERA = _Paths.FOTOCAMERA;
+  static const COMMUNITY = _Paths.COMMUNITY;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const TORNEO = '/torneo';
   static const PROFILE = '/profile';
   static const FOTOCAMERA = '/fotocamera';
+  static const COMMUNITY = '/community';
 }

@@ -9,6 +9,8 @@ class MColors {
   static const Color secondary = Color(0xFFD22E29);
   static const Color secondaryLight = Color(0xFFE4382E);
 
+  static const Color containerRed = Color(0xFFB61A15);
+
   static const Color successDark = Color(0xFF00A400);
   static const Color success = Color(0xFF0AC900);
   static const Color successLight = Color(0xFF51D240);

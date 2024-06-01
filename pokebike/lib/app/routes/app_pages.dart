@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/community/bindings/community_binding.dart';
+import '../modules/community/views/community_view.dart';
 import '../modules/fotocamera/bindings/fotocamera_binding.dart';
 import '../modules/fotocamera/views/fotocamera_view.dart';
 import '../modules/garage/bindings/garage_binding.dart';
@@ -87,6 +89,11 @@ class AppPages {
       name: _Paths.FOTOCAMERA,
       page: () => const FotocameraView(),
       binding: FotocameraBinding(),
+    ),
+    GetPage(
+      name: _Paths.COMMUNITY,
+      page: () => const CommunityView(),
+      binding: CommunityBinding(),
     ),
   ];
 }

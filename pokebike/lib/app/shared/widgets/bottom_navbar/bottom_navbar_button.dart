@@ -35,17 +35,15 @@ class BottomNavbarButton extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          InkWell(
+          MIcon(
+            name: iconName + addName,
             onTap: () => onTap(index),
-            child: MIcon(
-              name: iconName + addName,
-              // color: color,
-              size: size,
-            ),
+            // color: color,
+            size: size,
           ),
           Text(
             label,
-            style: TextStyle(color: color),
+            style: context.textTheme.bodyMedium?.copyWith(color: color),
           )
         ],
       );
