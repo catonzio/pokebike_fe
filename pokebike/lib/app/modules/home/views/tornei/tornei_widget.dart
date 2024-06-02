@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pokebike/app/modules/home/views/tornei/tornei_list.dart';
+import 'package:get/get.dart';
+import 'package:pokebike/app/shared/widgets/tornei_list.dart';
 import 'package:pokebike/app/modules/home/views/tornei/tornei_title.dart';
 
 class TorneiWidget extends StatelessWidget {
@@ -15,7 +16,12 @@ class TorneiWidget extends StatelessWidget {
       child: Column(
         children: [
           const TorneiTitle(),
-          SizedBox(height: height * 0.75, child: const TorneiList()),
+          SizedBox(
+              height: height * 0.75,
+              child: TorneiList(
+                itemExtent: context.width * 0.6,
+                scrollDirection: Axis.horizontal,
+              )),
         ],
       ),
     );

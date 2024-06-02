@@ -21,7 +21,7 @@ class GarageController extends GetxController {
   void onInit() {
     super.onInit();
     _fetchGarage();
-    _fetchCollection();
+    // _fetchCollection();
   }
 
   void _fetchGarage() async {
@@ -40,5 +40,10 @@ class GarageController extends GetxController {
 
   void toggleShowing(bool value) {
     isShowingGarage.value = value;
+    if (!value && collections.isEmpty) {
+      _fetchCollection();
+    } else if (value && garages.isEmpty) {
+      _fetchGarage();
+    }
   }
 }
