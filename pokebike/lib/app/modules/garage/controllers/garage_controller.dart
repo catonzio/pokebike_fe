@@ -27,7 +27,7 @@ class GarageController extends GetxController {
   void _fetchGarage() async {
     isFetchingGarage = true;
     await Future.delayed(const Duration(seconds: 3));
-    garages.addAll(List.generate(10, (index) => index + 1));
+    // garages.addAll(List.generate(10, (index) => index + 1));
     isFetchingGarage = false;
   }
 

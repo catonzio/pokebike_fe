@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/drawer/drawer_controller.dart';
 import 'package:pokebike/app/shared/widgets/drawer/drawer_item.dart';
 import 'package:pokebike/app/shared/widgets/drawer/drawer_item_widget.dart';
+import 'package:pokebike/app/shared/widgets/drawer/logout_dialog.dart';
 import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
 
 class Mdrawer extends StatelessWidget {
@@ -53,38 +53,9 @@ class Mdrawer extends StatelessWidget {
   }
 
   void _tapLogout(BuildContext context) {
-    Dialog alert = Dialog(
+    Dialog alert = const Dialog(
       backgroundColor: MColors.grey,
-      child: SizedBox(
-        height: context.height * 0.3,
-        width: context.width * 0.4,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                "Sei sicuro di voler uscire?",
-                style: context.textTheme.bodyLarge!
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                "Una volta uscito dovrai effettuare nuovamente l'accesso per utilizzare l'app",
-                textAlign: TextAlign.center,
-                style: context.textTheme.bodySmall,
-              ),
-              MButton(label: "Annulla", onTap: () => context.navigator.pop()),
-              MButton(
-                  label: "Esci",
-                  color: Colors.white,
-                  onTap: () => _dialogEsciTap(context),
-                  textColor: MColors.primary,
-                  border: Border.all(color: MColors.secondaryDark, width: 2)),
-            ],
-          ),
-        ),
-      ),
+      child: LogoutDialog(),
     );
 
     // show the dialog
@@ -93,65 +64,6 @@ class Mdrawer extends StatelessWidget {
       builder: (BuildContext context) {
         return alert;
       },
-    );
-  }
-
-  _dialogEsciTap(BuildContext context) {
-    final MDrawerController controller = Get.find<MDrawerController>();
-    controller.toggleDrawer();
-    context.navigator.pushNamed(Routes.LOGIN);
-  }
-
-}
-
-class MButton extends StatelessWidget {
-  final String label;
-  final Color color;
-  final Color? textColor;
-  final BoxBorder? border;
-  final double? width;
-  final double? height;
-  final Function() onTap;
-
-  const MButton(
-      {super.key,
-      required this.label,
-      this.color = MColors.secondaryDark,
-      this.textColor,
-      this.border,
-      this.width = double.infinity,
-      this.height,
-      required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    TextStyle textStyle = context.textTheme.bodyMedium!;
-    if (textColor != null) {
-      textStyle = textStyle.copyWith(color: textColor);
-    }
-
-    return Material(
-      elevation: 5,
-      borderRadius: BorderRadius.circular(32),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(32),
-        child: Container(
-          width: width,
-          height: height,
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: color,
-            border: border,
-            borderRadius: BorderRadius.circular(32),
-          ),
-          child: Text(
-            label,
-            style: textStyle,
-          ),
-        ),
-      ),
     );
   }
 }

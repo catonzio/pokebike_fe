@@ -6,8 +6,9 @@ import 'package:pokebike/app/modules/garage/views/garage/garage_widget.dart';
 import 'package:pokebike/app/modules/garage/views/pagination/pagination_row.dart';
 import 'package:pokebike/app/modules/garage/views/profile_widget.dart';
 import 'package:pokebike/app/shared/default_page.dart';
+import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/back_button.dart';
-import 'package:pokebike/app/shared/widgets/search_row.dart';
+import 'package:pokebike/app/shared/widgets/search_row/search_row.dart';
 
 import '../controllers/garage_controller.dart';
 
@@ -32,7 +33,7 @@ class GarageView extends GetView<GarageController> {
                 top: 0,
                 left: 0,
                 child: MBackButton(
-                  onPressed: () => {},
+                  onPressed: () => context.navigator.pop(),
                 ))
           ],
         ),
@@ -48,7 +49,8 @@ class GarageView extends GetView<GarageController> {
         ProfileWidget(radius: context.height * 0.07, text: "Name of user"),
         const PaginationRow(),
         const SearchRow(),
-        Expanded(
+        SizedBox(
+          height: context.height * 0.4,
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: Obx(() => controller.isShowingGarage.value

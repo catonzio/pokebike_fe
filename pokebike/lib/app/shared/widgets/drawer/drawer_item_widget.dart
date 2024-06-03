@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/shared/widgets/drawer/drawer_item.dart';
-import 'package:pokebike/app/shared/widgets/micon.dart';
+import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
 class DrawerItemWidget extends StatelessWidget {
   final DrawerItem item;

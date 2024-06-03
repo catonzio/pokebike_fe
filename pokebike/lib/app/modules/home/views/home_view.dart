@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/modules/home/views/stories/stories_widget.dart';
 import 'package:pokebike/app/modules/home/views/tornei/tornei_widget.dart';
 import 'package:pokebike/app/modules/home/views/upper_buttons/upper_buttons.dart';
@@ -23,7 +24,7 @@ class HomeView extends GetView<HomeController> {
         body: Padding(
       padding: const EdgeInsets.only(left: 16.0),
       child: SingleChildScrollView(
-        padding: EdgeInsets.only(bottom: communityHeight),
+        padding: const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,

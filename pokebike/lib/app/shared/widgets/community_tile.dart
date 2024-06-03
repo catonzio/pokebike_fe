@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
+import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
 
 class CommunityTile extends StatelessWidget {
   final int index;
@@ -24,19 +25,25 @@ class CommunityTile extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                      "https://picsum.photos/200/300?random=$index"),
-                  fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0), BlendMode.darken),
-                ),
-                // color: Colors.amber,
-                borderRadius: BorderRadius.circular(16),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: MimageNetwork(
+                path: "https://picsum.photos/200/300?random=$index",
               ),
             ),
+            // child: Container(
+            //   decoration: BoxDecoration(
+            //     image: DecorationImage(
+            //       image: NetworkImage(
+            //           "https://picsum.photos/200/300?random=$index"),
+            //       fit: BoxFit.cover,
+            //       colorFilter: ColorFilter.mode(
+            //           Colors.black.withOpacity(0), BlendMode.darken),
+            //     ),
+            //     // color: Colors.amber,
+            //     borderRadius: BorderRadius.circular(16),
+            //   ),
+            // ),
           ),
           Positioned(
             bottom: 0,
@@ -56,18 +63,18 @@ class CommunityTile extends StatelessWidget {
 }
 
 class CommunityTileBottomRow extends StatelessWidget {
+  final int index;
+
   const CommunityTileBottomRow({
     super.key,
     required this.index,
   });
 
-  final int index;
-
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: MColors.primary.withOpacity(0.4),
+          color: MColors.primary.withOpacity(0.5),
           borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(16),
               bottomRight: Radius.circular(16))),
@@ -76,12 +83,21 @@ class CommunityTileBottomRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CircleAvatar(
-            radius: context.width * 0.04,
-            foregroundImage:
-                Image.network("https://picsum.photos/250/250?random=$index")
-                    .image,
+          SizedBox(
+            width: context.width * 0.1,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: MimageNetwork(
+                path: "https://picsum.photos/250/250?random=$index",
+              ),
+            ),
           ),
+          // CircleAvatar(
+          //   radius: context.width * 0.04,
+          //   foregroundImage:
+          //       Image.network("https://picsum.photos/250/250?random=$index")
+          //           .image,
+          // ),
           const Text("Hello"),
           IconButton(
               onPressed: () => {}, icon: const Icon(Icons.arrow_forward_ios))

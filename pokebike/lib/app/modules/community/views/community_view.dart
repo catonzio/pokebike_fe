@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/shared/widgets/search_row.dart';
+import 'package:pokebike/app/shared/widgets/search_row/search_row.dart';
 import 'package:pokebike/app/modules/community/views/whole_community_list.dart';
 import 'package:pokebike/app/shared/default_page.dart';
 import 'package:pokebike/app/shared/widgets/shimmer_title.dart';

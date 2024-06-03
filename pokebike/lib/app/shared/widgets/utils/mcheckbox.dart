@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 
-class CustomCheckbox extends StatelessWidget {
+class MCheckbox extends StatelessWidget {
   final RxBool isChecked;
   final void Function(bool?) onChanged;
 
-  const CustomCheckbox(
+  const MCheckbox(
       {super.key, required this.isChecked, required this.onChanged});
 
   @override

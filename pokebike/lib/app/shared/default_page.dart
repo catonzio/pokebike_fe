@@ -7,7 +7,7 @@ import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/bottom_navbar/bottom_navbar.dart';
 import 'package:pokebike/app/shared/widgets/drawer/drawer_controller.dart';
 import 'package:pokebike/app/shared/widgets/drawer/mdrawer.dart';
-import 'package:pokebike/app/shared/widgets/micon.dart';
+import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
 class DefaultPage extends GetView<MDrawerController> {
   final Widget body;

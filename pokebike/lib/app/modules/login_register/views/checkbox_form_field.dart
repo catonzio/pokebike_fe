@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/shared/widgets/custom_checkbox.dart';
+import 'package:pokebike/app/shared/widgets/utils/mcheckbox.dart';
 
 class CheckboxFormField extends FormField<bool> {
   CheckboxFormField(
@@ -16,7 +16,7 @@ class CheckboxFormField extends FormField<bool> {
           return ListTile(
             dense: state.hasError,
             title: title,
-            leading: CustomCheckbox(
+            leading: MCheckbox(
                 isChecked: value,
                 onChanged: (bool? newValue) {
                   state.didChange(newValue);

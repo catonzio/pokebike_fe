@@ -9,7 +9,7 @@ import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/utils/decoration_image.dart';
 import 'package:pokebike/app/shared/utils/input_decoration.dart';
 import 'package:pokebike/app/shared/widgets/base_app_bar.dart';
-import 'package:pokebike/app/shared/widgets/loading_stack.dart';
+import 'package:pokebike/app/shared/widgets/utils/loading_stack.dart';
 import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
 
 import '../controllers/login_controller.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
 
 class GarageCardWidget extends StatelessWidget {
   final int index;
@@ -10,17 +11,12 @@ class GarageCardWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(16),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          image: DecorationImage(
-            image: Image.network("https://picsum.photos/id/${100 + index}/300")
-                .image,
-            fit: BoxFit.cover,
-          ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: MimageNetwork(
+          path: "https://picsum.photos/id/${200 + index}/300",
         ),
       ),
     );
   }
 }
-

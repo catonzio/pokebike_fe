@@ -1,39 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/shared/widgets/micon.dart';
+import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
-class SearchRow extends StatelessWidget {
-  const SearchRow({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const Expanded(
-          flex: 8,
-          child: SearchWidget(),
-        ),
-        Expanded(
-          flex: 2,
-          child: Container(
-            decoration: const BoxDecoration(
-                color: Colors.white, shape: BoxShape.circle),
-            padding: const EdgeInsets.all(6),
-            child: const MIcon(
-              name: "Filter icon",
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class SearchWidget extends StatelessWidget {
-  const SearchWidget({super.key});
+class SearchTextField extends StatelessWidget {
+  const SearchTextField({super.key});
 
   @override
   Widget build(BuildContext context) {

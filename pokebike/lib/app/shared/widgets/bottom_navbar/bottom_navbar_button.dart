@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 // import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/widgets/micon.dart';
+import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
 class BottomNavbarButton extends StatelessWidget {
   final int index;

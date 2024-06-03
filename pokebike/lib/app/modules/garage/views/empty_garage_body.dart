@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/garage/views/aggiungi_button.dart';
+import 'package:pokebike/app/shared/mbutton.dart';
 
 class EmptyGarageBody extends StatelessWidget {
   const EmptyGarageBody({super.key});
@@ -15,7 +15,8 @@ class EmptyGarageBody extends StatelessWidget {
             style: context.textTheme.titleMedium),
         Padding(
           padding: EdgeInsets.only(bottom: context.height * 0.1),
-          child: AggiungiButton(
+          child: MButton(
+            label: "Aggiungi",
             onTap: () => {print("Aggiungi garage")},
           ),
         )

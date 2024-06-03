@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:pokebike/app/config/colors.dart';
+import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/bottom_navbar/bezier_clipper.dart';
 import 'package:pokebike/app/shared/widgets/bottom_navbar/bottom_navbar_button.dart';
@@ -16,8 +17,8 @@ class BottomNavbar extends GetView<BottomNavbarController> {
     return Stack(
       fit: StackFit.loose,
       children: [
-        _bottomContainer(),
-        _upperCircle(),
+        _bottomContainer(Constants.bottomNavbarHeight / 2),
+        _upperCircle(Constants.bottomNavbarHeight / 2),
         _buttonsRow(context),
       ],
     );
@@ -44,44 +45,6 @@ class BottomNavbar extends GetView<BottomNavbarController> {
             size: el.$2.size,
           );
         }).toList(),
-        // [
-        //   BottomNavbarButton(
-        //     index: 0,
-        //     label: "Home",
-        //     currentIndex: controller.currentIndex,
-        //     iconName: "Home icon",
-        //     onTap: controller.onTap,
-        //   ),
-        //   BottomNavbarButton(
-        //     index: 1,
-        //     label: "Garage",
-        //     currentIndex: controller.currentIndex,
-        //     iconName: "Garage icon",
-        //     onTap: controller.onTap,
-        //   ),
-        //   // const SizedBox(width: 48), // space for the floating action button
-        //   BottomNavbarButton(
-        //       index: 20,
-        //       label: "Fotocamera",
-        //       currentIndex: 100.obs,
-        //       onTap: controller.onTap,
-        //       size: 70,
-        //       iconName: "Logo"),
-        //   BottomNavbarButton(
-        //     index: 2,
-        //     label: "Torneo",
-        //     currentIndex: controller.currentIndex,
-        //     iconName: "Torneo icon",
-        //     onTap: controller.onTap,
-        //   ),
-        //   BottomNavbarButton(
-        //     index: 3,
-        //     label: "Profilo",
-        //     currentIndex: controller.currentIndex,
-        //     iconName: "Profile icon",
-        //     onTap: controller.onTap,
-        //   ),
-        // ],
       ),
     );
   }
@@ -94,12 +57,12 @@ class BottomNavbar extends GetView<BottomNavbarController> {
     });
   }
 
-  Positioned _upperCircle() {
+  Positioned _upperCircle(double height) {
     return Positioned(
         left: 0,
         right: 0,
-        bottom: 80,
-        height: 80,
+        bottom: height,
+        height: height,
         child: ClipPath(
           clipper: BezierClipper(),
           child: Container(
@@ -108,12 +71,12 @@ class BottomNavbar extends GetView<BottomNavbarController> {
         ));
   }
 
-  Positioned _bottomContainer() {
+  Positioned _bottomContainer(double height) {
     return Positioned(
       left: 0,
       right: 0,
       bottom: 0,
-      height: 80,
+      height: height,
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50), color: MColors.primary),
