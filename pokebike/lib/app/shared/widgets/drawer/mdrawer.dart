@@ -1,71 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/shared/widgets/micon.dart';
+import 'package:pokebike/app/config/colors.dart';
+import 'package:pokebike/app/routes/app_pages.dart';
+import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/widgets/drawer/drawer_controller.dart';
+import 'package:pokebike/app/shared/widgets/drawer/drawer_item.dart';
+import 'package:pokebike/app/shared/widgets/drawer/drawer_item_widget.dart';
 import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
-
-class DrawerItem {
-  final String title;
-  final String icon;
-  final Function() onTap;
-
-  DrawerItem({required this.title, required this.icon, required this.onTap});
-}
-
-List<DrawerItem> drawerItems = [
-  DrawerItem(
-      title: "Home", icon: "Home icon white", onTap: () => {print("Home")}),
-  DrawerItem(
-      title: "Il mio garage",
-      icon: "Garage icon white",
-      onTap: () => {print("Il mio garage")}),
-  DrawerItem(
-      title: "Torneo",
-      icon: "Torneo icon white",
-      onTap: () => {print("Torneo")}),
-  DrawerItem(
-      title: "Community",
-      icon: "Community icon white",
-      onTap: () => {print("Community")}),
-  DrawerItem(
-      title: "Collezione",
-      icon: "Collection icon white",
-      onTap: () => {print("Collezione")}),
-  DrawerItem(
-      title: "Classifica",
-      icon: "Classifica icon white",
-      onTap: () => {print("Classifica")}),
-  DrawerItem(
-      title: "Profilo",
-      icon: "Profile icon white",
-      onTap: () => {print("Profilo")}),
-  DrawerItem(
-      title: "Notifiche",
-      icon: "Notification icon white",
-      onTap: () => {print("Notifiche")})
-];
-
-class DrawerItemWidget extends StatelessWidget {
-  final DrawerItem item;
-  const DrawerItemWidget({super.key, required this.item});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: item.onTap,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: MIcon(name: item.icon),
-          ),
-          Text(item.title)
-        ],
-      ),
-    );
-  }
-}
 
 class Mdrawer extends StatelessWidget {
   const Mdrawer({super.key});
@@ -92,13 +33,124 @@ class Mdrawer extends StatelessWidget {
           ),
           ...drawerItems.map((e) => Padding(
                 padding: const EdgeInsets.only(top: 16.0),
-                child: DrawerItemWidget(item: e),
+                child: DrawerItemWidget(
+                  item: e,
+                  onTap: () => _onTap(context, e.path),
+                ),
               )),
           const Spacer(),
           DrawerItemWidget(
-              item: DrawerItem(
-                  title: "Logout", icon: "Logout icon white", onTap: () => {})),
+              onTap: () => _tapLogout(context), item: drawerItemLogout),
         ],
+      ),
+    );
+  }
+
+  void _onTap(BuildContext context, String path) {
+    final MDrawerController controller = Get.find<MDrawerController>();
+    controller.toggleDrawer();
+    context.navigator.pushNamed(path);
+  }
+
+  void _tapLogout(BuildContext context) {
+    Dialog alert = Dialog(
+      backgroundColor: MColors.grey,
+      child: SizedBox(
+        height: context.height * 0.3,
+        width: context.width * 0.4,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                "Sei sicuro di voler uscire?",
+                style: context.textTheme.bodyLarge!
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                "Una volta uscito dovrai effettuare nuovamente l'accesso per utilizzare l'app",
+                textAlign: TextAlign.center,
+                style: context.textTheme.bodySmall,
+              ),
+              MButton(label: "Annulla", onTap: () => context.navigator.pop()),
+              MButton(
+                  label: "Esci",
+                  color: Colors.white,
+                  onTap: () => _dialogEsciTap(context),
+                  textColor: MColors.primary,
+                  border: Border.all(color: MColors.secondaryDark, width: 2)),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  _dialogEsciTap(BuildContext context) {
+    final MDrawerController controller = Get.find<MDrawerController>();
+    controller.toggleDrawer();
+    context.navigator.pushNamed(Routes.LOGIN);
+  }
+
+}
+
+class MButton extends StatelessWidget {
+  final String label;
+  final Color color;
+  final Color? textColor;
+  final BoxBorder? border;
+  final double? width;
+  final double? height;
+  final Function() onTap;
+
+  const MButton(
+      {super.key,
+      required this.label,
+      this.color = MColors.secondaryDark,
+      this.textColor,
+      this.border,
+      this.width = double.infinity,
+      this.height,
+      required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    TextStyle textStyle = context.textTheme.bodyMedium!;
+    if (textColor != null) {
+      textStyle = textStyle.copyWith(color: textColor);
+    }
+
+    return Material(
+      elevation: 5,
+      borderRadius: BorderRadius.circular(32),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(32),
+        child: Container(
+          width: width,
+          height: height,
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: color,
+            border: border,
+            borderRadius: BorderRadius.circular(32),
+          ),
+          child: Text(
+            label,
+            style: textStyle,
+          ),
+        ),
       ),
     );
   }

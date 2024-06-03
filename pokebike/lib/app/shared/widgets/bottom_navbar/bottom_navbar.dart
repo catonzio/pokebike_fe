@@ -39,6 +39,7 @@ class BottomNavbar extends GetView<BottomNavbarController> {
             label: el.$2.label,
             currentIndex: controller.currentIndex,
             iconName: el.$2.iconName,
+            route: el.$2.route,
             onTap: (int indx) => _onTap(context, indx),
             size: el.$2.size,
           );

@@ -17,6 +17,8 @@ abstract class Routes {
   static const PROFILE = _Paths.PROFILE;
   static const FOTOCAMERA = _Paths.FOTOCAMERA;
   static const COMMUNITY = _Paths.COMMUNITY;
+  static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
+  static const LEADERBOARD = _Paths.LEADERBOARD;
 }
 
 abstract class _Paths {
@@ -33,4 +35,6 @@ abstract class _Paths {
   static const PROFILE = '/profile';
   static const FOTOCAMERA = '/fotocamera';
   static const COMMUNITY = '/community';
+  static const NOTIFICATIONS = '/notifications';
+  static const LEADERBOARD = '/leaderboard';
 }

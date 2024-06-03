@@ -8,6 +8,8 @@ import '../modules/garage/bindings/garage_binding.dart';
 import '../modules/garage/views/garage_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/leaderboard/bindings/leaderboard_binding.dart';
+import '../modules/leaderboard/views/leaderboard_view.dart';
 import '../modules/login_register/bindings/confirm_register_binding.dart';
 import '../modules/login_register/bindings/login_binding.dart';
 import '../modules/login_register/bindings/login_register_binding.dart';
@@ -16,6 +18,8 @@ import '../modules/login_register/views/confirm_register_view.dart';
 import '../modules/login_register/views/login_register_view.dart';
 import '../modules/login_register/views/login_view.dart';
 import '../modules/login_register/views/register_view.dart';
+import '../modules/notifications/bindings/notifications_binding.dart';
+import '../modules/notifications/views/notifications_view.dart';
 import '../modules/presentation/bindings/presentation_binding.dart';
 import '../modules/presentation/views/presentation_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -94,6 +98,16 @@ class AppPages {
       name: _Paths.COMMUNITY,
       page: () => const CommunityView(),
       binding: CommunityBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFICATIONS,
+      page: () => const NotificationsView(),
+      binding: NotificationsBinding(),
+    ),
+    GetPage(
+      name: _Paths.LEADERBOARD,
+      page: () => const LeaderboardView(),
+      binding: LeaderboardBinding(),
     ),
   ];
 }
