@@ -43,8 +43,12 @@ class SearchRow extends StatelessWidget {
         enableDrag: true,
         showDragHandle: true,
         useSafeArea: true,
-        isScrollControlled: false, // change this to make it fullscreen
+        isScrollControlled: true, // change this to make it fullscreen
         backgroundColor: MColors.primary,
-        builder: (context) => const FilterModalSheet());
+        builder: (context) => const Wrap(
+              children: [
+                FilterModalSheet(),
+              ],
+            ));
   }
 }

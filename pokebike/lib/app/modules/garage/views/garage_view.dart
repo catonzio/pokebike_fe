@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/enums/garage_type.dart';
 import 'package:pokebike/app/modules/garage/views/collezione/collezione_widget.dart';
 import 'package:pokebike/app/modules/garage/views/garage/garage_widget.dart';
 import 'package:pokebike/app/modules/garage/views/pagination/pagination_row.dart';
@@ -16,6 +17,17 @@ class GarageView extends GetView<GarageController> {
   const GarageView({super.key});
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      controller.isShowingGarage.value =
+          (context.modalRoute?.settings.arguments ?? GarageType.garage) ==
+              GarageType.garage;
+    });
+    // if (context.mounted) {
+    //   controller.isShowingGarage.value =
+    //       (context.modalRoute?.settings.arguments ?? GarageType.garage) ==
+    //           GarageType.garage;
+    // }
+
     return DefaultPage(
       body: SizedBox(
         height: context.height,

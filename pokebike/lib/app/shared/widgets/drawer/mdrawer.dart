@@ -35,7 +35,7 @@ class Mdrawer extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 16.0),
                 child: DrawerItemWidget(
                   item: e,
-                  onTap: () => _onTap(context, e.path),
+                  onTap: () => _onTap(context, e.path, e.arguments),
                 ),
               )),
           const Spacer(),
@@ -46,10 +46,10 @@ class Mdrawer extends StatelessWidget {
     );
   }
 
-  void _onTap(BuildContext context, String path) {
+  void _onTap(BuildContext context, String path, dynamic arguments) {
     final MDrawerController controller = Get.find<MDrawerController>();
     controller.toggleDrawer();
-    context.navigator.pushNamed(path);
+    context.navigator.pushNamed(path, arguments: arguments);
   }
 
   void _tapLogout(BuildContext context) {

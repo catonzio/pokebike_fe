@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/enums/garage_type.dart';
 import 'package:pokebike/app/modules/home/views/upper_buttons/upper_button.dart';
+import 'package:pokebike/app/routes/app_pages.dart';
+import 'package:pokebike/app/shared/extensions/context_utils.dart';
 
 class UpperButtons extends StatelessWidget {
   const UpperButtons({super.key});
@@ -13,17 +16,19 @@ class UpperButtons extends StatelessWidget {
       children: [
         UpperButton(
           icon: "Garage icon white",
-          onTap: () => print("Garage"),
+          onTap: () => context.navigator
+              .pushNamed(Routes.GARAGE, arguments: GarageType.garage),
           text: "Il mio garage",
         ),
         UpperButton(
           icon: "Collection icon white",
-          onTap: () => print("Collezione"),
+          onTap: () => context.navigator
+              .pushNamed(Routes.GARAGE, arguments: GarageType.collection),
           text: "Collezione",
         ),
         UpperButton(
           icon: "Profile icon white",
-          onTap: () => print("Profilo"),
+          onTap: () => context.navigator.pushNamed(Routes.PROFILE),
           text: "Profilo",
         )
       ],

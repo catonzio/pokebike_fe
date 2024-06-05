@@ -7,6 +7,7 @@ import 'package:pokebike/app/shared/bindings/initial_bindings.dart';
 import 'app/routes/app_pages.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const App());
 }
 
@@ -21,8 +22,8 @@ class App extends StatelessWidget {
       title: "Pokebike",
       debugShowCheckedModeBanner: false,
       theme: Themes.dark(),
-      defaultTransition: Transition.native,
-      transitionDuration: const Duration(milliseconds: 300),
+      defaultTransition: Transition.size,
+      transitionDuration: const Duration(milliseconds: 500),
       initialBinding: InitialBindings(),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,

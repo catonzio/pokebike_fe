@@ -20,6 +20,7 @@ class GarageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    ever(isShowingGarage, toggleShowing);
     _fetchGarage();
     // _fetchCollection();
   }
