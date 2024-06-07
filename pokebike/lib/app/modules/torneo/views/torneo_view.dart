@@ -18,11 +18,10 @@ class TorneoView extends GetView<TorneoController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(bottom: 32.0),
-            child: ShimmerTitle(
+          Padding(
+            padding: const  EdgeInsets.only(bottom: 32.0),
+            child: ShimmerTitle.light(
               text: "Torneo",
-              colors: [Colors.white, Colors.grey, Colors.white],
             ),
           ),
           Expanded(

@@ -29,9 +29,8 @@ class HomeView extends GetView<HomeController> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ShimmerTitle(
+            ShimmerTitle.light(
               text: "Ciao Biker!",
-              colors: [Colors.white, Colors.grey, Colors.white],
             ),
             StoriesWidget(height: storiesHeight),
             SizedBox(

@@ -24,10 +24,13 @@ import '../modules/presentation/bindings/presentation_binding.dart';
 import '../modules/presentation/views/presentation_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/settings/bindings/settings_binding.dart';
+import '../modules/settings/views/settings_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/torneo/bindings/torneo_binding.dart';
 import '../modules/torneo/views/torneo_view.dart';
+import '../shared/widgets/pagination/pagination_bindings.dart';
 
 // ignore_for_file: constant_identifier_names
 
@@ -77,7 +80,7 @@ class AppPages {
     GetPage(
       name: _Paths.GARAGE,
       page: () => const GarageView(),
-      binding: GarageBinding(),
+      bindings: [GarageBinding(), PaginationBindings()],
     ),
     GetPage(
       name: _Paths.TORNEO,
@@ -87,7 +90,7 @@ class AppPages {
     GetPage(
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
-      binding: ProfileBinding(),
+      bindings: [ProfileBinding(), PaginationBindings()],
     ),
     GetPage(
       name: _Paths.FOTOCAMERA,
@@ -108,6 +111,11 @@ class AppPages {
       name: _Paths.LEADERBOARD,
       page: () => const LeaderboardView(),
       binding: LeaderboardBinding(),
+    ),
+    GetPage(
+      name: _Paths.SETTINGS,
+      page: () => const SettingsView(),
+      binding: SettingsBinding(),
     ),
   ];
 }

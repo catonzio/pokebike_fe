@@ -42,7 +42,7 @@ class LoginView extends GetView<LoginController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const ShimmerTitle(text: "Bentornato!"),
+        ShimmerTitle.dark(text: "Bentornato!"),
         SizedBox(
           height: context.height * 0.25,
           child: Form(

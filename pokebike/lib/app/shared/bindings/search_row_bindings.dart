@@ -9,7 +9,7 @@ class SearchRowBindings extends Bindings {
     List<FilterBoxController> controllers = [];
     for (var key in Constants.filterBoxes.keys) {
       controllers.add(Get.put(
-          FilterBoxController(title: key, options: Constants.filterBoxes[key]),
+          FilterBoxController(title: key, options: Constants.filterBoxes[key]!),
           tag: key));
     }
     Get.lazyPut<FilterSheetController>(

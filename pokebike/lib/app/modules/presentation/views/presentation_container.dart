@@ -64,7 +64,7 @@ class InternalText extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ShimmerTitle(text: title),
+          ShimmerTitle.dark(text: title),
           // Text(
           //   title,
           //   style: context.textTheme.displaySmall

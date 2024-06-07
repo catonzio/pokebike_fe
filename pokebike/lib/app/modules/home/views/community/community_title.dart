@@ -13,11 +13,10 @@ class CommunityTitle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ShimmerTitle(
+          ShimmerTitle.light(
             text: "Community",
             style: context.textTheme.headlineLarge!
                 .copyWith(fontWeight: FontWeight.bold),
-            colors: const [Colors.white, Colors.grey, Colors.white],
           ),
           InkWell(
             onTap: onTap,

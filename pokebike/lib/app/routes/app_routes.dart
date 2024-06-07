@@ -19,6 +19,7 @@ abstract class Routes {
   static const COMMUNITY = _Paths.COMMUNITY;
   static const NOTIFICATIONS = _Paths.NOTIFICATIONS;
   static const LEADERBOARD = _Paths.LEADERBOARD;
+  static const SETTINGS = _Paths.SETTINGS;
 }
 
 abstract class _Paths {
@@ -37,4 +38,5 @@ abstract class _Paths {
   static const COMMUNITY = '/community';
   static const NOTIFICATIONS = '/notifications';
   static const LEADERBOARD = '/leaderboard';
+  static const SETTINGS = '/settings';
 }

@@ -40,9 +40,8 @@ class ProfileWidget extends StatelessWidget {
             ),
           ),
         ),
-        ShimmerTitle(
+        ShimmerTitle.light(
           text: text,
-          colors: const [Colors.white, Colors.grey, Colors.white],
         )
       ],
     );

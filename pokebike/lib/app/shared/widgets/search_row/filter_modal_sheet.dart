@@ -27,7 +27,7 @@ class FilterModalSheet extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: FilterModalBox(
-                            title: key, options: Constants.filterBoxes[key]),
+                            title: key, options: Constants.filterBoxes[key]!),
                       ),
                   ],
                 )),

@@ -9,12 +9,11 @@ class TorneiTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      child: ShimmerTitle(
+      child: ShimmerTitle.light(
         text: "Tornei",
         style: context.textTheme.headlineLarge!
             .copyWith(fontWeight: FontWeight.bold),
         textAlign: TextAlign.start,
-        colors: const [Colors.white, Colors.grey, Colors.white],
       ),
     );
   }

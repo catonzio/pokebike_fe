@@ -26,9 +26,9 @@ class Mdrawer extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(top: context.height * 0.1, bottom: 32.0),
-            child: const ShimmerTitle(
+            child: ShimmerTitle.light(
               text: "Ciao Biker!",
-              colors: [Colors.white, Colors.grey, Colors.white],
+              
             ),
           ),
           ...drawerItems.map((e) => Padding(

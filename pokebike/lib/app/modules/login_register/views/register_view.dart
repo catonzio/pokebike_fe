@@ -43,7 +43,7 @@ class RegisterView extends GetView<RegisterController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const ShimmerTitle(text: "Benvenuto!"),
+        ShimmerTitle.dark(text: "Benvenuto!"),
         SizedBox(
           height: context.height * 0.35,
           child: Form(

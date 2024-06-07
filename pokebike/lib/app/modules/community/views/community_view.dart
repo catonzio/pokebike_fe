@@ -13,21 +13,20 @@ class CommunityView extends GetView<CommunityController> {
 
   @override
   Widget build(BuildContext context) {
-    return const DefaultPage(
+    return DefaultPage(
         body: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.all(16.0),
-          child: ShimmerTitle(
+            padding: const EdgeInsets.all(16.0),
+            child: ShimmerTitle.light(
               text: "Community",
-              colors: [Colors.white, Colors.grey, Colors.white]),
-        ),
-        Padding(
+            )),
+        const Padding(
           padding: EdgeInsets.all(16.0),
           child: SearchRow(),
         ),
-        Expanded(
+        const Expanded(
           child: Padding(
             padding: EdgeInsets.all(16.0),
             child: WholeCommunityList(),

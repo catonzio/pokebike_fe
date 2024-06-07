@@ -15,17 +15,46 @@ class ShimmerTitle extends StatelessWidget {
   final double angle;
   final Duration duration;
 
-  const ShimmerTitle(
-      {super.key,
-      required this.text,
-      this.style = const TextStyle(
-        fontSize: 34,
-        fontWeight: FontWeight.bold,
-      ),
-      this.textAlign,
-      this.colors = const [grey900, grey600, grey900],
-      this.angle = pi / 4,
-      this.duration = const Duration(seconds: 3)});
+  const ShimmerTitle({
+    super.key,
+    required this.text,
+    this.style = const TextStyle(
+      fontSize: 34,
+      fontWeight: FontWeight.bold,
+    ),
+    required this.colors,
+    required this.angle,
+    required this.duration,
+    this.textAlign,
+  });
+
+  factory ShimmerTitle.light(
+          {required String text,
+          TextStyle style = const TextStyle(
+            fontSize: 34,
+            fontWeight: FontWeight.bold,
+          ),
+          TextAlign? textAlign,
+          List<Color>? colors,
+          double? angle,
+          Duration? duration}) =>
+      ShimmerTitle(
+          text: text,
+          style: style,
+          textAlign: textAlign,
+          colors: colors ?? [Colors.white, Colors.grey, Colors.white],
+          angle: angle ?? pi / 4,
+          duration: duration ?? const Duration(seconds: 3));
+
+  factory ShimmerTitle.dark(
+          {text, style, textAlign, colors, angle, duration}) =>
+      ShimmerTitle(
+          text: text,
+          style: style,
+          textAlign: textAlign,
+          colors: colors ?? const [grey900, grey600, grey900],
+          angle: angle ?? pi / 4,
+          duration: duration ?? const Duration(seconds: 3));
 
   @override
   Widget build(BuildContext context) {

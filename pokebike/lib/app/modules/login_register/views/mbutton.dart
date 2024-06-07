@@ -19,7 +19,7 @@ class MButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(64),
       child: Container(
         alignment: Alignment.center,
-        width: double.infinity,
+        width: double.maxFinite,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: backgroundColor,

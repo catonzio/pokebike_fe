@@ -11,7 +11,7 @@ class Constants {
     crossAxisSpacing: 16,
   );
 
-  static const Map<String, dynamic> filterBoxes = {
+  static const Map<String, List<String>?> filterBoxes = {
     "Ordina per": ["Più recenti", "Dalla A alla Z"],
     "Tipo": [
       "Naked",
