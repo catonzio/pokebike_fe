@@ -6,8 +6,17 @@ import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/mbutton.dart';
 import 'package:pokebike/app/shared/widgets/drawer/drawer_controller.dart';
 
-class LogoutDialog extends StatelessWidget {
-  const LogoutDialog({super.key});
+class DefaultDialog extends StatelessWidget {
+  final String title;
+  final String message;
+  final String actionTitle;
+  final Function action;
+  const DefaultDialog(
+      {super.key,
+      required this.title,
+      required this.message,
+      required this.actionTitle,
+      required this.action});
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +30,13 @@ class LogoutDialog extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(
-              "Sei sicuro di voler uscire?",
+              title,
+              textAlign: TextAlign.center,
               style: context.textTheme.bodyLarge!
                   .copyWith(fontWeight: FontWeight.bold),
             ),
             Text(
-              "Una volta uscito dovrai effettuare nuovamente l'accesso per utilizzare l'app",
+              message,
               textAlign: TextAlign.center,
               style: context.textTheme.bodySmall,
             ),
@@ -34,7 +44,7 @@ class LogoutDialog extends StatelessWidget {
             MButton(
                 label: "Esci",
                 color: Colors.white,
-                onTap: () => _dialogEsciTap(context),
+                onTap: () => action(context),
                 textColor: MColors.primary,
                 border: Border.all(color: MColors.secondaryDark, width: 2)),
           ],
@@ -42,10 +52,41 @@ class LogoutDialog extends StatelessWidget {
       ),
     );
   }
+}
+
+class LogoutDialog extends StatelessWidget {
+  const LogoutDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultDialog(
+        title: "Sei sicuro di voler uscire?",
+        message:
+            "Una volta uscito dovrai effettuare nuovamente l'accesso per utilizzare l'app",
+        actionTitle: "Esci",
+        action: _dialogEsciTap);
+  }
 
   _dialogEsciTap(BuildContext context) {
     final MDrawerController controller = Get.find<MDrawerController>();
     controller.toggleDrawer();
     context.navigator.pushNamed(Routes.LOGIN);
+  }
+}
+
+class EliminaAccountDialog extends StatelessWidget {
+  const EliminaAccountDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultDialog(
+        title: "Sei sicuro di voler eliminare il tuo account?",
+        message: "Una volta confermato non potrai più accedere al tuo profilo",
+        actionTitle: "Esci",
+        action: _dialogEliminaTap);
+  }
+
+  _dialogEliminaTap(BuildContext context) {
+    context.navigator.pushNamed(Routes.SPLASH);
   }
 }

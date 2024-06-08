@@ -4,11 +4,13 @@ import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
 
 class ProfileWidget extends StatelessWidget {
   final String text;
+  final String imagePath;
   final double radius;
 
   const ProfileWidget({
     super.key,
     required this.radius,
+    required this.imagePath,
     required this.text,
   });
 
@@ -35,7 +37,7 @@ class ProfileWidget extends StatelessWidget {
               radius: radius,
               backgroundColor: Colors.black,
               foregroundImage: Image.network(
-                "https://picsum.photos/id/237/300",
+                imagePath,
               ).image,
             ),
           ),

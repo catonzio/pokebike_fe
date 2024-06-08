@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokebike/app/modules/garage/views/garage/garage_widget.dart';
 import 'package:pokebike/app/modules/home/views/stories/story_widget.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/classifica_body.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/empty_classifica_body.dart';
@@ -8,6 +9,7 @@ import 'package:pokebike/app/modules/profile/views/medaglie/medaglie_body.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/default_page.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/utils/mimage_provider.dart';
 import 'package:pokebike/app/shared/widgets/pagination/pagination_row.dart';
 import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
 import 'package:pokebike/app/shared/widgets/utils/micon.dart';
@@ -36,7 +38,9 @@ class ProfileView extends GetView<ProfileController> {
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
                     height: context.height * 0.15,
-                    child: const ProfileHeader()),
+                    child: ProfileHeader(
+                      imagePath: MImageProvider.getImageUrl(),
+                    )),
               ),
               PaginationRow(items: controller.items),
               const ProfileBody()
@@ -48,7 +52,8 @@ class ProfileView extends GetView<ProfileController> {
 }
 
 class ProfileHeader extends StatelessWidget {
-  const ProfileHeader({super.key});
+  final String imagePath;
+  const ProfileHeader({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +62,9 @@ class ProfileHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         StoryWidget(
-            index: 0, radius: context.width * 0.1, text: "", onTap: () => {}),
+          radius: context.width * 0.1,
+          imagePath: imagePath,
+        ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -88,7 +95,7 @@ class ProfileBody extends GetView<ProfileController> {
         child: Obx(() => AnimatedSwitcher(
             duration: const Duration(milliseconds: 500),
             child: controller.isGarage
-                ? const Text("Garage") //.animate().fade(duration: 1000.ms)
+                ? const GarageWidget() //.animate().fade(duration: 1000.ms)
                 : controller.isMedaglie
                     ? (controller.medaglie.isNotEmpty ||
                             controller.isLoadingMedaglie.value

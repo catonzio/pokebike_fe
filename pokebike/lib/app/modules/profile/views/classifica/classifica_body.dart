@@ -4,6 +4,7 @@ import 'package:pokebike/app/modules/profile/controllers/profile_controller.dart
 import 'package:pokebike/app/modules/profile/views/classifica/classifica_profile_row.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/statistics_row.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/top_moto.dart';
+import 'package:pokebike/app/shared/utils/mimage_provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ClassificaBody extends GetView<ProfileController> {
@@ -20,7 +21,7 @@ class ClassificaBody extends GetView<ProfileController> {
             Container(
               height: context.height * 0.11,
               padding: const EdgeInsets.all(8.0),
-              child: const ClassificaProfileRow(),
+              child: ClassificaProfileRow(profileImagePath: MImageProvider.getImageUrl(),),
             ),
             Container(
               padding: const EdgeInsets.all(8.0),

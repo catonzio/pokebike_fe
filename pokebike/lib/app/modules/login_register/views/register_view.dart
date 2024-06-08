@@ -89,7 +89,7 @@ class RegisterView extends GetView<RegisterController> {
             maxLines: 1,
             style: Themes.formTextStyle,
             validator: controller.emailValidator,
-            decoration: inputDecoration("E-mail")),
+            decoration: lightInputDecoration("E-mail")),
         const Text("Password"),
         Obx(() => TextFormField(
             controller: controller.passwordController,
@@ -98,7 +98,7 @@ class RegisterView extends GetView<RegisterController> {
             maxLines: 1,
             style: Themes.formTextStyle,
             validator: controller.passwordValidator,
-            decoration: inputDecoration("Password",
+            decoration: lightInputDecoration("Password",
                 isPassword: true,
                 toggleObscurePassword: controller.toggleObscurePassword))),
         const Text("Conferma Password"),
@@ -109,7 +109,7 @@ class RegisterView extends GetView<RegisterController> {
             maxLines: 1,
             style: Themes.formTextStyle,
             validator: controller.confirmPasswordValidator,
-            decoration: inputDecoration("Password",
+            decoration: lightInputDecoration("Password",
                 isPassword: true,
                 toggleObscurePassword: controller.toggleObscurePassword))),
         InkWell(

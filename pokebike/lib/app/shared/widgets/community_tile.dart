@@ -3,17 +3,22 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
+import 'package:pokebike/app/shared/utils/mimage_provider.dart';
 import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
 
 class CommunityTile extends StatelessWidget {
   final int index;
   final String text;
+  final String imagePath;
+  final String profileImagePath;
   final Function() onTap;
 
   const CommunityTile(
       {super.key,
       required this.index,
       required this.text,
+      required this.imagePath,
+      required this.profileImagePath,
       required this.onTap});
 
   @override
@@ -28,22 +33,9 @@ class CommunityTile extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: MimageNetwork(
-                path: "https://picsum.photos/200/300?random=$index",
+                path: MImageProvider.getImageUrl(index: index),
               ),
             ),
-            // child: Container(
-            //   decoration: BoxDecoration(
-            //     image: DecorationImage(
-            //       image: NetworkImage(
-            //           "https://picsum.photos/200/300?random=$index"),
-            //       fit: BoxFit.cover,
-            //       colorFilter: ColorFilter.mode(
-            //           Colors.black.withOpacity(0), BlendMode.darken),
-            //     ),
-            //     // color: Colors.amber,
-            //     borderRadius: BorderRadius.circular(16),
-            //   ),
-            // ),
           ),
           Positioned(
             bottom: 0,
@@ -53,7 +45,7 @@ class CommunityTile extends StatelessWidget {
             child: ClipRect(
               child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                  child: CommunityTileBottomRow(index: index)),
+                  child: CommunityTileBottomRow(index: index, imagePath: profileImagePath,)),
             ),
           )
         ],
@@ -64,10 +56,12 @@ class CommunityTile extends StatelessWidget {
 
 class CommunityTileBottomRow extends StatelessWidget {
   final int index;
+  final String imagePath;
 
   const CommunityTileBottomRow({
     super.key,
     required this.index,
+    required this.imagePath,
   });
 
   @override
@@ -88,16 +82,10 @@ class CommunityTileBottomRow extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: MimageNetwork(
-                path: "https://picsum.photos/250/250?random=$index",
+                path: imagePath,
               ),
             ),
           ),
-          // CircleAvatar(
-          //   radius: context.width * 0.04,
-          //   foregroundImage:
-          //       Image.network("https://picsum.photos/250/250?random=$index")
-          //           .image,
-          // ),
           const Text("Hello"),
           IconButton(
               onPressed: () => {}, icon: const Icon(Icons.arrow_forward_ios))

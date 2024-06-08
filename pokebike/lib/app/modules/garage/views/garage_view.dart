@@ -8,6 +8,7 @@ import 'package:pokebike/app/modules/garage/views/pagination/pagination_row.dart
 import 'package:pokebike/app/modules/garage/views/profile_widget.dart';
 import 'package:pokebike/app/shared/default_page.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/utils/mimage_provider.dart';
 import 'package:pokebike/app/shared/widgets/back_button.dart';
 import 'package:pokebike/app/shared/widgets/search_row/search_row.dart';
 
@@ -58,7 +59,7 @@ class GarageView extends GetView<GarageController> {
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        ProfileWidget(radius: context.height * 0.07, text: "Name of user"),
+        ProfileWidget(radius: context.height * 0.07, text: "Name of user", imagePath: MImageProvider.getImageUrl(),),
         const PaginationRow(),
         const SearchRow(),
         SizedBox(

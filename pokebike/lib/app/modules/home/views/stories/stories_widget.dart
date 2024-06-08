@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/modules/home/controllers/home_controller.dart';
 import 'package:pokebike/app/modules/home/views/stories/story_widget.dart';
+import 'package:pokebike/app/shared/utils/mimage_provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class StoriesWidget extends GetView<HomeController> {
@@ -26,7 +27,8 @@ class StoriesWidget extends GetView<HomeController> {
                     .map(((int, String) e) => Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: StoryWidget(
-                            index: e.$1,
+                            // index: e.$1,
+                            imagePath: MImageProvider.getImageUrl(index: e.$1),
                             radius: height * 0.3,
                             text: e.$2,
                             onTap: () => "Story ${e.$2} tapped")))

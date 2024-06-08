@@ -87,7 +87,7 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
             maxLines: 1,
             style: Themes.formTextStyle,
             validator: controller.codeValidator,
-            decoration: inputDecoration("Inserisci il codice")),
+            decoration: lightInputDecoration("Inserisci il codice")),
         SizedBox(
           width: double.infinity,
           child: InkWell(

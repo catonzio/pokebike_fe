@@ -9,8 +9,16 @@ class MButton extends StatelessWidget {
   const MButton(
       {super.key,
       required this.onPressed,
-      required this.child,
-      required this.backgroundColor});
+      required this.backgroundColor,
+      required this.child});
+
+  factory MButton.red({required Function() onPressed, required Widget child}) { 
+    return MButton(onPressed: onPressed, backgroundColor: MColors.secondaryDark, child: child);
+  }
+
+  factory MButton.white({required Function() onPressed, required Widget child}) { 
+    return MButton(onPressed: onPressed, backgroundColor:Colors.white, child: child);
+  }
 
   @override
   Widget build(BuildContext context) {

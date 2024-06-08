@@ -1,14 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:pokebike/app/config/colors.dart';
 
-InputDecoration inputDecoration(String hintText,
-    {bool isPassword = false, Function()? toggleObscurePassword}) {
+InputDecoration transparentInputDecoration(String hintText,
+    {bool isPassword = false,
+    Function()? toggleObscurePassword,
+    Color fillColor = Colors.transparent,
+    Color textColor = Colors.white}) {
+  return defaultInputDecoration(hintText,
+      fillColor: fillColor, textColor: textColor);
+}
+
+InputDecoration darkInputDecoration(String hintText,
+    {bool isPassword = false,
+    Function()? toggleObscurePassword,
+    Color fillColor = MColors.primary,
+    Color textColor = Colors.white}) {
+  return defaultInputDecoration(hintText,
+      fillColor: fillColor, textColor: textColor);
+}
+
+InputDecoration lightInputDecoration(String hintText,
+    {bool isPassword = false,
+    Function()? toggleObscurePassword,
+    Color fillColor = Colors.white,
+    Color textColor = MColors.primary}) {
+  return defaultInputDecoration(hintText,
+      fillColor: fillColor, textColor: textColor);
+}
+
+InputDecoration defaultInputDecoration(String hintText,
+    {bool isPassword = false,
+    Function()? toggleObscurePassword,
+    required Color fillColor,
+    required Color textColor}) {
   return InputDecoration(
       filled: true,
-      fillColor: Colors.white,
+      fillColor: fillColor,
       hintText: hintText,
       hintStyle: TextStyle(
-          color: MColors.primary.withOpacity(0.4),
+          color: textColor.withOpacity(0.4),
           fontSize: 14,
           fontWeight: FontWeight.w400),
       // errorStyle: const TextStyle(fontSize: 12, color: MColors.error),

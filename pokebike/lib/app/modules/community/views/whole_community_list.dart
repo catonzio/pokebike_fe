@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/modules/community/controllers/community_controller.dart';
+import 'package:pokebike/app/shared/utils/mimage_provider.dart';
 import 'package:pokebike/app/shared/widgets/community_tile.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -22,6 +23,8 @@ class WholeCommunityList extends GetView<CommunityController> {
                   .map((int e) => CommunityTile(
                         index: e,
                         text: "Community $e",
+                        imagePath: MImageProvider.getImageUrl(index: e),
+                        profileImagePath: MImageProvider.getImageUrl(index: e),
                         onTap: () => "Community $e tapped",
                       ))
                   .toList()),

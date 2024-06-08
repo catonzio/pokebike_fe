@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/modules/home/controllers/home_controller.dart';
+import 'package:pokebike/app/shared/utils/mimage_provider.dart';
 import 'package:pokebike/app/shared/widgets/community_tile.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -23,6 +24,8 @@ class CommunityList extends GetView<HomeController> {
                       child: CommunityTile(
                         index: e.$1,
                         text: e.$2,
+                        imagePath: MImageProvider.getImageUrl(index: e.$1),
+                        profileImagePath: MImageProvider.getImageUrl(index: e.$1),
                         onTap: () => print("Community $e tapped"),
                       ),
                     ))

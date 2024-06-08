@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 
 class ClassificaProfileRow extends StatelessWidget {
-  const ClassificaProfileRow({super.key});
+  final String profileImagePath;
+  const ClassificaProfileRow({super.key, required this.profileImagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +31,7 @@ class ClassificaProfileRow extends StatelessWidget {
                   style: context.textTheme.headlineLarge,
                 ),
               ),
-              Image.network(
-                "https://picsum.photos/300/300",
-                // "https://cdn.iconscout.com/icon/free/png-256/avatar-380-456332.png",
-              ),
+              Image.network(profileImagePath),
               const Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text("Nome Cognome"),

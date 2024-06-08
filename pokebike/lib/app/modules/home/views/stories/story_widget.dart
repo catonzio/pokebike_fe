@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:pokebike/app/config/colors.dart';
 
 class StoryWidget extends StatelessWidget {
-  final int index;
-  final String text;
+  final String? text;
   final double radius;
-  final Function() onTap;
+  final String imagePath;
+  final Function()? onTap;
 
   const StoryWidget(
       {super.key,
-      required this.index,
-      required this.radius,
-      required this.text,
-      required this.onTap});
+      this.radius = 150,
+      required this.imagePath,
+      this.text,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -46,16 +46,17 @@ class StoryWidget extends StatelessWidget {
                 radius: radius,
                 backgroundColor: Colors.black,
                 foregroundImage: Image.network(
-                  "https://picsum.photos/250?image=$index",
+                  imagePath,
                 ).image,
               ),
             ),
           ),
         ),
-        Text(
-          text,
-          overflow: TextOverflow.ellipsis,
-        )
+        if (text != null)
+          Text(
+            text!,
+            overflow: TextOverflow.ellipsis,
+          )
       ],
     );
   }

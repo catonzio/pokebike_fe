@@ -1,0 +1,107 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+
+import 'package:get/get.dart';
+import 'package:pokebike/app/config/colors.dart';
+import 'package:pokebike/app/config/constants.dart';
+import 'package:pokebike/app/modules/home/views/stories/story_widget.dart';
+import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
+import 'package:pokebike/app/modules/settings/views/settings_editing_form.dart';
+import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/utils/mimage_provider.dart';
+import 'package:pokebike/app/shared/widgets/drawer/logout_dialog.dart';
+
+import '../controllers/settings_controller.dart';
+
+class SettingsEditWidget extends GetView<SettingsController> {
+  const SettingsEditWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: context.height - Constants.bottomNavbarHeight,
+      padding: const EdgeInsets.all(16.0),
+      child: Obx(() => Stack(
+            children: [
+              _mainBody(context)
+                  .animate(target: controller.saving ? 1 : 0)
+                  .blur(
+                    curve: Curves.easeInCubic,
+                    duration: const Duration(milliseconds: 500),
+                  ),
+              if (controller.saving)
+                const Center(
+                  child: CircularProgressIndicator(),
+                )
+            ],
+          )),
+    );
+  }
+
+  Column _mainBody(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Expanded(
+          flex: 1,
+          child: StoryWidget(
+            imagePath: MImageProvider.getImageUrl(),
+            radius: 45,
+          ),
+        ),
+        const Expanded(
+          flex: 4,
+          child: SettingsEditingForm(),
+        ),
+        Expanded(
+            flex: 2,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                MButton.red(
+                    onPressed: () => _salva(context),
+                    child: const Text("Salva")),
+                MButton.white(
+                    onPressed: () => controller.editing = false,
+                    child: Text("Annulla",
+                        style: context.textTheme.bodySmall!
+                            .copyWith(color: MColors.primaryDark))),
+                InkWell(
+                  onTap: () => deleteAccount(context),
+                  child: const Text("Elimina account"),
+                )
+              ],
+            ))
+      ],
+    );
+  }
+
+  deleteAccount(BuildContext context) {
+    Dialog alert = const Dialog(
+      backgroundColor: MColors.grey,
+      child: EliminaAccountDialog(),
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  _salva(BuildContext context) async {
+    final bool result = await controller.salva();
+    if (context.mounted) {
+      context.scaffold.showSnackBar(SnackBar(
+        content: Text(result
+            ? "Salvataggio completato"
+            : "Salvataggio non riuscito. Errore"),
+        action: SnackBarAction(
+            label: "Ok", onPressed: () => context.scaffold.clearSnackBars()),
+      ));
+    }
+    if (result) controller.editing = false;
+  }
+}

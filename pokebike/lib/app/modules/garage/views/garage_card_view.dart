@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokebike/app/shared/utils/mimage_provider.dart';
 import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
 
 class GarageCardWidget extends StatelessWidget {
@@ -14,9 +15,8 @@ class GarageCardWidget extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(16),
         child: MimageNetwork(
-          path: "https://picsum.photos/id/${200 + index}/300",
+          path: MImageProvider.getImageUrl(index: index)),
         ),
-      ),
-    );
+      );
   }
 }

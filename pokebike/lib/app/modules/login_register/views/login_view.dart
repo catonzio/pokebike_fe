@@ -88,7 +88,7 @@ class LoginView extends GetView<LoginController> {
             maxLines: 1,
             style: Themes.formTextStyle,
             validator: controller.emailValidator,
-            decoration: inputDecoration("E-mail")),
+            decoration: lightInputDecoration("E-mail")),
         const Text("Password"),
         Obx(() => TextFormField(
             controller: controller.passwordController,
@@ -97,7 +97,7 @@ class LoginView extends GetView<LoginController> {
             maxLines: 1,
             style: Themes.formTextStyle,
             validator: controller.passwordValidator,
-            decoration: inputDecoration("Password",
+            decoration: lightInputDecoration("Password",
                 isPassword: true,
                 toggleObscurePassword: controller.toggleObscurePassword))),
         SizedBox(

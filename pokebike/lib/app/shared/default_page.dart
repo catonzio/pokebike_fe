@@ -11,16 +11,17 @@ import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
 class DefaultPage extends GetView<MDrawerController> {
   final Widget body;
+  final AppBar? appBar;
   final List<Widget>? actions;
 
-  const DefaultPage({super.key, required this.body, this.actions});
+  const DefaultPage({super.key, required this.body, this.appBar, this.actions});
 
   @override
   Widget build(BuildContext context) {
     final Widget page = Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: false,
-      appBar: AppBar(
+      appBar: appBar ?? AppBar(
         leading: MIcon(
           name: "Menu icon",
           size: 16,
