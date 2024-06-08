@@ -20,6 +20,8 @@ import '../modules/login_register/views/login_view.dart';
 import '../modules/login_register/views/register_view.dart';
 import '../modules/notifications/bindings/notifications_binding.dart';
 import '../modules/notifications/views/notifications_view.dart';
+import '../modules/partecipa_torneo/bindings/partecipa_torneo_binding.dart';
+import '../modules/partecipa_torneo/views/partecipa_torneo_view.dart';
 import '../modules/presentation/bindings/presentation_binding.dart';
 import '../modules/presentation/views/presentation_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
@@ -39,7 +41,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(
@@ -116,6 +118,11 @@ class AppPages {
       name: _Paths.SETTINGS,
       page: () => const SettingsView(),
       binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.PARTECIPA_TORNEO,
+      page: () => const PartecipaTorneoView(),
+      binding: PartecipaTorneoBinding(),
     ),
   ];
 }

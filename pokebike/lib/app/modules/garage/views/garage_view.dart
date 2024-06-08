@@ -59,7 +59,11 @@ class GarageView extends GetView<GarageController> {
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        ProfileWidget(radius: context.height * 0.07, text: "Name of user", imagePath: MImageProvider.getImageUrl(),),
+        ProfileWidget(
+          radius: context.height * 0.07,
+          text: "Name of user",
+          imagePath: MImageProvider.getImageUrl(),
+        ),
         const PaginationRow(),
         const SearchRow(),
         SizedBox(
@@ -70,7 +74,12 @@ class GarageView extends GetView<GarageController> {
                 ? const GarageWidget()
                 : RefreshIndicator(
                     onRefresh: controller.fetchCollection,
-                    child: const CollezioneWidget())),
+                    child: CollezioneWidget(
+                        // gridPadding: const EdgeInsets.only(
+                        //     bottom: Constants.bottomNavbarHeight),
+                        onTapElement: (int i) {
+                      print("Tapped $i");
+                    }))),
           ),
         )
       ],

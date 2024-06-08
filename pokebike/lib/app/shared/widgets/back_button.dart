@@ -15,14 +15,14 @@ class MBackButton extends StatelessWidget {
         onTap: onPressed,
         borderRadius: BorderRadius.circular(8),
         child: Container(
-            width: context.width * 0.1,
-            height: context.width * 0.1,
+            width: context.width * 0.09,
+            height: context.width * 0.09,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: MColors.primaryLight,
               borderRadius: BorderRadius.circular(8),
             ),
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.only(left: 10),
             child: const Icon(
               Icons.arrow_back_ios,
               color: Colors.white,

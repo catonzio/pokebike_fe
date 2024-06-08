@@ -7,7 +7,10 @@ import 'package:pokebike/app/modules/garage/views/garage_card_view.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class CollezioneWidget extends GetView<GarageController> {
-  const CollezioneWidget({super.key});
+  final EdgeInsetsGeometry? gridPadding;
+  final Function(int) onTapElement;
+  const CollezioneWidget(
+      {super.key, this.gridPadding, required this.onTapElement});
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +26,13 @@ class CollezioneWidget extends GetView<GarageController> {
   List<Widget> mapListToWidget(List<int> list) {
     return list
         .map((index) =>
-            GarageCardWidget(index: index, onTap: () => print("Garage $index")))
+            GarageCardWidget(index: index, onTap: () => onTapElement(index)))
         .toList();
   }
 
-  Widget _gridOfElements(List<Widget> elements) {
+  Widget _gridOfElements(List<Widget> elements, {EdgeInsetsGeometry? padding}) {
     return GridView(
-      padding: EdgeInsets.zero,
+      padding: padding ?? EdgeInsets.zero,
       gridDelegate: Constants.gridDelegate,
       children: elements,
     );

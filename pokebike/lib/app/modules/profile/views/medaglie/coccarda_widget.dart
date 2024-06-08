@@ -22,8 +22,8 @@ class CoccardaWidget extends StatelessWidget {
                   child: CircularProgressIndicator(
                 value: value.toDouble(),
               )),
-              Center(
-                child: MIcon(
+              const Center(
+                child:  MIcon(
                   name: "Cockade icon argento",
                   size: 30,
                 ),

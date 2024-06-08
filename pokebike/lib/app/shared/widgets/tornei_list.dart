@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pokebike/app/routes/app_pages.dart';
+import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/tornei_tile.dart';
 
 class TorneiList extends StatelessWidget {
@@ -20,7 +22,7 @@ class TorneiList extends StatelessWidget {
         child: TorneiTile(
             text: "Partecipa al torneo",
             imageName: "partecipa_al_torneo.jpg",
-            onTap: () => {}),
+            onTap: () => context.navigator.pushNamed(Routes.PARTECIPA_TORNEO)),
       ),
       Padding(
         padding: const EdgeInsets.all(8.0),

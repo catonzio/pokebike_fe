@@ -22,7 +22,7 @@ class GarageController extends GetxController {
     super.onInit();
     ever(isShowingGarage, toggleShowing);
     fetchGarage();
-    // _fetchCollection();
+    fetchCollection();
   }
 
   void fetchGarage() async {
