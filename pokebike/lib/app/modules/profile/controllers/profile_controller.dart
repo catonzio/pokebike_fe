@@ -1,14 +1,24 @@
+import 'dart:math';
+
 import 'package:get/get.dart';
+import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/shared/widgets/pagination/pagination_item.dart';
 
 class Torneo {}
 
 class ProfileController extends GetxController {
   final RxInt selectedIndex = 2.obs;
+
   final RxBool isLoadingMedaglie = false.obs;
+  final RxBool isLoadingCoccarde = false.obs;
   final RxBool isLoadingClassifica = false.obs;
+
   final RxList<String> fakeMedaglie = <String>["ciao", "a", "tutti"].obs;
   final RxList<String> medaglie = <String>[].obs;
+  final Map<String, double> fakeCoccardeScore = <String, double>{
+    for (var el in Constants.filterBoxes["Tipo"]!) el: 0.0
+  };
+  final Map<String, double> coccardeScore = <String, double>{}.obs;
   Rxn<Torneo> torneo = Rxn<Torneo>();
 
   ProfileController();
@@ -16,7 +26,8 @@ class ProfileController extends GetxController {
   @override
   onInit() {
     super.onInit();
-    // fetchMedaglie();
+    fetchMedaglie();
+    fetchCoccarde();
   }
 
   void setTorneo(Torneo torneo) {
@@ -31,10 +42,24 @@ class ProfileController extends GetxController {
 
   void fetchMedaglie() {
     isLoadingMedaglie.value = true;
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 7), () {
       isLoadingMedaglie.value = false;
       if (medaglie.isEmpty) {
         medaglie.addAll(fakeMedaglie);
+      }
+    });
+  }
+
+  void fetchCoccarde() {
+    isLoadingCoccarde.value = true;
+    Random random = Random();
+    Future.delayed(const Duration(seconds: 5), () {
+      isLoadingCoccarde.value = false;
+      if (coccardeScore.isEmpty) {
+        coccardeScore.addAll({
+          for (var el in Constants.filterBoxes["Tipo"]!)
+            el: random.nextInt(100) / 100
+        });
       }
     });
   }

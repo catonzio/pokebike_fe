@@ -67,7 +67,9 @@ class GarageView extends GetView<GarageController> {
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: Obx(() => controller.isShowingGarage.value
                 ? const GarageWidget()
-                : const CollezioneWidget()),
+                : RefreshIndicator(
+                    onRefresh: controller.fetchCollection,
+                    child: const CollezioneWidget())),
           ),
         )
       ],

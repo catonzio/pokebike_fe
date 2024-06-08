@@ -10,6 +10,7 @@ class Themes {
         primaryColorDark: MColors.primaryDark,
         primaryColorLight: MColors.primaryLight,
         textTheme: GoogleFonts.poppinsTextTheme(theme.textTheme),
+        
         colorScheme: theme.colorScheme.copyWith(secondary: MColors.secondary));
     return theme;
   }

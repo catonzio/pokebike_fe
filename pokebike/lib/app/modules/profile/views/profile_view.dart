@@ -84,17 +84,19 @@ class ProfileBody extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: context.height * 0.45,
+        height: context.height * 0.56,
         child: Obx(() => AnimatedSwitcher(
             duration: const Duration(milliseconds: 500),
             child: controller.isGarage
                 ? const Text("Garage") //.animate().fade(duration: 1000.ms)
                 : controller.isMedaglie
-                    ? (controller.medaglie.isEmpty
-                        ? const EmptyMedaglieBody()
-                        : const MedaglieBody())
-                    : (controller.torneo.value == null
-                        ? const EmptyClassificaBody()
-                        : const ClassificaBody()))));
+                    ? (controller.medaglie.isNotEmpty ||
+                            controller.isLoadingMedaglie.value
+                        ? const MedaglieBody()
+                        : const EmptyMedaglieBody())
+                    : (controller.torneo.value != null ||
+                            controller.isLoadingClassifica.value
+                        ? const ClassificaBody()
+                        : const EmptyClassificaBody()))));
   }
 }

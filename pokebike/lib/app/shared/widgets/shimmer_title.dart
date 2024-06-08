@@ -47,7 +47,15 @@ class ShimmerTitle extends StatelessWidget {
           duration: duration ?? const Duration(seconds: 3));
 
   factory ShimmerTitle.dark(
-          {text, style, textAlign, colors, angle, duration}) =>
+          {text,
+          style = const TextStyle(
+            fontSize: 34,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign,
+          colors,
+          angle,
+          duration}) =>
       ShimmerTitle(
           text: text,
           style: style,

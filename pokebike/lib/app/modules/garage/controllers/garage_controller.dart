@@ -21,18 +21,18 @@ class GarageController extends GetxController {
   void onInit() {
     super.onInit();
     ever(isShowingGarage, toggleShowing);
-    _fetchGarage();
+    fetchGarage();
     // _fetchCollection();
   }
 
-  void _fetchGarage() async {
+  void fetchGarage() async {
     isFetchingGarage = true;
     await Future.delayed(const Duration(seconds: 3));
     // garages.addAll(List.generate(10, (index) => index + 1));
     isFetchingGarage = false;
   }
 
-  void _fetchCollection() async {
+  Future<void> fetchCollection() async {
     isFetchingCollection = true;
     await Future.delayed(const Duration(seconds: 3));
     collections.addAll(List.generate(10, (index) => index + 1));
@@ -42,9 +42,9 @@ class GarageController extends GetxController {
   void toggleShowing(bool value) {
     isShowingGarage.value = value;
     if (!value && collections.isEmpty) {
-      _fetchCollection();
+      fetchCollection();
     } else if (value && garages.isEmpty) {
-      _fetchGarage();
+      fetchGarage();
     }
   }
 }
