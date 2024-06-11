@@ -7,9 +7,10 @@ import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/modules/home/views/stories/story_widget.dart';
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 import 'package:pokebike/app/modules/settings/views/settings_editing_form.dart';
+import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/utils/mimage_provider.dart';
-import 'package:pokebike/app/shared/widgets/drawer/logout_dialog.dart';
+import 'package:pokebike/app/shared/widgets/default_dialog.dart';
 
 import '../controllers/settings_controller.dart';
 
@@ -77,9 +78,16 @@ class SettingsEditWidget extends GetView<SettingsController> {
   }
 
   deleteAccount(BuildContext context) {
-    Dialog alert = const Dialog(
+    Dialog alert = Dialog(
       backgroundColor: MColors.grey,
-      child: EliminaAccountDialog(),
+      child: DefaultDialog(
+          title: "Sei sicuro di voler eliminare il tuo account?",
+          message:
+              "Una volta confermato non potrai più accedere al tuo profilo",
+          redTitle: "Annulla",
+          redAction: (BuildContext context) => context.navigator.pop(),
+          whiteTitle: "Elimina",
+          whiteAction: _dialogEliminaTap),
     );
 
     // show the dialog
@@ -89,6 +97,10 @@ class SettingsEditWidget extends GetView<SettingsController> {
         return alert;
       },
     );
+  }
+
+  _dialogEliminaTap(BuildContext context) {
+    context.navigator.pushNamed(Routes.SPLASH);
   }
 
   _salva(BuildContext context) async {

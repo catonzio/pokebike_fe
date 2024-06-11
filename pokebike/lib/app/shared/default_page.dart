@@ -48,10 +48,12 @@ class DefaultPage extends GetView<MDrawerController> {
               )
                   .animate(target: controller.isDrawerOpen ? 1.0 : 0)
                   .move(
+                    duration: const Duration(milliseconds: 300),
                       begin: Offset.zero,
                       end: Offset(context.width * 0.6, 0),
                       curve: Curves.easeInOutCubic)
                   .scale(
+                    duration: const Duration(milliseconds: 300),
                       begin: const Offset(1, 1),
                       end: const Offset(0.8, 0.8),
                       curve: Curves.easeInOutCubic)),

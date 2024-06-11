@@ -23,7 +23,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: Themes.dark(),
       defaultTransition: Transition.size,
-      transitionDuration: const Duration(milliseconds: 500),
+      transitionDuration: const Duration(milliseconds: 300),
       initialBinding: InitialBindings(),
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
