@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
+import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/utils/api_utils.dart';
 import 'package:pokebike/app/shared/widgets/drawer/drawer_controller.dart';
 import 'package:pokebike/app/shared/widgets/drawer/drawer_item.dart';
 import 'package:pokebike/app/shared/widgets/drawer/drawer_item_widget.dart';
@@ -69,14 +72,30 @@ class Mdrawer extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return alert;
+        return Obx(() {
+          final MDrawerController controller = MDrawerController.to;
+          return Stack(
+            children: [
+              alert
+                  .animate(target: controller.isPerformingLogout ? 1 : 0)
+                  .blur(),
+              controller.isPerformingLogout
+                  ? const Center(child: CircularProgressIndicator())
+                  : const SizedBox()
+            ],
+          );
+        });
       },
     );
   }
 
-  _dialogEsciTap(BuildContext context) {
+  _dialogEsciTap(BuildContext context) async {
     final MDrawerController controller = Get.find<MDrawerController>();
-    controller.toggleDrawer();
-    context.navigator.pushNamed(Routes.LOGIN);
+    ApiResponse response = await controller.logout();
+    if (context.mounted) {
+      controller.toggleDrawer();
+      handleApiResponse(context, response,
+          (data) => context.navigator.pushNamed(Routes.LOGIN));
+    }
   }
 }

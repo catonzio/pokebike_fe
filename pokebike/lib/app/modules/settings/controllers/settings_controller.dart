@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsController extends GetxController {
+  static SettingsController get to => Get.find<SettingsController>();
+
   final RxBool isEditing = false.obs;
   set editing(bool value) => isEditing.value = value;
   bool get editing => isEditing.value;

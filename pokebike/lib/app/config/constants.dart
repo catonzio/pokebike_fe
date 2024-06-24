@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Constants {
+  static const String apiBaseUrl = "http://localhost:8080/api";
+  static const String settingsStorage = "settings";
+
   static const double bottomNavbarHeight = 160;
-  
+
   static const SliverGridDelegate gridDelegate =
       SliverGridDelegateWithFixedCrossAxisCount(
     crossAxisCount: 2,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
+import 'package:pokebike/app/shared/controllers/storage.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 
 class SplashView extends StatefulWidget {
@@ -13,9 +14,15 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 2), () {
-      context.navigator.pushReplacementNamed(Routes.PRESENTATION);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Storage storage = Storage.to;
+      if (storage.apiToken.isEmpty) {
+        context.navigator.pushReplacementNamed(Routes.PRESENTATION);
+      } else {
+        context.navigator.pushReplacementNamed(Routes.HOME);
+      }
     });
+
     super.initState();
   }
 

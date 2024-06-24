@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/config/themes.dart';
+import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
+import 'package:pokebike/app/shared/controllers/storage.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/utils/api_utils.dart';
 import 'package:pokebike/app/shared/utils/decoration_image.dart';
 import 'package:pokebike/app/shared/utils/input_decoration.dart';
 import 'package:pokebike/app/shared/widgets/base_app_bar.dart';
@@ -118,20 +121,12 @@ class LoginView extends GetView<LoginController> {
 
   _login(BuildContext context) async {
     if (controller.formKey.currentState!.validate()) {
-      bool result = await controller.login();
-      if (context.mounted) {
-        if (result) {
+      controller.login().then((ApiResponse response) {
+        handleApiResponse(context, response, (dynamic data) {
+          Storage.to.apiToken = data;
           context.navigator.popAndPushNamed(Routes.HOME);
-        } else {
-          context.scaffold.showSnackBar(SnackBar(
-            content: const Text("Errore durante il login"),
-            action: SnackBarAction(
-              label: "Ok",
-              onPressed: () => context.scaffold.clearSnackBars(),
-            ),
-          ));
-        }
-      }
+        });
+      });
     }
   }
 

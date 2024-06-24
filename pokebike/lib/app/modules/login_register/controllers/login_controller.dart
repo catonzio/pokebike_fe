@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/api_response.dart';
+import 'package:pokebike/app/modules/login_register/providers/login_provider.dart';
 
 class LoginController extends GetxController {
   final RxBool _obscurePassword = true.obs;
@@ -17,6 +19,10 @@ class LoginController extends GetxController {
       TextEditingController(text: "email@email.com");
   final TextEditingController passwordController =
       TextEditingController(text: "password");
+
+  final LoginProvider provider;
+
+  LoginController({required this.provider});
 
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -38,13 +44,16 @@ class LoginController extends GetxController {
     return null;
   }
 
-  Future<bool> login() async {
+  Future<ApiResponse> login() async {
     isPerformingLogin.value = true;
-    return Future.delayed(const Duration(seconds: 2), () {
-      // Random r = Random();
-      // return r.nextBool();
-      isPerformingLogin.value = false;
-      return true;
-    });
+    ApiResponse result = await provider.login(emailController.text, passwordController.text);
+    isPerformingLogin.value = false;
+    return result;
+    // return Future.delayed(const Duration(seconds: 2), () {
+    //   // Random r = Random();
+    //   // return r.nextBool();
+    //   isPerformingLogin.value = false;
+    //   return true;
+    // });
   }
 }

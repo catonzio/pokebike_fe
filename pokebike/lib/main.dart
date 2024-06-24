@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/config/themes.dart';
 import 'package:pokebike/app/shared/bindings/initial_bindings.dart';
 
 import 'app/routes/app_pages.dart';
 
-void main() {
+Future<void> main() async {
+  await GetStorage.init(Constants.settingsStorage);
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const App());
 }
