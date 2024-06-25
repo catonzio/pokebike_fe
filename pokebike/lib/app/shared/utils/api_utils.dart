@@ -47,6 +47,13 @@ Future<ApiResponse> handleApiEndpoint(Function method, String url,
 
     final response =
         await method(url, data, headers: headers, contentType: contentType);
+    if (response.body == null) {
+      return ApiResponse.error(
+        status: response.status.code,
+        message: "No data",
+        data: null,
+      );
+    }
 
     final Map<String, dynamic> body = response.body;
 

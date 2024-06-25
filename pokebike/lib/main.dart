@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,8 +10,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'app/routes/app_pages.dart';
 
+late List<CameraDescription> cameras;
+
 Future<void> main() async {
   await GetStorage.init(Constants.settingsStorage);
+  cameras = await availableCameras();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const App());
 }

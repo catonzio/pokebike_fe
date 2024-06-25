@@ -13,6 +13,7 @@ import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 class DefaultPage extends GetView<MDrawerController> {
   final Widget body;
   final AppBar? appBar;
+  final bool useAppbar;
   final List<Widget>? actions;
   final bool backButton;
 
@@ -20,6 +21,7 @@ class DefaultPage extends GetView<MDrawerController> {
       {super.key,
       required this.body,
       this.appBar,
+      this.useAppbar = true,
       this.actions,
       this.backButton = false});
 
@@ -28,7 +30,7 @@ class DefaultPage extends GetView<MDrawerController> {
     final Widget page = Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: false,
-      appBar: appBar ?? _createAppbar(context),
+      appBar: useAppbar ? (appBar ?? _createAppbar(context)) : null,
       body: body,
       bottomNavigationBar: const BottomNavbar(),
     );
@@ -48,12 +50,12 @@ class DefaultPage extends GetView<MDrawerController> {
               )
                   .animate(target: controller.isDrawerOpen ? 1.0 : 0)
                   .move(
-                    duration: const Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 300),
                       begin: Offset.zero,
                       end: Offset(context.width * 0.6, 0),
                       curve: Curves.easeInOutCubic)
                   .scale(
-                    duration: const Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 300),
                       begin: const Offset(1, 1),
                       end: const Offset(0.8, 0.8),
                       curve: Curves.easeInOutCubic)),

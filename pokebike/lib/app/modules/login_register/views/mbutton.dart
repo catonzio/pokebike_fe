@@ -5,19 +5,47 @@ class MButton extends StatelessWidget {
   final Function()? onPressed;
   final Widget child;
   final Color backgroundColor;
+  final bool withBorders;
+  final EdgeInsets padding;
+  final double? height;
+  final double? width;
 
   const MButton(
       {super.key,
       this.onPressed,
       required this.backgroundColor,
-      required this.child});
+      required this.child,
+      this.height,
+      this.width,
+      this.withBorders = true,
+      this.padding = const EdgeInsets.all(16)});
 
-  factory MButton.red({required Function() onPressed, required Widget child}) { 
-    return MButton(onPressed: onPressed, backgroundColor: MColors.secondaryDark, child: child);
+  factory MButton.red(
+      {required Function() onPressed,
+      required Widget child,
+      double? height,
+      double? width}) {
+    return MButton(
+      onPressed: onPressed,
+      backgroundColor: MColors.secondaryDark,
+      height: height,
+      width: width,
+      child: child,
+    );
   }
 
-  factory MButton.white({required Function() onPressed, required Widget child}) { 
-    return MButton(onPressed: onPressed, backgroundColor:Colors.white, child: child);
+  factory MButton.white(
+      {required Function() onPressed,
+      required Widget child,
+      double? height,
+      double? width}) {
+    return MButton(
+      onPressed: onPressed,
+      backgroundColor: Colors.white,
+      height: height,
+      width: width,
+      child: child,
+    );
   }
 
   @override
@@ -27,12 +55,15 @@ class MButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(64),
       child: Container(
         alignment: Alignment.center,
-        width: double.maxFinite,
-        padding: const EdgeInsets.all(16),
+        width: width ?? double.maxFinite,
+        height: height,
+        padding: padding,
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(64),
-          border: Border.all(color: MColors.secondaryDark, width: 2),
+          border: withBorders
+              ? Border.all(color: MColors.secondaryDark, width: 2)
+              : null,
         ),
         child: child,
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Constants {
-  static const String apiBaseUrl = "http://localhost:8080/api";
+  static const String apiBaseUrl = "http://127.0.0.1:8080/api";
   static const String settingsStorage = "settings";
 
   static const double bottomNavbarHeight = 160;

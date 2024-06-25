@@ -10,11 +10,12 @@ class Themes {
         primaryColorDark: MColors.primaryDark,
         primaryColorLight: MColors.primaryLight,
         textTheme: GoogleFonts.poppinsTextTheme(theme.textTheme),
-        
         colorScheme: theme.colorScheme.copyWith(secondary: MColors.secondary));
     return theme;
   }
 
-  static const TextStyle formTextStyle = TextStyle(
+  static const TextStyle darkFormTextStyle = TextStyle(
       color: MColors.primary, fontSize: 14, fontWeight: FontWeight.w400);
+  static const TextStyle lightFormTextStyle =
+      TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w400);
 }

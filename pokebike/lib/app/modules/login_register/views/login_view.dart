@@ -52,7 +52,7 @@ class LoginView extends GetView<LoginController> {
           child: Form(
               key: controller.formKey,
               child: DefaultTextStyle(
-                style: Themes.formTextStyle,
+                style: Themes.darkFormTextStyle,
                 child: _formBody(context),
               )),
         ),
@@ -94,7 +94,7 @@ class LoginView extends GetView<LoginController> {
             controller: controller.emailController,
             minLines: 1,
             maxLines: 1,
-            style: Themes.formTextStyle,
+            style: Themes.darkFormTextStyle,
             validator: controller.emailValidator,
             decoration: lightInputDecoration("E-mail")),
         const Text("Password"),
@@ -103,7 +103,7 @@ class LoginView extends GetView<LoginController> {
             obscureText: controller.obscurePassword,
             minLines: 1,
             maxLines: 1,
-            style: Themes.formTextStyle,
+            style: Themes.darkFormTextStyle,
             validator: controller.passwordValidator,
             decoration: lightInputDecoration("Password",
                 isPassword: true,
