@@ -26,7 +26,7 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
-              image: getDecorationImage('assets/images/register_bg.png', 0.3)),
+              image: getDarkDecorationImage('assets/images/register_bg.png', 0.3)),
           alignment: Alignment.bottomCenter,
           child: Padding(
               padding: const EdgeInsets.all(16.0),

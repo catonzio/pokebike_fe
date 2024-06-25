@@ -35,7 +35,7 @@ class ProfileContainer extends StatelessWidget {
             horizontal: VisualDensity.minimumDensity,
             vertical: VisualDensity.maximumDensity),
         minLeadingWidth: context.width * 0.2,
-        minTileHeight: context.height * 0.06,
+        // minTileHeight: context.height * 0.06,
         title: Text(
           name,
           style: context.textTheme.titleLarge,

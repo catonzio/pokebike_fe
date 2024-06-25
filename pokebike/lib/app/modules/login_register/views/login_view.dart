@@ -30,7 +30,8 @@ class LoginView extends GetView<LoginController> {
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
-              image: getDecorationImage('assets/images/login_bg.png', 0.3)),
+              image:
+                  getLightDecorationImage('assets/images/login_bg.png', 0.1)),
           alignment: Alignment.bottomCenter,
           child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -60,7 +61,9 @@ class LoginView extends GetView<LoginController> {
             Padding(
               padding: const EdgeInsets.only(bottom: 32.0),
               child: MButton(
-                onPressed: () => _login(context),
+                onPressed: controller.isPerformingLogin.value
+                    ? null
+                    : () => _login(context),
                 backgroundColor: MColors.secondaryDark,
                 child: const Text("Accedi"),
               ),
@@ -68,7 +71,9 @@ class LoginView extends GetView<LoginController> {
             SizedBox(
               width: double.infinity,
               child: InkWell(
-                onTap: () => _onRegister(context),
+                onTap: controller.isPerformingLogin.value
+                    ? null
+                    : () => _onRegister(context),
                 child: const Text("Non hai un account? Registrati",
                     textAlign: TextAlign.center),
               ),
@@ -106,7 +111,9 @@ class LoginView extends GetView<LoginController> {
         SizedBox(
           width: double.infinity,
           child: InkWell(
-            onTap: () => _passwordForgotten(context),
+            onTap: controller.isPerformingLogin.value
+                ? null
+                : () => _passwordForgotten(context),
             child: const Text("Password dimenticata?",
                 textAlign: TextAlign.end,
                 style: TextStyle(

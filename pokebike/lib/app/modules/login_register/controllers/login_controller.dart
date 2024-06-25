@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/modules/login_register/providers/login_provider.dart';
+import 'package:pokebike/app/shared/providers/auth_provider.dart';
 
 class LoginController extends GetxController {
   final RxBool _obscurePassword = true.obs;
@@ -16,11 +16,11 @@ class LoginController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final TextEditingController emailController =
-      TextEditingController(text: "email@email.com");
+      TextEditingController(text: "email1@email.com");
   final TextEditingController passwordController =
       TextEditingController(text: "password");
 
-  final LoginProvider provider;
+  final AuthProvider provider;
 
   LoginController({required this.provider});
 
@@ -46,7 +46,8 @@ class LoginController extends GetxController {
 
   Future<ApiResponse> login() async {
     isPerformingLogin.value = true;
-    ApiResponse result = await provider.login(emailController.text, passwordController.text);
+    ApiResponse result =
+        await provider.login(emailController.text, passwordController.text);
     isPerformingLogin.value = false;
     return result;
     // return Future.delayed(const Duration(seconds: 2), () {

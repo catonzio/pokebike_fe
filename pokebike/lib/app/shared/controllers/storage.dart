@@ -10,4 +10,8 @@ class Storage {
   final ReadWriteValue<String> _apiToken = ''.val('apiToken', getBox: _box);
   String get apiToken => _apiToken.val;
   set apiToken(String value) => _apiToken.val = value;
+
+  final ReadWriteValue<bool> _hasSeenPresentation = false.val('seenPresentation', getBox: _box);
+  bool get hasSeenPresentation => _hasSeenPresentation.val;
+  set hasSeenPresentation(bool value) => _hasSeenPresentation.val = value;
 }

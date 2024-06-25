@@ -7,7 +7,10 @@ InputDecoration transparentInputDecoration(String hintText,
     Color fillColor = Colors.transparent,
     Color textColor = Colors.white}) {
   return defaultInputDecoration(hintText,
-      fillColor: fillColor, textColor: textColor);
+      isPassword: isPassword,
+      toggleObscurePassword: toggleObscurePassword,
+      fillColor: fillColor,
+      textColor: textColor);
 }
 
 InputDecoration darkInputDecoration(String hintText,
@@ -16,7 +19,10 @@ InputDecoration darkInputDecoration(String hintText,
     Color fillColor = MColors.primary,
     Color textColor = Colors.white}) {
   return defaultInputDecoration(hintText,
-      fillColor: fillColor, textColor: textColor);
+      isPassword: isPassword,
+      toggleObscurePassword: toggleObscurePassword,
+      fillColor: fillColor,
+      textColor: textColor);
 }
 
 InputDecoration lightInputDecoration(String hintText,
@@ -25,7 +31,10 @@ InputDecoration lightInputDecoration(String hintText,
     Color fillColor = Colors.white,
     Color textColor = MColors.primary}) {
   return defaultInputDecoration(hintText,
-      fillColor: fillColor, textColor: textColor);
+      isPassword: isPassword,
+      fillColor: fillColor,
+      textColor: textColor,
+      toggleObscurePassword: toggleObscurePassword);
 }
 
 InputDecoration defaultInputDecoration(String hintText,
@@ -41,7 +50,7 @@ InputDecoration defaultInputDecoration(String hintText,
           color: textColor.withOpacity(0.4),
           fontSize: 14,
           fontWeight: FontWeight.w400),
-      // errorStyle: const TextStyle(fontSize: 12, color: MColors.error),
+      errorStyle: const TextStyle(fontSize: 12, color: MColors.error),
       errorBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(32)),
         borderSide: BorderSide(color: MColors.error, width: 2),

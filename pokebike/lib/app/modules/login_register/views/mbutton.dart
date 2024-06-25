@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pokebike/app/config/colors.dart';
 
 class MButton extends StatelessWidget {
-  final Function() onPressed;
+  final Function()? onPressed;
   final Widget child;
   final Color backgroundColor;
 
   const MButton(
       {super.key,
-      required this.onPressed,
+      this.onPressed,
       required this.backgroundColor,
       required this.child});
 

@@ -19,7 +19,7 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-          image: getDecorationImage('assets/images/splash.png', 0.2)),
+          image: getDarkDecorationImage('assets/images/splash.png', 0.2)),
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.all(8.0),

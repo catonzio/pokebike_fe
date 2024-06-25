@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/config/themes.dart';
 import 'package:pokebike/app/shared/bindings/initial_bindings.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'app/routes/app_pages.dart';
 
@@ -25,6 +26,16 @@ class App extends StatelessWidget {
       title: "Pokebike",
       debugShowCheckedModeBanner: false,
       theme: Themes.dark(),
+      locale: const Locale('it'), //Get
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en'),
+        Locale('it'),
+      ],
       defaultTransition: Transition.size,
       transitionDuration: const Duration(milliseconds: 300),
       initialBinding: InitialBindings(),

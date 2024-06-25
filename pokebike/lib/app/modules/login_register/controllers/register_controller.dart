@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:pokebike/app/data/api_response.dart';
+import 'package:pokebike/app/shared/providers/auth_provider.dart';
 
 class RegisterController extends GetxController {
-  final RxBool _obscurePassword = true.obs;
-  bool get obscurePassword => _obscurePassword.value;
-  set obscurePassword(bool value) => _obscurePassword.value = value;
-  void toggleObscurePassword() => _obscurePassword.value = !obscurePassword;
+  final RxBool obscurePassword = true.obs;
+
+  void toggleObscurePassword() => obscurePassword.toggle();
 
   final RxBool isPrivacyAccepted = false.obs;
 
@@ -13,10 +15,19 @@ class RegisterController extends GetxController {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController(text: "email21@email.com");
+  final TextEditingController nomeController = TextEditingController(text: "nome");
+  final TextEditingController cognomeController = TextEditingController(text: "cognome");
+  final TextEditingController usernameController = TextEditingController(text: "username2");
+  final TextEditingController passwordController = TextEditingController(text: "password");
   final TextEditingController confirmPasswordController =
-      TextEditingController();
+      TextEditingController(text: "password");
+  final TextEditingController birthdateController = TextEditingController(text: "14-05-1997");
+  final Rx<XFile?> avatar = Rx<XFile?>(null);
+
+  final AuthProvider provider;
+
+  RegisterController({required this.provider});
 
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -24,6 +35,27 @@ class RegisterController extends GetxController {
     }
     if (!value.isEmail) {
       return "Inserisci un'email valida";
+    }
+    return null;
+  }
+
+  String? nomeValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Il nome non può essere vuoto";
+    }
+    return null;
+  }
+
+  String? cognomeValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Il cognome non può essere vuoto";
+    }
+    return null;
+  }
+
+  String? usernameValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "L'username non può essere vuoto";
     }
     return null;
   }
@@ -38,16 +70,6 @@ class RegisterController extends GetxController {
     return null;
   }
 
-  Future<bool> register() async {
-    isPerformingRegister.value = true;
-    return Future.delayed(const Duration(seconds: 2), () {
-      // Random r = Random();
-      // return r.nextBool();
-      isPerformingRegister.value = false;
-      return true;
-    });
-  }
-
   String? confirmPasswordValidator(String? value) {
     if (value == null || value.isEmpty) {
       return "La password non può essere vuota";
@@ -56,6 +78,39 @@ class RegisterController extends GetxController {
       return "Le password non corrispondono";
     }
     return null;
+  }
+
+  String? birthdateValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "La data di nascita non può essere vuota";
+    }
+    return null;
+  }
+
+  String? avatarValidator(XFile? value) {
+    if (value == null && avatar.value == null) {
+      return "Devi selezionare un avatar";
+    }
+    return null;
+  }
+
+  void setAvatar(XFile value) {
+    avatar.value = value;
+  }
+
+  Future<ApiResponse> register() async {
+    isPerformingRegister.value = true;
+    ApiResponse response = await provider.register(
+      emailController.text.trim(),
+      nomeController.text.trim(),
+      cognomeController.text.trim(),
+      usernameController.text.trim(),
+      passwordController.text.trim(),
+      birthdateController.text.trim(),
+      avatar.value!,
+    );
+    isPerformingRegister.value = false;
+    return response;
   }
 
   togglePrivacy(bool? value) {

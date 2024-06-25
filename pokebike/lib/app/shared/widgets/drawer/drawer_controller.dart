@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/shared/providers/logout_provider.dart';
+import 'package:pokebike/app/shared/controllers/storage.dart';
+import 'package:pokebike/app/shared/providers/auth_provider.dart';
 
 class MDrawerController extends GetxController {
   static MDrawerController get to => Get.find();
@@ -13,7 +14,7 @@ class MDrawerController extends GetxController {
   bool get isPerformingLogout => _isPerformingLogout.value;
   set isPerformingLogout(bool value) => _isPerformingLogout.value = value;
 
-  final LogoutProvider logoutProvider;
+  final AuthProvider logoutProvider;
 
   MDrawerController({required this.logoutProvider});
 
@@ -25,6 +26,7 @@ class MDrawerController extends GetxController {
   Future<ApiResponse> logout() async {
     isPerformingLogout = true;
     ApiResponse response = await logoutProvider.logout();
+    Storage.to.apiToken = "";
     isPerformingLogout = false;
     return response;
   }

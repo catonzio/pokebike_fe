@@ -32,7 +32,7 @@ class SettingsButton extends StatelessWidget {
             horizontal: VisualDensity.minimumDensity,
             vertical: VisualDensity.maximumDensity),
         // minLeadingWidth: context.width * 0.2,
-        minTileHeight: context.height * 0.02,
+        // minTileHeight: context.height * 0.02,
         title: Text(
           text,
           style: context.textTheme.bodyLarge,

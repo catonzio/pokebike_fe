@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/config/themes.dart';
+import 'package:pokebike/app/data/api_response.dart';
+import 'package:pokebike/app/modules/login_register/register_form_field.dart';
 import 'package:pokebike/app/modules/login_register/views/checkbox_form_field.dart';
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
+import 'package:pokebike/app/modules/login_register/views/register_form_field.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
+import 'package:pokebike/app/shared/controllers/storage.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/utils/api_utils.dart';
 import 'package:pokebike/app/shared/utils/decoration_image.dart';
-import 'package:pokebike/app/shared/utils/input_decoration.dart';
 import 'package:pokebike/app/shared/widgets/base_app_bar.dart';
 import 'package:pokebike/app/shared/widgets/utils/loading_stack.dart';
 import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
@@ -28,7 +34,8 @@ class RegisterView extends GetView<RegisterController> {
           width: double.infinity,
           height: double.infinity,
           decoration: BoxDecoration(
-              image: getDecorationImage('assets/images/register_bg.png', 0.3)),
+              image: getLightDecorationImage(
+                  'assets/images/register_bg.png', 0.15)),
           alignment: Alignment.bottomCenter,
           child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -43,9 +50,16 @@ class RegisterView extends GetView<RegisterController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        ShimmerTitle.dark(text: "Benvenuto!"),
-        SizedBox(
-          height: context.height * 0.35,
+        Expanded(
+          flex: 1,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 64),
+            child: ShimmerTitle.dark(text: "Benvenuto!"),
+          ),
+        ),
+        Expanded(
+          // height: context.height * 0.35,
+          flex: 4,
           child: Form(
               key: controller.formKey,
               child: DefaultTextStyle(
@@ -53,98 +67,174 @@ class RegisterView extends GetView<RegisterController> {
                 child: _formBody(context),
               )),
         ),
-        Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 32.0),
-              child: MButton(
-                onPressed: () => _register(context),
-                backgroundColor: MColors.secondaryDark,
-                child: const Text("Avanti"),
+        Expanded(
+          flex: 1,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 32.0),
+                child: MButton(
+                  onPressed: () => _register(context),
+                  backgroundColor: MColors.secondaryDark,
+                  child: const Text("Avanti"),
+                ),
               ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: InkWell(
-                onTap: () => _onAlreadyAccount(context),
-                child: const Text("Hai già un account? Accedi",
-                    textAlign: TextAlign.center),
+              SizedBox(
+                width: double.infinity,
+                child: InkWell(
+                  onTap: () => _onAlreadyAccount(context),
+                  child: const Text("Hai già un account? Accedi",
+                      textAlign: TextAlign.center),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         )
       ],
     );
   }
 
-  Column _formBody(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        const Text("E-mail"),
-        TextFormField(
-            controller: controller.emailController,
-            minLines: 1,
-            maxLines: 1,
-            style: Themes.formTextStyle,
-            validator: controller.emailValidator,
-            decoration: lightInputDecoration("E-mail")),
-        const Text("Password"),
-        Obx(() => TextFormField(
-            controller: controller.passwordController,
-            obscureText: controller.obscurePassword,
-            minLines: 1,
-            maxLines: 1,
-            style: Themes.formTextStyle,
-            validator: controller.passwordValidator,
-            decoration: lightInputDecoration("Password",
-                isPassword: true,
-                toggleObscurePassword: controller.toggleObscurePassword))),
-        const Text("Conferma Password"),
-        Obx(() => TextFormField(
-            controller: controller.confirmPasswordController,
-            obscureText: controller.obscurePassword,
-            minLines: 1,
-            maxLines: 1,
-            style: Themes.formTextStyle,
-            validator: controller.confirmPasswordValidator,
-            decoration: lightInputDecoration("Password",
-                isPassword: true,
-                toggleObscurePassword: controller.toggleObscurePassword))),
-        InkWell(
-          child: CheckboxFormField(
-            value: controller.isPrivacyAccepted,
-            onChanged: controller.togglePrivacy,
-            title: const Text("Privacy"),
-            validator: (value) =>
-                value == false ? "Devi accettare la privacy" : null,
-          ),
-        ),
-      ],
-    );
+  Widget _formBody(BuildContext context) {
+    List<RegisterFormFieldModel> fields = [
+      RegisterFormFieldModel(
+          label: "E-mail",
+          validator: controller.emailValidator,
+          controller: controller.emailController,
+          isPassword: false),
+      RegisterFormFieldModel(
+          label: "Nome",
+          validator: controller.nomeValidator,
+          controller: controller.nomeController,
+          isPassword: false),
+      RegisterFormFieldModel(
+          label: "Cognome",
+          validator: controller.cognomeValidator,
+          controller: controller.cognomeController,
+          isPassword: false),
+      RegisterFormFieldModel(
+          label: "Username",
+          validator: controller.usernameValidator,
+          controller: controller.usernameController,
+          isPassword: false),
+      RegisterFormFieldModel(
+          label: "Password",
+          validator: controller.passwordValidator,
+          controller: controller.passwordController,
+          isPassword: true),
+      RegisterFormFieldModel(
+          label: "Conferma Password",
+          validator: controller.confirmPasswordValidator,
+          controller: controller.confirmPasswordController,
+          isPassword: true),
+      RegisterFormFieldModel(
+          label: "Data di nascita",
+          validator: controller.birthdateValidator,
+          controller: controller.birthdateController,
+          isPassword: false,
+          onTap: () => _askBirthdate(context))
+    ];
+    return ListView(itemExtent: context.height * 0.11, children: [
+      ...fields.map((RegisterFormFieldModel e) {
+        return RegisterFormField(
+          model: e,
+          toggleObscurePassword: controller.toggleObscurePassword,
+          obscurePassword: controller.obscurePassword,
+        );
+      }),
+      Obx(() => PhotoPicker(
+            text: controller.avatar.value?.name ?? "Seleziona l'avatar",
+            validator: controller.avatarValidator,
+            onSuccess: controller.setAvatar,
+          )),
+      CheckboxFormField(
+        value: controller.isPrivacyAccepted,
+        onChanged: controller.togglePrivacy,
+        title: const Text("Privacy"),
+        validator: (value) =>
+            value == false ? "Devi accettare la privacy" : null,
+      ),
+    ]);
   }
 
   _register(BuildContext context) async {
     if (controller.formKey.currentState!.validate()) {
-      bool result = await controller.register();
+      ApiResponse response = await controller.register();
       if (context.mounted) {
-        if (result) {
-          context.navigator.pushNamed(Routes.CONFIRM_REGISTER);
-        } else {
-          context.scaffold.showSnackBar(SnackBar(
-            content: const Text("Errore durante la registrazione"),
-            action: SnackBarAction(
-              label: "Ok",
-              onPressed: () => context.scaffold.clearSnackBars(),
-            ),
-          ));
-        }
+        handleApiResponse(context, response, (dynamic data) {
+          Storage.to.apiToken = data;
+          context.navigator.popAndPushNamed(Routes.HOME);
+        });
       }
     }
   }
 
   _onAlreadyAccount(BuildContext context) {
     context.navigator.popAndPushNamed(Routes.LOGIN);
+  }
+
+  _askBirthdate(BuildContext context) async {
+    DateTime? time = await showDatePicker(
+        context: context, firstDate: DateTime(1900), lastDate: DateTime.now());
+    if (time != null) {
+      controller.birthdateController.text =
+          "${time.day}-${time.month}-${time.year}";
+    }
+  }
+}
+
+class PhotoPicker extends StatelessWidget {
+  final String text;
+  final String? Function(XFile?)? validator;
+  final Function(XFile) onSuccess;
+
+  const PhotoPicker(
+      {super.key,
+      required this.text,
+      required this.validator,
+      required this.onSuccess});
+
+  @override
+  Widget build(BuildContext context) {
+    return FormField<XFile>(
+      validator: validator,
+      builder: (field) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            InkWell(
+              onTap: _selectAvatar,
+              child: Container(
+                height: context.height * 0.08,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(32),
+                  border: Border.all(color: MColors.secondary, width: 3),
+                ),
+                alignment: Alignment.center,
+                child: Text(text),
+              ),
+            ),
+            if (field.errorText != null)
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: Text(
+                  field.errorText!,
+                  style: const TextStyle(color: MColors.error),
+                ),
+              )
+          ],
+        );
+      },
+    );
+  }
+
+  _selectAvatar() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      print(image.path);
+      onSuccess(image);
+      // controller.avatar = image.path;
+    }
   }
 }
