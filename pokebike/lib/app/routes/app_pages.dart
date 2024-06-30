@@ -32,6 +32,8 @@ import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
 import '../modules/torneo/bindings/torneo_binding.dart';
 import '../modules/torneo/views/torneo_view.dart';
+import '../modules/vota/bindings/vota_binding.dart';
+import '../modules/vota/views/vota_view.dart';
 import '../shared/widgets/pagination/pagination_bindings.dart';
 
 // ignore_for_file: constant_identifier_names
@@ -123,6 +125,11 @@ class AppPages {
       name: _Paths.PARTECIPA_TORNEO,
       page: () => const PartecipaTorneoView(),
       binding: PartecipaTorneoBinding(),
+    ),
+    GetPage(
+      name: _Paths.VOTA,
+      page: () => const VotaView(),
+      binding: VotaBinding(),
     ),
   ];
 }

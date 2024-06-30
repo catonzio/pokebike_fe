@@ -23,6 +23,7 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
+        resizeToAvoidBottomInset: false,
         appBar: BaseAppBar(
             onBackPressed: () =>
                 context.navigator.popAndPushNamed(Routes.LOGIN_REGISTER)),

@@ -21,6 +21,7 @@ abstract class Routes {
   static const LEADERBOARD = _Paths.LEADERBOARD;
   static const SETTINGS = _Paths.SETTINGS;
   static const PARTECIPA_TORNEO = _Paths.PARTECIPA_TORNEO;
+  static const VOTA = _Paths.VOTA;
 }
 
 abstract class _Paths {
@@ -41,4 +42,5 @@ abstract class _Paths {
   static const LEADERBOARD = '/leaderboard';
   static const SETTINGS = '/settings';
   static const PARTECIPA_TORNEO = '/partecipa-torneo';
+  static const VOTA = '/vota';
 }

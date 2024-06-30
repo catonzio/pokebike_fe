@@ -1,4 +1,6 @@
 import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pokebike/app/modules/fotocamera/providers/moto_provider.dart';
@@ -16,6 +18,8 @@ class FotocameraController extends GetxController {
   final RxBool _isCapturing = true.obs;
   bool get isCapturing => _isCapturing.value;
   set isCapturing(bool value) => _isCapturing.value = value;
+
+  final ScrollController scrollController = ScrollController();
 
   CameraController cameraController =
       CameraController(cameras[0], ResolutionPreset.max);
@@ -37,6 +41,14 @@ class FotocameraController extends GetxController {
         .onError((error, stackTrace) {
       print(error);
       return false;
+    });
+    scrollController.addListener(() {
+      if (scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        isCapturing = true;
+      } else {
+        isCapturing = false;
+      }
     });
     super.onInit();
   }

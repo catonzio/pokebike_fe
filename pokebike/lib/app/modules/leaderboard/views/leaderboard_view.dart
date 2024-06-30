@@ -10,6 +10,8 @@ class LeaderboardView extends GetView<LeaderboardController> {
   @override
   Widget build(BuildContext context) {
     return const DefaultPage(
+      backButton: true,
+      title: "Classifica",
       body: Center(
         child: Text(
           'LeaderboardView is working',

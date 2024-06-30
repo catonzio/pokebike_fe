@@ -26,6 +26,7 @@ class RegisterView extends GetView<RegisterController> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
+        resizeToAvoidBottomInset: false,
         appBar: BaseAppBar(
             onBackPressed: () =>
                 context.navigator.popAndPushNamed(Routes.LOGIN_REGISTER)),
@@ -59,12 +60,15 @@ class RegisterView extends GetView<RegisterController> {
         Expanded(
           // height: context.height * 0.35,
           flex: 4,
-          child: Form(
-              key: controller.formKey,
-              child: DefaultTextStyle(
-                style: Themes.darkFormTextStyle,
-                child: _formBody(context),
-              )),
+          child: Padding(
+            padding: EdgeInsets.only(bottom: context.keyboardHeight / 1.5),
+            child: Form(
+                key: controller.formKey,
+                child: DefaultTextStyle(
+                  style: Themes.darkFormTextStyle,
+                  child: _formBody(context),
+                )),
+          ),
         ),
         Expanded(
           flex: 1,
@@ -140,11 +144,14 @@ class RegisterView extends GetView<RegisterController> {
           obscurePassword: controller.obscurePassword,
         );
       }),
-      Obx(() => PhotoPicker(
-            text: controller.avatar.value?.name ?? "Seleziona l'avatar",
-            validator: controller.avatarValidator,
-            onSuccess: controller.setAvatar,
-          )),
+      Padding(
+        padding: const EdgeInsets.only(top: 16.0),
+        child: Obx(() => PhotoPicker(
+              text: controller.avatar.value?.name ?? "Seleziona l'avatar",
+              validator: controller.avatarValidator,
+              onSuccess: controller.setAvatar,
+            )),
+      ),
       CheckboxFormField(
         value: controller.isPrivacyAccepted,
         onChanged: controller.togglePrivacy,

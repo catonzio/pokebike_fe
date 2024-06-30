@@ -5,7 +5,7 @@ import 'package:pokebike/app/shared/providers/auth_provider.dart';
 
 class MDrawerController extends GetxController {
   static MDrawerController get to => Get.find();
-  
+
   final RxBool _isDrawerOpen = false.obs;
   bool get isDrawerOpen => _isDrawerOpen.value;
   set isDrawerOpen(bool value) => _isDrawerOpen.value = value;
@@ -28,6 +28,7 @@ class MDrawerController extends GetxController {
     ApiResponse response = await logoutProvider.logout();
     Storage.to.apiToken = "";
     isPerformingLogout = false;
+    toggleDrawer();
     return response;
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/enums/garage_type.dart';
+import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/modules/garage/views/collezione/collezione_widget.dart';
 import 'package:pokebike/app/modules/garage/views/garage/garage_widget.dart';
 import 'package:pokebike/app/modules/garage/views/pagination/pagination_row.dart';
@@ -77,7 +78,7 @@ class GarageView extends GetView<GarageController> {
                     child: CollezioneWidget(
                         // gridPadding: const EdgeInsets.only(
                         //     bottom: Constants.bottomNavbarHeight),
-                        onTapElement: (int i) {
+                        onTapElement: (Moto i) {
                       print("Tapped $i");
                     }))),
           ),

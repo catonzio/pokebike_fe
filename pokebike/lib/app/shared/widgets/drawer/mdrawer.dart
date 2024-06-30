@@ -77,7 +77,6 @@ class Mdrawer extends StatelessWidget {
   _dialogEsciTap(BuildContext context) {
     final MDrawerController controller = Get.find<MDrawerController>();
     controller.logout();
-    controller.toggleDrawer();
     context.navigator.pushNamed(Routes.LOGIN_REGISTER);
   }
 }

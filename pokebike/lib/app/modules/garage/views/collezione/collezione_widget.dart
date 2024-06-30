@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
+import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/modules/garage/controllers/garage_controller.dart';
 import 'package:pokebike/app/modules/garage/views/empty_garage_body.dart';
 import 'package:pokebike/app/modules/garage/views/garage_card_view.dart';
@@ -8,7 +9,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 class CollezioneWidget extends GetView<GarageController> {
   final EdgeInsetsGeometry? gridPadding;
-  final Function(int) onTapElement;
+  final Function(Moto) onTapElement;
   const CollezioneWidget(
       {super.key, this.gridPadding, required this.onTapElement});
 
@@ -23,10 +24,10 @@ class CollezioneWidget extends GetView<GarageController> {
                 : _gridOfElements(mapListToWidget(controller.collections)))));
   }
 
-  List<Widget> mapListToWidget(List<int> list) {
+  List<Widget> mapListToWidget(List<Moto> list) {
     return list
-        .map((index) =>
-            GarageCardWidget(index: index, onTap: () => onTapElement(index)))
+        .map((moto) =>
+            GarageCardWidget(moto: moto, onTap: () => onTapElement(moto)))
         .toList();
   }
 

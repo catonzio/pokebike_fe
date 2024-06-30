@@ -15,5 +15,11 @@ class TipoMoto with _$TipoMoto {
     required String nome,
   }) = _TipoMoto;
 
-  factory TipoMoto.fromJson(Map<String, Object?> json) => _$TipoMotoFromJson(json);
+  factory TipoMoto.fromJson(Map<String, Object?> json) =>
+      _$TipoMotoFromJson(json);
+
+  factory TipoMoto.fake(int index) => TipoMoto(
+        id: index,
+        nome: "Tipo Moto $index",
+      );
 }

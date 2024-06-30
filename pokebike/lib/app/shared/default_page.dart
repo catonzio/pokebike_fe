@@ -8,22 +8,27 @@ import 'package:pokebike/app/shared/widgets/back_button.dart';
 import 'package:pokebike/app/shared/widgets/bottom_navbar/bottom_navbar.dart';
 import 'package:pokebike/app/shared/widgets/drawer/drawer_controller.dart';
 import 'package:pokebike/app/shared/widgets/drawer/mdrawer.dart';
+import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
 import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
 class DefaultPage extends GetView<MDrawerController> {
   final Widget body;
   final AppBar? appBar;
-  final bool useAppbar;
   final List<Widget>? actions;
+  final bool useAppbar;
   final bool backButton;
+  final bool bottomBar;
+  final String? title;
 
   const DefaultPage(
       {super.key,
       required this.body,
       this.appBar,
-      this.useAppbar = true,
       this.actions,
-      this.backButton = false});
+      this.useAppbar = true,
+      this.backButton = false,
+      this.bottomBar = true,
+      this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -31,36 +36,54 @@ class DefaultPage extends GetView<MDrawerController> {
       extendBody: true,
       extendBodyBehindAppBar: false,
       appBar: useAppbar ? (appBar ?? _createAppbar(context)) : null,
-      body: body,
-      bottomNavigationBar: const BottomNavbar(),
+      body: (backButton && !useAppbar)
+          ? Stack(
+              children: [
+                body,
+                Positioned(
+                  child: _createBackButton(context),
+                ),
+              ],
+            )
+          : body,
+      bottomNavigationBar: bottomBar ? const BottomNavbar() : null,
+      resizeToAvoidBottomInset: false,
     );
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          const Mdrawer(),
-          const DrawerBackgroundRedContainer(),
-          Obx(() => InkWell(
-                onTap: controller.isDrawerOpen ? controller.toggleDrawer : null,
-                child: ClipRRect(
-                  borderRadius:
-                      BorderRadius.circular(controller.isDrawerOpen ? 16 : 0),
-                  child: page,
-                ),
-              )
-                  .animate(target: controller.isDrawerOpen ? 1.0 : 0)
-                  .move(
-                      duration: const Duration(milliseconds: 300),
-                      begin: Offset.zero,
-                      end: Offset(context.width * 0.6, 0),
-                      curve: Curves.easeInOutCubic)
-                  .scale(
-                      duration: const Duration(milliseconds: 300),
-                      begin: const Offset(1, 1),
-                      end: const Offset(0.8, 0.8),
-                      curve: Curves.easeInOutCubic)),
-        ],
-      ),
+    return SafeArea(
+      child: GetX(builder: (MDrawerController controller) {
+        return SafeArea(
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: Stack(
+              children: [
+                const Mdrawer(),
+                const DrawerBackgroundRedContainer(),
+                InkWell(
+                  onTap:
+                      controller.isDrawerOpen ? controller.toggleDrawer : null,
+                  child: ClipRRect(
+                    borderRadius:
+                        BorderRadius.circular(controller.isDrawerOpen ? 16 : 0),
+                    child: page,
+                  ),
+                )
+                    .animate(target: controller.isDrawerOpen ? 1.0 : 0)
+                    .move(
+                        duration: const Duration(milliseconds: 300),
+                        begin: Offset.zero,
+                        end: Offset(context.width * 0.6, 0),
+                        curve: Curves.easeInOutCubic)
+                    .scale(
+                        duration: const Duration(milliseconds: 300),
+                        begin: const Offset(1, 1),
+                        end: const Offset(0.8, 0.8),
+                        curve: Curves.easeInOutCubic),
+              ],
+            ),
+          ),
+        );
+      }),
     );
   }
 
@@ -92,16 +115,38 @@ class DefaultPage extends GetView<MDrawerController> {
           ],
       bottom: PreferredSize(
           preferredSize: const Size(0, 0),
-          child: backButton
-              ? Align(
-                  alignment: Alignment.centerLeft,
-                  child: MBackButton(
-                    onPressed: () => context.navigator.pop(),
-                  ),
-                )
-              : const SizedBox()),
-      toolbarHeight: context.height * (backButton ? 0.12 : 0.08),
+          child: backButton ? _createBackButton(context) : const SizedBox()),
+      toolbarHeight: context.height * (backButton ? 0.14 : 0.08),
     );
+  }
+
+  Widget _createBackButton(BuildContext context) {
+    if (backButton && title == null) {
+      return Align(
+        alignment: Alignment.topLeft,
+        child: MBackButton(
+          onPressed: () => context.navigator.pop(),
+        ),
+      );
+    } else {
+      return Stack(
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: MBackButton(
+              onPressed: () => context.navigator.pop(),
+            ),
+          ),
+          Center(
+              child: SizedBox(
+                  width: context.width * 0.4,
+                  child: ShimmerTitle.light(
+                    text: title!,
+                    textAlign: TextAlign.center,
+                  )))
+        ],
+      );
+    }
   }
 
   void _tapCommunity(BuildContext context) {

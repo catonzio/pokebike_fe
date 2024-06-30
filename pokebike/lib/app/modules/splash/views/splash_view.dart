@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:pokebike/app/modules/splash/controllers/splash_controller.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/controllers/storage.dart';
@@ -16,9 +17,12 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      PermissionStatus status = await Permission.notification.request();
+      print(status);
+
       bool tokenValid = await SplashController.to.checkToken();
       String route = Routes.PRESENTATION;
-      
+
       if (tokenValid) {
         route = Routes.HOME;
       } else {

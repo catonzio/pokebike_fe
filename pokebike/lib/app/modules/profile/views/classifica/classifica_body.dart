@@ -14,24 +14,58 @@ class ClassificaBody extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return Obx(() => Skeletonizer(
         enabled: controller.isLoadingClassifica.value,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Container(
-              height: context.height * 0.11,
-              padding: const EdgeInsets.all(8.0),
-              child: ClassificaProfileRow(profileImagePath: MImageProvider.getImageUrl(),),
-            ),
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: const StatisticsRow(),
-            ),
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: const TopMoto(),
-            )
-          ],
-        )));
+        child: ListView.separated(
+            physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
+            itemBuilder: (context, index) {
+              if (index == 0) {
+                return Container(
+                  height: context.height * 0.11,
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClassificaProfileRow(
+                    profileImagePath: MImageProvider.getImageUrl(),
+                  ),
+                );
+              } else if (index == 1) {
+                return const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: StatisticsRow(),
+                );
+              } else {
+                return const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: TopMoto(),
+                );
+              }
+            },
+            separatorBuilder: (context, index) {
+              return SizedBox(
+                height: context.height * 0.03,
+              );
+            },
+            itemCount: 3)
+
+        // Column(
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //   children: [
+        //     Container(
+        //       height: context.height * 0.11,
+        //       padding: const EdgeInsets.all(8.0),
+        //       child: ClassificaProfileRow(
+        //         profileImagePath: MImageProvider.getImageUrl(),
+        //       ),
+        //     ),
+        //     Container(
+        //       padding: const EdgeInsets.all(8.0),
+        //       child: const StatisticsRow(),
+        //     ),
+        //     Container(
+        //       padding: const EdgeInsets.all(8.0),
+        //       child: const TopMoto(),
+        //     )
+        //   ],
+        // )
+        ));
   }
 }

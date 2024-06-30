@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 import 'package:pokebike/app/modules/settings/views/profile_container.dart';
@@ -41,12 +42,13 @@ class SettingsShowWidget extends GetView<SettingsController> {
                   SettingsButton(
                     text: "Notifiche",
                     icon: "Notification",
-                    trailing: MSwitcher(
-                      onChanged: (bool value) {
-                        print("Changed: $value");
-                        controller.openNotificationsSettings();
-                      },
-                    ),
+                    trailing: Obx(() => MSwitcher(
+                          value: controller.notificationsEnabled.value,
+                          onChanged: (bool value) async {
+                            print("Changed: $value");
+                            return await controller.openNotificationsSettings();
+                          },
+                        )),
                   ),
                   SettingsButton(
                       text: "Termini e condizioni",

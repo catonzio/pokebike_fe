@@ -26,13 +26,17 @@ class TorneiList extends StatelessWidget {
       ),
       Padding(
         padding: const EdgeInsets.all(8.0),
-        child: TorneiTile(text: "Vota", imageName: "vota.jpg", onTap: () => {}),
+        child: TorneiTile(
+            text: "Vota",
+            imageName: "vota.jpg",
+            onTap: () => context.navigator.pushNamed(Routes.VOTA)),
       ),
       Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: TorneiTile(
-            text: "Classifica", imageName: "classifica.jpg", onTap: () => {}),
-      )
+          padding: const EdgeInsets.all(8.0),
+          child: TorneiTile(
+              text: "Classifica",
+              imageName: "classifica.jpg",
+              onTap: () => context.navigator.pushNamed(Routes.LEADERBOARD)))
     ];
 
     if (scroll) {

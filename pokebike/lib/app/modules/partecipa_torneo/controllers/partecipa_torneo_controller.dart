@@ -1,10 +1,16 @@
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/models/moto/moto.dart';
 
 class PartecipaTorneoController extends GetxController {
   final RxBool isFetching = false.obs;
 
-  final List<int> fakeCollections = List.generate(6, (index) => index);
-  final RxList<int> collections = <int>[].obs;
+  final List<Moto> fakeCollections =
+      List.generate(6, (index) => Moto.fake(index));
+  final RxList<Moto> collections = <Moto>[].obs;
+
+  final RxBool isMotoChosen = false.obs;
+  final RxInt motoIndex = 0.obs;
+  set index(int value) => motoIndex.value = value;
 
   @override
   void onInit() {
@@ -15,7 +21,7 @@ class PartecipaTorneoController extends GetxController {
   Future<void> fetchCollection() async {
     isFetching.value = true;
     await Future.delayed(const Duration(seconds: 3));
-    collections.addAll(List.generate(100, (index) => index + 1));
+    collections.addAll(List.generate(100, (index) => Moto.fake(index)));
     isFetching.value = false;
   }
 
@@ -31,5 +37,16 @@ class PartecipaTorneoController extends GetxController {
   void onSearch(String query) {
     collections.clear();
     fetchCollection();
+  }
+
+  void chooseMoto(int index) {
+    isMotoChosen.value = true;
+    motoIndex.value = index;
+    print("Moto scelta con successo! Index: $index");
+  }
+
+  void reset() {
+    isMotoChosen.value = false;
+    motoIndex.value = 0;
   }
 }

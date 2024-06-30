@@ -20,7 +20,7 @@ class SettingsButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        contentPadding: const EdgeInsets.all(8),
+        contentPadding: const EdgeInsets.all(12),
         leading: MIcon(name: "$icon icon white"),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50),
@@ -30,7 +30,7 @@ class SettingsButton extends StatelessWidget {
         dense: false,
         visualDensity: const VisualDensity(
             horizontal: VisualDensity.minimumDensity,
-            vertical: VisualDensity.maximumDensity),
+            vertical: VisualDensity.minimumDensity),
         // minLeadingWidth: context.width * 0.2,
         // minTileHeight: context.height * 0.02,
         title: Text(

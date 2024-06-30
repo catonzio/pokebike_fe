@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/modules/partecipa_torneo/controllers/scelta_moto_controller.dart';
+import 'package:pokebike/app/modules/partecipa_torneo/controllers/partecipa_torneo_controller.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/default_dialog.dart';
 
-class MSlider extends GetView<SceltaMotoController> {
+class MotoChosenSlider extends GetView<PartecipaTorneoController> {
   final int index;
 
-  const MSlider({super.key, required this.index});
+  const MotoChosenSlider({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {

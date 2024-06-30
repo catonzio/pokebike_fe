@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
+import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/modules/garage/controllers/garage_controller.dart';
 import 'package:pokebike/app/modules/garage/views/empty_garage_body.dart';
 import 'package:pokebike/app/modules/garage/views/garage_card_view.dart';
@@ -20,10 +21,10 @@ class GarageWidget extends GetView<GarageController> {
                 : _gridOfElements(mapListToWidget(controller.garages)))));
   }
 
-  List<Widget> mapListToWidget(List<int> list) {
+  List<Widget> mapListToWidget(List<Moto> list) {
     return list
-        .map((index) =>
-            GarageCardWidget(index: index, onTap: () => print("Garage $index")))
+        .map((moto) =>
+            GarageCardWidget(moto: moto, onTap: () => print("Garage $moto")))
         .toList();
   }
 

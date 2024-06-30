@@ -20,4 +20,7 @@ class MColors {
   static const Color errorDark = Color(0xFFE70202);
   static const Color error = Color(0xFFF51708);
   static const Color errorLight = Color(0xFFFF220F);
+
+  static const Color votaFirstPlayerColor = Color(0xFFFFB444);
+  static const Color votaSecondPlayerColor = Color(0xFFD1692E);
 }

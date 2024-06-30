@@ -24,12 +24,17 @@ class SettingsEditWidget extends GetView<SettingsController> {
       padding: const EdgeInsets.all(16.0),
       child: Obx(() => Stack(
             children: [
-              _mainBody(context)
-                  .animate(target: controller.saving ? 1 : 0)
-                  .blur(
-                    curve: Curves.easeInCubic,
-                    duration: const Duration(milliseconds: 500),
-                  ),
+              Positioned.fill(
+                bottom: context.keyboardHeight == 0
+                    ? Constants.bottomNavbarHeight / 4
+                    : context.keyboardHeight / 1.3,
+                child: _mainBody(context)
+                    .animate(target: controller.saving ? 1 : 0)
+                    .blur(
+                      curve: Curves.easeInCubic,
+                      duration: const Duration(milliseconds: 500),
+                    ),
+              ),
               if (controller.saving)
                 const Center(
                   child: CircularProgressIndicator(),
@@ -39,41 +44,44 @@ class SettingsEditWidget extends GetView<SettingsController> {
     );
   }
 
-  Column _mainBody(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Expanded(
-          flex: 1,
-          child: StoryWidget(
-            imagePath: MImageProvider.getImageUrl(),
-            radius: 45,
-          ),
+  Widget _mainBody(BuildContext context) {
+    return SingleChildScrollView(
+      child: SizedBox(
+        height: context.height - Constants.bottomNavbarHeight * 1.5,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(
+              flex: 1,
+              child: StoryWidget(
+                imagePath: MImageProvider.getImageUrl(),
+                radius: 45,
+              ),
+            ),
+            Expanded(flex: 3, child: SettingsEditingForm()),
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  MButton.red(
+                      onPressed: () => _salva(context),
+                      child: const Text("Salva")),
+                  MButton.white(
+                      onPressed: () => controller.editing = false,
+                      child: Text("Annulla",
+                          style: context.textTheme.bodySmall!
+                              .copyWith(color: MColors.primaryDark))),
+                  InkWell(
+                    onTap: () => deleteAccount(context),
+                    child: const Text("Elimina account"),
+                  )
+                ],
+              ),
+            )
+          ],
         ),
-        const Expanded(
-          flex: 4,
-          child: SettingsEditingForm(),
-        ),
-        Expanded(
-            flex: 2,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MButton.red(
-                    onPressed: () => _salva(context),
-                    child: const Text("Salva")),
-                MButton.white(
-                    onPressed: () => controller.editing = false,
-                    child: Text("Annulla",
-                        style: context.textTheme.bodySmall!
-                            .copyWith(color: MColors.primaryDark))),
-                InkWell(
-                  onTap: () => deleteAccount(context),
-                  child: const Text("Elimina account"),
-                )
-              ],
-            ))
-      ],
+      ),
     );
   }
 

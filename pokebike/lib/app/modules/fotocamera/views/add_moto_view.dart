@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/modules/fotocamera/views/add_moto_form.dart';
-import 'package:pokebike/app/shared/default_page.dart';
+import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/utils/api_utils.dart';
 
 import '../controllers/fotocamera_controller.dart';
@@ -24,14 +24,24 @@ class AddMotoView extends GetView<FotocameraController> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultPage(
-      useAppbar: false,
-      body: Column(
-        children: [
-          _showImage(context),
-          Container(
-              height: context.height * 0.6,
-              width: context.width,
+    return CustomScrollView(
+      // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      shrinkWrap: true,
+      slivers: [
+        SliverAppBar(
+          expandedHeight: context.height * 0.4,
+          flexibleSpace: FlexibleSpaceBar(
+            background: _showImage(context),
+          ),
+          snap: false,
+          pinned: false,
+          floating: true,
+        ),
+        SliverPadding(
+          padding: EdgeInsets.only(bottom: context.keyboardHeight / 1.5),
+          sliver: SliverFillRemaining(
+            child: Container(
+              padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                   gradient: RadialGradient(
                       center: Alignment.bottomCenter,
@@ -40,23 +50,13 @@ class AddMotoView extends GetView<FotocameraController> {
                     MColors.secondary.withOpacity(0.3),
                     Colors.black
                   ])),
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Center(
-                      child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Text("Informazioni"),
-                  )),
-                  Expanded(
-                      child: AddMotoForm(
-                    onSend: (data) => _addMoto(context, data),
-                  )),
-                ],
-              )),
-        ],
-      ),
+              child: AddMotoForm(
+                onSend: (data) => _addMoto(context, data),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -64,12 +64,13 @@ class AddMotoView extends GetView<FotocameraController> {
     return Container(
       height: context.height * 0.4,
       width: context.width,
-      color: Colors.grey,
+      color: MColors.primaryDark,
       child: FutureBuilder(
         future: xFileToImage(controller.image!),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return Image(image: (snapshot.data as Image).image);
+            return Image(
+                image: (snapshot.data as Image).image, fit: BoxFit.cover);
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           } else {

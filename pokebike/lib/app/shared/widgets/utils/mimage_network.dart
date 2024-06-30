@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class MimageNetwork extends StatelessWidget {
   final String path;
-
-  const MimageNetwork({super.key, required this.path});
+  final BoxFit fit;
+  const MimageNetwork({super.key, required this.path, this.fit = BoxFit.cover});
 
   @override
   Widget build(BuildContext context) {
     return Image.network(
       path,
-      fit: BoxFit.cover,
+      fit: fit,
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress == null) {
           return child;

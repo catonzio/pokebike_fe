@@ -1,0 +1,34 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pokebike/app/routes/app_pages.dart';
+import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/mbutton.dart';
+
+class MotoDetailChosen extends StatelessWidget {
+  const MotoDetailChosen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding:
+          EdgeInsets.only(left: 16, right: 16, bottom: context.height * 0.2),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            "Moto registrata al torneo con successo",
+            style: context.textTheme.titleLarge,
+            textAlign: TextAlign.center,
+          ),
+          MButton(
+              label: "Torna alla home", onTap: () => _tornaAllaHome(context))
+        ],
+      ),
+    );
+  }
+
+  void _tornaAllaHome(BuildContext context) {
+    // controller.reset();
+    context.navigator.pushReplacementNamed(Routes.HOME);
+  }
+}
