@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
 import 'package:pokebike/app/modules/profile/controllers/profile_controller.dart';
-import 'package:pokebike/app/modules/profile/views/classifica/classifica_profile_row.dart';
+import 'package:pokebike/app/shared/widgets/classifica_profile_row.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/statistics_row.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/top_moto.dart';
-import 'package:pokebike/app/shared/utils/mimage_provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ClassificaBody extends GetView<ProfileController> {
@@ -23,7 +23,7 @@ class ClassificaBody extends GetView<ProfileController> {
                   height: context.height * 0.11,
                   padding: const EdgeInsets.all(8.0),
                   child: ClassificaProfileRow(
-                    profileImagePath: MImageProvider.getImageUrl(),
+                    partecipazione: Partecipazione.fake(1),
                   ),
                 );
               } else if (index == 1) {

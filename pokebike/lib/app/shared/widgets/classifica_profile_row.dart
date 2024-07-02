@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
+import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
 
 class ClassificaProfileRow extends StatelessWidget {
-  final String profileImagePath;
-  const ClassificaProfileRow({super.key, required this.profileImagePath});
+  final Partecipazione partecipazione;
+  const ClassificaProfileRow({super.key, required this.partecipazione});
 
   @override
   Widget build(BuildContext context) {
@@ -27,20 +28,20 @@ class ClassificaProfileRow extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "3",
+                  partecipazione.id.toString(),
                   style: context.textTheme.headlineLarge,
                 ),
               ),
-              Image.network(profileImagePath),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text("Nome Cognome"),
+              Image.network(partecipazione.avatar),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(partecipazione.fullName),
               ),
               const Spacer(),
               Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  "Punti 25",
+                  "Punti ${partecipazione.punti}",
                   style: context.textTheme.labelSmall,
                 ),
               ),

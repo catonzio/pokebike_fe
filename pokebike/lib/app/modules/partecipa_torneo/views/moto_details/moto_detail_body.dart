@@ -5,6 +5,7 @@ import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/modules/partecipa_torneo/views/moto_details/moto_chosen_slider.dart';
 import 'package:pokebike/app/modules/partecipa_torneo/views/moto_details/moto_detail_photo.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/widgets/giant_title.dart';
 
 class MotoDetailBody extends StatelessWidget {
   final Moto moto;
@@ -25,22 +26,20 @@ class MotoDetailBody extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            moto.nome,
-            style: context.textTheme.headlineMedium
-                ?.copyWith(fontWeight: FontWeight.bold),
+          padding: const EdgeInsets.all(4.0),
+          child: GiantTitle(
+            title: moto.nome,
           ),
         ),
         const Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(4.0),
           child: Text(
             "Erede di un retaggio nato nel 1957, l’irriverente e ricercato Sportster S di Harley-Davidson evolve i tratti universalmente amati dei suoi predecessori: velocità scattante, agilità sorprendente e divertimento assicurato.",
             textAlign: TextAlign.center,
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(8.0),
           child: InkWell(
               onTap: () => context.navigator.push(
                     MaterialPageRoute(
@@ -62,6 +61,11 @@ class MotoDetailBody extends StatelessWidget {
           children: [
             InkWell(
                 onTap: () => onPrevious(),
+                splashFactory: NoSplash.splashFactory,
+                // highlightColor: Colors.transparent,
+                // splashColor: Colors.transparent,
+                // focusColor: Colors.transparent,
+                // overlayColor: MaterialStateProperty.all(Colors.transparent),
                 child:
                     SvgPicture.asset("assets/images/left_selection_arrow.svg")),
             MotoChosenSlider(index: moto.id),

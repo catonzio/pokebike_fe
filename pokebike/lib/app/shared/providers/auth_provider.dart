@@ -8,7 +8,7 @@ class AuthProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.baseUrl = Constants.apiBaseUrl;
-    httpClient.timeout = const Duration(seconds: 30);
+    httpClient.timeout = const Duration(seconds: 10);
   }
 
   Future<ApiResponse> login(String email, String password) async {

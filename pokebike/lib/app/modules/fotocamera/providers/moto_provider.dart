@@ -7,7 +7,7 @@ class MotoProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.baseUrl = Constants.apiBaseUrl;
-    httpClient.timeout = const Duration(seconds: 30);
+    httpClient.timeout = const Duration(seconds: 10);
   }
 
   Future<ApiResponse> addMoto(Map<String, dynamic> data) {
