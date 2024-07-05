@@ -166,7 +166,7 @@ class RegisterView extends GetView<RegisterController> {
     if (controller.formKey.currentState!.validate()) {
       ApiResponse response = await controller.register();
       if (context.mounted) {
-        handleApiResponse(context, response, (dynamic data) {
+        handleApiResponse(context, response, onSuccess: (dynamic data) {
           Storage.to.apiToken = data;
           context.navigator.popAndPushNamed(Routes.HOME);
         });

@@ -90,7 +90,7 @@ class AddMotoView extends GetView<FotocameraController> {
     data["image"] = controller.image;
     ApiResponse response = await controller.addMoto(data);
     if (context.mounted) {
-      handleApiResponse(context, response, (dynamic data) {
+      handleApiResponse(context, response, onSuccess: (dynamic data) {
         print(data);
       });
     }

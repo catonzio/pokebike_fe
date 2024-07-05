@@ -12,7 +12,7 @@ class AuthProvider extends GetConnect {
   }
 
   Future<ApiResponse> login(String email, String password) async {
-    return handleApiEndpoint(post, "/login", data: {
+    return handleApiEndpoint(request, "post", "/login", data: {
       'email': email,
       'password': password,
     });
@@ -20,7 +20,7 @@ class AuthProvider extends GetConnect {
 
   Future<ApiResponse> register(String email, String nome, String cognome,
       String username, String password, String birthdate, XFile avatar) async {
-    return handleApiEndpoint(post, "/register",
+    return handleApiEndpoint(request, "post", "/register",
         data: {
           'name': nome,
           'surname': cognome,
@@ -34,10 +34,10 @@ class AuthProvider extends GetConnect {
   }
 
   Future<ApiResponse> logout() async {
-    return handleApiEndpoint(post, "/logout", auth: true);
+    return handleApiEndpoint(request, "post", "/logout", auth: true);
   }
 
   Future<ApiResponse> checkToken() async {
-    return handleApiEndpoint(post, "/check-token", auth: true);
+    return handleApiEndpoint(request, "post", "/check-token", auth: true);
   }
 }

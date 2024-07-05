@@ -5,14 +5,14 @@ class ApiResponse {
   final bool success;
 
   ApiResponse({
-    required this.status,
+    this.status,
     required this.message,
     required this.data,
     required this.success,
   });
 
   factory ApiResponse.success({
-    required int? status,
+    int? status,
     required String message,
     required dynamic data,
   }) {
@@ -25,7 +25,7 @@ class ApiResponse {
   }
 
   factory ApiResponse.error({
-    required int? status,
+    int? status,
     required String message,
     required dynamic data,
   }) {

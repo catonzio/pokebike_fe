@@ -18,5 +18,14 @@ class Profile with _$Profile {
     required int numSconfitte,
   }) = _Profile;
 
-  factory Profile.fromJson(Map<String, Object?> json) => _$ProfileFromJson(json);
+  factory Profile.fromJson(Map<String, Object?> json) =>
+      _$ProfileFromJson(json);
+
+  factory Profile.fake(int index) => Profile(
+        id: index,
+        username: "Username $index",
+        numMotoCatturate: 0,
+        numVittorie: 0,
+        numSconfitte: 0,
+      );
 }

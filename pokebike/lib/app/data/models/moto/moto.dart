@@ -29,20 +29,18 @@ class Moto with _$Moto {
 
   factory Moto.fromJson(Map<String, Object?> json) => _$MotoFromJson(json);
 
-  factory Moto.fake(int index) {
-    return Moto(
-      id: index,
-      nome: "Moto $index",
-      descrizione:
-          "Erede di un retaggio nato nel 1957, l’irriverente e ricercato Sportster S di Harley-Davidson evolve i tratti universalmente amati dei suoi predecessori: velocità scattante, agilità sorprendente e divertimento assicurato.",
-      anno: 2021,
-      luogo: "Milano",
-      dataCattura: DateTime.now(),
-      marcaMoto: MarcaMoto.fake(index),
-      tipoMoto: TipoMoto.fake(index),
-      numVittorie: 0,
-      numSconfitte: 0,
-      avatar: MImageProvider.getImageUrl(index: index),
-    );
-  }
+  factory Moto.fake(int index) => Moto(
+        id: index,
+        nome: "Moto $index",
+        descrizione:
+            "Erede di un retaggio nato nel 1957, l’irriverente e ricercato Sportster S di Harley-Davidson evolve i tratti universalmente amati dei suoi predecessori: velocità scattante, agilità sorprendente e divertimento assicurato.",
+        anno: 2021,
+        luogo: "Milano",
+        dataCattura: DateTime.now(),
+        marcaMoto: MarcaMoto.fake(index),
+        tipoMoto: TipoMoto.fake(index),
+        numVittorie: 0,
+        numSconfitte: 0,
+        avatar: MImageProvider.getImageUrl(index: index),
+      );
 }

@@ -6,10 +6,10 @@ import 'package:pokebike/app/shared/controllers/storage.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 
 void handleApiResponse(
-    BuildContext context, ApiResponse response, Function(dynamic) onSuccess,
-    {Function(dynamic)? onError}) {
+    BuildContext context, ApiResponse response, {Function(dynamic)? onSuccess,
+    Function(dynamic)? onError}) {
   if (response.success) {
-    onSuccess(response.data);
+    onSuccess?.call(response.data);
   } else {
     if (onError != null) {
       onError(response.data);
@@ -25,7 +25,8 @@ void handleApiResponse(
   }
 }
 
-Future<ApiResponse> handleApiEndpoint(Function method, String url,
+Future<ApiResponse> handleApiEndpoint(
+    Function request, String method, String url,
     {dynamic data,
     bool auth = false,
     String contentType = 'application/json'}) async {
@@ -45,8 +46,8 @@ Future<ApiResponse> handleApiEndpoint(Function method, String url,
       data = FormData(data);
     }
 
-    final response =
-        await method(url, data, headers: headers, contentType: contentType);
+    final response = await request(url, method,
+        body: data, headers: headers, contentType: contentType);
     if (response.body == null) {
       return ApiResponse.error(
         status: response.status.code,
@@ -65,17 +66,22 @@ Future<ApiResponse> handleApiEndpoint(Function method, String url,
       );
     }
 
-    if (body.containsKey("success") && body["success"]) {
-      return ApiResponse.success(
-          status: response.status.code,
-          message: body["message"],
-          data: body["data"]);
-    } else {
-      return ApiResponse.error(
-          status: response.status.code,
-          message: body["message"],
-          data: body["data"]);
-    }
+    return ApiResponse(
+        status: response.status.code,
+        message: body["message"],
+        data: body["data"],
+        success: body.containsKey("success") && body["success"]);
+    // if (body.containsKey("success") && body["success"]) {
+    //   return ApiResponse.success(
+    //       status: response.status.code,
+    //       message: body["message"],
+    //       data: body["data"]);
+    // } else {
+    //   return ApiResponse.error(
+    //       status: response.status.code,
+    //       message: body["message"],
+    //       data: body["data"]);
+    // }
   } catch (e) {
     e.printError();
     return ApiResponse.error(

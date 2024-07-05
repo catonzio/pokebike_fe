@@ -130,7 +130,7 @@ class LoginView extends GetView<LoginController> {
   _login(BuildContext context) async {
     if (controller.formKey.currentState!.validate()) {
       controller.login().then((ApiResponse response) {
-        handleApiResponse(context, response, (dynamic data) {
+        handleApiResponse(context, response, onSuccess: (dynamic data) {
           Storage.to.apiToken = data;
           context.navigator.popAndPushNamed(Routes.HOME);
         });

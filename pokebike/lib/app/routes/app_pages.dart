@@ -49,7 +49,8 @@ class AppPages {
     GetPage(
       name: _Paths.HOME,
       page: () => const HomeView(),
-      binding: HomeBinding(),
+      // binding: HomeBinding(),
+      bindings: [HomeBinding(), CommunityBinding()],
     ),
     GetPage(
       name: _Paths.SPLASH,

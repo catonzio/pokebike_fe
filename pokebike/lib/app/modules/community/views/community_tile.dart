@@ -1,9 +1,9 @@
 import 'dart:ui';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/shared/utils/mimage_provider.dart';
 import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
 
 class CommunityTile extends StatelessWidget {
@@ -33,7 +33,7 @@ class CommunityTile extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: MimageNetwork(
-                path: MImageProvider.getImageUrl(index: index),
+                path: imagePath,
               ),
             ),
           ),
@@ -45,7 +45,11 @@ class CommunityTile extends StatelessWidget {
             child: ClipRect(
               child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                  child: CommunityTileBottomRow(index: index, imagePath: profileImagePath,)),
+                  child: CommunityTileBottomRow(
+                    index: index,
+                    text: text,
+                    imagePath: profileImagePath,
+                  )),
             ),
           )
         ],
@@ -56,11 +60,13 @@ class CommunityTile extends StatelessWidget {
 
 class CommunityTileBottomRow extends StatelessWidget {
   final int index;
+  final String text;
   final String imagePath;
 
   const CommunityTileBottomRow({
     super.key,
     required this.index,
+    required this.text,
     required this.imagePath,
   });
 
@@ -76,9 +82,10 @@ class CommunityTileBottomRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
-            width: context.width * 0.1,
+            width: context.width * 0.05,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(50),
               child: MimageNetwork(
@@ -86,9 +93,22 @@ class CommunityTileBottomRow extends StatelessWidget {
               ),
             ),
           ),
-          const Text("Hello"),
-          IconButton(
-              onPressed: () => {}, icon: const Icon(Icons.arrow_forward_ios))
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: AutoSizeText(
+                text,
+                style: context.textTheme.bodySmall,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ),
+          const Icon(Icons.arrow_forward_ios)
+          // IconButton(
+          //     padding: EdgeInsets.zero,
+          //     onPressed: () => {},
+          //     icon: )
         ],
       ),
     );
