@@ -12,28 +12,24 @@ class GarageWidget extends GetView<GarageController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Skeletonizer(
+    return Obx(() => SliverSkeletonizer(
         enabled: controller.isFetchingGarage,
         child: controller.isFetchingGarage
-            ? _gridOfElements(mapListToWidget(controller.fakeGarages))
+            ? _gridOfElements(controller.fakeGarages)
             : (controller.garages.isEmpty
                 ? const EmptyGarageBody()
-                : _gridOfElements(mapListToWidget(controller.garages)))));
+                : _gridOfElements(controller.garages))));
   }
 
-  List<Widget> mapListToWidget(List<Moto> list) {
-    return list
-        .map((moto) =>
-            GarageCardWidget(moto: moto, onTap: () => print("Garage $moto")))
-        .toList();
-  }
-
-  Widget _gridOfElements(List<Widget> elements) {
-    return GridView(
-      shrinkWrap: true,
-      padding: EdgeInsets.zero,
-      gridDelegate: Constants.gridDelegate,
-      children: elements,
-    );
+  Widget _gridOfElements(List<Moto> elements) {
+    return SliverGrid(
+        gridDelegate: Constants.gridDelegate,
+        delegate: SliverChildBuilderDelegate(
+          (BuildContext context, int index) {
+            return GarageCardWidget(
+                moto: elements[index], onTap: () => print("Garage $index"));
+          },
+          childCount: elements.length,
+        ));
   }
 }

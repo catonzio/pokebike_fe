@@ -26,7 +26,8 @@ class ProfileView extends GetView<ProfileController> {
             ? [
                 MIcon(
                   name: "Option icon",
-                  onTap: () => context.navigator.pushNamed(Routes.SETTINGS),
+                  onTap: () => context.navigator.pushNamed(Routes.SETTINGS,
+                      arguments: controller.user.value),
                 )
               ]
             : null,

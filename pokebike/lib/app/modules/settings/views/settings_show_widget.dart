@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/settings/views/profile_container.dart';
 import 'package:pokebike/app/modules/settings/views/settings_button.dart';
-import 'package:pokebike/app/shared/utils/mimage_provider.dart';
 import 'package:pokebike/app/shared/widgets/utils/mswitcher.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../controllers/settings_controller.dart';
 
@@ -23,11 +24,16 @@ class SettingsShowWidget extends GetView<SettingsController> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.max,
           children: [
-            ProfileContainer(
-              imagePath: MImageProvider.getImageUrl(),
-              name: "Nome Cognome",
-              onPressed: () => controller.editing = true,
-            ),
+            Obx(() => Skeletonizer(
+                  enabled: controller.user.value == null,
+                  child: controller.user.value != null
+                      ? ProfileContainer(
+                          imagePath: controller.user.value!.avatar,
+                          name: fullName(controller.user.value!),
+                          onPressed: () => controller.editing = true,
+                        )
+                      : const SizedBox.shrink(),
+                )),
             SizedBox(
               height: context.height * 0.3,
               child: Column(

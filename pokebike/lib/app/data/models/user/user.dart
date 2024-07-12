@@ -10,6 +10,8 @@ part 'user.freezed.dart';
 // But if Person was not serializable, we could skip it.
 part 'user.g.dart';
 
+String fullName(User user) => "${user.name} ${user.surname}";
+
 @freezed
 class User with _$User {
   const factory User({

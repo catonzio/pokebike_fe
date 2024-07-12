@@ -19,11 +19,14 @@ class MSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final MswitcherController controller = Get.put(MswitcherController(value));
-    return GetX(
+    return GetX<MswitcherController>(
       // initState: (state) {
       //   state.controller ??= Get.put(MswitcherController(value));
       // },
       init: Get.put(MswitcherController(value)),
+      initState: (state) {
+        state.controller?.value.value = value;
+      },
       builder: (MswitcherController controller) {
         print("Switcher: ${controller.value.value}");
         return Switch(

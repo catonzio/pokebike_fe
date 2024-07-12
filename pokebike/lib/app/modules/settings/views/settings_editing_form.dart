@@ -19,12 +19,15 @@ class SettingsEditingForm extends GetView<SettingsController> {
           children: [
             TextFormField(
               decoration: transparentInputDecoration("Nome"),
+              controller: controller.nameController,
             ),
             TextFormField(
               decoration: transparentInputDecoration("Cognome"),
+              controller: controller.surnameController,
             ),
             TextFormField(
               decoration: transparentInputDecoration("Username"),
+              controller: controller.usernameController,
             ),
             TextFormField(
               decoration: transparentInputDecoration("Data di nascita"),

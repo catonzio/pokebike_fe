@@ -4,10 +4,13 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:pokebike/app/data/models/user/user.dart';
+import 'package:pokebike/app/shared/extensions/date_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsController extends GetxController {
   static SettingsController get to => Get.find<SettingsController>();
+  User? argumentUser = Get.arguments as User?;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -19,6 +22,7 @@ class SettingsController extends GetxController {
   set saving(bool value) => isSaving.value = value;
   bool get saving => isSaving.value;
 
+  final RxBool isFetchingUser = false.obs;
   final RxBool notificationsEnabled = false.obs;
 
   final TextEditingController nameController = TextEditingController();
@@ -26,11 +30,30 @@ class SettingsController extends GetxController {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController dataController = TextEditingController();
 
+  final Rxn<User> user = Rxn<User>();
+
   @override
   void onInit() async {
     notificationsEnabled.value =
         (await Permission.notification.request()).isGranted;
+    await setUser(argumentUser);
+    nameController.text = user.value?.name ?? "";
+    surnameController.text = user.value?.surname ?? "";
+    dataController.text = user.value?.birthdate.toFormattedString() ?? "";
+
     super.onInit();
+  }
+
+  Future<void> setUser(User? user) async {
+    this.user.value = user;
+    // if (user == null) {
+    //   isFetchingUser.value = true;
+    //   this.user.value = await provider.fetchUserMe();
+    //   isFetchingUser.value = false;
+    // }
+    // if (this.user.value == null && user != null) {
+    //   this.user.value = user;
+    // }
   }
 
   Future<bool> openNotificationsSettings() async {

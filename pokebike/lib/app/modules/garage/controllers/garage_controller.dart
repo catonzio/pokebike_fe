@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
+import 'package:pokebike/app/data/models/user/user.dart';
+import 'package:pokebike/app/modules/profile/providers/profile_provider.dart';
 import 'package:pokebike/app/shared/providers/moto_provider.dart';
 
 class GarageController extends GetxController {
@@ -20,6 +22,7 @@ class GarageController extends GetxController {
       List.generate(3, (index) => Moto.fake(index));
   final RxList<Moto> collections = <Moto>[].obs;
 
+  final Rxn<User> user = Rxn<User>();
   final MotoProvider provider;
 
   GarageController({required this.provider});
@@ -27,12 +30,17 @@ class GarageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    ever(isShowingGarage, toggleShowing);
+    fetchUser();
+    // ever(isShowingGarage, toggleShowing);
     fetchGarage();
     fetchCollection();
   }
 
-  void fetchGarage() async {
+  Future<void> fetchUser() async {
+    user.value = await Get.find<ProfileProvider>().fetchUserMe();
+  }
+
+  Future<void> fetchGarage() async {
     isFetchingGarage = true;
     // await Future.delayed(const Duration(seconds: 3));
     garages.clear();
@@ -47,6 +55,14 @@ class GarageController extends GetxController {
     await Future.delayed(const Duration(seconds: 3));
     collections.addAll(List.generate(10, (index) => Moto.fake(index)));
     isFetchingCollection = false;
+  }
+
+  Future<void> refreshList() async {
+    if (isShowingGarage.value) {
+      await fetchGarage();
+    } else {
+      await fetchCollection();
+    }
   }
 
   void toggleShowing(bool value) {

@@ -58,7 +58,7 @@ class SettingsEditWidget extends GetView<SettingsController> {
                 radius: 45,
               ),
             ),
-            Expanded(flex: 3, child: SettingsEditingForm()),
+            const Expanded(flex: 3, child: SettingsEditingForm()),
             Expanded(
               flex: 2,
               child: Column(
