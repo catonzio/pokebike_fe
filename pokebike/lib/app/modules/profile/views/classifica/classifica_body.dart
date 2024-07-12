@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
 import 'package:pokebike/app/modules/profile/controllers/profile_controller.dart';
 import 'package:pokebike/app/shared/widgets/classifica_profile_row.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/statistics_row.dart';
@@ -22,9 +21,16 @@ class ClassificaBody extends GetView<ProfileController> {
                 return Container(
                   height: context.height * 0.11,
                   padding: const EdgeInsets.all(8.0),
-                  child: ClassificaProfileRow(
-                    partecipazione: Partecipazione.fake(1),
-                  ),
+                  child: Obx(() => Skeletonizer(
+                        enabled: controller.isFetchingPartecipazione.value,
+                        child: controller.lastPartecipazione.value == null
+                            ? const Center(
+                                child:
+                                    Text("Errore caricamento partecipazione"))
+                            : ClassificaProfileRow(
+                                partecipazione:
+                                    controller.lastPartecipazione.value!),
+                      )),
                 );
               } else if (index == 1) {
                 return const Padding(
@@ -40,32 +46,9 @@ class ClassificaBody extends GetView<ProfileController> {
             },
             separatorBuilder: (context, index) {
               return SizedBox(
-                height: context.height * 0.03,
+                height: context.height * 0.02,
               );
             },
-            itemCount: 3)
-
-        // Column(
-        //   crossAxisAlignment: CrossAxisAlignment.start,
-        //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        //   children: [
-        //     Container(
-        //       height: context.height * 0.11,
-        //       padding: const EdgeInsets.all(8.0),
-        //       child: ClassificaProfileRow(
-        //         profileImagePath: MImageProvider.getImageUrl(),
-        //       ),
-        //     ),
-        //     Container(
-        //       padding: const EdgeInsets.all(8.0),
-        //       child: const StatisticsRow(),
-        //     ),
-        //     Container(
-        //       padding: const EdgeInsets.all(8.0),
-        //       child: const TopMoto(),
-        //     )
-        //   ],
-        // )
-        ));
+            itemCount: 3)));
   }
 }

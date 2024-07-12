@@ -29,28 +29,11 @@ class GarageView extends GetView<GarageController> {
     //       (context.modalRoute?.settings.arguments ?? GarageType.garage) ==
     //           GarageType.garage;
     // }
-
     return DefaultPage(
-      body: SizedBox(
-        height: context.height,
-        width: context.width,
-        child: Stack(
-          children: [
-            Positioned.fill(
-              top: context.height * 0.04,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: _mainBody(context),
-              ),
-            ),
-            Positioned(
-                top: 0,
-                left: 0,
-                child: MBackButton(
-                  onPressed: () => context.navigator.pop(),
-                ))
-          ],
-        ),
+      backButton: true,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: _mainBody(context),
       ),
     );
   }
@@ -61,7 +44,7 @@ class GarageView extends GetView<GarageController> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         ProfileWidget(
-          radius: context.height * 0.07,
+          radius: context.height * 0.06,
           text: "Name of user",
           imagePath: MImageProvider.getImageUrl(),
         ),

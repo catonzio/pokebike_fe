@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/community/controllers/community_controller.dart';
+import 'package:pokebike/app/routes/app_pages.dart';
+import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/utils/api_utils.dart';
 import 'package:pokebike/app/modules/community/views/community_tile.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -32,7 +34,10 @@ class CommunityList extends StatelessWidget {
                       text: "${e.name} ${e.surname}",
                       imagePath: e.motoFavoritaAvatar,
                       profileImagePath: e.avatar,
-                      onTap: () => "Community $e tapped",
+                      onTap: () => context.navigator.pushNamed(
+                        Routes.PROFILE,
+                        arguments: e,
+                      ),
                     ),
                   ))
               .toList();
@@ -45,7 +50,7 @@ class CommunityList extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     children: children.sublist(0, 7))
                 : RefreshIndicator(
-                    onRefresh: () => controller.fetchUsers(),
+                    onRefresh: () => controller.fetchUsers(reload: true),
                     child: GridView(
                         padding: const EdgeInsets.only(
                             bottom: Constants.bottomNavbarHeight),

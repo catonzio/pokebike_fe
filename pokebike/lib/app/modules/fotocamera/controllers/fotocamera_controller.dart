@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pokebike/app/modules/fotocamera/providers/moto_provider.dart';
+import 'package:pokebike/app/shared/providers/moto_provider.dart';
 import 'package:pokebike/main.dart';
 
 class FotocameraController extends GetxController {

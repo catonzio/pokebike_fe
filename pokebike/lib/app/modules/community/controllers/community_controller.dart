@@ -16,8 +16,8 @@ class CommunityController extends GetxController {
 
   CommunityController(this._communityProvider);
 
-  Future<ApiResponse> fetchUsers() async {
-    if (communities.isNotEmpty) {
+  Future<ApiResponse> fetchUsers({bool reload = false}) async {
+    if (communities.isNotEmpty && !reload) {
       return ApiResponse.success(data: communities, message: "Success");
     }
 

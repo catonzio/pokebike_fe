@@ -13,6 +13,7 @@ class CoccardeGridWidget extends GetView<ProfileController> {
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 32),
           child: GridView(
               shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4, mainAxisSpacing: 16),
               padding: EdgeInsets.zero,

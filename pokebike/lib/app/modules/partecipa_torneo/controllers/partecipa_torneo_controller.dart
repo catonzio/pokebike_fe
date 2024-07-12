@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
+import 'package:pokebike/app/shared/providers/moto_provider.dart';
 
 class PartecipaTorneoController extends GetxController {
   final RxBool isFetching = false.obs;
@@ -12,6 +13,10 @@ class PartecipaTorneoController extends GetxController {
   final RxInt motoIndex = 0.obs;
   set index(int value) => motoIndex.value = value;
 
+  MotoProvider provider;
+
+  PartecipaTorneoController({required this.provider});
+
   @override
   void onInit() {
     super.onInit();
@@ -20,8 +25,10 @@ class PartecipaTorneoController extends GetxController {
 
   Future<void> fetchCollection() async {
     isFetching.value = true;
-    await Future.delayed(const Duration(seconds: 3));
-    collections.addAll(List.generate(100, (index) => Moto.fake(index)));
+    List<Moto> fetchedCollections = await provider.fetchMotos();
+    collections.addAll(fetchedCollections);
+    // await Future.delayed(const Duration(seconds: 3));
+    // collections.addAll(List.generate(100, (index) => Moto.fake(index)));
     isFetching.value = false;
   }
 

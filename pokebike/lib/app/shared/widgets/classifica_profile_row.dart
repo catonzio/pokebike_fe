@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
+import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
 
 class ClassificaProfileRow extends StatelessWidget {
   final Partecipazione partecipazione;
@@ -32,7 +33,10 @@ class ClassificaProfileRow extends StatelessWidget {
                   style: context.textTheme.headlineLarge,
                 ),
               ),
-              Image.network(partecipazione.avatar),
+              MimageNetwork(
+                path: partecipazione.avatar,
+                borderRadius: BorderRadius.circular(8),
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(partecipazione.fullName),

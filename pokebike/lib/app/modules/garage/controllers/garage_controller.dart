@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
+import 'package:pokebike/app/shared/providers/moto_provider.dart';
 
 class GarageController extends GetxController {
   final RxBool isShowingGarage = true.obs;
@@ -15,8 +16,13 @@ class GarageController extends GetxController {
   final List<Moto> fakeGarages = List.generate(3, (index) => Moto.fake(index));
   final RxList<Moto> garages = <Moto>[].obs;
 
-  final List<Moto> fakeCollections = List.generate(3, (index) => Moto.fake(index));
+  final List<Moto> fakeCollections =
+      List.generate(3, (index) => Moto.fake(index));
   final RxList<Moto> collections = <Moto>[].obs;
+
+  final MotoProvider provider;
+
+  GarageController({required this.provider});
 
   @override
   void onInit() {
@@ -28,7 +34,10 @@ class GarageController extends GetxController {
 
   void fetchGarage() async {
     isFetchingGarage = true;
-    await Future.delayed(const Duration(seconds: 3));
+    // await Future.delayed(const Duration(seconds: 3));
+    garages.clear();
+    final List<Moto> fetchedGarages = await provider.fetchMotos();
+    garages.addAll(fetchedGarages);
     // garages.addAll(List.generate(10, (index) => index + 1));
     isFetchingGarage = false;
   }

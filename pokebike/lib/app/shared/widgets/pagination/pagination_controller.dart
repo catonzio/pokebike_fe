@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 class PaginationController extends GetxController {
-  final _currentPage = 2.obs;
+  final _currentPage = 1.obs;
   final _totalPages = 0.obs;
 
   int get currentPage => _currentPage.value;

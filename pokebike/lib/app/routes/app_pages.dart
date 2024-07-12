@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/models/user/user.dart';
 
 import '../modules/community/bindings/community_binding.dart';
 import '../modules/community/views/community_view.dart';
@@ -95,6 +96,7 @@ class AppPages {
     GetPage(
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
+      arguments: User,
       bindings: [ProfileBinding(), PaginationBindings()],
     ),
     GetPage(

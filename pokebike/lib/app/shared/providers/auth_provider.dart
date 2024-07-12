@@ -12,10 +12,12 @@ class AuthProvider extends GetConnect {
   }
 
   Future<ApiResponse> login(String email, String password) async {
-    return handleApiEndpoint(request, "post", "/login", data: {
-      'email': email,
-      'password': password,
-    });
+    return handleApiEndpoint(request, "post", "/login",
+        data: {
+          'email': email,
+          'password': password,
+        },
+        auth: false);
   }
 
   Future<ApiResponse> register(String email, String nome, String cognome,
@@ -30,14 +32,15 @@ class AuthProvider extends GetConnect {
           'birthdate': birthdate,
           'avatar': avatar
         },
-        contentType: 'multipart/form-data');
+        contentType: 'multipart/form-data',
+        auth: false);
   }
 
   Future<ApiResponse> logout() async {
-    return handleApiEndpoint(request, "post", "/logout", auth: true);
+    return handleApiEndpoint(request, "post", "/logout");
   }
 
   Future<ApiResponse> checkToken() async {
-    return handleApiEndpoint(request, "post", "/check-token", auth: true);
+    return handleApiEndpoint(request, "post", "/check-token");
   }
 }

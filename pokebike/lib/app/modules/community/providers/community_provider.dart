@@ -11,9 +11,8 @@ class CommunityProvider extends GetConnect {
   }
 
   Future<ApiResponse> getUsers() async {
-    final ApiResponse response = await handleApiEndpoint(
-        request, "get", '/users',
-        auth: true);
+    final ApiResponse response =
+        await handleApiEndpoint(request, "get", '/users');
 
     return response;
   }

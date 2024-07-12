@@ -28,7 +28,7 @@ void handleApiResponse(
 Future<ApiResponse> handleApiEndpoint(
     Function request, String method, String url,
     {dynamic data,
-    bool auth = false,
+    bool auth = true,
     String contentType = 'application/json'}) async {
   try {
     Map<String, String>? headers =

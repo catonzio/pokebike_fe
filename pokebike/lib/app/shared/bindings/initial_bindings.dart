@@ -9,9 +9,9 @@ class InitialBindings extends Bindings {
   @override
   void dependencies() {
     Get.put(Storage());
+    Get.put(BottomNavbarController(), permanent: true);
     Get.lazyPut(() => SettingsController());
-    Get.lazyPut(() => BottomNavbarController());
     AuthProvider provider = Get.put(AuthProvider());
-    Get.lazyPut(() => MDrawerController(logoutProvider: provider));
+    Get.lazyPut(() => MDrawerController(logoutProvider: provider), fenix: true);
   }
 }

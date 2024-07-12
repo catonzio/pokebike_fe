@@ -37,11 +37,9 @@ class MotoDetailPage extends GetView<PartecipaTorneoController> {
                         MaterialPageRoute(
                             builder: (context) => MotoDetailPhoto(moto: moto)),
                       ),
-                      child: ClipRRect(
+                      child: MimageNetwork(
                         borderRadius: BorderRadius.circular(16),
-                        child: MimageNetwork(
-                          path: moto.avatar,
-                        ),
+                        path: moto.avatar,
                       ),
                     ),
                   ),

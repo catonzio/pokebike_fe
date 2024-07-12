@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:pokebike/app/modules/fotocamera/controllers/addmoto_form_controller.dart';
-import 'package:pokebike/app/modules/fotocamera/providers/moto_provider.dart';
+import 'package:pokebike/app/shared/providers/moto_provider.dart';
 
 import '../controllers/fotocamera_controller.dart';
 

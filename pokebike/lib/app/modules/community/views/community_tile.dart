@@ -30,11 +30,9 @@ class CommunityTile extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Positioned.fill(
-            child: ClipRRect(
+            child: MimageNetwork(
               borderRadius: BorderRadius.circular(16),
-              child: MimageNetwork(
-                path: imagePath,
-              ),
+              path: imagePath,
             ),
           ),
           Positioned(
@@ -85,12 +83,11 @@ class CommunityTileBottomRow extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
+            height: context.width * 0.05,
             width: context.width * 0.05,
-            child: ClipRRect(
+            child: MimageNetwork(
               borderRadius: BorderRadius.circular(50),
-              child: MimageNetwork(
-                path: imagePath,
-              ),
+              path: imagePath,
             ),
           ),
           Expanded(
