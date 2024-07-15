@@ -35,7 +35,9 @@ class MotoDetailPage extends GetView<PartecipaTorneoController> {
                     child: GestureDetector(
                       onTap: () => context.navigator.push(
                         MaterialPageRoute(
-                            builder: (context) => MotoDetailPhoto(moto: moto)),
+                            builder: (context) => MotoDetailPhoto(
+                                tag: moto.id.toString(),
+                                avatarUrl: moto.avatar)),
                       ),
                       child: MimageNetwork(
                         borderRadius: BorderRadius.circular(16),

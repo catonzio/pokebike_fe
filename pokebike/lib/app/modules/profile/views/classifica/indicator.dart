@@ -4,8 +4,9 @@ import 'package:pokebike/app/config/colors.dart';
 
 class Indicator extends StatelessWidget {
   final double percentage;
+  final bool boxShadow;
 
-  const Indicator({super.key, required this.percentage});
+  const Indicator({super.key, required this.percentage, this.boxShadow = true});
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +21,17 @@ class Indicator extends StatelessWidget {
               width: context.width * 0.025,
               decoration: BoxDecoration(
                   color: i * (100 / 15) < (percentage * 100)
-                      ? MColors.secondary
+                      ? MColors.secondaryDark
                       : MColors.primary,
-                  boxShadow: const [
-                    BoxShadow(
-                        color: MColors.secondary,
-                        blurRadius: 64,
-                        spreadRadius: -3,
-                        offset: Offset(1, 1))
-                  ],
+                  boxShadow: !boxShadow
+                      ? null
+                      : const [
+                          BoxShadow(
+                              color: MColors.secondary,
+                              blurRadius: 64,
+                              spreadRadius: -3,
+                              offset: Offset(1, 1))
+                        ],
                   borderRadius: BorderRadius.circular(8)),
             ),
           ),

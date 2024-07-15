@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AddMotoFormFieldModel {
+class MotoFormFieldModel {
   final String label;
   final String? Function(String?)? validator;
   final TextEditingController controller;
@@ -8,7 +8,7 @@ class AddMotoFormFieldModel {
   final bool isNumeric;
   final int maxLines;
 
-  AddMotoFormFieldModel(
+  MotoFormFieldModel(
       {required this.label,
       required this.controller,
       this.validator,
@@ -17,10 +17,10 @@ class AddMotoFormFieldModel {
       this.maxLines = 1});
 }
 
-class AddMotoFormFieldModelDropdown extends AddMotoFormFieldModel {
+class MotoFormFieldModelDropdown extends MotoFormFieldModel {
   final List<String> items;
 
-  AddMotoFormFieldModelDropdown({
+  MotoFormFieldModelDropdown({
     required super.label,
     required super.validator,
     required super.controller,

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
+import 'package:pokebike/app/modules/moto-details/moto_details_arguments.dart';
 import 'package:pokebike/app/modules/partecipa_torneo/views/moto_details/moto_chosen_slider.dart';
-import 'package:pokebike/app/modules/partecipa_torneo/views/moto_details/moto_detail_photo.dart';
+import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/giant_title.dart';
 
@@ -31,20 +32,26 @@ class MotoDetailBody extends StatelessWidget {
             title: moto.nome,
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.all(4.0),
+        Padding(
+          padding: const EdgeInsets.all(4.0),
           child: Text(
-            "Erede di un retaggio nato nel 1957, l’irriverente e ricercato Sportster S di Harley-Davidson evolve i tratti universalmente amati dei suoi predecessori: velocità scattante, agilità sorprendente e divertimento assicurato.",
+            moto.descrizione,
             textAlign: TextAlign.center,
           ),
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
-              onTap: () => context.navigator.push(
-                    MaterialPageRoute(
-                        builder: (context) => MotoDetailPhoto(moto: moto)),
-                  ),
+              // onTap: () => context.navigator.push(
+              //       MaterialPageRoute(
+              //           builder: (context) => MotoDetailPhoto(
+              //                 tag: "visualizza_moto",
+              //                 avatarUrl: moto.avatar,
+              //               )),
+              //     ),
+              onTap: () => context.navigator.pushNamed(Routes.MOTO_DETAILS,
+                  arguments:
+                      MotoDetailsArguments(moto: moto, isOwnMoto: false)),
               child: Hero(
                 tag: "visualizza_moto",
                 child: Text(

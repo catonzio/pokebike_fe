@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/moto/moto.dart';
-import 'package:pokebike/app/modules/partecipa_torneo/controllers/partecipa_torneo_controller.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
 
@@ -35,9 +33,11 @@ class InteractiveController extends GetxController {
   }
 }
 
-class MotoDetailPhoto extends GetView<PartecipaTorneoController> {
-  final Moto moto;
-  const MotoDetailPhoto({super.key, required this.moto});
+class MotoDetailPhoto extends StatelessWidget {
+  final String tag;
+  final String avatarUrl;
+
+  const MotoDetailPhoto({super.key, required this.tag, required this.avatarUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +49,12 @@ class MotoDetailPhoto extends GetView<PartecipaTorneoController> {
       onInteractionEnd: interactiveController.checkIfZoomed,
       child: MimageNetwork(
         fit: BoxFit.contain,
-        path: moto.avatar,
+        path: avatarUrl,
       ),
     );
 
     return Hero(
-      tag: "visualizza_moto",
+      tag: tag,
       child: GestureDetector(
         onVerticalDragEnd: (details) {
           if (!interactiveController.isZoomed.value &&

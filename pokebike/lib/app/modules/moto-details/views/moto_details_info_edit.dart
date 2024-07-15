@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/fotocamera/controllers/addmoto_form_controller.dart';
 import 'package:pokebike/app/modules/fotocamera/views/add_moto_form_field.dart';
 import 'package:pokebike/app/modules/fotocamera/views/add_moto_form_field_model.dart';
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 
-class AddMotoForm extends GetView<AddMotoFormController> {
-  final Function(Map<String, dynamic>) onSend;
-  const AddMotoForm({super.key, required this.onSend});
+import '../controllers/moto_details_controller.dart';
+
+class MotoDetailsInfoEdit extends GetView<MotoDetailsController> {
+  const MotoDetailsInfoEdit({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,38 +42,46 @@ class AddMotoForm extends GetView<AddMotoFormController> {
           controller: controller.descrizioneController,
           maxLines: 5)
     ];
-    print("Bottom padding: ${MediaQuery.of(context).viewInsets.bottom}");
+
     return Form(
       key: controller.formKey,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 32),
-        child: Column(
-            // padding: const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
-            // itemExtent: context.height * 0.11,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ...fields.map((MotoFormFieldModel e) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: AddMotoFormField(model: e),
-                );
-              }),
-              Padding(
-                padding: const EdgeInsets.only(top: 32),
-                child: MButton.red(
-                  onPressed: _addMoto,
-                  child: const Text("Aggiungi moto"),
-                ),
+      child: Column(
+          // padding: const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
+          // itemExtent: context.height * 0.11,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ...fields.map((MotoFormFieldModel e) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: AddMotoFormField(model: e),
+              );
+            }),
+            Padding(
+              padding: const EdgeInsets.only(top: 32, bottom: 16),
+              child: MButton.red(
+                onPressed: () => controller.salva(),
+                child: const Text("Salva"),
               ),
-            ]),
-      ),
+            ),
+            MButton.white(
+                onPressed: () => controller.annullaEdit(),
+                child: const Text(
+                  "Annulla",
+                  style: TextStyle(color: Colors.black),
+                ))
+          ]),
     );
-  }
 
-  _addMoto() async {
-    if (controller.formKey.currentState!.validate()) {
-      Map<String, dynamic> data = controller.getData();
-      onSend(data);
-    }
+    //  Column(
+    //   children: [
+    //     MButton.red(onPressed: () => controller.salva(), child: const Text("Salva")),
+    //     MButton.white(
+    //         onPressed: () => controller.annullaEdit(),
+    //         child: const Text(
+    //           "Annulla",
+    //           style: TextStyle(color: Colors.black),
+    //         ))
+    //   ],
+    // );
   }
 }

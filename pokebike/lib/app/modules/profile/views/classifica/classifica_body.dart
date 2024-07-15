@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/models/profile/profile.dart';
 import 'package:pokebike/app/modules/profile/controllers/profile_controller.dart';
 import 'package:pokebike/app/shared/widgets/classifica_profile_row.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/statistics_row.dart';
@@ -33,9 +34,13 @@ class ClassificaBody extends GetView<ProfileController> {
                       )),
                 );
               } else if (index == 1) {
-                return const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: StatisticsRow(),
+                Profile? profile = controller.user.value?.profile;
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: StatisticsRow(
+                    numeroVittorie: profile?.numVittorie ?? 0,
+                    numeroSconfitte: profile?.numSconfitte ?? 0,
+                  ),
                 );
               } else {
                 return const Padding(

@@ -1,37 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/profile/profile.dart';
-import 'package:pokebike/app/modules/profile/controllers/profile_controller.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/indicator.dart';
 
 class StatisticsRow extends StatelessWidget {
-  const StatisticsRow({super.key});
+  final int numeroVittorie;
+  final int numeroSconfitte;
+  final bool boxShadow;
+
+  const StatisticsRow(
+      {super.key,
+      required this.numeroVittorie,
+      required this.numeroSconfitte,
+      this.boxShadow = true});
 
   @override
   Widget build(BuildContext context) {
-    return GetX(
-      builder: (ProfileController controller) {
-        Profile? profile = controller.user.value?.profile;
-        int numeroVittorie = profile?.numVittorie ?? 0;
-        int numeroSconfitte = profile?.numSconfitte ?? 0;
-        int numeroPartecipazioni = numeroVittorie + numeroSconfitte;
+    int numeroPartecipazioni = numeroVittorie + numeroSconfitte;
 
-        return Column(
-          children: [
-            StatisticsElement(
-                text: "Vittorie",
-                value: numeroVittorie,
-                percentage: numeroVittorie / numeroPartecipazioni),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: StatisticsElement(
-                  text: "Sconfitte",
-                  value: numeroSconfitte,
-                  percentage: numeroSconfitte / numeroPartecipazioni),
-            ),
-          ],
-        );
-      },
+    return Column(
+      children: [
+        StatisticsElement(
+          text: "Vittorie",
+          value: numeroVittorie,
+          percentage: numeroVittorie / numeroPartecipazioni,
+          boxShadow: boxShadow,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          child: StatisticsElement(
+            text: "Sconfitte",
+            value: numeroSconfitte,
+            percentage: numeroSconfitte / numeroPartecipazioni,
+            boxShadow: boxShadow,
+          ),
+        ),
+      ],
     );
   }
 }
@@ -40,12 +43,14 @@ class StatisticsElement extends StatelessWidget {
   final String text;
   final int value;
   final double percentage;
+  final bool boxShadow;
 
   const StatisticsElement(
       {super.key,
       required this.text,
       required this.value,
-      required this.percentage});
+      required this.percentage,
+      this.boxShadow = true});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +68,10 @@ class StatisticsElement extends StatelessWidget {
             ],
           ),
         ),
-        Indicator(percentage: percentage)
+        Indicator(
+          percentage: percentage,
+          boxShadow: boxShadow,
+        )
       ],
     );
   }

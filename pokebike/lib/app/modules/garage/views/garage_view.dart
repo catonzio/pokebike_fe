@@ -10,6 +10,8 @@ import 'package:pokebike/app/modules/garage/views/collezione/collezione_widget.d
 import 'package:pokebike/app/modules/garage/views/garage/garage_widget.dart';
 import 'package:pokebike/app/modules/garage/views/pagination/pagination_row.dart';
 import 'package:pokebike/app/modules/garage/views/profile_widget.dart';
+import 'package:pokebike/app/modules/moto-details/moto_details_arguments.dart';
+import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/default_page.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/search_row/search_row.dart';
@@ -77,10 +79,17 @@ class GarageView extends GetView<GarageController> {
         SliverPadding(
           padding: const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
           sliver: Obx(() => controller.isShowingGarage.value
-              ? const GarageWidget()
-              : CollezioneWidget(onTapElement: (Moto i) {
-                  print("Tapped $i");
-                })),
+              ? GarageWidget(
+                  onTapElement: (Moto m) => context.navigator.pushNamed(
+                      Routes.MOTO_DETAILS,
+                      arguments:
+                          MotoDetailsArguments(moto: m, isOwnMoto: true)),
+                )
+              : CollezioneWidget(
+                  onTapElement: (Moto m) => context.navigator.pushNamed(
+                      Routes.MOTO_DETAILS,
+                      arguments:
+                          MotoDetailsArguments(moto: m, isOwnMoto: true)))),
         )
       ],
     );

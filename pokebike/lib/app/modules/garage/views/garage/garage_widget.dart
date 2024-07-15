@@ -8,7 +8,9 @@ import 'package:pokebike/app/modules/garage/views/garage_card_view.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class GarageWidget extends GetView<GarageController> {
-  const GarageWidget({super.key});
+  final Function(Moto) onTapElement;
+
+  const GarageWidget({super.key, required this.onTapElement});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,8 @@ class GarageWidget extends GetView<GarageController> {
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
             return GarageCardWidget(
-                moto: elements[index], onTap: () => print("Garage $index"));
+                moto: elements[index],
+                onTap: () => onTapElement(elements[index]));
           },
           childCount: elements.length,
         ));

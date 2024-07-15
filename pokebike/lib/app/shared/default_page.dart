@@ -19,6 +19,8 @@ class DefaultPage extends GetView<MDrawerController> {
   final bool backButton;
   final bool bottomBar;
   final String? title;
+  final Color? backgroundColor;
+  final List<Widget>? bottomAppbarActions;
 
   const DefaultPage(
       {super.key,
@@ -28,13 +30,16 @@ class DefaultPage extends GetView<MDrawerController> {
       this.useAppbar = true,
       this.backButton = false,
       this.bottomBar = true,
-      this.title});
+      this.title,
+      this.backgroundColor,
+      this.bottomAppbarActions});
 
   @override
   Widget build(BuildContext context) {
     final Widget page = Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: false,
+      backgroundColor: backgroundColor,
       appBar: useAppbar ? (appBar ?? _createAppbar(context)) : null,
       body: (backButton && !useAppbar)
           ? Stack(
@@ -121,22 +126,31 @@ class DefaultPage extends GetView<MDrawerController> {
   }
 
   Widget _createBackButton(BuildContext context) {
+    // final Widget bottomAppbar = Align(
+    //   alignment: Alignment.topLeft,
+    //   child: MBackButton(
+    //     onPressed: () => context.navigator.pop(),
+    //   ),
+    // );
+    final Widget bottomAppbar = Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          MBackButton(onPressed: context.navigator.pop),
+          Row(
+            children: bottomAppbarActions ?? [],
+          )
+        ],
+      ),
+    );
     if (backButton && title == null) {
-      return Align(
-        alignment: Alignment.topLeft,
-        child: MBackButton(
-          onPressed: () => context.navigator.pop(),
-        ),
-      );
+      return bottomAppbar;
     } else {
       return Stack(
         children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: MBackButton(
-              onPressed: () => context.navigator.pop(),
-            ),
-          ),
+          bottomAppbar,
           Center(
               child: SizedBox(
                   width: context.width * 0.4,

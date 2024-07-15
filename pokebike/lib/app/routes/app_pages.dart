@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/user/user.dart';
 
+import '../data/models/user/user.dart';
 import '../modules/community/bindings/community_binding.dart';
 import '../modules/community/views/community_view.dart';
 import '../modules/fotocamera/bindings/fotocamera_binding.dart';
@@ -19,6 +19,8 @@ import '../modules/login_register/views/confirm_register_view.dart';
 import '../modules/login_register/views/login_register_view.dart';
 import '../modules/login_register/views/login_view.dart';
 import '../modules/login_register/views/register_view.dart';
+import '../modules/moto-details/bindings/moto_details_binding.dart';
+import '../modules/moto-details/views/moto_details_view.dart';
 import '../modules/notifications/bindings/notifications_binding.dart';
 import '../modules/notifications/views/notifications_view.dart';
 import '../modules/partecipa_torneo/bindings/partecipa_torneo_binding.dart';
@@ -133,6 +135,11 @@ class AppPages {
       name: _Paths.VOTA,
       page: () => const VotaView(),
       binding: VotaBinding(),
+    ),
+    GetPage(
+      name: _Paths.MOTO_DETAILS,
+      page: () => const MotoDetailsView(),
+      binding: MotoDetailsBinding(),
     ),
   ];
 }

@@ -5,7 +5,7 @@ import 'package:pokebike/app/modules/fotocamera/views/add_moto_form_field_model.
 import 'package:pokebike/app/shared/utils/input_decoration.dart';
 
 class AddMotoFormField extends StatelessWidget {
-  final AddMotoFormFieldModel model;
+  final MotoFormFieldModel model;
 
   const AddMotoFormField({
     super.key,
@@ -16,8 +16,8 @@ class AddMotoFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     FormField field;
 
-    if (model is AddMotoFormFieldModelDropdown) {
-      List<DropdownMenuItem> items = (model as AddMotoFormFieldModelDropdown)
+    if (model is MotoFormFieldModelDropdown) {
+      List<DropdownMenuItem> items = (model as MotoFormFieldModelDropdown)
           .items
           .map((e) => DropdownMenuItem(
                 value: e,
