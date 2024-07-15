@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/community/controllers/community_controller.dart';
+import 'package:pokebike/app/modules/profile/profile_arguments.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/utils/api_utils.dart';
@@ -36,7 +37,7 @@ class CommunityList extends StatelessWidget {
                       profileImagePath: e.avatar,
                       onTap: () => context.navigator.pushNamed(
                         Routes.PROFILE,
-                        arguments: e,
+                        arguments: ProfileArguments(user: e),
                       ),
                     ),
                   ))

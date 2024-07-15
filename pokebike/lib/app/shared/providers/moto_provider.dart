@@ -8,6 +8,7 @@ class MotoProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.baseUrl = Constants.apiBaseUrl;
+    timeout = const Duration(seconds: 10);
   }
 
   Future<List<Moto>> fetchMotos() async {

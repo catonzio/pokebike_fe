@@ -13,13 +13,19 @@ class MainBody extends GetView<LeaderboardController> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: context.height * 0.6,
-      child: Obx(() => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: AnimatedSwitcher(
+      child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Obx(
+            () => AnimatedSwitcher(
                 duration: const Duration(milliseconds: 300),
                 child: controller.isLeaderboardList
-                    ? const MainBodyList()
-                    : const MainBodyGrid()),
+                    ? RefreshIndicator(
+                        onRefresh: controller.refreshLeaderboard,
+                        child: const MainBodyList(),
+                      )
+                    : RefreshIndicator(
+                        onRefresh: controller.refreshLeaderboard,
+                        child: const MainBodyGrid())),
           )),
     );
   }

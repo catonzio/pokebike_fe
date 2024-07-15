@@ -9,12 +9,15 @@ class EmptyGarageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return SliverList.list(
       children: [
-        Text("Non hai ancora aggiunto moto",
-            style: context.textTheme.titleMedium),
+        Center(
+          child: Text("Non hai ancora aggiunto moto",
+              style: context.textTheme.titleMedium),
+        ),
+        SizedBox(
+          height: context.height * 0.1,
+        ),
         Padding(
           padding: EdgeInsets.only(bottom: context.height * 0.1),
           child: MButton(

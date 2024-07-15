@@ -18,6 +18,7 @@ class Partecipazione with _$Partecipazione {
     required int torneoId,
     required String fullName,
     required String avatar,
+    required String motoAvatar,
     required int punti,
   }) = _Partecipazione;
 
@@ -31,6 +32,7 @@ class Partecipazione with _$Partecipazione {
         torneoId: index,
         fullName: "Partecipante $index",
         avatar: MImageProvider.getImageUrl(index: index),
+        motoAvatar: MImageProvider.getImageUrl(index: index),
         punti: index,
       );
 }

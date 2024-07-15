@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -5,22 +7,22 @@ import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/shared/controllers/storage.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 
-void handleApiResponse(
-    BuildContext context, ApiResponse response, {Function(dynamic)? onSuccess,
-    Function(dynamic)? onError}) {
+void handleApiResponse(BuildContext context, ApiResponse response,
+    {Function(dynamic)? onSuccess, Function(dynamic)? onError}) {
   if (response.success) {
     onSuccess?.call(response.data);
   } else {
     if (onError != null) {
       onError(response.data);
     } else {
-      context.scaffold.showSnackBar(SnackBar(
-        content: Text(response.message),
-        action: SnackBarAction(
-          label: "Ok",
-          onPressed: () => context.scaffold.clearSnackBars(),
-        ),
-      ));
+      context.createSnackbar(response.message);
+      // context.scaffold.showSnackBar(SnackBar(
+      //   content: Text(response.message),
+      //   action: SnackBarAction(
+      //     label: "Ok",
+      //     onPressed: () => context.scaffold.clearSnackBars(),
+      //   ),
+      // ));
     }
   }
 }
@@ -29,7 +31,8 @@ Future<ApiResponse> handleApiEndpoint(
     Function request, String method, String url,
     {dynamic data,
     bool auth = true,
-    String contentType = 'application/json'}) async {
+    String contentType = 'application/json',
+    dynamic Function(double)? uploadProgress}) async {
   try {
     Map<String, String>? headers =
         auth ? {"Authorization": "Bearer ${Storage.to.apiToken}"} : null;
@@ -37,7 +40,9 @@ Future<ApiResponse> handleApiEndpoint(
     if (data != null && data is Map<String, dynamic>) {
       for (MapEntry el in data.entries) {
         if (el.value is XFile) {
-          final fileBytes = await el.value.readAsBytes();
+          XFile xfile = el.value as XFile;
+          // final fileBytes = await el.value.readAsBytes();
+          final fileBytes = File(xfile.path);
           final multipartFile = MultipartFile(fileBytes,
               filename: el.value.name, contentType: 'application/octet-stream');
           data[el.key] = multipartFile;
@@ -47,7 +52,10 @@ Future<ApiResponse> handleApiEndpoint(
     }
 
     final response = await request(url, method,
-        body: data, headers: headers, contentType: contentType);
+        body: data,
+        headers: headers,
+        contentType: contentType,
+        uploadProgress: uploadProgress);
     if (response.body == null) {
       return ApiResponse.error(
         status: response.status.code,

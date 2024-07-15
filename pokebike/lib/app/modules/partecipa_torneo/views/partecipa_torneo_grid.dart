@@ -31,17 +31,16 @@ class PartecipaTorneoGrid extends GetView<PartecipaTorneoController> {
     return list.indexed
         .map(((int, Moto) indexMoto) => Hero(
               tag: indexMoto.$2.id,
-              child: Material(
-                child: GarageCardWidget(
-                    moto: indexMoto.$2,
-                    onTap: () {
-                      context.navigator.push(
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                MotoDetailPage(index: indexMoto.$1)),
-                      );
-                    }),
-              ),
+              child: GarageCardWidget(
+                  index: indexMoto.$1,
+                  moto: indexMoto.$2,
+                  onTap: () {
+                    context.navigator.push(
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              MotoDetailPage(index: indexMoto.$1)),
+                    );
+                  }),
             ))
         .toList();
   }

@@ -29,6 +29,7 @@ class GarageWidget extends GetView<GarageController> {
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
             return GarageCardWidget(
+              index: index,
                 moto: elements[index],
                 onTap: () => onTapElement(elements[index]));
           },

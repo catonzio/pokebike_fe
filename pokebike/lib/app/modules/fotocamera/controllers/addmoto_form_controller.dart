@@ -5,12 +5,18 @@ class AddMotoFormController extends GetxController {
   final RxBool isPerformingRegister = false.obs;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final TextEditingController marcaController = TextEditingController(text: "Yamaha");
-  final TextEditingController modelloController = TextEditingController(text: "nome");
-  final TextEditingController tipoController = TextEditingController(text: "Honda");
-  final TextEditingController annoController = TextEditingController(text: "1234");
-  final TextEditingController luogoController = TextEditingController(text: "Qui");
-  final TextEditingController descrizioneController = TextEditingController(text: "Descrizione");
+  final TextEditingController marcaController =
+      TextEditingController(text: "Yamaha");
+  final TextEditingController modelloController =
+      TextEditingController(text: "nome");
+  final TextEditingController tipoController =
+      TextEditingController(text: "Honda");
+  final TextEditingController annoController =
+      TextEditingController(text: "1234");
+  final TextEditingController luogoController =
+      TextEditingController(text: "Qui");
+  final TextEditingController descrizioneController =
+      TextEditingController(text: "Descrizione");
 
   String? marcaValidator(dynamic value) {
     print("MARCA VALIDATOR");
@@ -63,7 +69,7 @@ class AddMotoFormController extends GetxController {
       // 'marca': marcaController.text.trim(),
       'nome': modelloController.text.trim(),
       // 'tipo': tipoController.text.trim(),
-      // 'anno': annoController.text.trim(),
+      'anno': annoController.text.trim(),
       'luogo': luogoController.text.trim(),
       'descrizione': descrizioneController.text.trim(),
       'data_cattura': DateTime.now().toIso8601String(),

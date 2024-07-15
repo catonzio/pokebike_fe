@@ -24,9 +24,12 @@ class MotoMainPhoto extends StatelessWidget {
                       avatarUrl: moto.avatar,
                     )),
           ),
-          child: MimageNetwork(
-            borderRadius: BorderRadius.circular(16),
-            path: moto.avatar,
+          child: AspectRatio(
+            aspectRatio: 16 / 9,
+            child: MimageNetwork(
+              borderRadius: BorderRadius.circular(16),
+              path: moto.avatar,
+            ),
           ),
         ),
       ),

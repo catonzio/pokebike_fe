@@ -19,7 +19,7 @@ class DefaultPage extends GetView<MDrawerController> {
   final bool backButton;
   final bool bottomBar;
   final String? title;
-  final Color? backgroundColor;
+  final Color backgroundColor;
   final List<Widget>? bottomAppbarActions;
 
   const DefaultPage(
@@ -31,7 +31,7 @@ class DefaultPage extends GetView<MDrawerController> {
       this.backButton = false,
       this.bottomBar = true,
       this.title,
-      this.backgroundColor,
+      this.backgroundColor = Colors.black,
       this.bottomAppbarActions});
 
   @override

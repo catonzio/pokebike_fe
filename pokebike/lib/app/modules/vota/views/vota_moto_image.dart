@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/shared/utils/mimage_provider.dart';
+import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
 
 class VotaMotoImage extends StatelessWidget {
   final double height;
@@ -32,10 +32,10 @@ class VotaMotoImage extends StatelessWidget {
               blurStyle: BlurStyle.normal),
         ],
         borderRadius: BorderRadius.circular(16),
-        image: DecorationImage(
-          image: NetworkImage(MImageProvider.getImageUrl()),
-          fit: BoxFit.cover,
-        ),
+      ),
+      child: MimageNetwork(
+        path: motoAvatar,
+        borderRadius: BorderRadius.circular(16),
       ),
     );
   }

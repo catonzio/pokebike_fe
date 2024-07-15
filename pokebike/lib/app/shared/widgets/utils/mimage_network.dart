@@ -22,13 +22,11 @@ class MimageNetwork extends StatelessWidget {
         fit: fit,
         progressIndicatorBuilder: (context, url, progress) => Container(
           color: MColors.primaryLight,
-          child: progress.progress != null
-              ? Center(
-                  child: CircularProgressIndicator(
-                    value: progress.progress,
-                  ),
-                )
-              : null,
+          child: Center(
+            child: CircularProgressIndicator(
+              value: progress.progress,
+            ),
+          ),
         ),
         errorWidget: (context, url, error) => const Icon(Icons.error),
       ),

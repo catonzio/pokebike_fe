@@ -29,6 +29,7 @@ class ClassificaBody extends GetView<ProfileController> {
                                 child:
                                     Text("Errore caricamento partecipazione"))
                             : ClassificaProfileRow(
+                                index: 1,
                                 partecipazione:
                                     controller.lastPartecipazione.value!),
                       )),

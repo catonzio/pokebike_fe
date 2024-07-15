@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/api_response.dart';
@@ -27,8 +29,12 @@ class ProfileProvider extends GetConnect {
   }
 
   Future<ApiResponse> fetchLastPartecipazioneEndpoint(int? profileId) async {
-    return handleApiEndpoint(
-        request, "get", "/partecipaziones/last-of-profile${profileId != null ? "/$profileId" : ""}");
+    return handleApiEndpoint(request, "get",
+        "/partecipaziones/last-of-profile${profileId != null ? "/$profileId" : ""}");
+  }
+
+  Future<ApiResponse> fetchUserWithProfileEndpoint(int profileId) async {
+    return handleApiEndpoint(request, "get", "/users/profile/$profileId");
   }
 
   Future<User?> fetchUserMe() async {
@@ -62,6 +68,15 @@ class ProfileProvider extends GetConnect {
     ApiResponse response = await fetchLastPartecipazioneEndpoint(profileId);
     if (response.success) {
       return Partecipazione.fromJson(response.data);
+    } else {
+      return null;
+    }
+  }
+
+  Future<User?> fetchUserWithProfile(int profileId) async {
+    ApiResponse response = await fetchUserWithProfileEndpoint(profileId);
+    if (response.success) {
+      return User.fromJson(response.data);
     } else {
       return null;
     }

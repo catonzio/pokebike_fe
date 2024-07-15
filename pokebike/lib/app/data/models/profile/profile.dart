@@ -17,7 +17,7 @@ class Profile with _$Profile {
     required int numMotoCatturate,
     required int numVittorie,
     required int numSconfitte,
-    required int favouriteMotoId,
+    int? favouriteMotoId,
     Moto? favouriteMoto,
   }) = _Profile;
 

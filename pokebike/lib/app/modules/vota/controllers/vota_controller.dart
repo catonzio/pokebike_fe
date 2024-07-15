@@ -1,23 +1,27 @@
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/models/turno/turno.dart';
+import 'package:pokebike/app/modules/vota/providers/vota_provider.dart';
 
 class VotaController extends GetxController {
-  //TODO: Implement VotaController
+  final VotaProvider provider;
 
-  final count = 0.obs;
+  final RxBool _isFetchingTurno = false.obs;
+  bool get isFetchingTurno => _isFetchingTurno.value;
+  set isFetchingTurno(bool value) => _isFetchingTurno.value = value;
+
+  final Rxn<Turno> turno = Rxn<Turno>();
+
+  VotaController({required this.provider});
+
   @override
   void onInit() {
     super.onInit();
+    fetchTurno();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  Future<void> fetchTurno() async {
+    isFetchingTurno = true;
+    turno.value = await provider.fetchTurno();
+    isFetchingTurno = false;
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

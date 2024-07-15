@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
 import 'package:pokebike/app/modules/vota/views/vota_moto_image.dart';
 import 'package:pokebike/app/modules/vota/views/vota_player_row.dart';
+import 'package:pokebike/app/shared/extensions/context_utils.dart';
 
 class VotaRow extends StatelessWidget {
-  final String playerName;
-  final String playerAvatar;
-  final String motoAvatar;
+  final Partecipazione partecipazione;
   final bool reversed;
 
   const VotaRow(
-      {super.key,
-      this.reversed = false,
-      required this.playerName,
-      required this.playerAvatar,
-      required this.motoAvatar});
+      {super.key, required this.partecipazione, this.reversed = false});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +21,8 @@ class VotaRow extends StatelessWidget {
 
     final VotaPlayerRow playerRow = VotaPlayerRow(
       height: playerRowHeight,
-      playerName: playerName,
-      playerAvatar: playerAvatar,
+      playerName: partecipazione.fullName,
+      playerAvatar: partecipazione.avatar,
       reversed: reversed,
     );
 
@@ -37,10 +33,14 @@ class VotaRow extends StatelessWidget {
             if (reversed) playerRow,
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: VotaMotoImage(
-                height: motoImageHeight,
-                motoAvatar: motoAvatar,
-                reversed: reversed,
+              child: GestureDetector(
+                onTap: () => context.createSnackbar(
+                    "Hai votato per ${partecipazione.fullName}"),
+                child: VotaMotoImage(
+                  height: motoImageHeight,
+                  motoAvatar: partecipazione.motoAvatar,
+                  reversed: reversed,
+                ),
               ),
             ),
             if (!reversed) playerRow,

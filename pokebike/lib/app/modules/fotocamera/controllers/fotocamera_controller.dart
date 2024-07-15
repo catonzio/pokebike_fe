@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/shared/providers/moto_provider.dart';
 import 'package:pokebike/main.dart';
 
@@ -18,6 +19,8 @@ class FotocameraController extends GetxController {
   final RxBool _isCapturing = true.obs;
   bool get isCapturing => _isCapturing.value;
   set isCapturing(bool value) => _isCapturing.value = value;
+
+  final RxBool isUploadingMoto = false.obs;
 
   final ScrollController scrollController = ScrollController();
 
@@ -68,7 +71,10 @@ class FotocameraController extends GetxController {
     isCapturing = false;
   }
 
-  addMoto(Map<String, dynamic> data) {
-    return provider.addMoto(data);
+  Future<ApiResponse> addMoto(Map<String, dynamic> data) async {
+    isUploadingMoto.value = true;
+    final ApiResponse result = await provider.addMoto(data);
+    isUploadingMoto.value = false;
+    return result;
   }
 }

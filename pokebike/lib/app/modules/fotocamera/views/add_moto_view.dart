@@ -9,6 +9,7 @@ import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/modules/fotocamera/views/add_moto_form.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/utils/api_utils.dart';
+import 'package:pokebike/app/shared/widgets/utils/loading_stack.dart';
 
 import '../controllers/fotocamera_controller.dart';
 
@@ -24,40 +25,39 @@ class AddMotoView extends GetView<FotocameraController> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      // keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      shrinkWrap: true,
-      slivers: [
-        SliverAppBar(
-          expandedHeight: context.height * 0.4,
-          flexibleSpace: FlexibleSpaceBar(
-            background: _showImage(context),
-          ),
-          snap: false,
-          pinned: false,
-          floating: true,
-        ),
-        SliverPadding(
-          padding: EdgeInsets.only(bottom: context.keyboardHeight / 1.5),
-          sliver: SliverFillRemaining(
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                  gradient: RadialGradient(
-                      center: Alignment.bottomCenter,
-                      radius: 1.2,
-                      colors: [
-                    MColors.secondary.withOpacity(0.3),
-                    Colors.black
-                  ])),
-              child: AddMotoForm(
-                onSend: (data) => _addMoto(context, data),
+    return LoadingStack(
+        isLoading: controller.isUploadingMoto,
+        child: CustomScrollView(
+          shrinkWrap: true,
+          slivers: [
+            SliverAppBar(
+              expandedHeight: context.height * 0.4,
+              snap: false,
+              pinned: false,
+              floating: true,
+              flexibleSpace: FlexibleSpaceBar(background: _showImage(context)),
+            ),
+            SliverPadding(
+              padding: EdgeInsets.only(bottom: context.keyboardHeight / 1.5),
+              sliver: SliverFillRemaining(
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                      gradient: RadialGradient(
+                          center: Alignment.bottomCenter,
+                          radius: 1.2,
+                          colors: [
+                        MColors.secondary.withOpacity(0.3),
+                        Colors.black
+                      ])),
+                  child: AddMotoForm(
+                    onSend: (data) => _addMoto(context, data),
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-      ],
-    );
+          ],
+        ));
   }
 
   Widget _showImage(BuildContext context) {
@@ -82,16 +82,12 @@ class AddMotoView extends GetView<FotocameraController> {
   }
 
   _addMoto(BuildContext context, Map<String, dynamic> data) async {
-    // showDialog(
-    //     context: context,
-    //     builder: (context) => AlertDialog(
-    //         title: const Text("Caricamento..."),
-    //         content: Text(data.toString())));
     data["image"] = controller.image;
     ApiResponse response = await controller.addMoto(data);
     if (context.mounted) {
       handleApiResponse(context, response, onSuccess: (dynamic data) {
-        print(data);
+        context.createSnackbar("Moto salvata correttamente");
+        controller.isCapturing = false;
       });
     }
   }

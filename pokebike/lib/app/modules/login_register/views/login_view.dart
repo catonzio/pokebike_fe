@@ -132,7 +132,7 @@ class LoginView extends GetView<LoginController> {
       controller.login().then((ApiResponse response) {
         handleApiResponse(context, response, onSuccess: (dynamic data) {
           Storage.to.apiToken = data;
-          context.navigator.popAndPushNamed(Routes.HOME);
+          context.navigator.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
         });
       });
     }

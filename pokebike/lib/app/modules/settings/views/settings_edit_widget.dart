@@ -9,7 +9,6 @@ import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 import 'package:pokebike/app/modules/settings/views/settings_editing_form.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/utils/mimage_provider.dart';
 import 'package:pokebike/app/shared/widgets/default_dialog.dart';
 
 import '../controllers/settings_controller.dart';
@@ -54,7 +53,7 @@ class SettingsEditWidget extends GetView<SettingsController> {
             Expanded(
               flex: 1,
               child: StoryWidget(
-                imagePath: MImageProvider.getImageUrl(),
+                imagePath: controller.user.value?.avatar ?? "",
                 radius: 45,
               ),
             ),
@@ -108,7 +107,7 @@ class SettingsEditWidget extends GetView<SettingsController> {
   }
 
   _dialogEliminaTap(BuildContext context) {
-    context.navigator.pushNamed(Routes.SPLASH);
+    context.navigator.pushNamedAndRemoveUntil(Routes.SPLASH, (_) => false);
   }
 
   _salva(BuildContext context) async {

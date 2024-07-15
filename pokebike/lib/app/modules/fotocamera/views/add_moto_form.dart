@@ -47,10 +47,11 @@ class AddMotoForm extends GetView<AddMotoFormController> {
       key: controller.formKey,
       child: Padding(
         padding: const EdgeInsets.only(top: 32),
-        child: Column(
+        child: ListView(
             // padding: const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
             // itemExtent: context.height * 0.11,
-            mainAxisSize: MainAxisSize.min,
+            // mainAxisSize: MainAxisSize.min,
+            physics: const NeverScrollableScrollPhysics(),
             children: [
               ...fields.map((MotoFormFieldModel e) {
                 return Padding(

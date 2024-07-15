@@ -136,7 +136,7 @@ class RegisterView extends GetView<RegisterController> {
           isPassword: false,
           onTap: () => _askBirthdate(context))
     ];
-    return ListView(itemExtent: context.height * 0.11, children: [
+    return ListView(itemExtent: context.height * 0.12, children: [
       ...fields.map((RegisterFormFieldModel e) {
         return RegisterFormField(
           model: e,
@@ -168,7 +168,7 @@ class RegisterView extends GetView<RegisterController> {
       if (context.mounted) {
         handleApiResponse(context, response, onSuccess: (dynamic data) {
           Storage.to.apiToken = data;
-          context.navigator.popAndPushNamed(Routes.HOME);
+          context.navigator.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
         });
       }
     }

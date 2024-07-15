@@ -16,22 +16,28 @@ class MainBodyList extends GetView<LeaderboardController> {
       children: [
         const GridViewSelection(),
         Expanded(
-          child: Obx(() => Skeletonizer(
-                enabled: controller.leaderboard.isEmpty,
-                child: ListView.builder(
-                  itemExtent: context.height * 0.1,
-                  padding: const EdgeInsets.only(bottom: 24),
-                  itemCount: controller.leaderboard.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(top: 16.0),
-                      child: ClassificaProfileRow(
-                        partecipazione: controller.leaderboard[index],
-                      ),
-                    );
-                  },
-                ),
-              )),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Obx(() => Skeletonizer(
+                  enabled: controller.isFetchingLeaderboard,
+                  child: ListView(
+                    itemExtent: context.height * 0.1,
+                    padding: const EdgeInsets.only(bottom: 24),
+                    children: (controller.isFetchingLeaderboard
+                            ? controller.fakeLeaderboard
+                            : controller.leaderboard)
+                        .indexed
+                        .map((e) => Padding(
+                              padding: const EdgeInsets.only(top: 16.0),
+                              child: ClassificaProfileRow(
+                                index: e.$1 + 1,
+                                partecipazione: e.$2,
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                )),
+          ),
         )
       ],
     );

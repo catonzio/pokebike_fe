@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/data/enums/garage_type.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/garage/views/collezione/collezione_widget.dart';
@@ -23,16 +22,6 @@ class GarageView extends GetView<GarageController> {
   const GarageView({super.key});
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.isShowingGarage.value =
-          (context.modalRoute?.settings.arguments ?? GarageType.garage) ==
-              GarageType.garage;
-    });
-    // if (context.mounted) {
-    //   controller.isShowingGarage.value =
-    //       (context.modalRoute?.settings.arguments ?? GarageType.garage) ==
-    //           GarageType.garage;
-    // }
     return DefaultPage(
       backButton: true,
       body: Padding(
@@ -50,6 +39,11 @@ class GarageView extends GetView<GarageController> {
         SliverAppBar(
           automaticallyImplyLeading: false,
           expandedHeight: context.height * 0.4,
+          snap: false,
+          pinned: false,
+          floating: false,
+          surfaceTintColor: Colors.transparent,
+          backgroundColor: Colors.black,
           flexibleSpace: FlexibleSpaceBar(
             background: Column(
               children: [
@@ -68,10 +62,6 @@ class GarageView extends GetView<GarageController> {
               ],
             ),
           ),
-          snap: false,
-          pinned: false,
-          floating: true,
-          surfaceTintColor: Colors.transparent,
         ),
         CupertinoSliverRefreshControl(
           onRefresh: controller.refreshList,
@@ -80,18 +70,21 @@ class GarageView extends GetView<GarageController> {
           padding: const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
           sliver: Obx(() => controller.isShowingGarage.value
               ? GarageWidget(
-                  onTapElement: (Moto m) => context.navigator.pushNamed(
-                      Routes.MOTO_DETAILS,
-                      arguments:
-                          MotoDetailsArguments(moto: m, isOwnMoto: true)),
-                )
+                  onTapElement: (Moto m) => _onTapElement(context, m))
               : CollezioneWidget(
-                  onTapElement: (Moto m) => context.navigator.pushNamed(
-                      Routes.MOTO_DETAILS,
-                      arguments:
-                          MotoDetailsArguments(moto: m, isOwnMoto: true)))),
+                  onTapElement: (Moto? m) => _onTapElement(context, m))),
         )
       ],
     );
+  }
+
+  void _onTapElement(BuildContext context, Moto? m) {
+    final bool isGarage = controller.isShowingGarage.value;
+    if (m != null) {
+      context.navigator
+          .pushNamed(Routes.MOTO_DETAILS,
+              arguments: MotoDetailsArguments(moto: m, isOwnMoto: true))
+          .then((value) => controller.isShowingGarage.value = isGarage);
+    }
   }
 }

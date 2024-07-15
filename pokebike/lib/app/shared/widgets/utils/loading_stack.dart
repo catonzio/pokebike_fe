@@ -16,16 +16,15 @@ class LoadingStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => isLoading.value
-        ? Stack(
-            children: [
-              child,
+    return Obx(() => Stack(
+          children: [
+            child,
+            if (isLoading.value)
               BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
                 child: const Center(child: CircularProgressIndicator()),
               ).animate().fade()
-            ],
-          )
-        : child);
+          ],
+        ));
   }
 }

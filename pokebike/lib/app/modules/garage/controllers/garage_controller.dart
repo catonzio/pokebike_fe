@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/enums/garage_type.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/profile/providers/profile_provider.dart';
@@ -20,7 +21,7 @@ class GarageController extends GetxController {
 
   final List<Moto> fakeCollections =
       List.generate(3, (index) => Moto.fake(index));
-  final RxList<Moto> collections = <Moto>[].obs;
+  final RxList<Moto?> collections = <Moto?>[].obs;
 
   final Rxn<User> user = Rxn<User>();
   final MotoProvider provider;
@@ -30,6 +31,7 @@ class GarageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    isShowingGarage.value = Get.arguments == GarageType.garage;
     fetchUser();
     // ever(isShowingGarage, toggleShowing);
     fetchGarage();
@@ -52,8 +54,9 @@ class GarageController extends GetxController {
 
   Future<void> fetchCollection() async {
     isFetchingCollection = true;
-    await Future.delayed(const Duration(seconds: 3));
-    collections.addAll(List.generate(10, (index) => Moto.fake(index)));
+    await Future.delayed(const Duration(seconds: 1));
+    collections.addAll(List.generate(
+        100, (index) => ((index) % 3 == 0) ? Moto.fake(index) : null));
     isFetchingCollection = false;
   }
 

@@ -5,11 +5,12 @@ import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
+import 'package:pokebike/app/modules/profile/profile_arguments.dart';
 import 'package:pokebike/app/modules/profile/providers/profile_provider.dart';
 import 'package:pokebike/app/shared/widgets/pagination/pagination_item.dart';
 
 class ProfileController extends GetxController {
-  User? argumentUser = Get.arguments as User?;
+  ProfileArguments? argumentUser = Get.arguments as ProfileArguments?;
 
   final RxInt selectedIndex = 1.obs;
   final RxBool isOwnProfile = false.obs;
@@ -53,22 +54,40 @@ class ProfileController extends GetxController {
     fetchCoccarde();
   }
 
-  Future<void> setUser(User? user) async {
-    if (user == null) {
+  Future<void> setUser(ProfileArguments? arguments) async {
+    // se gli arguments sono vuoti
+    if (arguments == null ||
+        (arguments.user == null && arguments.profileId == null)) {
       isOwnProfile.value = true;
       isFetchingUser.value = true;
-      this.user.value = await provider.fetchUserMe();
+      user.value = await provider.fetchUserMe();
       isFetchingUser.value = false;
+      setUserProfile();
+
+      // se negli arguments c'e lo user
+    } else if (arguments.user != null && user.value == null) {
+      user.value = arguments.user;
+      setUserProfile();
+      
+      // se negli arguments c'e il profileId
+    } else if (arguments.user == null && arguments.profileId != null) {
+      user.value = await provider.fetchUserWithProfile(arguments.profileId!);
+    } else {
+      throw Exception("Wrong arguments for ProfileController");
     }
-    if (this.user.value == null) {
-      this.user.value = user;
-    }
-    if (this.user.value?.profile == null) {
-      isFetchingProfile.value = true;
-      this.user.value = this.user.value!.copyWith(
-          profile: await provider.fetchProfile(this.user.value!.profileId));
-      isFetchingProfile.value = false;
-    }
+    // if (user.value?.profile == null) {
+    //   isFetchingProfile.value = true;
+    //   user.value = user.value!.copyWith(
+    //       profile: await provider.fetchProfile(user.value!.profileId));
+    //   isFetchingProfile.value = false;
+    // }
+  }
+
+  Future<void> setUserProfile() async {
+    isFetchingProfile.value = true;
+    user.value = user.value!
+        .copyWith(profile: await provider.fetchProfile(user.value!.profileId));
+    isFetchingProfile.value = false;
   }
 
   Future<void> fetchTopMotos() async {
@@ -81,7 +100,8 @@ class ProfileController extends GetxController {
 
   Future<void> fetchLastPartecipazione() async {
     isFetchingPartecipazione.value = true;
-    lastPartecipazione.value = await provider.fetchLastPartecipazione(user.value!.profileId);
+    lastPartecipazione.value =
+        await provider.fetchLastPartecipazione(user.value!.profileId);
     isFetchingPartecipazione.value = false;
   }
   // void setTorneo(Torneo torneo) {
@@ -146,5 +166,4 @@ class ProfileController extends GetxController {
   void changeIndex(int index) {
     selectedIndex.value = index;
   }
-  
 }

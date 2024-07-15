@@ -6,11 +6,12 @@ class Themes {
   static dark() {
     ThemeData theme = ThemeData.dark();
     theme = theme.copyWith(
-        primaryColor: MColors.primary,
-        primaryColorDark: MColors.primaryDark,
-        primaryColorLight: MColors.primaryLight,
-        textTheme: GoogleFonts.poppinsTextTheme(theme.textTheme),
-        colorScheme: theme.colorScheme.copyWith(secondary: MColors.secondary));
+      primaryColor: MColors.primary,
+      primaryColorDark: MColors.primaryDark,
+      primaryColorLight: MColors.primaryLight,
+      textTheme: GoogleFonts.poppinsTextTheme(theme.textTheme),
+      // colorScheme: theme.colorScheme.copyWith(secondary: MColors.secondary),
+    );
     return theme;
   }
 
