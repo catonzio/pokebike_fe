@@ -7,8 +7,10 @@ import 'package:pokebike/app/modules/fotocamera/views/add_moto_form_field_model.
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 
 class AddMotoForm extends GetView<AddMotoFormController> {
-  final Function(Map<String, dynamic>) onSend;
-  const AddMotoForm({super.key, required this.onSend});
+  final Function(bool) onStartEndSend;
+  final Future<void> Function(Map<String, dynamic>) onSend;
+  const AddMotoForm(
+      {super.key, required this.onSend, required this.onStartEndSend});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,6 @@ class AddMotoForm extends GetView<AddMotoFormController> {
           controller: controller.descrizioneController,
           maxLines: 5)
     ];
-    print("Bottom padding: ${MediaQuery.of(context).viewInsets.bottom}");
     return Form(
       key: controller.formKey,
       child: Padding(
@@ -72,9 +73,11 @@ class AddMotoForm extends GetView<AddMotoFormController> {
   }
 
   _addMoto() async {
+    onStartEndSend(true);
     if (controller.formKey.currentState!.validate()) {
       Map<String, dynamic> data = controller.getData();
-      onSend(data);
+      await onSend(data);
     }
+    onStartEndSend(false);
   }
 }

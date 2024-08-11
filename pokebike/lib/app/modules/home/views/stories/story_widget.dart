@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:pokebike/app/config/colors.dart';
 
@@ -22,34 +23,54 @@ class StoryWidget extends StatelessWidget {
           shape: const CircleBorder(),
           child: InkWell(
             onTap: onTap,
-            // borderRadius: BorderRadius.circular(100),
-            splashColor: Colors.red,
-            hoverColor: Colors.blue,
-            focusColor: Colors.green,
-            highlightColor: Colors.yellow,
             customBorder: const CircleBorder(),
             child: Container(
-              padding: const EdgeInsets.all(4),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  colors: [
-                    MColors.primary,
-                    MColors.secondary,
-                  ],
-                  stops: [0, 0.8],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+                padding: const EdgeInsets.all(4),
+                width: radius * 2,
+                height: radius * 2,
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: [
+                      MColors.primary,
+                      MColors.secondary,
+                    ],
+                    stops: [0, 0.8],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
                 ),
-              ),
-              child: CircleAvatar(
-                radius: radius,
-                backgroundColor: Colors.black,
-                foregroundImage: Image.network(
-                  imagePath,
-                ).image,
-              ),
-            ),
+                child: CachedNetworkImage(
+                  imageUrl: imagePath,
+                  imageBuilder: (context, imageProvider) {
+                    return CircleAvatar(
+                      radius: radius,
+                      backgroundColor: Colors.black,
+                      foregroundImage: imageProvider,
+                    );
+                  },
+                  progressIndicatorBuilder: (context, url, progress) => Center(
+                    child: CircularProgressIndicator(
+                      value: progress.progress,
+                    ),
+                  ),
+                )
+                // CircleAvatar(
+                //   radius: radius,
+                //   backgroundColor: Colors.black,
+                //   foregroundImage: Image.network(imagePath,
+                //       frameBuilder:
+                //           (context, child, frame, wasSynchronouslyLoaded) =>
+                //               child,
+
+                //       loadingBuilder: (context, child, loadingProgress) {
+                //         final double progress =
+                //             (loadingProgress?.cumulativeBytesLoaded ?? 1) /
+                //                 (loadingProgress?.cumulativeBytesLoaded ?? 1);
+                //         return CircularProgressIndicator(value: progress);
+                //       }).image,
+                // ),
+                ),
           ),
         ),
         if (text != null)

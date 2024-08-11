@@ -51,6 +51,8 @@ class AddMotoView extends GetView<FotocameraController> {
                         Colors.black
                       ])),
                   child: AddMotoForm(
+                    onStartEndSend: (bool value) =>
+                        controller.isUploadingMoto.value = value,
                     onSend: (data) => _addMoto(context, data),
                   ),
                 ),
@@ -85,9 +87,10 @@ class AddMotoView extends GetView<FotocameraController> {
     data["image"] = controller.image;
     ApiResponse response = await controller.addMoto(data);
     if (context.mounted) {
-      handleApiResponse(context, response, onSuccess: (dynamic data) {
-        context.createSnackbar("Moto salvata correttamente");
-        controller.isCapturing = false;
+      handleApiResponse(context, response,
+          successMessage: "Moto salvata correttamente",
+          onSuccess: (dynamic data) {
+        controller.isCapturing = true;
       });
     }
   }

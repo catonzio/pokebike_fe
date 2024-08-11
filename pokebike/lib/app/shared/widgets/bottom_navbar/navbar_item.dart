@@ -6,11 +6,13 @@ class NavbarItem {
   final String route;
   final List<String>? routes;
   final double? size;
+  final bool shouldPop;
 
   NavbarItem(
       {required this.label,
       required this.iconName,
       required this.route,
+      this.shouldPop = true,
       this.routes,
       this.size});
 }
@@ -27,21 +29,24 @@ final List<NavbarItem> bottomNavbarItems = [
     route: Routes.GARAGE,
   ),
   NavbarItem(
-    label: "Fotocamera",
-    iconName: "Logo",
-    size: 70,
-    route: Routes.FOTOCAMERA,
-  ),
+      label: "Fotocamera",
+      iconName: "Logo",
+      size: 70,
+      route: Routes.FOTOCAMERA,
+      shouldPop: false),
   NavbarItem(
-    label: "Torneo",
-    iconName: "Torneo icon",
-    route: Routes.TORNEO,
-    routes: [Routes.TORNEO, Routes.PARTECIPA_TORNEO, Routes.LEADERBOARD, Routes.VOTA]
-  ),
+      label: "Torneo",
+      iconName: "Torneo icon",
+      route: Routes.TORNEO,
+      routes: [
+        Routes.TORNEO,
+        Routes.PARTECIPA_TORNEO,
+        Routes.LEADERBOARD,
+        Routes.VOTA
+      ]),
   NavbarItem(
-    label: "Profilo",
-    iconName: "Profile icon",
-    route: Routes.PROFILE,
-    routes: [Routes.PROFILE, Routes.SETTINGS]
-  ),
+      label: "Profilo",
+      iconName: "Profile icon",
+      route: Routes.PROFILE,
+      routes: [Routes.PROFILE, Routes.SETTINGS]),
 ];

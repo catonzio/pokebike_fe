@@ -74,7 +74,7 @@ class AddMotoFormController extends GetxController {
       'descrizione': descrizioneController.text.trim(),
       'data_cattura': DateTime.now().toIso8601String(),
       'marca_moto_id': 1,
-      'tipo_moto_id': 1,
+      'tipo_moto_id': 2,
     };
   }
 }
