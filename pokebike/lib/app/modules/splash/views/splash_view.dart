@@ -44,11 +44,12 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF08080a),
       body: Image.asset(
         "assets/images/splash.png",
         width: context.width,
         height: context.height,
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
         alignment: Alignment.center,
       ),
       // body: SvgPicture.asset(

@@ -4,8 +4,8 @@ import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/home/views/stories/story_widget.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/classifica_body.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/empty_classifica_body.dart';
-import 'package:pokebike/app/modules/profile/views/medaglie/empty_medaglie_body.dart';
 import 'package:pokebike/app/modules/profile/views/medaglie/medaglie_body.dart';
+import 'package:pokebike/app/modules/profile/views/medaglie/medaglie_row_widget.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/default_page.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
@@ -65,6 +65,7 @@ class ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (user == null) return const SizedBox();
+    int? numMotoCatturate = user!.profile?.numMotoCatturate;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -85,8 +86,13 @@ class ProfileHeader extends StatelessWidget {
                     style: context.textTheme.headlineSmall!.copyWith(
                       fontWeight: FontWeight.bold,
                     )),
-                Text("${user!.profile?.numMotoCatturate ?? '-'} moto catturate",
+                Text("${numMotoCatturate ?? '-'} moto catturate",
                     style: context.textTheme.bodyLarge),
+                MIcon(
+                  name: "Medal icon ${medagliaName(numMotoCatturate ?? 0)}"
+                      .trim(),
+                  size: Size(context.width, context.height).shortestSide * 0.1,
+                )
               ]),
         ),
       ],
@@ -104,10 +110,7 @@ class ProfileBody extends GetView<ProfileController> {
         child: Obx(() => AnimatedSwitcher(
             duration: const Duration(milliseconds: 500),
             child: controller.isMedaglie
-                ? (controller.medaglie.isNotEmpty ||
-                        controller.isLoadingMedaglie.value
-                    ? const MedaglieBody()
-                    : const EmptyMedaglieBody())
+                ? const MedaglieBody()
                 : (controller.numPartecipazioni > 0 ||
                         controller.isLoadingClassifica.value
                     ? const ClassificaBody()

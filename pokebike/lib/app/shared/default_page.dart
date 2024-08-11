@@ -19,6 +19,7 @@ class DefaultPage extends GetView<MDrawerController> {
   final bool backButton;
   final bool bottomBar;
   final String? title;
+  final TextStyle? titleStyle;
   final Color backgroundColor;
   final List<Widget>? bottomAppbarActions;
 
@@ -31,6 +32,7 @@ class DefaultPage extends GetView<MDrawerController> {
       this.backButton = false,
       this.bottomBar = true,
       this.title,
+      this.titleStyle,
       this.backgroundColor = Colors.black,
       this.bottomAppbarActions});
 
@@ -153,11 +155,17 @@ class DefaultPage extends GetView<MDrawerController> {
           bottomAppbar,
           Center(
               child: SizedBox(
-                  width: context.width * 0.4,
-                  child: ShimmerTitle.light(
-                    text: title!,
-                    textAlign: TextAlign.center,
-                  )))
+                  width: context.width * 0.6,
+                  child: titleStyle == null
+                      ? ShimmerTitle.light(
+                          text: title!,
+                          textAlign: TextAlign.center,
+                        )
+                      : ShimmerTitle.light(
+                          text: title!,
+                          style: titleStyle!,
+                          textAlign: TextAlign.center,
+                        )))
         ],
       );
     }

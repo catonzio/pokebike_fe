@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pokebike/app/modules/profile/views/details/medals_details.dart';
 
 import '../data/models/user/user.dart';
 import '../modules/community/bindings/community_binding.dart';
@@ -141,5 +142,9 @@ class AppPages {
       page: () => const MotoDetailsView(),
       binding: MotoDetailsBinding(),
     ),
+    GetPage(
+      name: _Paths.MEDALS_DETAILS,
+      page: () => const MedalsDetails(),
+    )
   ];
 }

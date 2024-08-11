@@ -19,4 +19,10 @@ class VotaProvider extends GetConnect {
       return null;
     }
   }
+
+  Future<ApiResponse> vote(int turnoId, bool partecipazione1) async {
+    ApiResponse response = await handleApiEndpoint(request, 'get',
+        '/turnos/vote?turno_id=$turnoId&partecipazione1=$partecipazione1');
+    return response;
+  }
 }

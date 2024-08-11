@@ -26,8 +26,12 @@ class MedaglieBody extends GetView<ProfileController> {
               children: [
                 const DividerTitle("MEDAGLIE"),
                 Skeletonizer(
-                    enabled: controller.isLoadingMedaglie.value,
-                    child: const MedaglieRowWidget()),
+                    enabled: controller.isLoadingNumCatture.value,
+                    child: Obx(() => MedaglieRowWidget(
+                          numCatture: controller
+                                  .user.value?.profile?.numMotoCatturate ??
+                              0,
+                        ))),
                 const DividerTitle("COCCARDE"),
                 Skeletonizer(
                     enabled: controller.isLoadingCoccarde.value,

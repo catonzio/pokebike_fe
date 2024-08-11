@@ -8,14 +8,23 @@ import 'package:pokebike/app/shared/controllers/storage.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 
 void handleApiResponse(BuildContext context, ApiResponse response,
-    {Function(dynamic)? onSuccess, Function(dynamic)? onError}) {
+    {String? successMessage,
+    String? errorMessage,
+    Function(dynamic)? onSuccess,
+    Function(dynamic)? onError}) {
   if (response.success) {
     onSuccess?.call(response.data);
+    if (successMessage != null && successMessage.isNotEmpty) {
+      context.createSnackbar(successMessage);
+    }
   } else {
     if (onError != null) {
       onError(response.data);
+      if (errorMessage != null && errorMessage.isNotEmpty) {
+        context.createSnackbar(errorMessage);
+      }
     } else {
-      context.createSnackbar(response.message);
+      context.createSnackbar(errorMessage ?? response.message);
       // context.scaffold.showSnackBar(SnackBar(
       //   content: Text(response.message),
       //   action: SnackBarAction(
@@ -34,6 +43,7 @@ Future<ApiResponse> handleApiEndpoint(
     String contentType = 'application/json',
     dynamic Function(double)? uploadProgress}) async {
   try {
+    method = method.toLowerCase();
     Map<String, String>? headers =
         auth ? {"Authorization": "Bearer ${Storage.to.apiToken}"} : null;
 
@@ -48,11 +58,14 @@ Future<ApiResponse> handleApiEndpoint(
           data[el.key] = multipartFile;
         }
       }
-      data = FormData(data);
+      if (method == 'post') {
+        data = FormData(data);
+      }
     }
 
     final response = await request(url, method,
-        body: data,
+        query: method == 'get' ? data : null,
+        body: method == 'post' ? data : null,
         headers: headers,
         contentType: contentType,
         uploadProgress: uploadProgress);
@@ -79,17 +92,6 @@ Future<ApiResponse> handleApiEndpoint(
         message: body["message"],
         data: body["data"],
         success: body.containsKey("success") && body["success"]);
-    // if (body.containsKey("success") && body["success"]) {
-    //   return ApiResponse.success(
-    //       status: response.status.code,
-    //       message: body["message"],
-    //       data: body["data"]);
-    // } else {
-    //   return ApiResponse.error(
-    //       status: response.status.code,
-    //       message: body["message"],
-    //       data: body["data"]);
-    // }
   } catch (e) {
     e.printError();
     return ApiResponse.error(

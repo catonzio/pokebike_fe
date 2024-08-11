@@ -23,6 +23,7 @@ abstract class Routes {
   static const PARTECIPA_TORNEO = _Paths.PARTECIPA_TORNEO;
   static const VOTA = _Paths.VOTA;
   static const MOTO_DETAILS = _Paths.MOTO_DETAILS;
+  static const MEDALS_DETAILS = _Paths.MEDALS_DETAILS;
 }
 
 abstract class _Paths {
@@ -45,4 +46,5 @@ abstract class _Paths {
   static const PARTECIPA_TORNEO = '/partecipa-torneo';
   static const VOTA = '/vota';
   static const MOTO_DETAILS = '/moto-details';
+  static const MEDALS_DETAILS = '/medals-details';
 }

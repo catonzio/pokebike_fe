@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:pokebike/app/config/colors.dart';
+import 'package:pokebike/app/modules/vota/controllers/vota_controller.dart';
 import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
 
-class VotaMotoImage extends StatelessWidget {
+class VotaMotoImage extends GetView<VotaController> {
   final double height;
   final String motoAvatar;
   final bool reversed;
@@ -33,10 +35,21 @@ class VotaMotoImage extends StatelessWidget {
         ],
         borderRadius: BorderRadius.circular(16),
       ),
-      child: MimageNetwork(
-        path: motoAvatar,
-        borderRadius: BorderRadius.circular(16),
-      ),
+      child: Obx(() => AnimatedSwitcher(
+            duration: const Duration(seconds: 3),
+            child: controller.hasVoted.value
+                ? Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "${((reversed ? 1 - controller.percentage.value : controller.percentage.value) * 100).toPrecision(2)}%",
+                      style: context.textTheme.displaySmall,
+                    ),
+                  )
+                : MimageNetwork(
+                    path: motoAvatar,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+          )),
     );
   }
 }

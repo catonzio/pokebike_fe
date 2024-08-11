@@ -15,7 +15,7 @@ class ProfileController extends GetxController {
   final RxInt selectedIndex = 1.obs;
   final RxBool isOwnProfile = false.obs;
 
-  final RxBool isLoadingMedaglie = false.obs;
+  final RxBool isLoadingNumCatture = false.obs;
   final RxBool isLoadingCoccarde = false.obs;
   final RxBool isLoadingClassifica = false.obs;
   final RxBool isFetchingUser = false.obs;
@@ -24,7 +24,7 @@ class ProfileController extends GetxController {
   final RxBool isFetchingTopMotos = false.obs;
 
   final RxList<String> fakeMedaglie = <String>["ciao", "a", "tutti"].obs;
-  final RxList<String> medaglie = <String>[].obs;
+  
   final Map<String, double> fakeCoccardeScore = <String, double>{
     for (var el in Constants.filterBoxes["Tipo"]!) el: 0.0
   };
@@ -50,7 +50,6 @@ class ProfileController extends GetxController {
     await setUser(argumentUser);
     fetchLastPartecipazione();
     fetchTopMotos();
-    fetchMedaglie();
     fetchCoccarde();
   }
 
@@ -68,7 +67,7 @@ class ProfileController extends GetxController {
     } else if (arguments.user != null && user.value == null) {
       user.value = arguments.user;
       setUserProfile();
-      
+
       // se negli arguments c'e il profileId
     } else if (arguments.user == null && arguments.profileId != null) {
       user.value = await provider.fetchUserWithProfile(arguments.profileId!);
@@ -114,15 +113,6 @@ class ProfileController extends GetxController {
   //   });
   // }
 
-  void fetchMedaglie() {
-    isLoadingMedaglie.value = true;
-    Future.delayed(const Duration(seconds: 7), () {
-      isLoadingMedaglie.value = false;
-      if (medaglie.isEmpty) {
-        medaglie.addAll(fakeMedaglie);
-      }
-    });
-  }
 
   void fetchCoccarde() {
     isLoadingCoccarde.value = true;

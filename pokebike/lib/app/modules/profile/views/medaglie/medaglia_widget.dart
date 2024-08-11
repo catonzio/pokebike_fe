@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
 class MedagliaWidget extends StatelessWidget {
+  final String iconName;
   final String text;
-  const MedagliaWidget(this.text, {super.key});
+  const MedagliaWidget(this.iconName, this.text, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class MedagliaWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         MIcon(
-          name: "Medal icon ${text.toLowerCase()}",
+          name: "Medal icon ${iconName.toLowerCase()}".trim(),
           size: 50,
         ),
         Text(text)

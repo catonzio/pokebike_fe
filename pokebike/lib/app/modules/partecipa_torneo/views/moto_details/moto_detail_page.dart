@@ -16,6 +16,8 @@ class MotoDetailPage extends GetView<PartecipaTorneoController> {
 
   @override
   Widget build(BuildContext context) {
+    // final Moto moto =
+    //     controller.collections.where((Moto p0) => p0.id == index).first;
     final Moto moto = controller.collections[index];
 
     return Obx(() => DefaultPage(
