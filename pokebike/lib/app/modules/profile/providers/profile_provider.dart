@@ -37,6 +37,11 @@ class ProfileProvider extends GetConnect {
     return handleApiEndpoint(request, "get", "/users/profile/$profileId");
   }
 
+  Future<ApiResponse> fetchCockadesEndpoint(int profileId) async {
+    return handleApiEndpoint(
+        request, "get", "/profiles/$profileId/motos-by-type");
+  }
+
   Future<User?> fetchUserMe() async {
     ApiResponse response = await fetchUserMeEndpoint();
     if (response.success) {
@@ -79,6 +84,24 @@ class ProfileProvider extends GetConnect {
       return User.fromJson(response.data);
     } else {
       return null;
+    }
+  }
+
+  Future<Map<String, int>> fetchCockades(int profileId) async {
+    ApiResponse response = await fetchCockadesEndpoint(profileId);
+    if (response.success) {
+      Map<String, int> result = {};
+      for (String k in Constants.filterBoxes['Tipo']!) {
+        int value = (response.data as Map<String, dynamic>)[k] ?? 0;
+        result[k] = value;
+      }
+
+      // Map<String, int> res = (response.data as Map<String, dynamic>)
+      //     .map((key, value) => MapEntry(key, value is int ? value : 0));
+
+      return result;
+    } else {
+      return {};
     }
   }
 }

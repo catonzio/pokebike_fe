@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pokebike/app/modules/profile/views/details/cockade_details.dart';
 import 'package:pokebike/app/modules/profile/views/details/medals_details.dart';
 
 import '../data/models/user/user.dart';
@@ -145,6 +146,10 @@ class AppPages {
     GetPage(
       name: _Paths.MEDALS_DETAILS,
       page: () => const MedalsDetails(),
+    ),
+    GetPage(
+      name: _Paths.COCKADES_DETAILS,
+      page: () => const CockadesDetails(),
     )
   ];
 }

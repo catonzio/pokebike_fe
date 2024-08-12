@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Constants {
-  static const String apiBaseUrl = "https://danilocatone.duckdns.org/pokebike/api";
+  static const String apiBaseUrl = "http://danilocatone.com/pokebike/api";
   // static const String apiBaseUrl = "http://127.0.0.1:8080/api";
 
   static const String settingsStorage = "settings";

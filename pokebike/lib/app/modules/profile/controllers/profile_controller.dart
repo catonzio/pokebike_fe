@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
@@ -24,11 +22,11 @@ class ProfileController extends GetxController {
   final RxBool isFetchingTopMotos = false.obs;
 
   final RxList<String> fakeMedaglie = <String>["ciao", "a", "tutti"].obs;
-  
-  final Map<String, double> fakeCoccardeScore = <String, double>{
-    for (var el in Constants.filterBoxes["Tipo"]!) el: 0.0
+
+  final Map<String, int> fakeCoccardeScore = <String, int>{
+    for (var el in Constants.filterBoxes["Tipo"]!) el: 0
   };
-  final Map<String, double> coccardeScore = <String, double>{}.obs;
+  final RxMap<String, int> coccardeScore = <String, int>{}.obs;
 
   final ProfileProvider provider;
   final Rxn<Partecipazione> lastPartecipazione = Rxn<Partecipazione>();
@@ -113,19 +111,22 @@ class ProfileController extends GetxController {
   //   });
   // }
 
-
-  void fetchCoccarde() {
+  Future<void> fetchCoccarde() async {
     isLoadingCoccarde.value = true;
-    Random random = Random();
-    Future.delayed(const Duration(seconds: 5), () {
-      isLoadingCoccarde.value = false;
-      if (coccardeScore.isEmpty) {
-        coccardeScore.addAll({
-          for (var el in Constants.filterBoxes["Tipo"]!)
-            el: random.nextInt(100) / 100
-        });
-      }
-    });
+    final Map<String, int> coccarde =
+        await provider.fetchCockades(user.value!.profileId);
+    coccardeScore.value = coccarde;
+    isLoadingCoccarde.value = false;
+    // Random random = Random();
+    // Future.delayed(const Duration(seconds: 2), () {
+    //   isLoadingCoccarde.value = false;
+    //   if (coccardeScore.isEmpty) {
+    //     coccardeScore.addAll({
+    //       for (var el in Constants.filterBoxes["Tipo"]!)
+    //         el: random.nextInt(100)
+    //     });
+    //   }
+    // });
   }
 
   // bool get isGarage => selectedIndex.value == 0;

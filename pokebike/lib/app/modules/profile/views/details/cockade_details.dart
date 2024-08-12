@@ -7,25 +7,34 @@ import 'package:pokebike/app/config/medals_cockades_enums.dart';
 import 'package:pokebike/app/shared/default_page.dart';
 import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
-class MedalsDetails extends StatelessWidget {
-  const MedalsDetails({super.key});
+class CockadesDetailsArguments {
+  final int numCatturate;
+  final String typeName;
+
+  const CockadesDetailsArguments(
+      {required this.numCatturate, required this.typeName});
+}
+
+class CockadesDetails extends StatelessWidget {
+  const CockadesDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final int numCatturate = Get.arguments as int;
+    final CockadesDetailsArguments arguments =
+        Get.arguments as CockadesDetailsArguments;
 
     return DefaultPage(
       backButton: true,
-      title: "Moto catturate",
+      title: arguments.typeName,
       body: ListView(
         itemExtent: context.height * 0.2,
         padding: const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
-        children: Medals.values
+        children: Cockades.values
             .sublist(1)
             .map((e) => Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: SingleMedagliaDetail(
-                      medaglia: e, numCatturate: numCatturate),
+                  child: SingleCockadeDetail(
+                      cockade: e, numCatturate: arguments.numCatturate),
                 ))
             .toList(),
       ),
@@ -33,24 +42,23 @@ class MedalsDetails extends StatelessWidget {
   }
 }
 
-class SingleMedagliaDetail extends StatelessWidget {
-  final Medals medaglia;
+class SingleCockadeDetail extends StatelessWidget {
+  final Cockades cockade;
   final int numCatturate;
 
-  const SingleMedagliaDetail(
-      {super.key, required this.medaglia, required this.numCatturate});
+  const SingleCockadeDetail(
+      {super.key, required this.cockade, required this.numCatturate});
 
   @override
   Widget build(BuildContext context) {
-    int realNum = medaglia.ub == null
-        ? numCatturate
-        : min<int>(numCatturate, medaglia.ub!);
+    int realNum =
+        cockade.ub == null ? numCatturate : min<int>(numCatturate, cockade.ub!);
     final double medalSize = Size(context.width, context.height).shortestSide;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
-          "Moto catturate: $realNum${medaglia.ub == null ? "" : "/${medaglia.ub}"}",
+          "Moto catturate: $realNum${cockade.ub == null ? "" : "/${cockade.ub}"}",
           style: context.textTheme.titleMedium,
         ),
         Stack(
@@ -58,18 +66,18 @@ class SingleMedagliaDetail extends StatelessWidget {
           children: [
             MIcon(
               name:
-                  "Medal icon ${numCatturate < (medaglia.ub ?? Medals.diamante.lb) ? 'none' : medaglia.iconName}"
+                  "Cockade icon ${numCatturate < cockade.lb ? 'none' : cockade.iconName}"
                       .trim(),
               size: medalSize * 0.15,
             ),
-            if (medaglia.ub != null)
+            if (cockade.ub != null)
               SizedBox(
                 width: medalSize * 0.25,
                 height: medalSize * 0.25,
                 child: CircularProgressIndicator(
-                  value: realNum / (medaglia.ub ?? 1),
-                  backgroundColor: Medals.none.color,
-                  valueColor: AlwaysStoppedAnimation<Color>(medaglia.color),
+                  value: realNum / (cockade.ub ?? 1),
+                  backgroundColor: Cockades.none.color,
+                  valueColor: AlwaysStoppedAnimation<Color>(cockade.color),
                   strokeWidth: 5,
                 ),
               )

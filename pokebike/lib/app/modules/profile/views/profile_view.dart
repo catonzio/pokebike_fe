@@ -89,8 +89,9 @@ class ProfileHeader extends StatelessWidget {
                 Text("${numMotoCatturate ?? '-'} moto catturate",
                     style: context.textTheme.bodyLarge),
                 MIcon(
-                  name: "Medal icon ${medagliaName(numMotoCatturate ?? 0)}"
-                      .trim(),
+                  name:
+                      "Medal icon ${medagliaName(numMotoCatturate ?? 0).iconName}"
+                          .trim(),
                   size: Size(context.width, context.height).shortestSide * 0.1,
                 )
               ]),
