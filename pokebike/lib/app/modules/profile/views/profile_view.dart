@@ -6,6 +6,7 @@ import 'package:pokebike/app/modules/profile/views/classifica/classifica_body.da
 import 'package:pokebike/app/modules/profile/views/classifica/empty_classifica_body.dart';
 import 'package:pokebike/app/modules/profile/views/medaglie/medaglie_body.dart';
 import 'package:pokebike/app/modules/profile/views/medaglie/medaglie_row_widget.dart';
+import 'package:pokebike/app/modules/settings/controllers/settings_controller.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/default_page.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
@@ -26,8 +27,11 @@ class ProfileView extends GetView<ProfileController> {
             ? [
                 MIcon(
                   name: "Option icon",
-                  onTap: () => context.navigator.pushNamed(Routes.SETTINGS,
-                      arguments: controller.user.value),
+                  onTap: () => context.navigator
+                      .pushNamed(Routes.SETTINGS,
+                          arguments: controller.user.value)
+                      .then((value) => controller.user.value =
+                          SettingsController.to.user.value),
                 )
               ]
             : null,

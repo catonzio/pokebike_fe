@@ -40,7 +40,7 @@ class ProfileContainer extends StatelessWidget {
           name,
           style: context.textTheme.titleLarge,
         ),
-        trailing: const MIcon(name: "Edit icon"),
+        trailing: const MIcon(name: "Edit icon white"),
         onTap: onPressed);
   }
 }

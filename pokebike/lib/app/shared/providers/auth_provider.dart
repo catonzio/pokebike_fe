@@ -43,4 +43,17 @@ class AuthProvider extends GetConnect {
   Future<ApiResponse> checkToken() async {
     return handleApiEndpoint(request, "post", "/check-token");
   }
+
+  Future<ApiResponse> askVerificationCode() async {
+    return handleApiEndpoint(request, "get", "/send-email-verification");
+  }
+
+  Future<ApiResponse> verifyCode(String code) async {
+    return handleApiEndpoint(request, "post", "/verify-email",
+        data: {"code": code});
+  }
+
+  Future<ApiResponse> passwordForgot(String email) async {
+    return handleApiEndpoint(request, "post", "/forgot-password?email=$email");
+  }
 }

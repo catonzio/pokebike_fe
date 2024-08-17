@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -16,6 +19,12 @@ Future<void> main() async {
   await GetStorage.init(Constants.settingsStorage);
   cameras = await availableCameras();
   WidgetsFlutterBinding.ensureInitialized();
+
+  ByteData data = await PlatformAssetBundle()
+      .load('assets/ca/danilocatone.com_ssl_certificate.cer');
+  SecurityContext.defaultContext
+      .setTrustedCertificatesBytes(data.buffer.asUint8List());
+
   runApp(const App());
 }
 

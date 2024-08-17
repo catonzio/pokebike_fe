@@ -92,6 +92,7 @@ class LoginView extends GetView<LoginController> {
       children: [
         const Text("E-mail"),
         TextFormField(
+            key: controller.emailFormKey,
             controller: controller.emailController,
             minLines: 1,
             maxLines: 1,
@@ -128,17 +129,30 @@ class LoginView extends GetView<LoginController> {
   }
 
   _login(BuildContext context) async {
-    if (controller.formKey.currentState!.validate()) {
+    if (controller.formKey.currentState?.validate() ?? false) {
       controller.login().then((ApiResponse response) {
         handleApiResponse(context, response, onSuccess: (dynamic data) {
           Storage.to.apiToken = data;
-          context.navigator.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
+          controller.checkToken().then((bool value) => value
+              ? context.navigator
+                  .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
+              : context.navigator.pushNamedAndRemoveUntil(
+                  Routes.CONFIRM_REGISTER, (_) => false));
+          // context.navigator.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
         });
       });
     }
   }
 
-  _passwordForgotten(BuildContext context) {}
+  _passwordForgotten(BuildContext context) {
+    if (controller.emailFormKey.currentState?.validate() ?? false) {
+      controller.passwordForgot().then((ApiResponse value) {
+        handleApiResponse(context, value,
+            successMessage:
+                "Email di reset ${value.message.contains('throttled') ? 'gia ' : ''}inviata");
+      });
+    }
+  }
 
   _onRegister(BuildContext context) {
     context.navigator.popAndPushNamed(Routes.REGISTER);

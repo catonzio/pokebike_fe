@@ -6,12 +6,14 @@ class MimageNetwork extends StatelessWidget {
   final String path;
   final BoxFit fit;
   final BorderRadius? borderRadius;
+  final bool shouldDarken;
 
   const MimageNetwork(
       {super.key,
       required this.path,
       this.fit = BoxFit.cover,
-      this.borderRadius});
+      this.borderRadius,
+      this.shouldDarken = false});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,8 @@ class MimageNetwork extends StatelessWidget {
       child: CachedNetworkImage(
         imageUrl: path,
         fit: fit,
+        color: shouldDarken ? Colors.black.withOpacity(0.6) : null,
+        colorBlendMode: shouldDarken ? BlendMode.darken : null,
         progressIndicatorBuilder: (context, url, progress) => Container(
           color: MColors.primaryLight,
           child: Center(

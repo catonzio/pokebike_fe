@@ -65,8 +65,8 @@ Future<ApiResponse> handleApiEndpoint(
 
     final response = await request(url, method,
         query: method == 'get' ? data : null,
-        body: method == 'post' ? data : null,
-        headers: headers, 
+        body: ['post', 'put', 'patch'].contains(method) ? data : null,
+        headers: headers,
         contentType: contentType,
         uploadProgress: uploadProgress);
     if (response.body == null) {

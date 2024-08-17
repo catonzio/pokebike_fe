@@ -4,11 +4,14 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/config/constants.dart';
+import 'package:pokebike/app/data/api_response.dart';
+import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/home/views/stories/story_widget.dart';
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 import 'package:pokebike/app/modules/settings/views/settings_editing_form.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/utils/api_utils.dart';
 import 'package:pokebike/app/shared/widgets/default_dialog.dart';
 
 import '../controllers/settings_controller.dart';
@@ -107,20 +110,19 @@ class SettingsEditWidget extends GetView<SettingsController> {
   }
 
   _dialogEliminaTap(BuildContext context) {
-    context.navigator.pushNamedAndRemoveUntil(Routes.SPLASH, (_) => false);
+    controller.deleteUser().then((ApiResponse value) => handleApiResponse(
+        context, value,
+        onSuccess: (_) => context.navigator
+            .pushNamedAndRemoveUntil(Routes.SPLASH, (_) => false)));
   }
 
   _salva(BuildContext context) async {
-    final bool result = await controller.salva();
-    if (context.mounted) {
-      context.scaffold.showSnackBar(SnackBar(
-        content: Text(result
-            ? "Salvataggio completato"
-            : "Salvataggio non riuscito. Errore"),
-        action: SnackBarAction(
-            label: "Ok", onPressed: () => context.scaffold.clearSnackBars()),
-      ));
-    }
-    if (result) controller.editing = false;
+    controller.salva().then((ApiResponse response) {
+      handleApiResponse(context, response,
+          successMessage: "Salvataggio completato", onSuccess: (_) {
+        controller.editing = false;
+        controller.user.value = User.fromJson(response.data);
+      });
+    });
   }
 }

@@ -4,7 +4,9 @@ import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
+import 'package:pokebike/app/modules/settings/providers/settings_provider.dart';
 import 'package:pokebike/app/shared/extensions/date_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,6 +34,10 @@ class SettingsController extends GetxController {
 
   final Rxn<User> user = Rxn<User>();
 
+  final SettingsProvider provider;
+
+  SettingsController({required this.provider});
+
   @override
   void onInit() async {
     notificationsEnabled.value =
@@ -39,6 +45,7 @@ class SettingsController extends GetxController {
     await setUser(argumentUser);
     nameController.text = user.value?.name ?? "";
     surnameController.text = user.value?.surname ?? "";
+    usernameController.text = user.value?.username ?? "";
     dataController.text = user.value?.birthdate.toFormattedString() ?? "";
 
     super.onInit();
@@ -83,16 +90,24 @@ class SettingsController extends GetxController {
     return false;
   }
 
-  Future<bool> salva() {
-    print("Salva: ");
-    print("Nome: ${nameController.text}");
-    print("Cognome: ${surnameController.text}");
-    print("Username: ${usernameController.text}");
-    print("Data: ${dataController.text}");
+  Future<ApiResponse> salva() async {
+    Map<String, dynamic> data = {
+      'name': nameController.text.trim(),
+      'surname': surnameController.text.trim(),
+      'username': usernameController.text.trim(),
+      'birthdate': dataController.text.trim().replaceAll("/", "-")
+    };
     saving = true;
-    return Future.delayed(const Duration(seconds: 2), () {
-      saving = false;
-      return true;
-    });
+    ApiResponse response = await provider.updateUser(user.value?.id ?? 0, data);
+    saving = false;
+    return response;
+  }
+
+  Future<ApiResponse> deleteUser() async {
+    if (user.value != null) {
+      return provider.deleteUser(user.value!.id);
+    } else {
+      return ApiResponse.error(message: "User is null", data: {});
+    }
   }
 }

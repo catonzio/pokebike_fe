@@ -88,20 +88,28 @@ class ProfileProvider extends GetConnect {
   }
 
   Future<Map<String, int>> fetchCockades(int profileId) async {
-    ApiResponse response = await fetchCockadesEndpoint(profileId);
-    if (response.success) {
-      Map<String, int> result = {};
-      for (String k in Constants.filterBoxes['Tipo']!) {
-        int value = (response.data as Map<String, dynamic>)[k] ?? 0;
-        result[k] = value;
+    Map<String, int> emptyResult = {
+      for (String k in Constants.filterBoxes['Tipo']!) k: 0
+    };
+    try {
+      ApiResponse response = await fetchCockadesEndpoint(profileId);
+      if (response.success) {
+        if ((response.data.runtimeType == List) &&
+            (response.data as List).isEmpty) {
+          return emptyResult;
+        }
+        Map<String, int> result = {};
+        for (String k in Constants.filterBoxes['Tipo']!) {
+          int value = (response.data as Map<String, dynamic>)[k] ?? 0;
+          result[k] = value;
+        }
+
+        return result;
+      } else {
+        return emptyResult;
       }
-
-      // Map<String, int> res = (response.data as Map<String, dynamic>)
-      //     .map((key, value) => MapEntry(key, value is int ? value : 0));
-
-      return result;
-    } else {
-      return {};
+    } on Exception catch (_) {
+      return emptyResult;
     }
   }
 }

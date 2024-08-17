@@ -4,12 +4,15 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/config/themes.dart';
+import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/utils/api_utils.dart';
 import 'package:pokebike/app/shared/utils/decoration_image.dart';
 import 'package:pokebike/app/shared/utils/input_decoration.dart';
 import 'package:pokebike/app/shared/widgets/base_app_bar.dart';
+import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
 import 'package:pokebike/app/shared/widgets/utils/loading_stack.dart';
 
 import '../controllers/confirm_register_controller.dart';
@@ -42,22 +45,22 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const Column(
+        Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Conferma",
-              style: TextStyle(
-                  fontSize: 34,
-                  fontWeight: FontWeight.bold,
-                  color: MColors.primaryDark),
+            ShimmerTitle.dark(
+              text: "Conferma",
+              // style: TextStyle(
+              //     fontSize: 34,
+              //     fontWeight: FontWeight.bold,
+              //     color: MColors.primaryDark),
             ),
-            Text(
-              "Registrazione",
-              style: TextStyle(
-                  fontSize: 34,
-                  fontWeight: FontWeight.bold,
-                  color: MColors.primaryDark),
+            ShimmerTitle.dark(
+              text: "Registrazione",
+              // style: TextStyle(
+              //     fontSize: 34,
+              //     fontWeight: FontWeight.bold,
+              //     color: MColors.primaryDark),
             ),
           ],
         ),
@@ -107,22 +110,28 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
 
   void _confirm(BuildContext context) async {
     if (controller.formKey.currentState!.validate()) {
-      bool result = await controller.confirmRegister();
+      ApiResponse result = await controller.confirmRegister();
       if (context.mounted) {
-        if (result) {
+        handleApiResponse(context, result, onSuccess: (value) {
           context.navigator.pushReplacementNamed(Routes.HOME);
-        } else {
-          context.scaffold.showSnackBar(SnackBar(
-            content: const Text("Errore in fase di registrazione"),
-            action: SnackBarAction(
-              label: "Ok",
-              onPressed: () => context.scaffold.clearSnackBars,
-            ),
-          ));
-        }
+        });
+        // if (result) {
+        //   context.navigator.pushReplacementNamed(Routes.HOME);
+        // } else {
+        //   context.scaffold.showSnackBar(SnackBar(
+        //     content: const Text("Errore in fase di registrazione"),
+        //     action: SnackBarAction(
+        //       label: "Ok",
+        //       onPressed: () => context.scaffold.clearSnackBars,
+        //     ),
+        //   ));
+        // }
       }
     }
   }
 
-  _askAnotherCode(BuildContext context) {}
+  _askAnotherCode(BuildContext context) {
+    controller.askCode().then((ApiResponse value) =>
+        handleApiResponse(context, value, successMessage: "Codice inviato"));
+  }
 }

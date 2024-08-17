@@ -168,7 +168,7 @@ class RegisterView extends GetView<RegisterController> {
       if (context.mounted) {
         handleApiResponse(context, response, onSuccess: (dynamic data) {
           Storage.to.apiToken = data;
-          context.navigator.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
+          context.navigator.pushNamedAndRemoveUntil(Routes.CONFIRM_REGISTER, (_) => false);
         });
       }
     }

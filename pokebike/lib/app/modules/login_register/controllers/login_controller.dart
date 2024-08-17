@@ -14,6 +14,7 @@ class LoginController extends GetxController {
   final RxBool isPerformingLogin = false.obs;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final GlobalKey<FormFieldState> emailFormKey = GlobalKey<FormFieldState>();
 
   final TextEditingController emailController =
       TextEditingController(text: "email1@email.com");
@@ -56,5 +57,16 @@ class LoginController extends GetxController {
     //   isPerformingLogin.value = false;
     //   return true;
     // });
+  }
+
+  Future<bool> checkToken() async {
+    ApiResponse result = await provider.checkToken();
+    return result.success;
+  }
+
+  Future<ApiResponse> passwordForgot() async {
+    ApiResponse response =
+        await provider.passwordForgot(emailController.text.trim());
+    return response;
   }
 }

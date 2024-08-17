@@ -35,20 +35,23 @@ class VotaMotoImage extends GetView<VotaController> {
         ],
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Obx(() => AnimatedSwitcher(
-            duration: const Duration(seconds: 3),
-            child: controller.hasVoted.value
-                ? Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "${((reversed ? 1 - controller.percentage.value : controller.percentage.value) * 100).toPrecision(2)}%",
-                      style: context.textTheme.displaySmall,
-                    ),
-                  )
-                : MimageNetwork(
-                    path: motoAvatar,
-                    borderRadius: BorderRadius.circular(16),
-                  ),
+      child: Obx(() => Stack(
+            alignment: Alignment.center,
+            children: [
+              MimageNetwork(
+                path: motoAvatar,
+                borderRadius: BorderRadius.circular(16),
+                shouldDarken: controller.hasVoted.value,
+              ),
+              AnimatedOpacity(
+                opacity: controller.hasVoted.value ? 1 : 0,
+                duration: const Duration(seconds: 1),
+                child: Text(
+                  "${((reversed ? 1 - controller.percentage.value : controller.percentage.value) * 100).toPrecision(2)}%",
+                  style: context.textTheme.displaySmall,
+                ),
+              )
+            ],
           )),
     );
   }
