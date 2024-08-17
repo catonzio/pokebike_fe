@@ -13,16 +13,18 @@ class CommunityView extends GetView<CommunityController> {
 
   @override
   Widget build(BuildContext context) {
-    return const DefaultPage(
+    return DefaultPage(
         body: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CommunityTitle(),
+        const CommunityTitle(),
         Padding(
-          padding: EdgeInsets.all(16.0),
-          child: SearchRow(),
+          padding: const EdgeInsets.all(16.0),
+          child: SearchRow(
+            onSearchField: _onSearchField,
+          ),
         ),
-        Expanded(
+        const Expanded(
           child: Padding(
             padding: EdgeInsets.all(16.0),
             child: CommunityList(),
@@ -30,5 +32,9 @@ class CommunityView extends GetView<CommunityController> {
         ),
       ],
     ));
+  }
+
+  void _onSearchField(String value) {
+    controller.filterCommunities(value);
   }
 }

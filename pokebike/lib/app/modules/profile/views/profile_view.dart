@@ -85,7 +85,7 @@ class ProfileHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 ShimmerTitle.light(
-                    text: "${user!.name} ${user!.surname}",
+                    text: fullName(user!),
                     // colors: [Colors.white, Colors.grey, Colors.white],
                     style: context.textTheme.headlineSmall!.copyWith(
                       fontWeight: FontWeight.bold,

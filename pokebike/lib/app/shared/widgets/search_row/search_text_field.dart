@@ -4,7 +4,8 @@ import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
 class SearchTextField extends StatelessWidget {
-  const SearchTextField({super.key});
+  final Function(String) onSearch;
+  const SearchTextField({super.key, required this.onSearch});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class SearchTextField extends StatelessWidget {
       cursorColor: MColors.primary,
       maxLines: 1,
       minLines: 1,
+      onChanged: onSearch,
     );
   }
 }

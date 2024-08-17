@@ -7,7 +7,8 @@ class Constants {
   static const String settingsStorage = "settings";
 
   static const double bottomNavbarHeight = 160;
-
+  static const int numCommunityHome = 7;
+  
   static const SliverGridDelegate gridDelegate =
       SliverGridDelegateWithFixedCrossAxisCount(
     crossAxisCount: 2,

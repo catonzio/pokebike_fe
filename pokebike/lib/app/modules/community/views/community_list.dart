@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
@@ -27,12 +29,14 @@ class CommunityList extends StatelessWidget {
         builder: (CommunityController controller) {
           final List<Widget> children = (controller.isLoading
                   ? controller.fakeCommunities
-                  : controller.communities)
+                  : (isHorizontal
+                      ? controller.communities
+                      : controller.filteredCommunities))
               .map((User e) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CommunityTile(
                       index: e.id,
-                      text: "${e.name} ${e.surname}",
+                      text: fullName(e),
                       imagePath: e.motoFavoritaAvatar,
                       profileImagePath: e.avatar,
                       onTap: () => context.navigator.pushNamed(
@@ -45,23 +49,26 @@ class CommunityList extends StatelessWidget {
 
           return Skeletonizer(
             enabled: controller.isLoading,
-            child: isHorizontal
-                ? ListView(
-                    itemExtent: context.width * 0.45,
-                    scrollDirection: Axis.horizontal,
-                    children: children.sublist(0, 7))
-                : RefreshIndicator(
-                    onRefresh: () => controller.fetchUsers(reload: true),
-                    child: GridView(
-                        padding: const EdgeInsets.only(
-                            bottom: Constants.bottomNavbarHeight),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          childAspectRatio: 1.3,
-                        ),
-                        children: children),
-                  ),
+            child: children.isEmpty
+                ? const Center(child: Text("La community è vuota"))
+                : isHorizontal
+                    ? ListView(
+                        itemExtent: context.width * 0.45,
+                        scrollDirection: Axis.horizontal,
+                        children: children.sublist(0,
+                            min(children.length, Constants.numCommunityHome)))
+                    : RefreshIndicator(
+                        onRefresh: () => controller.fetchUsers(reload: true),
+                        child: GridView(
+                            padding: const EdgeInsets.only(
+                                bottom: Constants.bottomNavbarHeight),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 1.3,
+                            ),
+                            children: children),
+                      ),
           );
         });
   }

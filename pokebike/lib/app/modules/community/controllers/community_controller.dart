@@ -11,6 +11,7 @@ class CommunityController extends GetxController {
   final List<User> fakeCommunities =
       List.generate(7, (index) => User.fake(index));
   final RxList<User> communities = <User>[].obs;
+  RxList<User> filteredCommunities = <User>[].obs;
 
   final CommunityProvider _communityProvider;
 
@@ -28,7 +29,19 @@ class CommunityController extends GetxController {
           response.data.map<User>((e) => User.fromJson(e)).toList();
       communities.addAll(users);
     }
+    filteredCommunities.value = communities;
     isLoading = false;
     return response;
+  }
+
+  void filterCommunities(String filter) {
+    if (filter.isEmpty) {
+      filteredCommunities.value = communities;
+    } else {
+      filteredCommunities.value = communities
+          .where((element) =>
+              fullName(element).toLowerCase().contains(filter.toLowerCase()))
+          .toList();
+    }
   }
 }

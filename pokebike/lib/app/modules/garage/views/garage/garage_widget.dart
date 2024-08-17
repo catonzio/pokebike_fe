@@ -20,7 +20,7 @@ class GarageWidget extends GetView<GarageController> {
             ? _gridOfElements(controller.fakeGarages)
             : (controller.garages.isEmpty
                 ? const EmptyGarageBody()
-                : _gridOfElements(controller.garages))));
+                : _gridOfElements(controller.filteredGarages))));
   }
 
   Widget _gridOfElements(List<Moto> elements) {
@@ -29,7 +29,7 @@ class GarageWidget extends GetView<GarageController> {
         delegate: SliverChildBuilderDelegate(
           (BuildContext context, int index) {
             return GarageCardWidget(
-              index: index,
+                index: index,
                 moto: elements[index],
                 onTap: () => onTapElement(elements[index]));
           },

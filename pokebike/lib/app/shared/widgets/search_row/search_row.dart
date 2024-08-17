@@ -5,7 +5,8 @@ import 'package:pokebike/app/shared/widgets/search_row/search_text_field.dart';
 import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
 class SearchRow extends StatelessWidget {
-  const SearchRow({super.key});
+  final Function(String) onSearchField;
+  const SearchRow({super.key, required this.onSearchField});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +14,9 @@ class SearchRow extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Expanded(
+        Expanded(
           flex: 8,
-          child: SearchTextField(),
+          child: SearchTextField(onSearch: onSearchField),
         ),
         Expanded(
           flex: 2,

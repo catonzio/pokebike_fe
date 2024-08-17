@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/shared/controllers/filter_box_controller.dart';
@@ -17,7 +18,6 @@ class FilterModalBox extends StatelessWidget {
         Get.find<FilterBoxController>(tag: title);
 
     return LayoutBuilder(builder: (context, constraints) {
-      print("$title ${constraints.hasBoundedHeight}");
       return Obx(() => Container(
             width: double.infinity,
             decoration: BoxDecoration(
@@ -31,17 +31,22 @@ class FilterModalBox extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(title),
-                      Obx(() => IconButton(
-                          onPressed: () => controller.toggle(),
-                          icon: Icon(controller.isExpanded.value
+                  GestureDetector(
+                    onTap: () => controller.toggle(),
+                    behavior: HitTestBehavior.opaque,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(title),
+                          Obx(() => Icon(controller.isExpanded.value
                               ? Icons.keyboard_arrow_down
-                              : Icons.keyboard_arrow_up)))
-                    ],
+                              : Icons.keyboard_arrow_up))
+                        ],
+                      ),
+                    ),
                   ),
                   Obx(() => controller.isExpanded.value
                       ? OptionsWidget(controller: controller, options: options)

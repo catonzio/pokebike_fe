@@ -37,6 +37,7 @@ class MedaglieRowWidget extends StatelessWidget {
       child: GestureDetector(
         onTap: () => context.navigator
             .pushNamed(Routes.MEDALS_DETAILS, arguments: numCatture),
+        behavior: HitTestBehavior.opaque,
         child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

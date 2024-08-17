@@ -58,7 +58,9 @@ class GarageView extends GetView<GarageController> {
                           : const SizedBox.shrink(),
                     )),
                 const PaginationRow(),
-                const SearchRow(),
+                SearchRow(
+                  onSearchField: _onSearchField,
+                ),
               ],
             ),
           ),
@@ -86,5 +88,9 @@ class GarageView extends GetView<GarageController> {
               arguments: MotoDetailsArguments(moto: m, isOwnMoto: true))
           .then((value) => controller.isShowingGarage.value = isGarage);
     }
+  }
+
+  void _onSearchField(String value) {
+    controller.filterGarages(value);
   }
 }

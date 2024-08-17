@@ -21,9 +21,11 @@ class PartecipaTorneoView extends GetView<PartecipaTorneoController> {
               child: Column(
                 children: [
                   // ShimmerTitle.light(text: "Scegli la tua moto"),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 16.0),
-                    child: SearchRow(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                    child: SearchRow(
+                      onSearchField: _onSearchField,
+                    ),
                   ),
                   Expanded(
                     child: Padding(
@@ -37,4 +39,6 @@ class PartecipaTorneoView extends GetView<PartecipaTorneoController> {
               ),
             ));
   }
+
+  void _onSearchField(String value) {}
 }

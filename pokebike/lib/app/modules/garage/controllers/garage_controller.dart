@@ -18,6 +18,7 @@ class GarageController extends GetxController {
 
   final List<Moto> fakeGarages = List.generate(3, (index) => Moto.fake(index));
   final RxList<Moto> garages = <Moto>[].obs;
+  RxList<Moto> filteredGarages = <Moto>[].obs;
 
   final List<Moto> fakeCollections =
       List.generate(3, (index) => Moto.fake(index));
@@ -49,6 +50,7 @@ class GarageController extends GetxController {
     final List<Moto> fetchedGarages = await provider.fetchMotos();
     garages.addAll(fetchedGarages);
     // garages.addAll(List.generate(10, (index) => index + 1));
+    filteredGarages.value = garages;
     isFetchingGarage = false;
   }
 
@@ -74,6 +76,17 @@ class GarageController extends GetxController {
       fetchCollection();
     } else if (value && garages.isEmpty) {
       fetchGarage();
+    }
+  }
+
+  void filterGarages(String value) {
+    if (value.isEmpty) {
+      filteredGarages.value = garages;
+    } else {
+      filteredGarages.value = garages
+          .where(
+              (moto) => moto.nome.toLowerCase().contains(value.toLowerCase()))
+          .toList();
     }
   }
 }
