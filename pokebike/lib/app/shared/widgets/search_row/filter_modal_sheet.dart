@@ -8,7 +8,8 @@ import 'package:pokebike/app/shared/mbutton.dart';
 import 'package:pokebike/app/shared/widgets/search_row/filter_modal_box.dart';
 
 class FilterModalSheet extends StatelessWidget {
-  const FilterModalSheet({super.key});
+  final Function(Map<String, List<String>>) onSave;
+  const FilterModalSheet({super.key, required this.onSave});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +51,8 @@ class FilterModalSheet extends StatelessWidget {
     final FilterSheetController controller = Get.find<FilterSheetController>();
     final Map<String, List<String>> options = controller.getOptions();
     print(options);
-    controller.reset();
+    onSave(options);
+    // controller.reset();
     context.navigator.pop();
   }
 }

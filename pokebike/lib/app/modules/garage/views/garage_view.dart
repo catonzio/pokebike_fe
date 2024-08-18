@@ -60,6 +60,7 @@ class GarageView extends GetView<GarageController> {
                 const PaginationRow(),
                 SearchRow(
                   onSearchField: _onSearchField,
+                  onSave: _onSave,
                 ),
               ],
             ),
@@ -92,5 +93,9 @@ class GarageView extends GetView<GarageController> {
 
   void _onSearchField(String value) {
     controller.filterGarages(value);
+  }
+
+  void _onSave(Map<String, List<String>> options) {
+    controller.sortAndFilter(options);
   }
 }

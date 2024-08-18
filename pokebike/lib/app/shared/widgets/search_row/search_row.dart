@@ -6,7 +6,9 @@ import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
 class SearchRow extends StatelessWidget {
   final Function(String) onSearchField;
-  const SearchRow({super.key, required this.onSearchField});
+  final Function(Map<String, List<String>>) onSave;
+  const SearchRow(
+      {super.key, required this.onSearchField, required this.onSave});
 
   @override
   Widget build(BuildContext context) {
@@ -46,10 +48,10 @@ class SearchRow extends StatelessWidget {
         useSafeArea: true,
         isScrollControlled: true, // change this to make it fullscreen
         backgroundColor: MColors.primary,
-        builder: (context) => const Wrap(
-              children: [
-                FilterModalSheet(),
-              ],
-            ));
+        builder: (context) => Wrap(children: [
+              FilterModalSheet(
+                onSave: onSave,
+              )
+            ]));
   }
 }

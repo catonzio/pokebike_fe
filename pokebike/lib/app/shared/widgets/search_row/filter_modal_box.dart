@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/shared/controllers/filter_box_controller.dart';
@@ -41,13 +40,19 @@ class FilterModalBox extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(title),
-                          Obx(() => Icon(controller.isExpanded.value
+                          Icon(controller.isExpanded.value
                               ? Icons.keyboard_arrow_down
-                              : Icons.keyboard_arrow_up))
+                              : Icons.keyboard_arrow_up)
+                          // Obx(() => Icon(controller.isExpanded.value
+                          //     ? Icons.keyboard_arrow_down
+                          //     : Icons.keyboard_arrow_up))
                         ],
                       ),
                     ),
                   ),
+                  // controller.isExpanded.value
+                  //     ? OptionsWidget(controller: controller, options: options)
+                  //     : const SizedBox()
                   Obx(() => controller.isExpanded.value
                       ? OptionsWidget(controller: controller, options: options)
                       : const SizedBox()),
@@ -75,18 +80,23 @@ class OptionsWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: controller.options.indexed
-          .map(((int, String) option) => ListTile(
-                leading: Obx(() => options.length > 3
-                    ? MCheckbox(
-                        isChecked: controller.isSelected(option.$2),
-                        onChanged: (b) => controller.toggleCheckbox(option.$2))
-                    : MRadioButton<String>(
-                        // groupValue: options.first,
-                        isSelected: controller.isSelected(option.$2).value,
-                        value: option.$2,
-                        onChanged: (String value) =>
-                            controller.toggleCheckbox(option.$2))),
-                title: Text(option.$2),
+          .map(((int, String) option) => GestureDetector(
+                onTap: () => controller.toggleCheckbox(option.$2),
+                behavior: HitTestBehavior.opaque,
+                child: ListTile(
+                  leading: Obx(() => options.length > 3
+                      ? MCheckbox(
+                          isChecked: controller.isSelected(option.$2),
+                          onChanged: (b) =>
+                              controller.toggleCheckbox(option.$2))
+                      : MRadioButton<String>(
+                          // groupValue: options.first,
+                          isSelected: controller.isSelected(option.$2).value,
+                          value: option.$2,
+                          onChanged: (String value) =>
+                              controller.toggleCheckbox(option.$2))),
+                  title: Text(option.$2),
+                ),
               ))
           .toList(),
     );

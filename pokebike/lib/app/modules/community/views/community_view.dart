@@ -22,6 +22,7 @@ class CommunityView extends GetView<CommunityController> {
           padding: const EdgeInsets.all(16.0),
           child: SearchRow(
             onSearchField: _onSearchField,
+            onSave: _onSave,
           ),
         ),
         const Expanded(
@@ -36,5 +37,9 @@ class CommunityView extends GetView<CommunityController> {
 
   void _onSearchField(String value) {
     controller.filterCommunities(value);
+  }
+
+  void _onSave(Map<String, List<String>> options) {
+    
   }
 }

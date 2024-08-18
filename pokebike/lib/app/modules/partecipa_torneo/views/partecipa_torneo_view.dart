@@ -25,6 +25,7 @@ class PartecipaTorneoView extends GetView<PartecipaTorneoController> {
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: SearchRow(
                       onSearchField: _onSearchField,
+                      onSave: _onSave,
                     ),
                   ),
                   Expanded(
@@ -41,4 +42,6 @@ class PartecipaTorneoView extends GetView<PartecipaTorneoController> {
   }
 
   void _onSearchField(String value) {}
+
+  void _onSave(Map<String, List<String>> options) {}
 }

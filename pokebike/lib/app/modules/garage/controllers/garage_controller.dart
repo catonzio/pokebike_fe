@@ -45,11 +45,9 @@ class GarageController extends GetxController {
 
   Future<void> fetchGarage() async {
     isFetchingGarage = true;
-    // await Future.delayed(const Duration(seconds: 3));
     garages.clear();
     final List<Moto> fetchedGarages = await provider.fetchMotos();
     garages.addAll(fetchedGarages);
-    // garages.addAll(List.generate(10, (index) => index + 1));
     filteredGarages.value = garages;
     isFetchingGarage = false;
   }
@@ -86,6 +84,19 @@ class GarageController extends GetxController {
       filteredGarages.value = garages
           .where(
               (moto) => moto.nome.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    }
+  }
+
+  void sortAndFilter(Map<String, List<String>> options) {
+    if (options['Tipo']!.isNotEmpty) {
+      filteredGarages.value = filteredGarages
+          .where((moto) => options['Tipo']!.contains(moto.tipoMoto.nome))
+          .toList();
+    }
+    if (options['Marca']!.isNotEmpty) {
+      filteredGarages.value = filteredGarages
+          .where((moto) => options['Marca']!.contains(moto.tipoMoto.nome))
           .toList();
     }
   }
