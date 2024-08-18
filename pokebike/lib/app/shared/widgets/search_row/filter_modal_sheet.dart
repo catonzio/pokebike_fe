@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/config/constants.dart';
+import 'package:pokebike/app/data/search_options.dart';
 import 'package:pokebike/app/shared/controllers/filter_sheet_controller.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/mbutton.dart';
 import 'package:pokebike/app/shared/widgets/search_row/filter_modal_box.dart';
 
 class FilterModalSheet extends StatelessWidget {
-  final Function(Map<String, List<String>>) onSave;
+  final Function(SearchOptions) onSave;
   const FilterModalSheet({super.key, required this.onSave});
 
   @override
@@ -49,7 +50,7 @@ class FilterModalSheet extends StatelessWidget {
 
   void _applicaClicked(BuildContext context) {
     final FilterSheetController controller = Get.find<FilterSheetController>();
-    final Map<String, List<String>> options = controller.getOptions();
+    final SearchOptions options = controller.getOptions();
     print(options);
     onSave(options);
     // controller.reset();

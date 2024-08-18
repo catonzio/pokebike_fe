@@ -5,11 +5,13 @@ import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
 class SearchTextField extends StatelessWidget {
   final Function(String) onSearch;
-  const SearchTextField({super.key, required this.onSearch});
+  final FocusNode? focusNode;
+  const SearchTextField({super.key, required this.onSearch, this.focusNode});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      focusNode: focusNode,
       decoration: InputDecoration(
         hintText: "Cerca",
         hintStyle:

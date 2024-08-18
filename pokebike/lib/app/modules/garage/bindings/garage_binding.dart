@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:pokebike/app/modules/garage/controllers/collezione_controller.dart';
+import 'package:pokebike/app/modules/garage/controllers/garage_w_controller.dart';
 import 'package:pokebike/app/modules/profile/providers/profile_provider.dart';
 import 'package:pokebike/app/shared/bindings/search_row_bindings.dart';
 import 'package:pokebike/app/shared/providers/moto_provider.dart';
@@ -9,8 +11,15 @@ class GarageBinding extends Bindings {
   @override
   void dependencies() {
     MotoProvider provider = Get.put(MotoProvider());
+    GarageWController garageWController =
+        Get.put(GarageWController(provider: provider));
+    CollezioneController collezioneController =
+        Get.put(CollezioneController(provider: provider));
+        
     Get.lazyPut(() => ProfileProvider());
-    Get.lazyPut<GarageController>(() => GarageController(provider: provider));
+    Get.lazyPut<GarageController>(() => GarageController(
+        garageWController: garageWController,
+        collezioneController: collezioneController));
     SearchRowBindings().dependencies();
   }
 }

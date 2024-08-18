@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/search_options.dart';
 import 'package:pokebike/app/modules/community/views/community_title.dart';
 import 'package:pokebike/app/shared/widgets/search_row/search_row.dart';
 import 'package:pokebike/app/modules/community/views/community_list.dart';
@@ -39,7 +40,7 @@ class CommunityView extends GetView<CommunityController> {
     controller.filterCommunities(value);
   }
 
-  void _onSave(Map<String, List<String>> options) {
+  void _onSave(SearchOptions options) {
     
   }
 }

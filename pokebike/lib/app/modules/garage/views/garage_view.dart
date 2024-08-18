@@ -30,6 +30,7 @@ class GarageView extends GetView<GarageController> {
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(
           decelerationRate: ScrollDecelerationRate.fast),
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       // physics: NeverScrollableScrollPhysics(),
       slivers: [
         SliverAppBar(
