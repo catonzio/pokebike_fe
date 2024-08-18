@@ -1,47 +1,26 @@
-import 'package:get/get.dart';
 import 'package:pokebike/app/data/api_response.dart';
+import 'package:pokebike/app/data/enums/order_by.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/community/providers/community_provider.dart';
+import 'package:pokebike/app/shared/controllers/searchable_list_controller.dart';
 
-class CommunityController extends GetxController {
-  final RxBool _isLoading = false.obs;
-  bool get isLoading => _isLoading.value;
-  set isLoading(bool value) => _isLoading.value = value;
-
-  final List<User> fakeCommunities =
-      List.generate(7, (index) => User.fake(index));
-  final RxList<User> communities = <User>[].obs;
-  RxList<User> filteredCommunities = <User>[].obs;
-
+class CommunityController extends SearchableListController<User> {
   final CommunityProvider _communityProvider;
+  final List<User> fakeList = List.generate(3, (index) => User.fake(index));
 
-  CommunityController(this._communityProvider);
+  CommunityController(this._communityProvider)
+      : super(
+            searchFilterFunc: (User el, String value) =>
+                fullName(el).toLowerCase().contains(value.toLowerCase()),
+            tipoFilterFunc: (User el, List<String> values) => true,
+            marcaFilterFunc: (User el, List<String> values) => true,
+            orderByFilterFunc: (List<User> els, OrderBy value) => els);
 
-  Future<ApiResponse> fetchUsers({bool reload = false}) async {
-    if (communities.isNotEmpty && !reload) {
-      return ApiResponse.success(data: communities, message: "Success");
-    }
-
-    isLoading = true;
-    final ApiResponse response = await _communityProvider.getUsers();
-    if (response.success) {
-      final List<User> users =
-          response.data.map<User>((e) => User.fromJson(e)).toList();
-      communities.addAll(users);
-    }
-    filteredCommunities.value = communities;
-    isLoading = false;
-    return response;
+  Future<ApiResponse> fetch() {
+    return initialFetch(_communityProvider.getUsers);
   }
 
-  void filterCommunities(String filter) {
-    if (filter.isEmpty) {
-      filteredCommunities.value = communities;
-    } else {
-      filteredCommunities.value = communities
-          .where((element) =>
-              fullName(element).toLowerCase().contains(filter.toLowerCase()))
-          .toList();
-    }
+  Future<ApiResponse> refreshList() {
+    return initialFetch(_communityProvider.getUsers, reload: true);
   }
 }

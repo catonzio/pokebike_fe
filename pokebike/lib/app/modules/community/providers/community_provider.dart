@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/api_response.dart';
+import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/shared/utils/api_utils.dart';
 
 class CommunityProvider extends GetConnect {
@@ -10,10 +11,13 @@ class CommunityProvider extends GetConnect {
     httpClient.timeout = const Duration(seconds: 10);
   }
 
-  Future<ApiResponse> getUsers() async {
+  Future<List<User>> getUsers() async {
     final ApiResponse response =
         await handleApiEndpoint(request, "get", '/users');
-
-    return response;
+    if (response.success) {
+      return (response.data as List).map((e) => User.fromJson(e)).toList();
+    } else {
+      return [];
+    }
   }
 }

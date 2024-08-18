@@ -41,7 +41,7 @@ class SearchableMotoController extends SearchableListController<Moto?> {
   }
 
   void fetch() {
-    super.initialFetch(fetchFunction);
+    initialFetch(fetchFunction);
   }
 
   Future<void> refreshList() async {

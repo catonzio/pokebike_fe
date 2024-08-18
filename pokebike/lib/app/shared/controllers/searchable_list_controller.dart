@@ -1,11 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/data/enums/order_by.dart';
 import 'package:pokebike/app/data/search_options.dart';
 
 class SearchableListController<T> extends GetxController {
   final FocusNode focusNode = FocusNode();
-  
+
   final RxBool _isFetching = false.obs;
   bool get isFetching => _isFetching.value;
   set isFetching(bool value) => _isFetching.value = value;
@@ -27,13 +28,22 @@ class SearchableListController<T> extends GetxController {
       required this.marcaFilterFunc,
       required this.orderByFilterFunc});
 
-  Future<void> initialFetch(Future<List<T>> Function() providerFunc) async {
+  Future<ApiResponse> initialFetch(Future<List<T>> Function() providerFunc,
+      {bool reload = false}) async {
+    if (list.isNotEmpty && !reload) {
+      return ApiResponse.success(message: "Success", data: list);
+    }
+    
     isFetching = true;
     list.clear();
     final List<T> fetchedList = await providerFunc();
     list.addAll(fetchedList);
     filteredList.value = list;
     isFetching = false;
+
+    return fetchedList.isEmpty
+        ? ApiResponse.error(message: "Errore nel caricamento", data: null)
+        : ApiResponse.success(message: "Success", data: list);
   }
 
   List<T> filterSearch({String? value, List<T>? list}) {

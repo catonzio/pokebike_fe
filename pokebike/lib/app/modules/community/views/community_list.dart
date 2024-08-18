@@ -18,7 +18,7 @@ class CommunityList extends StatelessWidget {
 
   void initState(GetXState<CommunityController> state) {
     state.controller
-        ?.fetchUsers()
+        ?.fetch()
         .then((value) => handleApiResponse(state.context, value));
   }
 
@@ -27,11 +27,9 @@ class CommunityList extends StatelessWidget {
     return GetX<CommunityController>(
         initState: initState,
         builder: (CommunityController controller) {
-          final List<Widget> children = (controller.isLoading
-                  ? controller.fakeCommunities
-                  : (isHorizontal
-                      ? controller.communities
-                      : controller.filteredCommunities))
+          final List<Widget> children = (controller.isFetching
+                  ? controller.fakeList
+                  : (isHorizontal ? controller.list : controller.filteredList))
               .map((User e) => Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CommunityTile(
@@ -39,27 +37,36 @@ class CommunityList extends StatelessWidget {
                       text: fullName(e),
                       imagePath: e.motoFavoritaAvatar,
                       profileImagePath: e.avatar,
-                      onTap: () => context.navigator.pushNamed(
-                        Routes.PROFILE,
-                        arguments: ProfileArguments(user: e),
-                      ),
+                      onTap: () {
+                        controller.focusNode.unfocus();
+                        context.navigator.pushNamed(
+                          Routes.PROFILE,
+                          arguments: ProfileArguments(user: e),
+                        );
+                      },
                     ),
                   ))
               .toList();
 
           return Skeletonizer(
-            enabled: controller.isLoading,
+            enabled: controller.isFetching,
             child: children.isEmpty
-                ? const Center(child: Text("La community è vuota"))
+                ? const Align(
+                    alignment: Alignment.topCenter,
+                    child: Text("La community è vuota"))
                 : isHorizontal
                     ? ListView(
                         itemExtent: context.width * 0.45,
                         scrollDirection: Axis.horizontal,
+                        keyboardDismissBehavior:
+                            ScrollViewKeyboardDismissBehavior.onDrag,
                         children: children.sublist(0,
                             min(children.length, Constants.numCommunityHome)))
                     : RefreshIndicator(
-                        onRefresh: () => controller.fetchUsers(reload: true),
+                        onRefresh: () => controller.refreshList(),
                         child: GridView(
+                            keyboardDismissBehavior:
+                                ScrollViewKeyboardDismissBehavior.onDrag,
                             padding: const EdgeInsets.only(
                                 bottom: Constants.bottomNavbarHeight),
                             gridDelegate:

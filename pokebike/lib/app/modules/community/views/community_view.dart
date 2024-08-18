@@ -24,6 +24,7 @@ class CommunityView extends GetView<CommunityController> {
           child: SearchRow(
             onSearchField: _onSearchField,
             onSave: _onSave,
+            focusNode: controller.focusNode,
           ),
         ),
         const Expanded(
@@ -37,10 +38,10 @@ class CommunityView extends GetView<CommunityController> {
   }
 
   void _onSearchField(String value) {
-    controller.filterCommunities(value);
+    controller.filter(searchS: value);
   }
 
   void _onSave(SearchOptions options) {
-    
+    controller.filter(options: options);
   }
 }
