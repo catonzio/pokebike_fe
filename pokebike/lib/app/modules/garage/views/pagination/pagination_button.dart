@@ -17,9 +17,9 @@ class PaginationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onPressed,
-      borderRadius: BorderRadius.circular(32),
+      // borderRadius: BorderRadius.circular(32),
       child: Container(
         height: height,
         alignment: Alignment.center,

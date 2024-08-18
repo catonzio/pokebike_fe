@@ -1,19 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/garage/views/collezione/collezione_widget.dart';
 import 'package:pokebike/app/modules/garage/views/garage/garage_widget.dart';
 import 'package:pokebike/app/modules/garage/views/pagination/pagination_row.dart';
 import 'package:pokebike/app/modules/garage/views/profile_widget.dart';
-import 'package:pokebike/app/modules/moto-details/moto_details_arguments.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/default_page.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/widgets/search_row/search_row.dart';
+import 'package:pokebike/app/shared/widgets/sliver_refresh.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../controllers/garage_controller.dart';
@@ -34,11 +28,13 @@ class GarageView extends GetView<GarageController> {
   Widget _mainBody(BuildContext context) {
     return CustomScrollView(
       shrinkWrap: true,
-      physics: const BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(
+          decelerationRate: ScrollDecelerationRate.fast),
+      // physics: NeverScrollableScrollPhysics(),
       slivers: [
         SliverAppBar(
           automaticallyImplyLeading: false,
-          expandedHeight: context.height * 0.4,
+          expandedHeight: context.height * 0.285,
           snap: false,
           pinned: false,
           floating: false,
@@ -58,44 +54,15 @@ class GarageView extends GetView<GarageController> {
                           : const SizedBox.shrink(),
                     )),
                 const PaginationRow(),
-                SearchRow(
-                  onSearchField: _onSearchField,
-                  onSave: _onSave,
-                ),
               ],
             ),
           ),
         ),
-        CupertinoSliverRefreshControl(
-          onRefresh: controller.refreshList,
-        ),
-        SliverPadding(
-          padding: const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
-          sliver: Obx(() => controller.isShowingGarage.value
-              ? GarageWidget(
-                  onTapElement: (Moto m) => _onTapElement(context, m))
-              : CollezioneWidget(
-                  onTapElement: (Moto? m) => _onTapElement(context, m))),
-        )
+        SliverRefresh(onRefresh: controller.refreshList),
+        Obx(() => controller.isShowingGarage.value
+            ? const GarageWidget()
+            : const CollezioneWidget())
       ],
     );
-  }
-
-  void _onTapElement(BuildContext context, Moto? m) {
-    final bool isGarage = controller.isShowingGarage.value;
-    if (m != null) {
-      context.navigator
-          .pushNamed(Routes.MOTO_DETAILS,
-              arguments: MotoDetailsArguments(moto: m, isOwnMoto: true))
-          .then((value) => controller.isShowingGarage.value = isGarage);
-    }
-  }
-
-  void _onSearchField(String value) {
-    controller.filterGarages(value);
-  }
-
-  void _onSave(Map<String, List<String>> options) {
-    controller.sortAndFilter(options);
   }
 }
