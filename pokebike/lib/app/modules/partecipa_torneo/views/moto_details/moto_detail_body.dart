@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
@@ -59,17 +60,12 @@ class MotoDetailBody extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            InkWell(
+            GestureDetector(
                 onTap: () => onPrevious(),
-                splashFactory: NoSplash.splashFactory,
-                // highlightColor: Colors.transparent,
-                // splashColor: Colors.transparent,
-                // focusColor: Colors.transparent,
-                // overlayColor: MaterialStateProperty.all(Colors.transparent),
                 child:
                     SvgPicture.asset("assets/images/left_selection_arrow.svg")),
             MotoChosenSlider(index: moto.id),
-            InkWell(
+            GestureDetector(
                 onTap: () => onNext(),
                 child: SvgPicture.asset(
                     "assets/images/right_selection_arrow.svg")),

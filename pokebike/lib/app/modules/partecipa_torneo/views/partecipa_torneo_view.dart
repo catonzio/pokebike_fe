@@ -27,6 +27,7 @@ class PartecipaTorneoView extends GetView<PartecipaTorneoController> {
                     child: SearchRow(
                       onSearchField: _onSearchField,
                       onSave: _onSave,
+                      focusNode: controller.focusNode,
                     ),
                   ),
                   Expanded(
@@ -34,7 +35,7 @@ class PartecipaTorneoView extends GetView<PartecipaTorneoController> {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: RefreshIndicator(
                           child: const PartecipaTorneoGrid(),
-                          onRefresh: () async => controller.onRefresh()),
+                          onRefresh: () async => controller.refreshList()),
                     ),
                   )
                 ],
@@ -42,7 +43,11 @@ class PartecipaTorneoView extends GetView<PartecipaTorneoController> {
             ));
   }
 
-  void _onSearchField(String value) {}
+  void _onSearchField(String value) {
+    controller.filter(searchS: value);
+  }
 
-  void _onSave(SearchOptions options) {}
+  void _onSave(SearchOptions options) {
+    controller.filter(options: options);
+  }
 }

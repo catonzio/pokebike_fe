@@ -15,26 +15,26 @@ class PartecipaTorneoGrid extends GetView<PartecipaTorneoController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Skeletonizer(
-        enabled: controller.isFetching.value,
-        child: controller.isFetching.value
-            ? _gridOfElements(
-                mapListToWidget(context, controller.fakeCollections))
-            : (controller.collections.isEmpty
+        enabled: controller.isFetching,
+        child: controller.isFetching
+            ? _gridOfElements(mapListToWidget(context, controller.fakeList))
+            : (controller.list.isEmpty
                 ? const EmptyPartecipaTorneoGrid()
                 : _gridOfElements(
-                    mapListToWidget(context, controller.collections),
+                    mapListToWidget(context, controller.filteredList),
                     padding: const EdgeInsets.only(
                         bottom: Constants.bottomNavbarHeight)))));
   }
 
-  List<Widget> mapListToWidget(BuildContext context, List<Moto> list) {
+  List<Widget> mapListToWidget(BuildContext context, List<Moto?> list) {
     return list.indexed
-        .map(((int, Moto) indexMoto) => Hero(
-              tag: indexMoto.$2.id,
+        .map(((int, Moto?) indexMoto) => Hero(
+              tag: indexMoto.$2?.id ?? 0,
               child: GarageCardWidget(
                   index: indexMoto.$1,
                   moto: indexMoto.$2,
                   onTap: () {
+                    controller.focusNode.unfocus();
                     context.navigator.push(
                       MaterialPageRoute(
                           builder: (context) =>
@@ -54,6 +54,7 @@ class PartecipaTorneoGrid extends GetView<PartecipaTorneoController> {
         mainAxisSpacing: 12,
         childAspectRatio: 1,
       ),
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
       children: elements,
     );
   }
