@@ -1,0 +1,34 @@
+import 'package:get/get.dart';
+import 'package:pokebike/app/data/models/marca_moto/marca_moto.dart';
+import 'package:pokebike/app/data/models/tipo_moto/tipo_moto.dart';
+import 'package:pokebike/app/shared/providers/tipo_marca_provider.dart';
+
+class TipoMarcaController extends GetxController {
+  static TipoMarcaController get to => Get.find<TipoMarcaController>();
+  final TipoMarcaProvider provider;
+
+  final List<MarcaMoto> marche = [];
+  final List<TipoMoto> tipi = [];
+
+  TipoMarcaController({required this.provider});
+
+  List<String> get nomiTipi => tipi.map((e) => e.nome).toList();
+  List<String> get nomiMarche => marche.map((e) => e.nome).toList();
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchMarche();
+    fetchTipi();
+  }
+
+  Future<void> fetchMarche() async {
+    List<MarcaMoto> marche = await provider.fetchMarcas();
+    this.marche.addAll(marche);
+  }
+
+  Future<void> fetchTipi() async {
+    List<TipoMoto> tipi = await provider.fetchTipos();
+    this.tipi.addAll(tipi);
+  }
+}

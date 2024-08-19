@@ -19,7 +19,8 @@ class GarageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    isShowingGarage.value = Get.arguments == GarageType.garage;
+    // isShowingGarage.value = Get.arguments == GarageType.garage;
+    toggleShowing(Get.arguments == GarageType.garage);
     fetchUser();
   }
 

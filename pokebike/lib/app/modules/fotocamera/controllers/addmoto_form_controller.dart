@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/models/marca_moto/marca_moto.dart';
+import 'package:pokebike/app/data/models/tipo_moto/tipo_moto.dart';
+import 'package:pokebike/app/shared/controllers/tipo_marca_controller.dart';
 
 class AddMotoFormController extends GetxController {
   final RxBool isPerformingRegister = false.obs;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final TextEditingController marcaController =
-      TextEditingController(text: "Yamaha");
+  final RxList<TipoMoto> availableTipos = <TipoMoto>[].obs;
+  final RxList<MarcaMoto> availableMarche = <MarcaMoto>[].obs;
+
+  final TextEditingController marcaController = TextEditingController();
   final TextEditingController modelloController =
       TextEditingController(text: "nome");
-  final TextEditingController tipoController =
-      TextEditingController(text: "Honda");
+  final TextEditingController tipoController = TextEditingController();
   final TextEditingController annoController =
       TextEditingController(text: "1234");
   final TextEditingController luogoController =
@@ -18,8 +22,15 @@ class AddMotoFormController extends GetxController {
   final TextEditingController descrizioneController =
       TextEditingController(text: "Descrizione");
 
+  @override
+  void onInit() {
+    super.onInit();
+    final TipoMarcaController tipoMarcaController = TipoMarcaController.to;
+    availableTipos.addAll(tipoMarcaController.tipi);
+    availableMarche.addAll(tipoMarcaController.marche);
+  }
+
   String? marcaValidator(dynamic value) {
-    print("MARCA VALIDATOR");
     if (value == null || value.isEmpty) {
       return 'Inserisci la marca';
     }
@@ -66,15 +77,19 @@ class AddMotoFormController extends GetxController {
   Map<String, dynamic> getData() {
     // Moto(nome: nome, descrizione: descrizione, anno: anno, luogo: luogo, dataCattura: dataCattura, marcaMoto: marcaMoto, tipoMoto: tipoMoto, numVittorie: numVittorie, numSconfitte: numSconfitte, avatar: avatar)
     return {
-      // 'marca': marcaController.text.trim(),
       'nome': modelloController.text.trim(),
-      // 'tipo': tipoController.text.trim(),
       'anno': annoController.text.trim(),
       'luogo': luogoController.text.trim(),
       'descrizione': descrizioneController.text.trim(),
       'data_cattura': DateTime.now().toIso8601String(),
-      'marca_moto_id': 1,
-      'tipo_moto_id': 2,
+      'marca_moto_id': availableMarche
+          .where((marca) => marca.nome == marcaController.text)
+          .first
+          .id,
+      'tipo_moto_id': availableTipos
+          .where((tipo) => tipo.nome == tipoController.text)
+          .first
+          .id,
     };
   }
 }

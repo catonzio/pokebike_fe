@@ -6,16 +6,12 @@ import 'package:pokebike/app/shared/widgets/utils/mcheckbox.dart';
 import 'package:pokebike/app/shared/widgets/utils/mradio_button.dart';
 
 class FilterModalBox extends StatelessWidget {
-  final String title;
-  final List<String> options;
+  final FilterBoxController controller;
 
-  const FilterModalBox({super.key, required this.title, required this.options});
+  const FilterModalBox({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    final FilterBoxController controller =
-        Get.find<FilterBoxController>(tag: title);
-
     return LayoutBuilder(builder: (context, constraints) {
       return Obx(() => Container(
             width: double.infinity,
@@ -39,7 +35,7 @@ class FilterModalBox extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text(title),
+                          Text(controller.title),
                           Icon(controller.isExpanded.value
                               ? Icons.keyboard_arrow_down
                               : Icons.keyboard_arrow_up)
@@ -54,7 +50,7 @@ class FilterModalBox extends StatelessWidget {
                   //     ? OptionsWidget(controller: controller, options: options)
                   //     : const SizedBox()
                   Obx(() => controller.isExpanded.value
-                      ? OptionsWidget(controller: controller, options: options)
+                      ? OptionsWidget(controller: controller, options: controller.options)
                       : const SizedBox()),
                 ],
               ),

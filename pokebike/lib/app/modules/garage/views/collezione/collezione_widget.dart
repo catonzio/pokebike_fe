@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
+import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/data/search_options.dart';
 import 'package:pokebike/app/modules/garage/controllers/collezione_controller.dart';
+import 'package:pokebike/app/modules/garage/views/collezione/collezione_card_widget.dart';
 import 'package:pokebike/app/modules/garage/views/empty_garage_body.dart';
-import 'package:pokebike/app/modules/garage/views/garage_card_view.dart';
 import 'package:pokebike/app/modules/moto-details/moto_details_arguments.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
@@ -26,7 +27,7 @@ class CollezioneWidget extends GetView<CollezioneController> {
                 : _gridOfElements(controller.filteredList))));
   }
 
-  Widget _gridOfElements(List<Moto?> elements) {
+  Widget _gridOfElements(List<CollezioneMoto> elements) {
     return SliverList(
         delegate: SliverChildListDelegate.fixed([
       Padding(
@@ -51,11 +52,11 @@ class CollezioneWidget extends GetView<CollezioneController> {
               padding:
                   const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
               itemBuilder: (BuildContext context, int index) {
-                Moto? moto = elements[index];
-                return GarageCardWidget(
+                CollezioneMoto collezioneMoto = elements[index];
+                return CollezioneCardWidget(
                     index: index + 1,
-                    moto: moto,
-                    onTap: () => _onTapElement(context, moto));
+                    collezioneMoto: collezioneMoto,
+                    onTap: () => _onTapElement(context, collezioneMoto.moto));
               },
               itemCount: elements.length,
             )

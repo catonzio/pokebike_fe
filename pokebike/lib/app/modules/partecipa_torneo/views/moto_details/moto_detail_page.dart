@@ -18,7 +18,7 @@ class MotoDetailPage extends GetView<PartecipaTorneoController> {
   Widget build(BuildContext context) {
     // final Moto moto =
     //     controller.collections.where((Moto p0) => p0.id == index).first;
-    final Moto moto = controller.filteredList[index]!;
+    final Moto moto = controller.filteredList[index];
 
     return Obx(() => DefaultPage(
           backButton: !controller.isMotoChosen.value,

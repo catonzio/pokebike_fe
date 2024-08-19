@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
@@ -24,7 +23,7 @@ class ProfileController extends GetxController {
   final RxList<String> fakeMedaglie = <String>["ciao", "a", "tutti"].obs;
 
   final Map<String, int> fakeCoccardeScore = <String, int>{
-    for (var el in Constants.filterBoxes["Tipo"]!) el: 0
+    for (var el in List.generate(20, (index) => '')) el: 0
   };
   final RxMap<String, int> coccardeScore = <String, int>{}.obs;
 
@@ -101,15 +100,6 @@ class ProfileController extends GetxController {
         await provider.fetchLastPartecipazione(user.value!.profileId);
     isFetchingPartecipazione.value = false;
   }
-  // void setTorneo(Torneo torneo) {
-  //   isLoadingClassifica.value = true;
-  //   Future.delayed(const Duration(seconds: 2), () {
-  //     isLoadingClassifica.value = false;
-  //     if (this.torneo.value == null) {
-  //       this.torneo.value = torneo;
-  //     }
-  //   });
-  // }
 
   Future<void> fetchCoccarde() async {
     isLoadingCoccarde.value = true;
@@ -117,16 +107,6 @@ class ProfileController extends GetxController {
         await provider.fetchCockades(user.value!.profileId);
     coccardeScore.value = coccarde;
     isLoadingCoccarde.value = false;
-    // Random random = Random();
-    // Future.delayed(const Duration(seconds: 2), () {
-    //   isLoadingCoccarde.value = false;
-    //   if (coccardeScore.isEmpty) {
-    //     coccardeScore.addAll({
-    //       for (var el in Constants.filterBoxes["Tipo"]!)
-    //         el: random.nextInt(100)
-    //     });
-    //   }
-    // });
   }
 
   // bool get isGarage => selectedIndex.value == 0;

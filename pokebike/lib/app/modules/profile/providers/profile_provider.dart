@@ -87,29 +87,42 @@ class ProfileProvider extends GetConnect {
     }
   }
 
-  Future<Map<String, int>> fetchCockades(int profileId) async {
-    Map<String, int> emptyResult = {
-      for (String k in Constants.filterBoxes['Tipo']!) k: 0
-    };
-    try {
-      ApiResponse response = await fetchCockadesEndpoint(profileId);
-      if (response.success) {
-        if ((response.data.runtimeType == List) &&
-            (response.data as List).isEmpty) {
-          return emptyResult;
-        }
-        Map<String, int> result = {};
-        for (String k in Constants.filterBoxes['Tipo']!) {
-          int value = (response.data as Map<String, dynamic>)[k] ?? 0;
-          result[k] = value;
-        }
+  // Future<Map<String, int>> fetchCockades(int profileId) async {
+  //   Map<String, int> emptyResult = {
+  //     for (String k in Constants.filterBoxes['Tipo']!) k: 0
+  //   };
+  //   try {
+  //     ApiResponse response = await fetchCockadesEndpoint(profileId);
+  //     if (response.success) {
+  //       if ((response.data.runtimeType == List) &&
+  //           (response.data as List).isEmpty) {
+  //         return emptyResult;
+  //       }
+  //       Map<String, int> result = {};
+  //       for (String k in Constants.filterBoxes['Tipo']!) {
+  //         int value = (response.data as Map<String, dynamic>)[k] ?? 0;
+  //         result[k] = value;
+  //       }
 
-        return result;
-      } else {
-        return emptyResult;
-      }
-    } on Exception catch (_) {
-      return emptyResult;
-    }
+  //       return result;
+  //     } else {
+  //       return emptyResult;
+  //     }
+  //   } on Exception catch (_) {
+  //     return emptyResult;
+  //   }
+  // }
+
+  Future<Map<String, int>> fetchCockades(int profileId) async {
+    ApiResponse response = await fetchCockadesEndpoint(profileId);
+    Map<String, int> result = (response.data as Map<String, dynamic>)
+        .map((key, value) => MapEntry(key, value));
+
+    // for (String k in Constants.filterBoxes['Tipo']!) {
+    //   int value = (response.data as Map<String, dynamic>)[k] ?? 0;
+    //   result[k] = value;
+    // }
+
+    return result;
   }
 }

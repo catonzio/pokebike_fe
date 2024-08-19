@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/api_response.dart';
+import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/shared/utils/api_utils.dart';
 
@@ -22,5 +23,17 @@ class MotoProvider extends GetConnect {
 
   Future<ApiResponse> addMoto(Map<String, dynamic> data) {
     return handleApiEndpoint(request, "post", "/motos", data: data);
+  }
+
+  Future<List<CollezioneMoto>> fetchCollezioneMoto() async {
+    ApiResponse response =
+        await handleApiEndpoint(request, 'get', '/collezione-motos');
+    if (response.success) {
+      return (response.data as List)
+          .map((e) => CollezioneMoto.fromJson(e))
+          .toList();
+    } else {
+      return [];
+    }
   }
 }

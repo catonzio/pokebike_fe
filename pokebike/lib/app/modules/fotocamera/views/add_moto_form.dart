@@ -17,7 +17,9 @@ class AddMotoForm extends GetView<AddMotoFormController> {
     List<MotoFormFieldModel> fields = [
       MotoFormFieldModelDropdown(
           label: "Marca",
-          items: ["Yamaha", "Honda", "Suzuki", "Kawasaki", "Ducati"],
+          items: controller.availableMarche
+              .map((element) => element.nome)
+              .toList(),
           validator: controller.marcaValidator,
           controller: controller.marcaController),
       MotoFormFieldModel(
@@ -26,7 +28,8 @@ class AddMotoForm extends GetView<AddMotoFormController> {
           controller: controller.modelloController),
       MotoFormFieldModelDropdown(
           label: "Tipo",
-          items: ["Yamaha", "Honda", "Suzuki", "Kawasaki", "Ducati"],
+          items:
+              controller.availableTipos.map((element) => element.nome).toList(),
           validator: controller.tipoValidator,
           controller: controller.tipoController),
       MotoFormFieldModel(

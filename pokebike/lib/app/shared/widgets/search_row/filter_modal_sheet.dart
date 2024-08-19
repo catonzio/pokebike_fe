@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/search_options.dart';
 import 'package:pokebike/app/shared/controllers/filter_sheet_controller.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/mbutton.dart';
 import 'package:pokebike/app/shared/widgets/search_row/filter_modal_box.dart';
 
-class FilterModalSheet extends StatelessWidget {
+class FilterModalSheet extends GetView<FilterSheetController> {
   final Function(SearchOptions) onSave;
   const FilterModalSheet({super.key, required this.onSave});
 
@@ -24,15 +23,14 @@ class FilterModalSheet extends StatelessWidget {
             Expanded(
                 flex: 3,
                 child: ListView(
-                  children: [
-                    for (var key in Constants.filterBoxes.keys)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: FilterModalBox(
-                            title: key, options: Constants.filterBoxes[key]!),
-                      ),
-                  ],
-                )),
+                    children: controller.controllers.values
+                        .map((e) => Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: FilterModalBox(
+                                controller: e,
+                              ),
+                            ))
+                        .toList())),
             Padding(
               padding: const EdgeInsets.only(top: 8.0, bottom: 16),
               child: MButton(
@@ -49,7 +47,6 @@ class FilterModalSheet extends StatelessWidget {
   }
 
   void _applicaClicked(BuildContext context) {
-    final FilterSheetController controller = Get.find<FilterSheetController>();
     final SearchOptions options = controller.getOptions();
     print(options);
     onSave(options);

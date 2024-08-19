@@ -7,7 +7,7 @@ import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/data/search_options.dart';
 import 'package:pokebike/app/modules/garage/controllers/garage_w_controller.dart';
 import 'package:pokebike/app/modules/garage/views/empty_garage_body.dart';
-import 'package:pokebike/app/modules/garage/views/garage_card_view.dart';
+import 'package:pokebike/app/modules/garage/views/garage/garage_card_widget.dart';
 import 'package:pokebike/app/modules/moto-details/moto_details_arguments.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
@@ -28,7 +28,7 @@ class GarageWidget extends GetView<GarageWController> {
                 : _gridOfElements(controller.filteredList))));
   }
 
-  Widget _gridOfElements(List<Moto?> elements) {
+  Widget _gridOfElements(List<Moto> elements) {
     return SliverList(
       delegate: SliverChildListDelegate.fixed([
         Padding(
