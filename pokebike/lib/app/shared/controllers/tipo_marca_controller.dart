@@ -9,6 +9,7 @@ class TipoMarcaController extends GetxController {
 
   final List<MarcaMoto> marche = [];
   final List<TipoMoto> tipi = [];
+  final List<String> modelli = [];
 
   TipoMarcaController({required this.provider});
 
@@ -20,6 +21,7 @@ class TipoMarcaController extends GetxController {
     super.onInit();
     fetchMarche();
     fetchTipi();
+    fetchModelli();
   }
 
   Future<void> fetchMarche() async {
@@ -30,5 +32,10 @@ class TipoMarcaController extends GetxController {
   Future<void> fetchTipi() async {
     List<TipoMoto> tipi = await provider.fetchTipos();
     this.tipi.addAll(tipi);
+  }
+
+  Future<void> fetchModelli() async {
+    List<String> modelli = await provider.fetchModelli();
+    this.modelli.addAll(modelli);
   }
 }

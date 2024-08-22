@@ -74,7 +74,7 @@ const goldenTextGradient = LinearGradient(
 class CollezioneCardWidget extends StatelessWidget {
   final int index;
   final CollezioneMoto collezioneMoto;
-  final Function() onTap;
+  final Function()? onTap;
 
   const CollezioneCardWidget(
       {super.key,
@@ -104,12 +104,9 @@ class CollezioneCardWidget extends StatelessWidget {
     Widget child;
 
     if (collezioneMoto.moto != null) {
-      child = GestureDetector(
-        onTap: onTap,
-        child: MimageNetwork(
-          path: collezioneMoto.moto!.avatar,
-          borderRadius: borderRadius,
-        ),
+      child = MimageNetwork(
+        path: collezioneMoto.moto!.avatar,
+        borderRadius: borderRadius,
       );
     } else {
       child = Container(
@@ -128,7 +125,7 @@ class CollezioneCardWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(borderRadius: borderRadius, gradient: gradient),
-      child: child,
+      child: GestureDetector(onTap: onTap, child: child),
     );
   }
 }

@@ -1,17 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/api_response.dart';
+import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
+import 'package:pokebike/app/data/models/marca_moto/marca_moto.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
+import 'package:pokebike/app/data/models/tipo_moto/tipo_moto.dart';
 import 'package:pokebike/app/modules/moto-details/moto_details_arguments.dart';
+import 'package:pokebike/app/shared/controllers/tipo_marca_controller.dart';
 import 'package:pokebike/app/shared/extensions/date_utils.dart';
+import 'package:pokebike/app/shared/providers/moto_provider.dart';
 
 class MotoDetailsController extends GetxController {
-  final Moto moto = (Get.arguments as MotoDetailsArguments).moto;
+  final CollezioneMoto? collezioneMoto =
+      (Get.arguments as MotoDetailsArguments).collezioneMoto;
+  final Moto? moto = (Get.arguments as MotoDetailsArguments).moto;
   final bool isOwnMoto = (Get.arguments as MotoDetailsArguments).isOwnMoto;
-  
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  
+
+  final RxList<TipoMoto> availableTipos = <TipoMoto>[].obs;
+  final RxList<MarcaMoto> availableMarche = <MarcaMoto>[].obs;
+
   final RxBool isShowingInfo = false.obs;
   final RxBool isEditingMoto = false.obs;
+
+  final RxBool isSendingData = false.obs;
 
   final TextEditingController marcaController = TextEditingController();
   final TextEditingController modelloController = TextEditingController();
@@ -21,15 +34,25 @@ class MotoDetailsController extends GetxController {
   final TextEditingController luogoController = TextEditingController();
   final TextEditingController descrizioneController = TextEditingController();
 
+  final MotoProvider provider;
+
+  MotoDetailsController({required this.provider});
+
   @override
   void onInit() {
-    // marcaController.text = moto.marcaMoto.nome;
-    modelloController.text = moto.nome;
-    // tipoController.text = moto.tipoMoto.nome;
-    annoController.text = moto.anno.toString();
-    dataController.text = moto.dataCattura.toFormattedString();
-    luogoController.text = moto.luogo;
-    descrizioneController.text = moto.descrizione;
+    final TipoMarcaController tipoMarcaController = TipoMarcaController.to;
+    availableTipos.addAll(tipoMarcaController.tipi);
+    availableMarche.addAll(tipoMarcaController.marche);
+
+    if (moto != null) {
+      marcaController.text = moto!.marcaMoto.nome;
+      modelloController.text = moto!.nome;
+      tipoController.text = moto!.tipoMoto.nome;
+      annoController.text = moto!.anno.toString();
+      dataController.text = moto!.dataCattura.toFormattedString();
+      luogoController.text = moto!.luogo;
+      descrizioneController.text = moto!.descrizione;
+    }
     super.onInit();
   }
 
@@ -50,7 +73,6 @@ class MotoDetailsController extends GetxController {
   }
 
   String? marcaValidator(dynamic value) {
-    print("MARCA VALIDATOR");
     if (value == null || value.isEmpty) {
       return 'Inserisci la marca';
     }
@@ -100,10 +122,18 @@ class MotoDetailsController extends GetxController {
       'anno': annoController.text.trim(),
       'luogo': luogoController.text.trim(),
       'descrizione': descrizioneController.text.trim(),
-      'data_cattura':
-          DateTime.tryParse(dataController.text.trim())?.toIso8601String(),
-      'marca_moto_id': 1,
-      'tipo_moto_id': 1,
+      // 'data_cattura': DateTime.fromFormattedString(dataController.text.trim()),
+      // DateTime.tryParse(dataController.text.trim().replaceAll("/", "-"))
+      //         ?.toIso8601String() ??
+      //     dataController.text.trim().replaceAll("/", "-"),
+      'marca_moto_id': availableMarche
+          .where((MarcaMoto p0) => p0.nome == marcaController.text.trim())
+          .first
+          .id,
+      'tipo_moto_id': availableTipos
+          .where((TipoMoto p0) => p0.nome == tipoController.text.trim())
+          .first
+          .id,
     };
   }
 
@@ -111,5 +141,13 @@ class MotoDetailsController extends GetxController {
     toggleEditingMoto(value: false);
   }
 
-  salva() {}
+  Future<ApiResponse> salva() async {
+    if (moto == null) {
+      return ApiResponse.error(message: "Moto is null", data: null);
+    }
+    isSendingData.value = true;
+    final ApiResponse response = await provider.updateMoto(moto!.id, getData());
+    isSendingData.value = false;
+    return response;
+  }
 }

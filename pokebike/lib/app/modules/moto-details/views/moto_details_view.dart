@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/config/constants.dart';
+import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
 
 import 'package:pokebike/app/modules/moto-details/views/moto_details_info.dart';
 import 'package:pokebike/app/modules/moto-details/views/moto_details_info_edit.dart';
@@ -56,38 +57,53 @@ class MotoDetailsView extends StatelessWidget {
                     floating: true,
                     surfaceTintColor: Colors.transparent,
                     flexibleSpace: FlexibleSpaceBar(
-                      background: MotoMainPhoto(moto: controller.moto),
-                    ),
-                  ),
-                  SliverPadding(
-                    padding: EdgeInsets.only(
-                        bottom: context.keyboardHeight == 0
-                            ? Constants.bottomNavbarHeight
-                            : context.keyboardHeight),
-                    sliver: SliverList(
-                      delegate: SliverChildListDelegate(
-                        [
-                          Center(
-                            child: Text(
-                              controller.moto.nome,
-                              style: context.textTheme.displaySmall,
-                            ),
-                          ),
-                          const PaginationRow(),
-                          Padding(
-                              padding: const EdgeInsets.only(top: 32),
-                              child: AnimatedSwitcher(
-                                duration: const Duration(milliseconds: 200),
-                                child: controller.isShowingInfo.value
-                                    ? controller.isEditingMoto.value
-                                        ? const MotoDetailsInfoEdit()
-                                        : MotoDetailsInfo(moto: controller.moto)
-                                    : MotoDetailsStato(moto: controller.moto),
-                              ))
-                        ],
+                      background: MotoMainPhoto(
+                        collezioneMoto: controller.collezioneMoto ??
+                            CollezioneMoto.fake(0)
+                                .copyWith(moto: controller.moto!),
                       ),
                     ),
-                  )
+                  ),
+                  controller.moto != null
+                      ? SliverPadding(
+                          padding: EdgeInsets.only(
+                              bottom: context.keyboardHeight == 0
+                                  ? Constants.bottomNavbarHeight
+                                  : context.keyboardHeight),
+                          sliver: SliverList(
+                            delegate: SliverChildListDelegate(
+                              [
+                                Center(
+                                  child: Text(
+                                    controller.moto!.nome,
+                                    style: context.textTheme.displaySmall,
+                                  ),
+                                ),
+                                const PaginationRow(),
+                                Padding(
+                                    padding: const EdgeInsets.only(top: 32),
+                                    child: AnimatedSwitcher(
+                                      duration:
+                                          const Duration(milliseconds: 200),
+                                      child: controller.isShowingInfo.value
+                                          ? controller.isEditingMoto.value
+                                              ? const MotoDetailsInfoEdit()
+                                              : MotoDetailsInfo(
+                                                  moto: controller.moto!)
+                                          : MotoDetailsStato(
+                                              moto: controller.moto!),
+                                    ))
+                              ],
+                            ),
+                          ),
+                        )
+                      : SliverPadding(
+                          padding: const EdgeInsets.all(16),
+                          sliver: SliverToBoxAdapter(
+                            child: CollezioneMotoDetailsInfo(
+                                collezioneMoto: controller.collezioneMoto!),
+                          ),
+                        )
                 ],
               ),
             ));

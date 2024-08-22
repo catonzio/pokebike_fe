@@ -13,8 +13,10 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
   CollezioneController({required this.provider})
       : super(
             searchFilterFunc: (CollezioneMoto el, String value) =>
-                el.moto?.nome.contains(value) ??
-                (el.marcaMoto.nome + el.tipoMoto.nome).contains(value),
+                (el.moto?.nome.toLowerCase().contains(value) ?? false) ||
+                el.marcaMoto.nome.toLowerCase().contains(value) ||
+                el.tipoMoto.nome.toLowerCase().contains(value) ||
+                el.modello.toLowerCase().contains(value),
             marcaFilterFunc: (CollezioneMoto el, List<String> values) =>
                 values.contains(el.marcaMoto.nome),
             tipoFilterFunc: (CollezioneMoto el, List<String> values) =>
@@ -29,7 +31,9 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
     for ((int, CollezioneMoto) collezioneMoto in list.indexed) {
       for (Moto moto in motos) {
         if (collezioneMoto.$2.marcaMoto == moto.marcaMoto &&
-            collezioneMoto.$2.tipoMoto == moto.tipoMoto) {
+            collezioneMoto.$2.tipoMoto == moto.tipoMoto &&
+            collezioneMoto.$2.modello.toLowerCase() ==
+                moto.nome.toLowerCase()) {
           list[collezioneMoto.$1] = collezioneMoto.$2.copyWith(moto: moto);
           break;
         }
@@ -38,6 +42,8 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
   }
 
   Future<void> refreshList() async {
+    list.clear();
+    filteredList.clear();
     initialFetch(provider.fetchCollezioneMoto);
   }
 }

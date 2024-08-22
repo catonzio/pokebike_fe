@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
-import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/data/search_options.dart';
 import 'package:pokebike/app/modules/garage/controllers/collezione_controller.dart';
 import 'package:pokebike/app/modules/garage/views/collezione/collezione_card_widget.dart';
@@ -56,21 +55,24 @@ class CollezioneWidget extends GetView<CollezioneController> {
                 return CollezioneCardWidget(
                     index: index + 1,
                     collezioneMoto: collezioneMoto,
-                    onTap: () => _onTapElement(context, collezioneMoto.moto));
+                    onTap: () => _onTapElement(context, collezioneMoto));
               },
               itemCount: elements.length,
             )
     ]));
   }
 
-  void _onTapElement(BuildContext context, Moto? m) {
+  void _onTapElement(BuildContext context, CollezioneMoto collezioneMoto) {
     controller.focusNode.unfocus();
     // final bool isGarage = controller.isShowingGarage.value;
-    if (m != null) {
-      context.navigator.pushNamed(Routes.MOTO_DETAILS,
-          arguments: MotoDetailsArguments(moto: m, isOwnMoto: true));
-      // .then((value) => controller.isShowingGarage.value = isGarage);
-    }
+    // if (m != null) {
+    context.navigator.pushNamed(Routes.MOTO_DETAILS,
+        arguments: MotoDetailsArguments(
+            moto: collezioneMoto.moto,
+            collezioneMoto: collezioneMoto,
+            isOwnMoto: false));
+    // .then((value) => controller.isShowingGarage.value = isGarage);
+    // }
   }
 
   void _onSearchField(String value) {

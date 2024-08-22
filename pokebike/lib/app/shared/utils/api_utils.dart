@@ -62,17 +62,24 @@ Future<ApiResponse> handleApiEndpoint(
         data = FormData(data);
       }
     }
-
+    if (url.contains('modello')) {
+      print("Modello");
+    }
     final response = await request(url, method,
         query: method == 'get' ? data : null,
         body: ['post', 'put', 'patch'].contains(method) ? data : null,
         headers: headers,
         contentType: contentType,
         uploadProgress: uploadProgress);
+
+    if (response.status.code == 413) {
+      return ApiResponse.error(message: "Immagine troppo grande", data: null);
+    }
+
     if (response.body == null) {
       return ApiResponse.error(
         status: response.status.code,
-        message: "No data",
+        message: "Problema di connessione",
         data: null,
       );
     }

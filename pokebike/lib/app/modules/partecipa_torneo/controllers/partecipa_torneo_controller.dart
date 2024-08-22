@@ -15,6 +15,7 @@ class PartecipaTorneoController extends SearchableMotoController {
   void chooseMoto(int index) {
     isMotoChosen.value = true;
     motoIndex.value = index;
+    filteredList.value = list;
     print("Moto scelta con successo! Index: $index");
   }
 

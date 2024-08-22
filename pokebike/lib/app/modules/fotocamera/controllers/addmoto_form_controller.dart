@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pokebike/app/data/models/marca_moto/marca_moto.dart';
 import 'package:pokebike/app/data/models/tipo_moto/tipo_moto.dart';
 import 'package:pokebike/app/shared/controllers/tipo_marca_controller.dart';
+import 'package:pokebike/app/shared/providers/tipo_marca_provider.dart';
 
 class AddMotoFormController extends GetxController {
   final RxBool isPerformingRegister = false.obs;
@@ -10,10 +11,10 @@ class AddMotoFormController extends GetxController {
 
   final RxList<TipoMoto> availableTipos = <TipoMoto>[].obs;
   final RxList<MarcaMoto> availableMarche = <MarcaMoto>[].obs;
+  final RxList<String> availableNames = <String>[].obs;
 
   final TextEditingController marcaController = TextEditingController();
-  final TextEditingController modelloController =
-      TextEditingController(text: "nome");
+  final TextEditingController modelloController = TextEditingController();
   final TextEditingController tipoController = TextEditingController();
   final TextEditingController annoController =
       TextEditingController(text: "1234");
@@ -22,12 +23,34 @@ class AddMotoFormController extends GetxController {
   final TextEditingController descrizioneController =
       TextEditingController(text: "Descrizione");
 
+  final TipoMarcaProvider provider;
+
+  TipoMoto get tipoMotoString =>
+      availableTipos.where((p0) => p0.nome == tipoController.text.trim()).first;
+  MarcaMoto get marcaMotoString => availableMarche
+      .where(((p0) => p0.nome == marcaController.text.trim()))
+      .first;
+
+  AddMotoFormController({required this.provider});
+
   @override
   void onInit() {
     super.onInit();
     final TipoMarcaController tipoMarcaController = TipoMarcaController.to;
     availableTipos.addAll(tipoMarcaController.tipi);
     availableMarche.addAll(tipoMarcaController.marche);
+    availableNames.addAll(tipoMarcaController.modelli);
+
+    // marcaController.addListener(() async {
+    //   availableTipos.clear();
+    //   List<TipoMoto> motos = await provider.fetchTipos(marcaId: marcaMotoString.id);
+    //   availableTipos.addAll(motos);
+    // });
+    // tipoController.addListener(() async {
+    //   availableNames.clear();
+    //   List<String> motos = await provider.fetchModelli();
+    //   availableNames.addAll(motos);
+    // });
   }
 
   String? marcaValidator(dynamic value) {

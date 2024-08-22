@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
+import 'package:pokebike/app/shared/providers/moto_provider.dart';
 
 import '../controllers/moto_details_controller.dart';
 
 class MotoDetailsBinding extends Bindings {
   @override
   void dependencies() {
+    final MotoProvider provider = Get.put(MotoProvider());
     Get.lazyPut<MotoDetailsController>(
-      () => MotoDetailsController(),
+      () => MotoDetailsController(provider: provider),
     );
   }
 }

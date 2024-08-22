@@ -31,4 +31,17 @@ class TipoMarcaProvider extends GetConnect {
       return [];
     }
   }
+
+  Future<List<String>> fetchModelli() async {
+    ApiResponse response = await handleApiEndpoint(
+        //?tipoId=11&marcaId=2
+        request,
+        "get",
+        "/collezione-motos/modello");
+    if (response.success) {
+      return (response.data as List).map<String>((dynamic e) => e).toList();
+    } else {
+      return [];
+    }
+  }
 }

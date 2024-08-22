@@ -22,16 +22,17 @@ class AddMotoForm extends GetView<AddMotoFormController> {
               .toList(),
           validator: controller.marcaValidator,
           controller: controller.marcaController),
-      MotoFormFieldModel(
-          label: "Modello",
-          validator: controller.modelloValidator,
-          controller: controller.modelloController),
       MotoFormFieldModelDropdown(
           label: "Tipo",
           items:
               controller.availableTipos.map((element) => element.nome).toList(),
           validator: controller.tipoValidator,
           controller: controller.tipoController),
+      MotoFormFieldModelDropdown(
+          label: "Modello",
+          items: controller.availableNames.map((element) => element).toList(),
+          validator: controller.modelloValidator,
+          controller: controller.modelloController),
       MotoFormFieldModel(
           label: "Anno",
           validator: controller.annoValidator,

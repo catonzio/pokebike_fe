@@ -36,4 +36,8 @@ class MotoProvider extends GetConnect {
       return [];
     }
   }
+
+  Future<ApiResponse> updateMoto(int id, Map<String, dynamic> data) {
+    return handleApiEndpoint(request, "put", "/motos/$id", data: data);
+  }
 }

@@ -39,6 +39,8 @@ class SearchableMotoController extends SearchableListController<Moto> {
   }
 
   Future<void> refreshList() async {
+    list.clear();
+    filteredList.clear();
     await initialFetch(fetchFunction);
   }
 }
