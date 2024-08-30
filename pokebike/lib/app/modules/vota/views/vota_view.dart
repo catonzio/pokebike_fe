@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/modules/vota/views/vota_row.dart';
 import 'package:pokebike/app/shared/default_page.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -16,7 +17,8 @@ class VotaView extends GetView<VotaController> {
         backButton: true,
         title: "Vota",
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.fromLTRB(
+              16.0, 16.0, 16.0, Constants.bottomNavbarHeight),
           child: Obx(() => Skeletonizer(
                 enabled: controller.isFetchingTurno,
                 child: controller.turno.value == null

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/models/profile/profile.dart';
 import 'package:pokebike/app/modules/profile/controllers/profile_controller.dart';
 import 'package:pokebike/app/shared/widgets/classifica_profile_row.dart';
@@ -15,8 +16,8 @@ class ClassificaBody extends GetView<ProfileController> {
     return Obx(() => Skeletonizer(
         enabled: controller.isLoadingClassifica.value,
         child: ListView.separated(
-            physics: const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.zero,
+            // physics: const NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.fromLTRB(0, 0, 0, Constants.bottomNavbarHeight),
             itemBuilder: (context, index) {
               if (index == 0) {
                 return Container(
