@@ -21,32 +21,39 @@ final List<NavbarItem> bottomNavbarItems = [
   NavbarItem(
     label: "Home",
     iconName: "Home icon",
+    size: 30,
     route: Routes.HOME,
   ),
   NavbarItem(
     label: "Garage",
     iconName: "Garage icon",
+    size: 30,
     route: Routes.GARAGE,
   ),
   NavbarItem(
-      label: "Fotocamera",
-      iconName: "Logo",
-      size: 70,
-      route: Routes.FOTOCAMERA,
-      shouldPop: false),
+    label: "Fotocamera",
+    iconName: "Logo",
+    size: 70,
+    route: Routes.FOTOCAMERA,
+    shouldPop: false,
+  ),
   NavbarItem(
-      label: "Torneo",
-      iconName: "Torneo icon",
-      route: Routes.TORNEO,
-      routes: [
-        Routes.TORNEO,
-        Routes.PARTECIPA_TORNEO,
-        Routes.LEADERBOARD,
-        Routes.VOTA
-      ]),
+    label: "Torneo",
+    iconName: "Torneo icon",
+    size: 30,
+    route: Routes.TORNEO,
+    routes: [
+      Routes.TORNEO,
+      Routes.PARTECIPA_TORNEO,
+      Routes.LEADERBOARD,
+      Routes.VOTA
+    ],
+  ),
   NavbarItem(
-      label: "Profilo",
-      iconName: "Profile icon",
-      route: Routes.PROFILE,
-      routes: [Routes.PROFILE, Routes.SETTINGS]),
+    label: "Profilo",
+    iconName: "Profile icon",
+    size: 30,
+    route: Routes.PROFILE,
+    routes: [Routes.PROFILE, Routes.SETTINGS],
+  ),
 ];

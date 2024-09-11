@@ -29,12 +29,18 @@ class VotaController extends GetxController {
     isFetchingTurno = false;
   }
 
-  Future<ApiResponse> vota(bool partecipazione1) async {
+  Future<ApiResponse> vota(int toPartecipazioneId) async {
+    if (hasVoted.value) {
+      return ApiResponse.error(
+          message: "Non puoi effettuare un'altra votazione su questo turno",
+          data: null);
+    }
+
     ApiResponse response =
-        await provider.vote(turno.value!.id, partecipazione1);
+        await provider.vote(turno.value!.id, toPartecipazioneId);
     if (response.success) {
       hasVoted.value = true;
-      if (partecipazione1) {
+      if (toPartecipazioneId == turno.value!.partecipazione1.id) {
         turno.value = turno.value!.copyWith(
             partecipazione1: turno.value!.partecipazione1
                 .copyWith(punti: turno.value!.partecipazione1.punti + 1),

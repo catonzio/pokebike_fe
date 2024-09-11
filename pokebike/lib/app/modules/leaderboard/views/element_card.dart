@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
+import 'package:pokebike/app/data/models/classifica_tile/classifica_tile.dart';
+import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/profile/profile_arguments.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 
 class ElementCard extends StatelessWidget {
   final int index;
-  final Partecipazione element;
+  final ClassificaTile element;
 
   const ElementCard({super.key, required this.index, required this.element});
 
@@ -20,7 +21,7 @@ class ElementCard extends StatelessWidget {
     final double height = context.height * 0.22;
     return GestureDetector(
       onTap: () => context.navigator.pushNamed(Routes.PROFILE,
-          arguments: ProfileArguments(profileId: element.profileId)),
+          arguments: ProfileArguments(profileId: element.id)),
       child: Container(
           width: width,
           height: height,
@@ -28,7 +29,7 @@ class ElementCard extends StatelessWidget {
             color: MColors.primary,
             borderRadius: BorderRadius.circular(8),
             image: DecorationImage(
-                image: Image.network(element.avatar).image, fit: BoxFit.cover),
+                image: Image.network(element.user.avatar).image, fit: BoxFit.cover),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,14 +65,14 @@ class ElementCard extends StatelessWidget {
                       Expanded(
                         flex: 8,
                         child: AutoSizeText(
-                          element.fullName,
+                          fullName(element.user),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       Expanded(
                           flex: 1,
-                          child: AutoSizeText(element.punti.toString(),
+                          child: AutoSizeText(element.puntiTotali.toString(),
                               textAlign: TextAlign.end, maxLines: 1)),
                     ],
                   ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pokebike/app/config/colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class MimageNetwork extends StatelessWidget {
   final String path;
@@ -24,14 +24,17 @@ class MimageNetwork extends StatelessWidget {
         fit: fit,
         color: shouldDarken ? Colors.black.withOpacity(0.6) : null,
         colorBlendMode: shouldDarken ? BlendMode.darken : null,
-        progressIndicatorBuilder: (context, url, progress) => Container(
-          color: MColors.primaryLight,
-          child: Center(
-            child: CircularProgressIndicator(
-              value: progress.progress,
-            ),
-          ),
+        progressIndicatorBuilder: (context, url, progress) => Skeletonizer(
+          child: LinearProgressIndicator(value: progress.progress),
         ),
+        // Container(
+        //   color: MColors.primaryLight,
+        //   child: Center(
+        //     child: CircularProgressIndicator(
+        //       value: progress.progress,
+        //     ),
+        //   ),
+        // ),
         errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
     );

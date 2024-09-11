@@ -3,8 +3,8 @@
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/api_response.dart';
+import 'package:pokebike/app/data/models/classifica_tile/classifica_tile.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
-import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
 import 'package:pokebike/app/data/models/profile/profile.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/shared/utils/api_utils.dart';
@@ -28,9 +28,9 @@ class ProfileProvider extends GetConnect {
         "/motos/most-winners${profileId != null ? "/$profileId" : ""}");
   }
 
-  Future<ApiResponse> fetchLastPartecipazioneEndpoint(int? profileId) async {
+  Future<ApiResponse> fetchClassificaTileEndpoint(int? profileId) async {
     return handleApiEndpoint(request, "get",
-        "/partecipaziones/last-of-profile${profileId != null ? "/$profileId" : ""}");
+        "/profiles/leaderboard${profileId != null ? "/$profileId" : ""}");
   }
 
   Future<ApiResponse> fetchUserWithProfileEndpoint(int profileId) async {
@@ -69,10 +69,10 @@ class ProfileProvider extends GetConnect {
     }
   }
 
-  Future<Partecipazione?> fetchLastPartecipazione(int? profileId) async {
-    ApiResponse response = await fetchLastPartecipazioneEndpoint(profileId);
+  Future<ClassificaTile?> fetchClassificaTile(int? profileId) async {
+    ApiResponse response = await fetchClassificaTileEndpoint(profileId);
     if (response.success) {
-      return Partecipazione.fromJson(response.data);
+      return ClassificaTile.fromJson((response.data as List).first);
     } else {
       return null;
     }

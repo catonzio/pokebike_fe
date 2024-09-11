@@ -25,7 +25,7 @@ class MotoDetailPage extends GetView<PartecipaTorneoController> {
       moto = controller.filteredList.where((Moto p0) => p0.id == index).first;
     }
 
-    return Obx(() => DefaultPage(
+    return DefaultPage(
           backButton: !controller.isMotoChosen.value,
           body: SizedBox(
             width: double.infinity,
@@ -60,30 +60,52 @@ class MotoDetailPage extends GetView<PartecipaTorneoController> {
                     child: Obx(
                   () => controller.isMotoChosen.value
                       ? const MotoDetailChosen()
-                      : MotoDetailBody(
-                          moto: moto,
-                          index: index,
-                          onPrevious: () => _onPrevious(context),
-                          onNext: () => _onNext(context),
+                      : GestureDetector(
+                          onHorizontalDragEnd: (details) {
+                            if (details.velocity.pixelsPerSecond.dx > 0) {
+                              createNewRoute(context, true);
+                            } else {
+                              createNewRoute(context, false);
+                            }
+                          },
+                          child: MotoDetailBody(
+                            moto: moto,
+                            index: index,
+                            totalLen: controller.filteredList.length - 1,
+                            onPrevious: () => createNewRoute(context, true),
+                            onNext: () => createNewRoute(context, false),
+                          ),
                         ),
                 )),
               ],
             ),
           ),
-        ));
+        );
   }
 
-  void _onPrevious(BuildContext context) {
-    if (index > 0) {
-      context.navigator.pushReplacement(MaterialPageRoute(
-          builder: (context) => MotoDetailPage(index: index - 1)));
-    }
-  }
+  void createNewRoute(BuildContext context, bool left) {
+    if ((left && index <= 0) ||
+        (!left && index >= controller.filteredList.length - 1)) return;
 
-  void _onNext(BuildContext context) {
-    if (index < controller.filteredList.length - 1) {
-      context.navigator.pushReplacement(MaterialPageRoute(
-          builder: (context) => MotoDetailPage(index: index + 1)));
-    }
+    final double delta = left ? -1 : 1;
+
+    final builder = PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          MotoDetailPage(index: index + delta.toInt()),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        final begin = Offset(delta, 0.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween =
+            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+        return SlideTransition(
+          position: animation.drive(tween),
+          child: child,
+        );
+      },
+    );
+    context.navigator.pushReplacement(builder);
   }
 }

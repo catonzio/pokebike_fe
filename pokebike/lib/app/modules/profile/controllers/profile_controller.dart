@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/models/classifica_tile/classifica_tile.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
-import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/profile/profile_arguments.dart';
 import 'package:pokebike/app/modules/profile/providers/profile_provider.dart';
@@ -17,18 +17,18 @@ class ProfileController extends GetxController {
   final RxBool isLoadingClassifica = false.obs;
   final RxBool isFetchingUser = false.obs;
   final RxBool isFetchingProfile = false.obs;
-  final RxBool isFetchingPartecipazione = false.obs;
+  final RxBool isFetchingClassificaTile = false.obs;
   final RxBool isFetchingTopMotos = false.obs;
 
   final RxList<String> fakeMedaglie = <String>["ciao", "a", "tutti"].obs;
 
   final Map<String, int> fakeCoccardeScore = <String, int>{
-    for (var el in List.generate(20, (index) => '')) el: 0
+    for (var el in List.generate(20, (index) => '$index')) el: int.parse(el)
   };
   final RxMap<String, int> coccardeScore = <String, int>{}.obs;
 
   final ProfileProvider provider;
-  final Rxn<Partecipazione> lastPartecipazione = Rxn<Partecipazione>();
+  final Rxn<ClassificaTile> classificaTile = Rxn<ClassificaTile>();
   final Rxn<User> user = Rxn<User>();
   // final Rxn<Torneo> torneo = Rxn<Torneo>();
 
@@ -42,10 +42,14 @@ class ProfileController extends GetxController {
   ProfileController({required this.provider});
 
   @override
-  onInit() async {
-    super.onInit();
+  onReady() async {
+    super.onReady();
+    initialize();
+  }
+
+  Future<void> initialize() async {
     await setUser(argumentUser);
-    fetchLastPartecipazione();
+    fetchClassificaTile();
     fetchTopMotos();
     fetchCoccarde();
   }
@@ -94,11 +98,11 @@ class ProfileController extends GetxController {
     topMotos.addAll(motos);
   }
 
-  Future<void> fetchLastPartecipazione() async {
-    isFetchingPartecipazione.value = true;
-    lastPartecipazione.value =
-        await provider.fetchLastPartecipazione(user.value!.profileId);
-    isFetchingPartecipazione.value = false;
+  Future<void> fetchClassificaTile() async {
+    isFetchingClassificaTile.value = true;
+    classificaTile.value =
+        await provider.fetchClassificaTile(user.value!.profileId);
+    isFetchingClassificaTile.value = false;
   }
 
   Future<void> fetchCoccarde() async {
@@ -114,12 +118,12 @@ class ProfileController extends GetxController {
   bool get isClassifica => selectedIndex.value == 1;
 
   List<PaginationItem> get items => [
-        // PaginationItem(
-        //     text: "Garage",
-        //     index: 0,
-        //     leftPadding: 0.0,
-        //     rightPadding: 8.0,
-        //     onPressed: () => changeIndex(0)),
+        PaginationItem(
+            text: "Collezione",
+            index: 0,
+            leftPadding: 0.0,
+            rightPadding: 8.0,
+            onPressed: () => changeIndex(0)),
         PaginationItem(
             text: "Medaglie",
             index: 0,

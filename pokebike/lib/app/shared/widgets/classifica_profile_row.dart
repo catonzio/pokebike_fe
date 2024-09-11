@@ -2,24 +2,24 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
+import 'package:pokebike/app/data/models/classifica_tile/classifica_tile.dart';
+import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/profile/profile_arguments.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
 
 class ClassificaProfileRow extends StatelessWidget {
-  final int index;
-  final Partecipazione partecipazione;
+  final ClassificaTile classificaTile;
 
   const ClassificaProfileRow(
-      {super.key, required this.index, required this.partecipazione});
+      {super.key, required this.classificaTile});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => context.navigator.pushNamed(Routes.PROFILE,
-          arguments: ProfileArguments(profileId: partecipazione.profileId)),
+          arguments: ProfileArguments(profileId: classificaTile.id)),
       child: Container(
           decoration: BoxDecoration(
               color: context.theme.primaryColor,
@@ -43,7 +43,7 @@ class ClassificaProfileRow extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: AutoSizeText(
-                      index.toString(),
+                      classificaTile.position.toString(),
                       maxLines: 1,
                       style: context.textTheme.headlineLarge,
                       textAlign: TextAlign.center,
@@ -53,7 +53,7 @@ class ClassificaProfileRow extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: MimageNetwork(
-                    path: partecipazione.avatar,
+                    path: classificaTile.user.avatar,
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
@@ -61,14 +61,14 @@ class ClassificaProfileRow extends StatelessWidget {
                   flex: 7,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(partecipazione.fullName),
+                    child: Text(fullName(classificaTile.user)),
                   ),
                 ),
                 const Spacer(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Punti ${partecipazione.punti}",
+                    "Punti ${classificaTile.puntiTotali}",
                     style: context.textTheme.labelSmall,
                   ),
                 ),

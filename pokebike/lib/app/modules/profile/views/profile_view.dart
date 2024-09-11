@@ -22,6 +22,25 @@ class ProfileView extends GetView<ProfileController> {
 
   @override
   Widget build(BuildContext context) {
+    return GetX<ProfileController>(
+      didUpdateWidget: (oldWidget, state) {
+        state.controller?.initialize();
+      },
+      didChangeDependencies: (state) {
+        print("Changed dependecies");
+        // controller.initialize();
+      },
+      builder: (controller) {
+        return buildPage(context);
+      },
+    );
+
+    // if (controller.argumentUser?.user != controller.user.value) {
+    //   controller.initialize();
+    // }
+  }
+
+  DefaultPage buildPage(BuildContext context) {
     return DefaultPage(
         actions: controller.isOwnProfile.value
             ? [

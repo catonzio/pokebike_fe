@@ -12,7 +12,7 @@ class VotaProvider extends GetConnect {
 
   Future<Turno?> fetchTurno() async {
     ApiResponse response =
-        await handleApiEndpoint(request, 'get', '/torneos/last-votazione');
+        await handleApiEndpoint(request, 'get', '/torneos/votazione');
     if (response.success) {
       return Turno.fromJson(response.data);
     } else {
@@ -20,9 +20,10 @@ class VotaProvider extends GetConnect {
     }
   }
 
-  Future<ApiResponse> vote(int turnoId, bool partecipazione1) async {
-    ApiResponse response = await handleApiEndpoint(request, 'get',
-        '/turnos/vote?turno_id=$turnoId&partecipazione1=$partecipazione1');
+  Future<ApiResponse> vote(int turnoId, int toPartecipazioneId) async {
+    print('?turno_id=$turnoId&to_partecipazione_id=$toPartecipazioneId');
+    ApiResponse response = await handleApiEndpoint(request, 'post',
+        '/votaziones/vota?turno_id=$turnoId&to_partecipazione_id=$toPartecipazioneId');
     return response;
   }
 }

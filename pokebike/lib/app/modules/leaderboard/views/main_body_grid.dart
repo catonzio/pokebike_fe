@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
+import 'package:pokebike/app/data/models/classifica_tile/classifica_tile.dart';
 import 'package:pokebike/app/modules/leaderboard/views/element_card.dart';
 import 'package:pokebike/app/modules/leaderboard/views/grid_view_selection.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -17,7 +17,7 @@ class MainBodyGrid extends GetView<LeaderboardController> {
         scrollDirection: Axis.vertical,
         child: GetX<LeaderboardController>(
           builder: (controller) {
-            List<Partecipazione> list = controller.isFetchingLeaderboard
+            List<ClassificaTile> list = controller.isFetchingLeaderboard
                 ? controller.fakeLeaderboard
                 : controller.leaderboard;
 

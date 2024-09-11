@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
+import 'package:pokebike/app/data/models/classifica_tile/classifica_tile.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/shared/utils/api_utils.dart';
 
@@ -21,12 +21,12 @@ class LeaderboardProvider extends GetConnect {
     }
   }
 
-  Future<List<Partecipazione>> fetchLeaderboard() async {
+  Future<List<ClassificaTile>> fetchLeaderboard() async {
     ApiResponse response =
-        await handleApiEndpoint(request, 'get', '/torneos/last-leaderboard');
+        await handleApiEndpoint(request, 'get', '/profiles/leaderboard');
     if (response.success) {
       return (response.data as List)
-          .map<Partecipazione>((e) => Partecipazione.fromJson(e))
+          .map<ClassificaTile>((e) => ClassificaTile.fromJson(e))
           .toList();
     } else {
       return [];

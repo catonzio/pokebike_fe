@@ -12,7 +12,7 @@ class MainBody extends GetView<LeaderboardController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: context.height * 0.6,
+      height: context.height * 0.65,
       child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Obx(

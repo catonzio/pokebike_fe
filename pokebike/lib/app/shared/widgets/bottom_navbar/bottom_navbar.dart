@@ -14,13 +14,20 @@ class BottomNavbar extends GetView<BottomNavbarController> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.loose,
-      children: [
-        _bottomContainer(Constants.bottomNavbarHeight / 2),
-        _upperCircle(Constants.bottomNavbarHeight / 2),
-        _buttonsRow(context),
-      ],
+    return Hero(
+      tag: "navbar",
+      child: Material(
+        type: MaterialType.transparency,
+        elevation: 1,
+        child: Stack(
+          fit: StackFit.loose,
+          children: [
+            _bottomContainer(Constants.bottomNavbarHeight / 2.5),
+            _upperCircle(Constants.bottomNavbarHeight / 2.5),
+            _buttonsRow(context),
+          ],
+        ),
+      ),
     );
   }
 
@@ -28,8 +35,8 @@ class BottomNavbar extends GetView<BottomNavbarController> {
     return Positioned(
       left: 0,
       right: 0,
-      bottom: 10,
-      height: 150,
+      bottom: Constants.bottomNavbarHeight / 10,
+      height: Constants.bottomNavbarHeight, // 150,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -67,7 +74,7 @@ class BottomNavbar extends GetView<BottomNavbarController> {
         child: ClipPath(
           clipper: BezierClipper(),
           child: Container(
-            color: MColors.primary,
+            color: MColors.bottomNavbarColor,
           ),
         ));
   }
@@ -79,8 +86,10 @@ class BottomNavbar extends GetView<BottomNavbarController> {
       bottom: 0,
       height: height,
       child: Container(
+        padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50), color: MColors.primary),
+            borderRadius: BorderRadius.circular(50),
+            color: MColors.bottomNavbarColor),
       ),
     );
   }

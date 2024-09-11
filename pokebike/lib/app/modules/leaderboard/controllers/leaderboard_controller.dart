@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
+import 'package:pokebike/app/data/models/classifica_tile/classifica_tile.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/leaderboard/providers/leaderboard_provider.dart';
 
@@ -22,9 +22,9 @@ class LeaderboardController extends GetxController {
   bool get isLeaderboardList => _isLeaderboardList.value;
   set isLeaderboardList(bool value) => _isLeaderboardList.value = value;
 
-  final List<Partecipazione> fakeLeaderboard =
-      List.generate(4, (index) => Partecipazione.fake(index));
-  final RxList<Partecipazione> leaderboard = <Partecipazione>[].obs;
+  final List<ClassificaTile> fakeLeaderboard =
+      List.generate(4, (index) => ClassificaTile.fake(index));
+  final RxList<ClassificaTile> leaderboard = <ClassificaTile>[].obs;
 
   final Rxn<User> winner = Rxn();
 
@@ -40,11 +40,11 @@ class LeaderboardController extends GetxController {
 
   Future<void> fetchLeaderboard() async {
     isFetchingLeaderboard = true;
-    List<Partecipazione> leaderboard = await provider.fetchLeaderboard();
+    List<ClassificaTile> leaderboard = await provider.fetchLeaderboard();
     this.leaderboard.addAll(leaderboard);
     // await Future.delayed(const Duration(seconds: 3));
     // leaderboard
-    //     .addAll(List.generate(20, (index) => Partecipazione.fake(index + 1)));
+    //     .addAll(List.generate(20, (index) => ClassificaTile.fake(index + 1)));
     isFetchingLeaderboard = false;
   }
 

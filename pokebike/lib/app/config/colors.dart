@@ -1,6 +1,8 @@
 import 'dart:ui';
 
 class MColors {
+  static const Color bottomNavbarColor = Color(0xDF000000);
+
   static const Color primaryDark = Color(0xFF000000);
   static const Color primary = Color(0xFF262626);
   static const Color primaryLight = Color(0xFF434343);

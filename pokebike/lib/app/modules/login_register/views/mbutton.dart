@@ -10,24 +10,30 @@ class MButton extends StatelessWidget {
   final double? height;
   final double? width;
 
-  const MButton(
-      {super.key,
-      this.onPressed,
-      required this.backgroundColor,
-      required this.child,
-      this.height,
-      this.width,
-      this.withBorders = true,
-      this.padding = const EdgeInsets.all(16)});
+  const MButton({
+    super.key,
+    this.onPressed,
+    required this.backgroundColor,
+    required this.child,
+    this.height,
+    this.width,
+    this.withBorders = true,
+    EdgeInsets? padding, // Ensure padding is properly handled as nullable
+  }) : padding = padding ??
+            const EdgeInsets.all(16); // Assign padding in initializer
 
-  factory MButton.red(
-      {required Function() onPressed,
-      required Widget child,
-      double? height,
-      double? width}) {
+  factory MButton.red({
+    required Function() onPressed,
+    required Widget child,
+    EdgeInsets? padding,
+    double? height,
+    double? width,
+  }) {
     return MButton(
       onPressed: onPressed,
-      backgroundColor: MColors.secondaryDark,
+      backgroundColor:
+          MColors.secondaryDark, // Assuming MColors.secondaryDark is defined
+      padding: padding,
       height: height,
       width: width,
       child: child,

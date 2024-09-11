@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/indicator.dart';
 
 class StatisticsRow extends StatelessWidget {
@@ -20,20 +19,20 @@ class StatisticsRow extends StatelessWidget {
     return Column(
       children: [
         StatisticsElement(
-          text: "Vittorie",
-          value: numeroVittorie,
+          text: "Vittorie:",
+          value: "$numeroVittorie / $numeroPartecipazioni",
           percentage: numeroVittorie / numeroPartecipazioni,
           boxShadow: boxShadow,
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-          child: StatisticsElement(
-            text: "Sconfitte",
-            value: numeroSconfitte,
-            percentage: numeroSconfitte / numeroPartecipazioni,
-            boxShadow: boxShadow,
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.symmetric(vertical: 16.0),
+        //   child: StatisticsElement(
+        //     text: "Sconfitte",
+        //     value: numeroSconfitte,
+        //     percentage: numeroSconfitte / numeroPartecipazioni,
+        //     boxShadow: boxShadow,
+        //   ),
+        // ),
       ],
     );
   }
@@ -41,7 +40,7 @@ class StatisticsRow extends StatelessWidget {
 
 class StatisticsElement extends StatelessWidget {
   final String text;
-  final int value;
+  final String value;
   final double percentage;
   final bool boxShadow;
 
@@ -57,20 +56,29 @@ class StatisticsElement extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SizedBox(
-          width: context.width * 0.25,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Text(text),
-              Text("$value"),
-            ],
+        Expanded(
+          flex: 6,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Text(text),
+                Text(value),
+              ],
+            ),
           ),
         ),
-        Indicator(
-          percentage: percentage,
-          boxShadow: boxShadow,
+        Expanded(
+          flex: 10,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Indicator(
+              percentage: percentage,
+              boxShadow: boxShadow,
+            ),
+          ),
         )
       ],
     );

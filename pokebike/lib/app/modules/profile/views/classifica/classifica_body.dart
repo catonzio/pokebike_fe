@@ -17,22 +17,24 @@ class ClassificaBody extends GetView<ProfileController> {
         enabled: controller.isLoadingClassifica.value,
         child: ListView.separated(
             // physics: const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.fromLTRB(0, 0, 0, Constants.bottomNavbarHeight),
+            padding: const EdgeInsets.fromLTRB(
+                0, 0, 0, Constants.bottomNavbarHeight),
+            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+            shrinkWrap: true,
             itemBuilder: (context, index) {
               if (index == 0) {
                 return Container(
-                  height: context.height * 0.11,
-                  padding: const EdgeInsets.all(8.0),
+                  height: context.height * 0.13,
+                  padding: EdgeInsets.fromLTRB(8, context.height * 0.05, 8, 0),
                   child: Obx(() => Skeletonizer(
-                        enabled: controller.isFetchingPartecipazione.value,
-                        child: controller.lastPartecipazione.value == null
+                        enabled: controller.isFetchingClassificaTile.value,
+                        child: controller.classificaTile.value == null
                             ? const Center(
                                 child:
                                     Text("Errore caricamento partecipazione"))
                             : ClassificaProfileRow(
-                                index: 1,
-                                partecipazione:
-                                    controller.lastPartecipazione.value!),
+                                classificaTile:
+                                    controller.classificaTile.value!),
                       )),
                 );
               } else if (index == 1) {
@@ -53,7 +55,7 @@ class ClassificaBody extends GetView<ProfileController> {
             },
             separatorBuilder: (context, index) {
               return SizedBox(
-                height: context.height * 0.02,
+                height: context.height * 0.05,
               );
             },
             itemCount: 3)));

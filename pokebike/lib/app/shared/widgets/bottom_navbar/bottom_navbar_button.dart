@@ -28,24 +28,31 @@ class BottomNavbarButton extends StatelessWidget {
     bool isSelected = item.routes != null && item.routes!.isNotEmpty
         ? item.routes!.contains(Get.currentRoute)
         : Get.currentRoute == item.route;
-    final Color color = isSelected ? selectedColor : unselectedColor;
+    // final Color color = isSelected ? selectedColor : unselectedColor;
     final String addName = isSelected ? " red" : "";
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        MIcon(
-          name: item.iconName + addName,
-          onTap: () => onTap(index),
-          // color: color,
-          size: item.size,
-        ),
-        Text(
-          item.label,
-          style: context.textTheme.bodyMedium?.copyWith(color: color),
-        )
-      ],
+    return MIcon(
+      name: item.iconName + addName,
+      onTap: () => onTap(index),
+      padding: const EdgeInsets.all(0),
+      // color: color,
+      size: item.size,
     );
+    // return Column(
+    //   mainAxisSize: MainAxisSize.min,
+    //   crossAxisAlignment: CrossAxisAlignment.center,
+    //   mainAxisAlignment: MainAxisAlignment.center,
+    //   children: [
+    //     MIcon(
+    //       name: item.iconName + addName,
+    //       onTap: () => onTap(index),
+    //       // color: color,
+    //       size: item.size,
+    //     ),
+    //     Text(
+    //       item.label,
+    //       style: context.textTheme.bodyMedium?.copyWith(color: color),
+    //     )
+    //   ],
+    // );
   }
 }
