@@ -150,4 +150,13 @@ class MotoDetailsController extends GetxController {
     isSendingData.value = false;
     return response;
   }
+
+  Future<ApiResponse> setFavorita() async {
+    if (moto != null) {
+      final ApiResponse response = await provider.setFavorita(moto!.id);
+      return response;
+    } else {
+      return ApiResponse.error(message: "Errore nel caricamento", data: null);
+    }
+  }
 }

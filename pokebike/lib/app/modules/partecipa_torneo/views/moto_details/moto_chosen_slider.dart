@@ -6,10 +6,10 @@ import 'package:pokebike/app/modules/partecipa_torneo/controllers/partecipa_torn
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/default_dialog.dart';
 
-class MotoChosenSlider extends GetView<PartecipaTorneoController> {
+class MotoChosenButton extends GetView<PartecipaTorneoController> {
   final int index;
 
-  const MotoChosenSlider({super.key, required this.index});
+  const MotoChosenButton({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {

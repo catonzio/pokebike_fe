@@ -77,4 +77,10 @@ class FotocameraController extends GetxController {
     // isUploadingMoto.value = false;
     return result;
   }
+
+  Future<ApiResponse> checkMotoDuplicate(Map<String, dynamic> data) async {
+    final ApiResponse result = await provider.checkMotoDuplicate(
+        data['marca_moto_id'], data['tipo_moto_id'], data['nome']);
+    return result;
+  }
 }

@@ -94,10 +94,10 @@ class SettingsEditWidget extends GetView<SettingsController> {
           title: "Sei sicuro di voler eliminare il tuo account?",
           message:
               "Una volta confermato non potrai più accedere al tuo profilo",
-          redTitle: "Annulla",
-          redAction: (BuildContext context) => context.navigator.pop(),
-          whiteTitle: "Elimina",
-          whiteAction: _dialogEliminaTap),
+          redTitle: "Elimina",
+          redAction: _dialogEliminaTap,
+          whiteTitle: "Annulla",
+          whiteAction: (BuildContext context) => context.navigator.pop()),
     );
 
     // show the dialog

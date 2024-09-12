@@ -40,4 +40,17 @@ class MotoProvider extends GetConnect {
   Future<ApiResponse> updateMoto(int id, Map<String, dynamic> data) {
     return handleApiEndpoint(request, "put", "/motos/$id", data: data);
   }
+
+  Future<ApiResponse> checkMotoDuplicate(
+      int marcaMotoId, int tipoMotoId, String nome) {
+    return handleApiEndpoint(request, "post", "/motos/check-exists", data: {
+      'marca_moto_id': marcaMotoId,
+      'tipo_moto_id': tipoMotoId,
+      'nome': nome
+    });
+  }
+
+  Future<ApiResponse> setFavorita(int motoId) {
+    return handleApiEndpoint(request, "get", "/motos/set-favorita/$motoId");
+  }
 }

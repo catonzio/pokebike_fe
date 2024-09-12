@@ -95,8 +95,6 @@ class AddMotoFormController extends GetxController {
     return null;
   }
 
-  addMoto() {}
-
   Map<String, dynamic> getData() {
     // Moto(nome: nome, descrizione: descrizione, anno: anno, luogo: luogo, dataCattura: dataCattura, marcaMoto: marcaMoto, tipoMoto: tipoMoto, numVittorie: numVittorie, numSconfitte: numSconfitte, avatar: avatar)
     return {
@@ -114,5 +112,14 @@ class AddMotoFormController extends GetxController {
           .first
           .id,
     };
+  }
+
+  void clear() {
+    marcaController.text = "";
+    modelloController.text = "";
+    tipoController.text = "";
+    annoController.text = "";
+    luogoController.text = "";
+    descrizioneController.text = "";
   }
 }

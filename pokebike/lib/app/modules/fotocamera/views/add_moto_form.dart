@@ -8,7 +8,7 @@ import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 
 class AddMotoForm extends GetView<AddMotoFormController> {
   final Function(bool) onStartEndSend;
-  final Future<void> Function(Map<String, dynamic>) onSend;
+  final Future<bool> Function(Map<String, dynamic>) onSend;
   const AddMotoForm(
       {super.key, required this.onSend, required this.onStartEndSend});
 
@@ -80,7 +80,10 @@ class AddMotoForm extends GetView<AddMotoFormController> {
     onStartEndSend(true);
     if (controller.formKey.currentState!.validate()) {
       Map<String, dynamic> data = controller.getData();
-      await onSend(data);
+      bool success = await onSend(data);
+      if (success) {
+        controller.clear();
+      }
     }
     onStartEndSend(false);
   }

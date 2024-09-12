@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/config/constants.dart';
+import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
 
 import 'package:pokebike/app/modules/moto-details/views/moto_details_info.dart';
@@ -12,6 +14,7 @@ import 'package:pokebike/app/modules/moto-details/views/moto_main_photo.dart';
 import 'package:pokebike/app/modules/moto-details/views/pagination_row.dart';
 import 'package:pokebike/app/shared/default_page.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/utils/api_utils.dart';
 import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
 import '../controllers/moto_details_controller.dart';
@@ -26,16 +29,26 @@ class MotoDetailsView extends StatelessWidget {
         return DefaultPage(
             backButton: true,
             backgroundColor: Colors.black,
-            bottomAppbarActions:
-                controller.isShowingInfo.value && controller.isOwnMoto
-                    ? [
-                        Obx(() => MIcon(
-                              name:
-                                  "Edit icon ${controller.isEditingMoto.value ? 'red' : 'white'}",
-                              onTap: controller.toggleEditingMoto,
-                            ))
-                      ]
-                    : null,
+            bottomAppbarActions: controller.isOwnMoto
+                ? [
+                    Obx(() => AnimatedOpacity(
+                          duration: 300.ms,
+                          opacity: controller.isShowingInfo.value ? 1 : 0,
+                          child: MIcon(
+                            name:
+                                "Edit icon ${controller.isEditingMoto.value ? 'red' : 'white'}",
+                            onTap: controller.toggleEditingMoto,
+                          ),
+                        )),
+                    IconButton(
+                      onPressed: () => _setFavorita(context, controller),
+                      icon: Icon(Icons.favorite),
+                      color: (controller.moto?.isFavorita ?? false)
+                          ? MColors.secondary
+                          : Colors.white,
+                    ),
+                  ]
+                : null,
             body: Container(
               padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
@@ -109,5 +122,13 @@ class MotoDetailsView extends StatelessWidget {
             ));
       },
     );
+  }
+
+  _setFavorita(BuildContext context, MotoDetailsController controller) async {
+    final ApiResponse response = await controller.setFavorita();
+    if (context.mounted) {
+      handleApiResponse(context, response,
+          successMessage: "Moto salvata come preferita");
+    }
   }
 }

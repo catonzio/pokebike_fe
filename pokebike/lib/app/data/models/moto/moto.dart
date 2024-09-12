@@ -22,6 +22,7 @@ class Moto with _$Moto {
     required DateTime dataCattura,
     required MarcaMoto marcaMoto,
     required TipoMoto tipoMoto,
+    required bool isFavorita,
     required int numVittorie,
     required int numSconfitte,
     required String avatar,

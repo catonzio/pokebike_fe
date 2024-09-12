@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+
+class DefaultCacheManager extends CacheManager with ImageCacheManager {
+  static const key = 'libCachedImageData';
+
+  static final DefaultCacheManager _instance = DefaultCacheManager._();
+
+  factory DefaultCacheManager() {
+    return _instance;
+  }
+
+  DefaultCacheManager._() : super(Config(key));
+}
 
 class MimageNetwork extends StatelessWidget {
   final String path;
@@ -25,8 +38,12 @@ class MimageNetwork extends StatelessWidget {
         color: shouldDarken ? Colors.black.withOpacity(0.6) : null,
         colorBlendMode: shouldDarken ? BlendMode.darken : null,
         progressIndicatorBuilder: (context, url, progress) => Skeletonizer(
+          enabled: true,
           child: LinearProgressIndicator(value: progress.progress),
         ),
+        fadeInDuration: Duration.zero,
+        fadeOutDuration: Duration.zero,
+        placeholderFadeInDuration: Duration.zero,
         // Container(
         //   color: MColors.primaryLight,
         //   child: Center(

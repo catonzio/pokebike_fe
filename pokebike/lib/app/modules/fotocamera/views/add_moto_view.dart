@@ -9,6 +9,7 @@ import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/modules/fotocamera/views/add_moto_form.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/utils/api_utils.dart';
+import 'package:pokebike/app/shared/widgets/default_dialog.dart';
 import 'package:pokebike/app/shared/widgets/utils/loading_stack.dart';
 
 import '../controllers/fotocamera_controller.dart';
@@ -53,7 +54,7 @@ class AddMotoView extends GetView<FotocameraController> {
                   child: AddMotoForm(
                     onStartEndSend: (bool value) =>
                         controller.isUploadingMoto.value = value,
-                    onSend: (data) => _addMoto(context, data),
+                    onSend: (data) => _sendMoto(context, data),
                   ),
                 ),
               ),
@@ -83,8 +84,42 @@ class AddMotoView extends GetView<FotocameraController> {
     );
   }
 
-  _addMoto(BuildContext context, Map<String, dynamic> data) async {
+  Future<bool> _sendMoto(
+      BuildContext context, Map<String, dynamic> data) async {
+    bool? exists = await _checkIfExists(context, data);
+
+    if (context.mounted) {
+      if (exists != null && exists) {
+        bool? result = await showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Dialog(
+              child: DefaultDialog(
+                  title: "Moto già inserita",
+                  message:
+                      "La moto che stai tentando di salvare è già presente nella tua collezione. Sei sicuro di volerla sostituire con questa nuova cattura?",
+                  redTitle: "Sostituisci",
+                  redAction: (context) {
+                    _addMoto(context, data);
+                    context.navigator.pop(true);
+                  },
+                  whiteTitle: "Annulla",
+                  whiteAction: (context) => context.navigator.pop(false)),
+            );
+          },
+        );
+
+        return result == true; // return true if redAction was triggered
+      } else {
+        return _addMoto(context, data);
+      }
+    }
+    return false;
+  }
+
+  Future<bool> _addMoto(BuildContext context, Map<String, dynamic> data) async {
     data["image"] = controller.image;
+
     ApiResponse response = await controller.addMoto(data);
     if (context.mounted) {
       handleApiResponse(context, response,
@@ -93,5 +128,19 @@ class AddMotoView extends GetView<FotocameraController> {
         controller.isCapturing = true;
       });
     }
+    return response.success;
+  }
+
+  Future<bool?> _checkIfExists(
+      BuildContext context, Map<String, dynamic> data) async {
+    ApiResponse response = await controller.checkMotoDuplicate(data);
+    if (response.success) {
+      return response.data as bool;
+    } else {
+      if (context.mounted) {
+        context.createSnackbar("Controlla la connessione ad internet");
+      }
+    }
+    return null;
   }
 }
