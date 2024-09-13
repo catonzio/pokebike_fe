@@ -15,14 +15,15 @@ class MainBodyGrid extends GetView<LeaderboardController> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         scrollDirection: Axis.vertical,
+        controller: controller.scrollController,
         child: GetX<LeaderboardController>(
           builder: (controller) {
-            List<ClassificaTile> list = controller.isFetchingLeaderboard
+            List<ClassificaTile> list = controller.isFetching
                 ? controller.fakeLeaderboard
-                : controller.leaderboard;
+                : controller.list;
 
             return Skeletonizer(
-              enabled: controller.isFetchingLeaderboard,
+              enabled: controller.isFetching,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 24.0),
                 child: Row(

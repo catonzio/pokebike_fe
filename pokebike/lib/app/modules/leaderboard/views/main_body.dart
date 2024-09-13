@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/modules/leaderboard/views/main_body_grid.dart';
 import 'package:pokebike/app/modules/leaderboard/views/main_body_list.dart';
 
@@ -16,16 +17,28 @@ class MainBody extends GetView<LeaderboardController> {
       child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Obx(
-            () => AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                child: controller.isLeaderboardList
-                    ? RefreshIndicator(
-                        onRefresh: controller.refreshLeaderboard,
-                        child: const MainBodyList(),
-                      )
-                    : RefreshIndicator(
-                        onRefresh: controller.refreshLeaderboard,
-                        child: const MainBodyGrid())),
+            () => Stack(
+              children: [
+                AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    child: controller.isLeaderboardList
+                        ? RefreshIndicator(
+                            onRefresh: controller.refreshLeaderboard,
+                            child: const MainBodyList(),
+                          )
+                        : RefreshIndicator(
+                            onRefresh: controller.refreshList,
+                            child: const MainBodyGrid())),
+                if (controller.isFetchingOthers)
+                  const Positioned(
+                      left: 0,
+                      right: 0,
+                      bottom: Constants.bottomNavbarHeight,
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ))
+              ],
+            ),
           )),
     );
   }

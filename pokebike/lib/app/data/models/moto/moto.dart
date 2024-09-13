@@ -43,5 +43,6 @@ class Moto with _$Moto {
         numVittorie: 0,
         numSconfitte: 0,
         avatar: MImageProvider.getImageUrl(index: index),
+        isFavorita: true
       );
 }

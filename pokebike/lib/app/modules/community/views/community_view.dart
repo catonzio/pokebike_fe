@@ -25,6 +25,7 @@ class CommunityView extends GetView<CommunityController> {
             onSearchField: _onSearchField,
             onSave: _onSave,
             focusNode: controller.focusNode,
+            showButton: false,
           ),
         ),
         const Expanded(

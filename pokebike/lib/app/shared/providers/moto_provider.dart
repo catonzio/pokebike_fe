@@ -12,8 +12,10 @@ class MotoProvider extends GetConnect {
     httpClient.timeout = const Duration(seconds: 30);
   }
 
-  Future<List<Moto>> fetchMotos() async {
-    ApiResponse response = await handleApiEndpoint(request, "get", "/motos");
+  Future<List<Moto>> fetchMotos(int? limit, int? skip) async {
+    String suffix = (limit != null ? "limit=$limit" : "") + (skip != null ? "&skip=$skip" : "");
+
+    ApiResponse response = await handleApiEndpoint(request, "get", "/motos?$suffix");
     if (response.success) {
       return (response.data as List).map((e) => Moto.fromJson(e)).toList();
     } else {
@@ -25,7 +27,7 @@ class MotoProvider extends GetConnect {
     return handleApiEndpoint(request, "post", "/motos", data: data);
   }
 
-  Future<List<CollezioneMoto>> fetchCollezioneMoto() async {
+  Future<List<CollezioneMoto>> fetchCollezioneMoto(int? limit, int? skip) async {
     ApiResponse response =
         await handleApiEndpoint(request, 'get', '/collezione-motos');
     if (response.success) {

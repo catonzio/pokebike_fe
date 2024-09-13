@@ -11,9 +11,11 @@ class CommunityProvider extends GetConnect {
     httpClient.timeout = const Duration(seconds: 10);
   }
 
-  Future<List<User>> getUsers() async {
+  Future<List<User>> getUsers(int? limit, int? skip) async {
+    String suffix = (limit != null ? "limit=$limit" : "") + (skip != null ? "&skip=$skip" : "");
+
     final ApiResponse response =
-        await handleApiEndpoint(request, "get", '/users');
+        await handleApiEndpoint(request, "get", '/users?$suffix');
     if (response.success) {
       return (response.data as List).map((e) => User.fromJson(e)).toList();
     } else {

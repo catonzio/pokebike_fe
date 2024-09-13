@@ -41,7 +41,7 @@ class GarageController extends GetxController {
     if (!value && collezioneController.list.isEmpty) {
       collezioneController.fetch();
     } else if (value && garageWController.list.isEmpty) {
-      garageWController.fetch();
+      garageWController.initialFetch();
     }
   }
 }

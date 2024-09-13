@@ -2,13 +2,14 @@ import 'package:get/get.dart';
 import 'package:pokebike/app/data/models/classifica_tile/classifica_tile.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/leaderboard/providers/leaderboard_provider.dart';
+import 'package:pokebike/app/shared/controllers/api_pagination_controller.dart';
 
-class LeaderboardController extends GetxController {
+class LeaderboardController extends ApiPaginationController<ClassificaTile> {
   static LeaderboardController get to => Get.find<LeaderboardController>();
 
-  final RxBool _isFetchingLeaderboard = false.obs;
-  bool get isFetchingLeaderboard => _isFetchingLeaderboard.value;
-  set isFetchingLeaderboard(bool value) => _isFetchingLeaderboard.value = value;
+  // final RxBool _isFetchingLeaderboard = false.obs;
+  // bool get isFetchingLeaderboard => _isFetchingLeaderboard.value;
+  // set isFetchingLeaderboard(bool value) => _isFetchingLeaderboard.value = value;
 
   final RxBool _isFetchingWinner = false.obs;
   bool get isFetchingWinner => _isFetchingWinner.value;
@@ -24,29 +25,28 @@ class LeaderboardController extends GetxController {
 
   final List<ClassificaTile> fakeLeaderboard =
       List.generate(4, (index) => ClassificaTile.fake(index));
-  final RxList<ClassificaTile> leaderboard = <ClassificaTile>[].obs;
 
   final Rxn<User> winner = Rxn();
 
   final LeaderboardProvider provider;
 
-  LeaderboardController({required this.provider});
+  LeaderboardController({required this.provider}) : super(providerFunc: provider.fetchLeaderboard);
 
-  @override
-  void onInit() {
-    super.onInit();
-    fetchLeaderboard();
-  }
+  // @override
+  // void onInit() {
+  //   super.onInit();
+  //   fetchLeaderboard();
+  // }
 
-  Future<void> fetchLeaderboard() async {
-    isFetchingLeaderboard = true;
-    List<ClassificaTile> leaderboard = await provider.fetchLeaderboard();
-    this.leaderboard.addAll(leaderboard);
-    // await Future.delayed(const Duration(seconds: 3));
-    // leaderboard
-    //     .addAll(List.generate(20, (index) => ClassificaTile.fake(index + 1)));
-    isFetchingLeaderboard = false;
-  }
+  // Future<void> fetchLeaderboard() async {
+  //   isFetchingLeaderboard = true;
+  //   List<ClassificaTile> leaderboard = await provider.fetchLeaderboard();
+  //   this.leaderboard.addAll(leaderboard);
+  //   // await Future.delayed(const Duration(seconds: 3));
+  //   // leaderboard
+  //   //     .addAll(List.generate(20, (index) => ClassificaTile.fake(index + 1)));
+  //   isFetchingLeaderboard = false;
+  // }
 
   Future<void> fetchWinner() async {
     isFetchingWinner = true;
@@ -58,8 +58,8 @@ class LeaderboardController extends GetxController {
   }
 
   Future<void> refreshLeaderboard() async {
-    leaderboard.clear();
-    return await fetchLeaderboard();
+    // leaderboard.clear();
+    // return await fetchLeaderboard();
   }
 
   void showWinner() {

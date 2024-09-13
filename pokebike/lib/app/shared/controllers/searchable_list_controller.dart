@@ -3,19 +3,15 @@ import 'package:get/get.dart';
 import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/data/enums/order_by.dart';
 import 'package:pokebike/app/data/search_options.dart';
+import 'package:pokebike/app/shared/controllers/api_pagination_controller.dart';
 
-class SearchableListController<T> extends GetxController {
+class SearchableListController<T> extends ApiPaginationController<T> {
   final FocusNode focusNode = FocusNode();
-
-  final RxBool _isFetching = false.obs;
-  bool get isFetching => _isFetching.value;
-  set isFetching(bool value) => _isFetching.value = value;
-
-  final List<T> list = <T>[];
-  RxList<T> filteredList = <T>[].obs;
 
   String lastSearch = "";
   SearchOptions lastOptions = const SearchOptions();
+
+  RxList<T> filteredList = <T>[].obs;
 
   final bool Function(T, String) searchFilterFunc;
   final bool Function(T, List<String>) tipoFilterFunc;
@@ -26,24 +22,27 @@ class SearchableListController<T> extends GetxController {
       {required this.searchFilterFunc,
       required this.tipoFilterFunc,
       required this.marcaFilterFunc,
-      required this.orderByFilterFunc});
+      required this.orderByFilterFunc,
+      required super.providerFunc});
 
-  Future<ApiResponse> initialFetch(Future<List<T>> Function() providerFunc,
-      {bool reload = false}) async {
-    if (list.isNotEmpty && !reload) {
-      return ApiResponse.success(message: "Success", data: list);
-    }
-    
-    isFetching = true;
-    list.clear();
-    final List<T> fetchedList = await providerFunc();
-    list.addAll(fetchedList);
+  @override
+  Future<ApiResponse> initialFetch({bool reload = false}) async {
+    ApiResponse response = await super.initialFetch(reload: reload);
     filteredList.value = list;
-    isFetching = false;
+    return response;
+  }
 
-    return fetchedList.isEmpty
-        ? ApiResponse.error(message: "Errore nel caricamento", data: null)
-        : ApiResponse.success(message: "Success", data: list);
+  @override
+  Future<void> refreshList() async {
+    filteredList.clear();
+    super.refreshList();
+  }
+
+  @override
+  Future<List<T>> fetchOthers() async {
+    List<T> newElements = await super.fetchOthers();
+    filteredList.addAll(newElements);
+    return newElements;
   }
 
   List<T> filterSearch({String? value, List<T>? list}) {

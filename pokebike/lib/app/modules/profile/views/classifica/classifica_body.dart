@@ -34,7 +34,9 @@ class ClassificaBody extends GetView<ProfileController> {
                                     Text("Errore caricamento partecipazione"))
                             : ClassificaProfileRow(
                                 classificaTile:
-                                    controller.classificaTile.value!),
+                                    controller.classificaTile.value!,
+                                shouldNavigate: false,
+                              ),
                       )),
                 );
               } else if (index == 1) {

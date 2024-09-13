@@ -18,7 +18,7 @@ class CommunityList extends StatelessWidget {
 
   void initState(GetXState<CommunityController> state) {
     state.controller
-        ?.fetch()
+        ?.initialFetch()
         .then((value) => handleApiResponse(state.context, value));
   }
 
@@ -55,28 +55,66 @@ class CommunityList extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     child: Text("La community è vuota"))
                 : isHorizontal
-                    ? ListView(
-                        itemExtent: context.width * 0.45,
-                        scrollDirection: Axis.horizontal,
-                        keyboardDismissBehavior:
-                            ScrollViewKeyboardDismissBehavior.onDrag,
-                        children: children.sublist(0,
-                            min(children.length, Constants.numCommunityHome)))
+                    ? HorizontalCommunityList(children: children)
                     : RefreshIndicator(
                         onRefresh: () => controller.refreshList(),
-                        child: GridView(
-                            keyboardDismissBehavior:
-                                ScrollViewKeyboardDismissBehavior.onDrag,
-                            padding: const EdgeInsets.only(
-                                bottom: Constants.bottomNavbarHeight),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 1.3,
-                            ),
-                            children: children),
+                        child: Stack(
+                          children: [
+                            VerticalCommunityList(
+                                controller: controller, children: children),
+                            if (controller.isFetchingOthers)
+                              const Positioned(
+                                  bottom: 20,
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ))
+                          ],
+                        ),
                       ),
           );
         });
+  }
+}
+
+class VerticalCommunityList extends StatelessWidget {
+  final CommunityController controller;
+  const VerticalCommunityList({
+    super.key,
+    required this.controller,
+    required this.children,
+  });
+
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        controller: controller.scrollController,
+        padding: const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 1.3,
+        ),
+        children: children);
+  }
+}
+
+class HorizontalCommunityList extends StatelessWidget {
+  const HorizontalCommunityList({
+    super.key,
+    required this.children,
+  });
+
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+        itemExtent: context.width * 0.45,
+        scrollDirection: Axis.horizontal,
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        children: children.sublist(
+            0, min(children.length, Constants.numCommunityHome)));
   }
 }

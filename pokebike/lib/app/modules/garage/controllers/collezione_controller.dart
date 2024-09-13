@@ -22,10 +22,10 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
             tipoFilterFunc: (CollezioneMoto el, List<String> values) =>
                 values.contains(el.tipoMoto.nome),
             orderByFilterFunc: (List<CollezioneMoto> els, OrderBy orderBy) =>
-                els);
+                els, providerFunc: provider.fetchCollezioneMoto);
 
   Future<void> fetch() async {
-    await initialFetch(provider.fetchCollezioneMoto);
+    await initialFetch();
     final GarageWController controller = GarageWController.to;
     final List<Moto> motos = controller.list;
     for ((int, CollezioneMoto) collezioneMoto in list.indexed) {
@@ -44,6 +44,6 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
   Future<void> refreshList() async {
     list.clear();
     filteredList.clear();
-    initialFetch(provider.fetchCollezioneMoto);
+    initialFetch();
   }
 }

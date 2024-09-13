@@ -11,15 +11,18 @@ import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
 
 class ClassificaProfileRow extends StatelessWidget {
   final ClassificaTile classificaTile;
+  final bool shouldNavigate;
 
   const ClassificaProfileRow(
-      {super.key, required this.classificaTile});
+      {super.key, required this.classificaTile, this.shouldNavigate = true});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.navigator.pushNamed(Routes.PROFILE,
-          arguments: ProfileArguments(profileId: classificaTile.id)),
+      onTap: () => shouldNavigate
+          ? context.navigator.pushNamed(Routes.PROFILE,
+              arguments: ProfileArguments(profileId: classificaTile.id))
+          : null,
       child: Container(
           decoration: BoxDecoration(
               color: context.theme.primaryColor,

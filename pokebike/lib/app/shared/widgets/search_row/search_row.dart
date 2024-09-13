@@ -8,11 +8,14 @@ import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 class SearchRow extends StatelessWidget {
   final Function(String) onSearchField;
   final Function(SearchOptions) onSave;
+  final bool showButton;
   final FocusNode? focusNode;
+
   const SearchRow(
       {super.key,
       required this.onSearchField,
       required this.onSave,
+      this.showButton = true,
       this.focusNode});
 
   @override
@@ -25,6 +28,7 @@ class SearchRow extends StatelessWidget {
           flex: 8,
           child: SearchTextField(onSearch: onSearchField, focusNode: focusNode),
         ),
+        if (showButton)
         Expanded(
           flex: 2,
           child: InkWell(

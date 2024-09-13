@@ -21,9 +21,11 @@ class LeaderboardProvider extends GetConnect {
     }
   }
 
-  Future<List<ClassificaTile>> fetchLeaderboard() async {
-    ApiResponse response =
-        await handleApiEndpoint(request, 'get', '/profiles/leaderboard');
+  Future<List<ClassificaTile>> fetchLeaderboard(int? limit, int? skip) async {
+    String suffix = (limit != null ? "limit=$limit" : "") +
+        (skip != null ? "&skip=$skip" : "");
+    ApiResponse response = await handleApiEndpoint(
+        request, 'get', '/profiles/leaderboard?$suffix');
     if (response.success) {
       return (response.data as List)
           .map<ClassificaTile>((e) => ClassificaTile.fromJson(e))
