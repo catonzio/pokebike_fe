@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:pokebike/app/data/enums/order_by.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/community/providers/community_provider.dart';
@@ -15,5 +16,12 @@ class CommunityController extends SearchableListController<User> {
                 fullName(el).toLowerCase().contains(value.toLowerCase()),
             tipoFilterFunc: (User el, List<String> values) => true,
             marcaFilterFunc: (User el, List<String> values) => true,
-            orderByFilterFunc: (List<User> els, OrderBy value) => els, providerFunc:  _communityProvider.getUsers);
+            orderByFilterFunc: (List<User> els, OrderBy value) => els,
+            providerFunc: _communityProvider.getUsers);
+
+  @override
+  void onInit() {
+    scrollController = ScrollController();
+    super.onInit();
+  }
 }

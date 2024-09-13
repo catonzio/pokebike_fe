@@ -42,12 +42,19 @@ class ProfileController extends GetxController {
   ProfileController({required this.provider});
 
   @override
-  onReady() async {
+  Future<void> onReady() async {
     super.onReady();
-    initialize();
+    ProfileArguments? argumentUser = Get.arguments as ProfileArguments?;
+    initialize(argumentUser);
   }
 
-  Future<void> initialize() async {
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+    await initialize(argumentUser);
+  }
+
+  Future<void> initialize(ProfileArguments? argumentUser) async {
     await setUser(argumentUser);
     fetchClassificaTile();
     fetchTopMotos();
@@ -65,7 +72,7 @@ class ProfileController extends GetxController {
       setUserProfile();
 
       // se negli arguments c'e lo user
-    } else if (arguments.user != null && user.value == null) {
+    } else if (arguments.user != null) {
       user.value = arguments.user;
       setUserProfile();
 

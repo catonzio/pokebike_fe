@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:pokebike/app/data/enums/order_by.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/shared/controllers/searchable_list_controller.dart';
@@ -28,11 +29,11 @@ class SearchableMotoController extends SearchableListController<Moto> {
             },
             providerFunc: fetchFunction);
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   fetch();
-  // }
+  @override
+  void onInit() {
+    scrollController = ScrollController();
+    super.onInit();
+  }
 
   // void fetch() {
   //   initialFetch();

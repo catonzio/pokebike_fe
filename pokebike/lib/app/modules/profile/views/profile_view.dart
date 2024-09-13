@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/home/views/stories/story_widget.dart';
+import 'package:pokebike/app/modules/profile/profile_arguments.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/classifica_body.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/empty_classifica_body.dart';
 import 'package:pokebike/app/modules/profile/views/medaglie/medaglie_body.dart';
@@ -17,30 +18,29 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 import '../controllers/profile_controller.dart';
 
-class ProfileView extends GetView<ProfileController> {
+class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
+
+  Future<void> initState(GetXState<ProfileController> state) async {
+    // state.controller?.setUser(argumentUser);
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      ProfileArguments? argumentUser = Get.arguments as ProfileArguments?;
+      // Make sure this is called after the widget is fully built
+      await state.controller?.initialize(argumentUser);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return GetX<ProfileController>(
-      didUpdateWidget: (oldWidget, state) {
-        state.controller?.initialize();
-      },
-      didChangeDependencies: (state) {
-        print("Changed dependecies");
-        // controller.initialize();
-      },
+      initState: initState,
       builder: (controller) {
-        return buildPage(context);
+        return buildPage(context, controller);
       },
     );
-
-    // if (controller.argumentUser?.user != controller.user.value) {
-    //   controller.initialize();
-    // }
   }
 
-  DefaultPage buildPage(BuildContext context) {
+  DefaultPage buildPage(BuildContext context, ProfileController controller) {
     return DefaultPage(
         actions: controller.isOwnProfile.value
             ? [

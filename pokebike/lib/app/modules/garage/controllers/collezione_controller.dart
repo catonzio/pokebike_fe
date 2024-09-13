@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:pokebike/app/data/enums/order_by.dart';
 import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
@@ -22,10 +23,20 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
             tipoFilterFunc: (CollezioneMoto el, List<String> values) =>
                 values.contains(el.tipoMoto.nome),
             orderByFilterFunc: (List<CollezioneMoto> els, OrderBy orderBy) =>
-                els, providerFunc: provider.fetchCollezioneMoto);
+                els,
+            providerFunc: provider.fetchCollezioneMoto,
+            ) {
+    afterInit = _afterInit;
+  }
 
-  Future<void> fetch() async {
-    await initialFetch();
+  @override
+  void onInit() {
+    scrollController = ScrollController();
+    super.onInit();
+  }
+
+  Future<void> _afterInit() async {
+    // await initialFetch();
     final GarageWController controller = GarageWController.to;
     final List<Moto> motos = controller.list;
     for ((int, CollezioneMoto) collezioneMoto in list.indexed) {
@@ -39,11 +50,5 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
         }
       }
     }
-  }
-
-  Future<void> refreshList() async {
-    list.clear();
-    filteredList.clear();
-    initialFetch();
   }
 }

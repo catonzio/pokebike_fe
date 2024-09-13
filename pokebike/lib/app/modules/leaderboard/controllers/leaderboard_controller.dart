@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/models/classifica_tile/classifica_tile.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
@@ -30,13 +31,14 @@ class LeaderboardController extends ApiPaginationController<ClassificaTile> {
 
   final LeaderboardProvider provider;
 
-  LeaderboardController({required this.provider}) : super(providerFunc: provider.fetchLeaderboard);
+  LeaderboardController({required this.provider})
+      : super(providerFunc: provider.fetchLeaderboard);
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   fetchLeaderboard();
-  // }
+  @override
+  void onInit() {
+    scrollController = ScrollController();
+    super.onInit();
+  }
 
   // Future<void> fetchLeaderboard() async {
   //   isFetchingLeaderboard = true;

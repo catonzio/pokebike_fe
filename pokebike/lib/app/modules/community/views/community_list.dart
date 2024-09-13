@@ -64,7 +64,9 @@ class CommunityList extends StatelessWidget {
                                 controller: controller, children: children),
                             if (controller.isFetchingOthers)
                               const Positioned(
-                                  bottom: 20,
+                                  left: 0,
+                                  right: 0,
+                                  bottom: Constants.bottomNavbarHeight,
                                   child: Center(
                                     child: CircularProgressIndicator(),
                                   ))

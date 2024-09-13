@@ -39,7 +39,8 @@ class GarageController extends GetxController {
   void toggleShowing(bool value) {
     isShowingGarage.value = value;
     if (!value && collezioneController.list.isEmpty) {
-      collezioneController.fetch();
+      collezioneController.initialFetch();
+      collezioneController.afterInit();
     } else if (value && garageWController.list.isEmpty) {
       garageWController.initialFetch();
     }

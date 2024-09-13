@@ -12,7 +12,7 @@ class NavbarItem {
       {required this.label,
       required this.iconName,
       required this.route,
-      this.shouldPop = true,
+      this.shouldPop = false,
       this.routes,
       this.size});
 }
@@ -35,7 +35,7 @@ final List<NavbarItem> bottomNavbarItems = [
     iconName: "Logo",
     size: 70,
     route: Routes.FOTOCAMERA,
-    shouldPop: false,
+    // shouldPop: false,
   ),
   NavbarItem(
     label: "Torneo",

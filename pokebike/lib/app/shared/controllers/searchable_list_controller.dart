@@ -23,7 +23,8 @@ class SearchableListController<T> extends ApiPaginationController<T> {
       required this.tipoFilterFunc,
       required this.marcaFilterFunc,
       required this.orderByFilterFunc,
-      required super.providerFunc});
+      required super.providerFunc,
+      super.afterInit});
 
   @override
   Future<ApiResponse> initialFetch({bool reload = false}) async {

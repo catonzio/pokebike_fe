@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/modules/home/views/stories/stories_widget.dart';
+// import 'package:pokebike/app/modules/home/views/stories/stories_widget.dart';
 import 'package:pokebike/app/modules/home/views/tornei/tornei_widget.dart';
 import 'package:pokebike/app/modules/home/views/upper_buttons/upper_buttons.dart';
 import 'package:pokebike/app/shared/default_page.dart';
@@ -16,7 +16,7 @@ class HomeView extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final double storiesHeight = context.height * 0.2;
+    // final double storiesHeight = context.height * 0.2;
     final double upperButtonsHeight = context.height * 0.3;
     final double communityHeight = context.height * 0.25;
 
@@ -32,7 +32,7 @@ class HomeView extends GetView<HomeController> {
             ShimmerTitle.light(
               text: "Ciao Biker!",
             ),
-            StoriesWidget(height: storiesHeight),
+            // StoriesWidget(height: storiesHeight),
             SizedBox(
               height: upperButtonsHeight,
               child: const Padding(

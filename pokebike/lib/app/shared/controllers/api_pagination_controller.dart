@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:pokebike/app/data/api_response.dart';
 
 class ApiPaginationController<T> extends GetxController {
-  final ScrollController scrollController = ScrollController();
+  ScrollController scrollController = ScrollController();
 
   final RxBool _isFetchingOthers = false.obs;
   bool get isFetchingOthers => _isFetchingOthers.value;
@@ -19,14 +19,19 @@ class ApiPaginationController<T> extends GetxController {
   int skip = 0;
 
   final Future<List<T>> Function(int?, int?) providerFunc;
+  Future<void> Function() afterInit;
 
-  ApiPaginationController({required this.providerFunc});
+  ApiPaginationController({
+    required this.providerFunc,
+    Future<void> Function()? afterInit, // Nullable parameter
+  }) : afterInit = afterInit ?? _defaultAfterInit;
 
   @override
   void onInit() {
     super.onInit();
     scrollController.addListener(_scrollListener);
     initialFetch();
+    afterInit();
   }
 
   @override
@@ -35,7 +40,11 @@ class ApiPaginationController<T> extends GetxController {
     scrollController.dispose();
   }
 
+  static Future<void> _defaultAfterInit() async {}
+
   Future<ApiResponse> initialFetch({bool reload = false}) async {
+    // print(
+    //     "This $hashCode, scroll controller ${scrollController.hashCode}. Has clients? ${scrollController.hasClients}");
     if (list.isNotEmpty && !reload) {
       return ApiResponse.success(message: "Success", data: list);
     }
@@ -52,7 +61,8 @@ class ApiPaginationController<T> extends GetxController {
   }
 
   Future<void> refreshList() async {
-    list.clear();
+    // list.clear();
+    skip = 0;
     await initialFetch(reload: true);
   }
 
