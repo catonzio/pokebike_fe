@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
 
 class SliverRefresh extends StatelessWidget {
   final Future<void> Function()? onRefresh;
@@ -18,12 +18,12 @@ class SliverRefresh extends StatelessWidget {
           refreshIndicatorExtent) {
         if ([RefreshIndicatorMode.armed, RefreshIndicatorMode.refresh]
             .contains(refreshState)) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: MCircularProgressIndicator());
         } else if (refreshState == RefreshIndicatorMode.inactive) {
           return const SizedBox.shrink();
         } else if (refreshState == RefreshIndicatorMode.drag) {
           return Center(
-            child: CircularProgressIndicator(
+            child: MCircularProgressIndicator(
               value: pulledExtent / refreshTriggerPullDistance,
             ),
           );

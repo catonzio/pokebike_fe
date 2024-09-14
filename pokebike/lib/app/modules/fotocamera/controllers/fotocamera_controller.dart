@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/shared/providers/moto_provider.dart';
-import 'package:pokebike/main.dart';
+import 'package:pokebike/initializer.dart';
 
 class FotocameraController extends GetxController {
   final RxInt _selectedIndex = 1.obs;

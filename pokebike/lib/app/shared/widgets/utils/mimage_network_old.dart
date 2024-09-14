@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pokebike/app/config/colors.dart';
+import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
 
 class MimageNetworkOld extends StatelessWidget {
   final String path;
   final BoxFit fit;
   final BorderRadius? borderRadius;
-  
+
   const MimageNetworkOld(
       {super.key,
       required this.path,
@@ -26,7 +27,7 @@ class MimageNetworkOld extends StatelessWidget {
           return Container(
             color: MColors.primaryLight,
             child: Center(
-              child: CircularProgressIndicator(
+              child: MCircularProgressIndicator(
                 value: loadingProgress.cumulativeBytesLoaded /
                     loadingProgress.expectedTotalBytes!,
               ),

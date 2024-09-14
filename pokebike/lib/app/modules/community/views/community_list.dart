@@ -10,6 +10,7 @@ import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/utils/api_utils.dart';
 import 'package:pokebike/app/modules/community/views/community_tile.dart';
+import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class CommunityList extends StatelessWidget {
@@ -58,19 +59,10 @@ class CommunityList extends StatelessWidget {
                     ? HorizontalCommunityList(children: children)
                     : RefreshIndicator(
                         onRefresh: () => controller.refreshList(),
-                        child: Stack(
-                          children: [
-                            VerticalCommunityList(
-                                controller: controller, children: children),
-                            if (controller.isFetchingOthers)
-                              const Positioned(
-                                  left: 0,
-                                  right: 0,
-                                  bottom: Constants.bottomNavbarHeight,
-                                  child: Center(
-                                    child: CircularProgressIndicator(),
-                                  ))
-                          ],
+                        child: PaginatorWidget(
+                          body: VerticalCommunityList(
+                              controller: controller, children: children),
+                          showIndicator: controller.isFetchingOthers,
                         ),
                       ),
           );

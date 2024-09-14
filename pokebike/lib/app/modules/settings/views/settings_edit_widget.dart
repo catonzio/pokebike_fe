@@ -13,6 +13,7 @@ import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/utils/api_utils.dart';
 import 'package:pokebike/app/shared/widgets/default_dialog.dart';
+import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
 
 import '../controllers/settings_controller.dart';
 
@@ -38,9 +39,7 @@ class SettingsEditWidget extends GetView<SettingsController> {
                     ),
               ),
               if (controller.saving)
-                const Center(
-                  child: CircularProgressIndicator(),
-                )
+                const MCircularProgressIndicator()
             ],
           )),
     );

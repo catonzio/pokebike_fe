@@ -47,7 +47,7 @@ class MimageNetwork extends StatelessWidget {
         // Container(
         //   color: MColors.primaryLight,
         //   child: Center(
-        //     child: CircularProgressIndicator(
+        //     child: MCircularProgressIndicator(
         //       value: progress.progress,
         //     ),
         //   ),

@@ -10,6 +10,7 @@ import 'package:pokebike/app/modules/fotocamera/views/add_moto_form.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/utils/api_utils.dart';
 import 'package:pokebike/app/shared/widgets/default_dialog.dart';
+import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
 import 'package:pokebike/app/shared/widgets/utils/loading_stack.dart';
 
 import '../controllers/fotocamera_controller.dart';
@@ -77,7 +78,7 @@ class AddMotoView extends GetView<FotocameraController> {
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           } else {
-            return const CircularProgressIndicator();
+            return const MCircularProgressIndicator();
           }
         },
       ),

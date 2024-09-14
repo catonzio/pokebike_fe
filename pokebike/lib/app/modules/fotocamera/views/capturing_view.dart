@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/modules/fotocamera/views/camera_button.dart';
 import 'package:pokebike/app/modules/fotocamera/views/camera_row_button.dart';
+import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
 
 import '../controllers/fotocamera_controller.dart';
 
@@ -30,9 +31,7 @@ class CapturingView extends GetView<FotocameraController> {
         ),
         child: Obx(() => controller.isInitialized
             ? CameraPreview(controller.cameraController)
-            : const Center(
-                child: CircularProgressIndicator(),
-              )));
+            : const MCircularProgressIndicator()));
   }
 
   Padding _lowerButtons(BuildContext context) {

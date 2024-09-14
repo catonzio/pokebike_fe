@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
+import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
 
 class LoadingStack extends StatelessWidget {
   final Widget child;
@@ -22,7 +23,7 @@ class LoadingStack extends StatelessWidget {
             if (isLoading.value)
               BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                child: const Center(child: CircularProgressIndicator()),
+                child: const Center(child: MCircularProgressIndicator()),
               ).animate().fade()
           ],
         ));

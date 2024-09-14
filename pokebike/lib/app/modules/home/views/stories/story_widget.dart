@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/modules/partecipa_torneo/views/moto_details/moto_detail_photo.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
 
 class StoryWidget extends StatelessWidget {
   final String? text;
@@ -56,7 +57,7 @@ class StoryWidget extends StatelessWidget {
                       },
                       progressIndicatorBuilder: (context, url, progress) =>
                           Center(
-                        child: CircularProgressIndicator(
+                        child: MCircularProgressIndicator(
                           value: progress.progress,
                         ),
                       ),
@@ -74,7 +75,7 @@ class StoryWidget extends StatelessWidget {
                   //         final double progress =
                   //             (loadingProgress?.cumulativeBytesLoaded ?? 1) /
                   //                 (loadingProgress?.cumulativeBytesLoaded ?? 1);
-                  //         return CircularProgressIndicator(value: progress);
+                  //         return MCircularProgressIndicator(value: progress);
                   //       }).image,
                   // ),
                   ),
