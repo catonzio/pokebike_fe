@@ -48,11 +48,11 @@ class ProfileController extends GetxController {
     initialize(argumentUser);
   }
 
-  @override
-  Future<void> onInit() async {
-    super.onInit();
-    await initialize(argumentUser);
-  }
+  // @override
+  // Future<void> onInit() async {
+  //   super.onInit();
+  //   await initialize(argumentUser);
+  // }
 
   Future<void> initialize(ProfileArguments? argumentUser) async {
     await setUser(argumentUser);

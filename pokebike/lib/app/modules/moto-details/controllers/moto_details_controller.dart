@@ -11,10 +11,16 @@ import 'package:pokebike/app/shared/extensions/date_utils.dart';
 import 'package:pokebike/app/shared/providers/moto_provider.dart';
 
 class MotoDetailsController extends GetxController {
-  final CollezioneMoto? collezioneMoto =
-      (Get.arguments as MotoDetailsArguments).collezioneMoto;
-  Moto? moto = (Get.arguments as MotoDetailsArguments).moto;
-  final bool isOwnMoto = (Get.arguments as MotoDetailsArguments).isOwnMoto;
+  MotoDetailsArguments arguments = Get.arguments as MotoDetailsArguments;
+  final Rxn<CollezioneMoto> _collezioneMoto = Rxn<CollezioneMoto>();
+  CollezioneMoto? get collezioneMoto => _collezioneMoto.value;
+  set collezioneMoto(CollezioneMoto? value) => _collezioneMoto.value = value;
+
+  final Rxn<Moto> _moto = Rxn<Moto>();
+  Moto? get moto => _moto.value;
+  set moto(Moto? value) => _moto.value = value;
+
+  final RxBool isOwnMoto = false.obs;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -57,6 +63,13 @@ class MotoDetailsController extends GetxController {
       descrizioneController.text = moto!.descrizione;
     }
     super.onInit();
+    initialize(arguments);
+  }
+
+  void initialize(MotoDetailsArguments? arguments) {
+    collezioneMoto = arguments?.collezioneMoto;
+    moto = arguments?.moto;
+    isOwnMoto.value = arguments?.isOwnMoto ?? false;
   }
 
   void toggleShowingInfo({bool? value}) {
