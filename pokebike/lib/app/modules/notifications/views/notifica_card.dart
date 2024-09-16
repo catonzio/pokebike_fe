@@ -22,14 +22,13 @@ class NotificaCard extends StatelessWidget {
       color: notifica.hasSeen ? MColors.primary : MColors.primaryLight,
       child: ListTile(
           title: AutoSizeText(
-            notifica.title,
+            notifica.data.title,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          subtitle: AutoSizeText(notifica.body,
+          subtitle: AutoSizeText(notifica.data.body,
               maxLines: 2, overflow: TextOverflow.ellipsis),
-          trailing:
-              Text("Ricevuta ${notifica.receivedAt.toFormattedString()}")),
+          trailing: Text("Ricevuta ${notifica.createdAt.toFormattedString()}")),
     );
   }
 }

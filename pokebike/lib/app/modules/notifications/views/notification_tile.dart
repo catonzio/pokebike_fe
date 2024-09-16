@@ -20,6 +20,9 @@ class NotificationTile extends GetView<NotificationsController> {
       child: Dismissible(
         key: Key(notifica.id.toString()),
         onDismissed: _onDismissed,
+        background: Container(
+          color: MColors.secondaryDark,
+        ),
         child: GestureDetector(
           onTap: () => _onTap(context),
           child: Stack(
@@ -42,7 +45,9 @@ class NotificationTile extends GetView<NotificationsController> {
     );
   }
 
-  void _onDismissed(DismissDirection direction) {}
+  void _onDismissed(DismissDirection direction) {
+    controller.delete(notifica.id);
+  }
 
   _onTap(BuildContext context) {
     controller.tap(notifica.id);

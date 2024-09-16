@@ -14,8 +14,18 @@ class CommunityView extends GetView<CommunityController> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultPage(
-        body: Column(
+    return Obx(() => DefaultPage(
+          body: _buildBody(),
+          fabOnTap: controller.showFAB
+              ? () => controller.scrollController.animateTo(0,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.decelerate)
+              : null,
+        ));
+  }
+
+  Column _buildBody() {
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const CommunityTitle(),
@@ -35,7 +45,7 @@ class CommunityView extends GetView<CommunityController> {
           ),
         ),
       ],
-    ));
+    );
   }
 
   void _onSearchField(String value) {

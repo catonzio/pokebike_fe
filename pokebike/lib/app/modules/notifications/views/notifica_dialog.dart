@@ -25,29 +25,29 @@ class NotificaDialog extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    notifica.title,
+                    notifica.data.title,
                     style: context.textTheme.headlineLarge,
                   ),
                   const Divider(),
                   Padding(
                     padding: const EdgeInsets.only(top: 28),
                     child:
-                        Text(notifica.body, style: context.textTheme.bodyLarge),
+                        Text(notifica.data.body, style: context.textTheme.bodyLarge),
                   ),
                   const Spacer(),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      notifica.seenAt != null
+                      notifica.readAt != null
                           ? Text(
-                              "Letta ${notifica.seenAt!.toFormattedString(withHour: true)}",
+                              "Letta ${notifica.readAt!.toFormattedString(withHour: true)}",
                               style: context.textTheme.labelSmall,
                             )
                           : const SizedBox.shrink(),
                       // Spacer(),
                       Text(
-                        "Ricevuta ${notifica.receivedAt.toFormattedString(withHour: true)}",
+                        "Ricevuta ${notifica.createdAt.toFormattedString(withHour: true)}",
                         style: context.textTheme.labelSmall,
                       )
                     ],

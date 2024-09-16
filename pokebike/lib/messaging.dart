@@ -1,10 +1,19 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
+import 'package:pokebike/app/routes/app_pages.dart';
 
 @pragma('vm:entry-point')
-void notificationTapBackground(NotificationResponse notificationResponse) {}
+void notificationTapBackground(NotificationResponse notificationResponse) {
+  final String? payload = notificationResponse.payload;
+  if (notificationResponse.payload != null) {
+    print('notification payload BACKGROUND: $payload');
+  }
+  Navigator.pushNamed(Get.context!, Routes.COCKADES_DETAILS);
+}
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -15,6 +24,9 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     print('Message notification: ${message.notification?.title}');
     print('Message notification: ${message.notification?.body}');
   }
+  MessagingInitializer messagingInitializer = MessagingInitializer();
+  await messagingInitializer.initialize();
+  messagingInitializer.onDidReceiveLocalNotification(message);
 }
 
 class MessagingInitializer {
@@ -41,7 +53,7 @@ class MessagingInitializer {
     FirebaseMessaging.onMessage.listen(_firebaseMessagingForegroundHandler);
 
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('launch_background');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
     const DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings(
@@ -57,14 +69,12 @@ class MessagingInitializer {
             iOS: initializationSettingsDarwin,
             macOS: initializationSettingsDarwin);
 
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
+    // await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+    //     onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
 
-    await flutterLocalNotificationsPlugin.initialize(
-      initializationSettings,
-      onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
-      onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
-    );
+    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
+        onDidReceiveBackgroundNotificationResponse: notificationTapBackground);
   }
 
   void _firebaseMessagingForegroundHandler(RemoteMessage message) {
@@ -95,7 +105,7 @@ class MessagingInitializer {
       NotificationResponse notificationResponse) async {
     final String? payload = notificationResponse.payload;
     if (notificationResponse.payload != null) {
-      print('notification payload: $payload');
+      print('notification payload FOREGROUND: $payload');
     }
     // await Navigator.push(
     //   context,

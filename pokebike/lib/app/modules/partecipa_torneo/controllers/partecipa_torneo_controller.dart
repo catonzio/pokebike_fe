@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/api_response.dart';
+import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/shared/controllers/searchable_moto_controller.dart';
 import 'package:pokebike/app/shared/providers/moto_provider.dart';
 
@@ -16,15 +17,19 @@ class PartecipaTorneoController extends SearchableMotoController {
       : super(fetchFunction: provider.fetchMotos);
 
   @override
-  Future<void> onInit() async {
-    super.onInit();
+  Future<void> onReady() async {
+    super.onReady();
     await setIsChosen();
   }
 
   Future<void> setIsChosen() async {
-    ApiResponse response = await provider.checkAlreadyChosen();
-    isMotoChosen.value = response.success;
-    motoIndex.value = response.data;
+    Moto? moto = await provider.checkAlreadyChosen();
+    isMotoChosen.value = moto != null;
+    motoIndex.value = moto?.id ?? 0;
+    if (moto != null) {
+      list.add(moto);
+      filteredList.add(moto);
+    }
   }
 
   Future<ApiResponse> chooseMoto(int motoId) async {

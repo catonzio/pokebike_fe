@@ -11,31 +11,47 @@ class NotificaProvider extends GetConnect {
   }
 
   Future<List<Notifica>> fetchNotifiche(int? limit, int? skip) async {
-    return Future.delayed(
-      const Duration(seconds: 1),
-      () => List.generate(100, (index) => Notifica.fake(index)),
-    );
+    // return Future.delayed(
+    //   const Duration(seconds: 1),
+    //   () => List.generate(100, (index) => Notifica.fake(index)),
+    // );
 
-    // String suffix = (limit != null ? "limit=$limit" : "") +
-    //     (skip != null ? "&skip=$skip" : "");
+    String suffix = (limit != null ? "limit=$limit" : "") +
+        (skip != null ? "&skip=$skip" : "");
 
-    // ApiResponse response =
-    //     await handleApiEndpoint(request, "get", "/notificas?$suffix");
+    ApiResponse response =
+        await handleApiEndpoint(request, "get", "/notificas?$suffix");
 
-    // if (response.success) {
-    //   return (response.data as List)
-    //       .map((el) => Notifica.fromJson(el))
-    //       .toList();
-    // } else {
-    //   return [];
-    // }
+    if (response.success) {
+      List<Notifica> notifiche =
+          (response.data as List).map((el) => Notifica.fromJson(el)).toList();
+      return notifiche;
+    } else {
+      return [];
+    }
   }
 
-  Future<ApiResponse> readNotifica(int id) async {
-    return handleApiEndpoint(request, "get", "/notificas/read/$id");
+  Future<ApiResponse> readNotifica(String id) async {
+    ApiResponse response =
+        await handleApiEndpoint(request, "post", "/notificas/read/$id");
+    return response;
   }
 
   Future<ApiResponse> readAll() async {
-    return handleApiEndpoint(request, "get", "/notificas/read-all");
+    ApiResponse response =
+        await handleApiEndpoint(request, "post", "/notificas/read-all");
+    return response;
+  }
+
+  Future<ApiResponse> deleteAll() async {
+    ApiResponse response =
+        await handleApiEndpoint(request, "delete", "/notificas/null");
+    return response;
+  }
+
+  Future<ApiResponse> deleteNotifica(String id) async {
+    ApiResponse response =
+        await handleApiEndpoint(request, "delete", "/notificas/$id");
+    return response;
   }
 }

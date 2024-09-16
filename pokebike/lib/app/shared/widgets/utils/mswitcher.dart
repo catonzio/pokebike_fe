@@ -6,6 +6,8 @@ class MswitcherController extends GetxController {
   final RxBool value = false.obs;
 
   MswitcherController(bool value) {
+    print(
+        "Setting inside controller. Value: $value This.value: ${this.value.value}");
     this.value.value = value;
   }
 }
@@ -25,7 +27,10 @@ class MSwitcher extends StatelessWidget {
       // },
       init: Get.put(MswitcherController(value)),
       initState: (state) {
-        state.controller?.value.value = value;
+        WidgetsBinding.instance.addPostFrameCallback((_) async {
+          print("Setting inside initState: $value");
+          state.controller?.value.value = value;
+        });
       },
       builder: (MswitcherController controller) {
         print("Switcher: ${controller.value.value}");
@@ -33,7 +38,7 @@ class MSwitcher extends StatelessWidget {
           value: controller.value.value,
           onChanged: (bool value) async {
             if (onChanged != null) {
-              controller.value.value = await onChanged?.call(value);
+              controller.value.value = await onChanged!(value);
             } else {
               controller.value.value = value;
             }

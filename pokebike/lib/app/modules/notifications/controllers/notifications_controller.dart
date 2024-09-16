@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/data/models/notifica/notifica.dart';
 import 'package:pokebike/app/modules/notifications/providers/notifica_provider.dart';
 import 'package:pokebike/app/shared/controllers/api_pagination_controller.dart';
@@ -14,28 +15,35 @@ class NotificationsController extends ApiPaginationController<Notifica> {
   @override
   void onInit() {
     scrollController = ScrollController();
+    skip = 0;
     super.onInit();
   }
 
-  Notifica? getN(int id) => list.where((el) => el.id == id).firstOrNull;
+  Notifica? getN(String id) => list.where((el) => el.id == id).firstOrNull;
 
-  deleteAll() {
-    list.clear();
+  deleteAll() async {
+    ApiResponse response = await provider.deleteAll();
+    if (response.success) {
+      list.clear();
+    }
   }
 
-  delete(int id) {
-    list.removeWhere((notifica) => notifica.id == id);
+  delete(String id) async {
+    ApiResponse response = await provider.deleteNotifica(id);
+    if (response.success) {
+      list.removeWhere((notifica) => notifica.id == id);
+    }
   }
 
   updateNotifica(Notifica notifica, int index, {bool refresh = false}) {
     list[index] = notifica.copyWith(
-        hasSeen: true, seenAt: notifica.seenAt ?? DateTime.now());
+        hasSeen: true, readAt: notifica.readAt ?? DateTime.now());
     if (refresh) {
       list.refresh();
     }
   }
 
-  tap(int id) {
+  tap(String id) {
     Notifica? notifica = getN(id);
     if (notifica != null) {
       int index = list.indexOf(notifica);

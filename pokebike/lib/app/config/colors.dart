@@ -25,4 +25,6 @@ class MColors {
 
   static const Color votaFirstPlayerColor = Color(0xFFFFB444);
   static const Color votaSecondPlayerColor = Color(0xFFD1692E);
+
+  static const Color iconRed = Color(0xFFB61A15);
 }

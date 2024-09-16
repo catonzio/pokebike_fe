@@ -22,7 +22,7 @@ class MainBody extends GetView<LeaderboardController> {
                     duration: const Duration(milliseconds: 300),
                     child: controller.isLeaderboardList
                         ? RefreshIndicator(
-                            onRefresh: controller.refreshLeaderboard,
+                            onRefresh: controller.refreshList,
                             child: const MainBodyList(),
                           )
                         : RefreshIndicator(

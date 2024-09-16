@@ -7,6 +7,7 @@ class Constants {
   static const String settingsStorage = "settings";
 
   static const double bottomNavbarHeight = 130;
+  static const double fabOffset = 200;
   static const int numCommunityHome = 7;
 
   static const SliverGridDelegate gridDelegate =

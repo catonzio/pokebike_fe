@@ -22,6 +22,7 @@ class CommunityController extends SearchableListController<User> {
   @override
   void onInit() {
     scrollController = ScrollController();
+    skip = 0;
     super.onInit();
   }
 }

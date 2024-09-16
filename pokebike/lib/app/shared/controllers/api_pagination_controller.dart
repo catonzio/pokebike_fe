@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/api_response.dart';
 
 class ApiPaginationController<T> extends GetxController {
@@ -12,6 +13,10 @@ class ApiPaginationController<T> extends GetxController {
   final RxBool _isFetching = false.obs;
   bool get isFetching => _isFetching.value;
   set isFetching(bool value) => _isFetching.value = value;
+
+  final RxBool _showFAB = false.obs;
+  bool get showFAB => _showFAB.value;
+  set showFAB(bool value) => _showFAB.value = value;
 
   final RxList<T> list = <T>[].obs;
 
@@ -52,7 +57,9 @@ class ApiPaginationController<T> extends GetxController {
     isFetching = true;
     list.clear();
     final List<T> fetchedList = await providerFunc(limit, skip);
-    list.addAll(fetchedList);
+    if (list.isEmpty) {
+      list.addAll(fetchedList);
+    }
     isFetching = false;
 
     return fetchedList.isEmpty
@@ -78,7 +85,13 @@ class ApiPaginationController<T> extends GetxController {
   Future<void> _scrollListener() async {
     final offset = scrollController.offset;
     final maxOffset = scrollController.position.maxScrollExtent;
-    if (offset >= (maxOffset)) {
+    if (offset >= Constants.fabOffset) {
+      showFAB = true;
+    } else {
+      showFAB = false;
+    }
+
+    if (offset == maxOffset) {
       fetchOthers();
       // scrollController.jumpTo(offset - offset / 1.5);
     }

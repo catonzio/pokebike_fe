@@ -6,6 +6,7 @@ import 'package:pokebike/app/modules/garage/views/collezione/collezione_widget.d
 import 'package:pokebike/app/modules/garage/views/garage/garage_widget.dart';
 import 'package:pokebike/app/modules/garage/views/pagination/pagination_row.dart';
 import 'package:pokebike/app/modules/garage/views/profile_widget.dart';
+import 'package:pokebike/app/shared/controllers/api_pagination_controller.dart';
 import 'package:pokebike/app/shared/default_page.dart';
 import 'package:pokebike/app/shared/widgets/sliver_refresh.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -16,21 +17,32 @@ class GarageView extends GetView<GarageController> {
   const GarageView({super.key});
   @override
   Widget build(BuildContext context) {
-    return DefaultPage(
-      backButton: true,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: _mainBody(context),
-      ),
-    );
+    final ApiPaginationController apiController =
+        (controller.isShowingGarage.value
+            ? controller.garageWController
+            : controller.collezioneController as ApiPaginationController);
+    return Obx(() => DefaultPage(
+          backButton: true,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: _mainBody(apiController, context),
+          ),
+          fabOnTap: apiController.showFAB
+              ? () => apiController.scrollController.animateTo(0,
+                  duration: Duration(milliseconds: 500),
+                  curve: Curves.decelerate)
+              : null,
+        ));
   }
 
-  Widget _mainBody(BuildContext context) {
+  Widget _mainBody(
+      ApiPaginationController<dynamic> apiController, BuildContext context) {
     return CustomScrollView(
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(
           decelerationRate: ScrollDecelerationRate.fast),
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      controller: apiController.scrollController,
       // physics: NeverScrollableScrollPhysics(),
       slivers: [
         SliverAppBar(
@@ -65,5 +77,28 @@ class GarageView extends GetView<GarageController> {
             : const CollezioneWidget())
       ],
     );
+    // return Obx(() => Stack(
+    //       children: [
+    //         _buildScrollView(apiController, context),
+    //         Positioned(
+    //           top: 10,
+    //           // bottom: 10,
+    //           left: 100,
+    //           right: 100,
+    //           bottom: Constants.bottomNavbarHeight * 2,
+    //           // right: 100,
+    //           // height: context.height * 0.01,
+    //           // width: context.width * 0.01,
+    //           child: AnimatedSwitcher(
+    //             duration: Duration(milliseconds: 300),
+    //             child: apiController.showFAB
+    //                 ? Container(
+    //                     color: Colors.red,
+    //                   )
+    //                 : SizedBox.shrink(),
+    //           ),
+    //         )
+    //       ],
+    //     ));
   }
 }

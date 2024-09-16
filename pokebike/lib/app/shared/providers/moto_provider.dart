@@ -64,7 +64,13 @@ class MotoProvider extends GetConnect {
         "/partecipaziones?moto_id=$motoId${profileId != null ? "&profile_id=$profileId" : ""}");
   }
 
-  Future<ApiResponse> checkAlreadyChosen() {
-    return handleApiEndpoint(request, "get", "/partecipaziones/exists");
+  Future<Moto?> checkAlreadyChosen() async {
+    ApiResponse response =
+        await handleApiEndpoint(request, "get", "/partecipaziones/exists");
+    if (response.success) {
+      return Moto.fromJson(response.data);
+    } else {
+      return null;
+    }
   }
 }

@@ -17,13 +17,15 @@ class CollezioneWidget extends GetView<CollezioneController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => SliverSkeletonizer(
-        enabled: controller.isFetching,
-        child: controller.isFetching
-            ? _gridOfElements(controller.fakeList)
-            : (controller.list.isEmpty
-                ? const EmptyGarageBody()
-                : _gridOfElements(controller.filteredList))));
+    return Obx(() {
+      return SliverSkeletonizer(
+          enabled: controller.isFetching,
+          child: controller.isFetching
+              ? _gridOfElements(controller.fakeList)
+              : (controller.list.isEmpty
+                  ? const EmptyGarageBody()
+                  : _gridOfElements(controller.filteredList)));
+    });
   }
 
   Widget _gridOfElements(List<CollezioneMoto> elements) {

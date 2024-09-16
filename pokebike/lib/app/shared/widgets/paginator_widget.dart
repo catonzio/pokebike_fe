@@ -18,7 +18,7 @@ class PaginatorWidget extends StatelessWidget {
           const Positioned(
               left: 0,
               right: 0,
-              bottom: Constants.bottomNavbarHeight / 2,
+              bottom: Constants.bottomNavbarHeight / 1.7,
               child: MCircularProgressIndicator())
       ],
     );

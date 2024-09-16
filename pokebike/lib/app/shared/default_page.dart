@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
+import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/back_button.dart';
@@ -22,6 +23,8 @@ class DefaultPage extends GetView<MDrawerController> {
   final TextStyle? titleStyle;
   final Color backgroundColor;
   final List<Widget>? bottomAppbarActions;
+  final Widget? fab;
+  final Future<void>? Function()? fabOnTap;
 
   const DefaultPage(
       {super.key,
@@ -34,7 +37,9 @@ class DefaultPage extends GetView<MDrawerController> {
       this.title,
       this.titleStyle,
       this.backgroundColor = Colors.black,
-      this.bottomAppbarActions});
+      this.bottomAppbarActions,
+      this.fab,
+      this.fabOnTap});
 
   @override
   Widget build(BuildContext context) {
@@ -88,9 +93,45 @@ class DefaultPage extends GetView<MDrawerController> {
                         curve: Curves.easeInOutCubic),
               ],
             ),
+            floatingActionButton: _buildFAB(),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.endContained,
           ),
         );
       }),
+    );
+  }
+
+  AnimatedSwitcher _buildFAB() {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 200),
+      transitionBuilder: (child, animation) {
+        return FadeTransition(
+          opacity: animation,
+          child: ScaleTransition(
+            scale: animation,
+            child: child, // Don't forget to pass the child here
+          ),
+        );
+      },
+      child: fabOnTap != null
+          ? Padding(
+              padding: const EdgeInsets.only(
+                  bottom: Constants.bottomNavbarHeight / 2, right: 5),
+              child: fab ??
+                  FloatingActionButton(
+                    elevation: 10,
+                    onPressed: fabOnTap,
+                    shape: const CircleBorder(),
+                    backgroundColor: MColors.iconRed,
+                    child: const Icon(
+                      Icons.arrow_circle_up,
+                      color: Colors.white,
+                      size: 32,
+                    ),
+                  ),
+            )
+          : const SizedBox.shrink(),
     );
   }
 

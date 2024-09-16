@@ -39,16 +39,22 @@ class SettingsController extends GetxController {
   SettingsController({required this.provider});
 
   @override
-  void onInit() async {
-    notificationsEnabled.value =
-        (await Permission.notification.request()).isGranted;
+  void onReady() async {
+    PermissionStatus status = await Permission.notification.request();
+    notificationsEnabled.value = [
+      PermissionStatus.granted,
+      PermissionStatus.limited,
+      PermissionStatus.restricted,
+      PermissionStatus.provisional
+    ].contains(status);
+
     await setUser(argumentUser);
     nameController.text = user.value?.name ?? "";
     surnameController.text = user.value?.surname ?? "";
     usernameController.text = user.value?.username ?? "";
     dataController.text = user.value?.birthdate.toFormattedString() ?? "";
 
-    super.onInit();
+    super.onReady();
   }
 
   Future<void> setUser(User? user) async {
