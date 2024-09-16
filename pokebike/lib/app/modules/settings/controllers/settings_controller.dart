@@ -7,14 +7,20 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
 import 'package:pokebike/app/modules/settings/providers/settings_provider.dart';
+import 'package:pokebike/app/shared/controllers/storage.dart';
 import 'package:pokebike/app/shared/extensions/date_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsController extends GetxController {
   static SettingsController get to => Get.find<SettingsController>();
+
   User? argumentUser = Get.arguments as User?;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final RxBool isEditingPassword = false.obs;
+  set editingPassword(bool value) => isEditingPassword.value = value;
+  bool get editingPassword => isEditingPassword.value;
 
   final RxBool isEditing = false.obs;
   set editing(bool value) => isEditing.value = value;
@@ -31,6 +37,11 @@ class SettingsController extends GetxController {
   final TextEditingController surnameController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController dataController = TextEditingController();
+
+  final TextEditingController oldPasswordController = TextEditingController();
+  final TextEditingController newPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   final Rxn<User> user = Rxn<User>();
 
@@ -94,6 +105,59 @@ class SettingsController extends GetxController {
     }
     // if (Platform.isIOS) return await launchUrl(Uri.parse("app-settings:"));
     return false;
+  }
+
+  String? oldPasswordValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Inserisci la vecchia password';
+    }
+    if (value.length < 8) {
+      return 'La password deve essere di almeno 8 caratteri';
+    }
+    return null;
+  }
+
+  String? newPasswordValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Inserisci la nuova password';
+    }
+    if (value.length < 8) {
+      return 'La password deve essere di almeno 8 caratteri';
+    }
+    if (value.trim() != confirmPasswordController.text.trim()) {
+      return 'Le password non coincidono';
+    }
+    return null;
+  }
+
+  String? confirmPasswordValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Inserisci la password di conferma';
+    }
+    if (value.length < 8) {
+      return 'La password deve essere di almeno 8 caratteri';
+    }
+    if (value.trim() != newPasswordController.text.trim()) {
+      return 'Le password non coincidono';
+    }
+    return null;
+  }
+
+  Future<ApiResponse> salvaPassword() async {
+    Map<String, dynamic> data = {
+      'old_password': oldPasswordController.text.trim(),
+      'new_password': newPasswordController.text.trim()
+    };
+    saving = true;
+    ApiResponse response = await provider.updatePassword(data);
+    if (response.success) {
+      Storage.to.apiToken = response.data;
+      oldPasswordController.text = "";
+      newPasswordController.text = "";
+      confirmPasswordController.text = "";
+    }
+    saving = false;
+    return response;
   }
 
   Future<ApiResponse> salva() async {

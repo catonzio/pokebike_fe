@@ -16,4 +16,9 @@ class SettingsProvider extends GetConnect {
   Future<ApiResponse> updateUser(int id, Map<String, dynamic> params) {
     return handleApiEndpoint(request, "put", "/users/$id", data: params);
   }
+
+  Future<ApiResponse> updatePassword(Map<String, dynamic> params) {
+    return handleApiEndpoint(request, "put", "/users/update-password",
+        data: params);
+  }
 }

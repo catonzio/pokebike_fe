@@ -40,17 +40,17 @@ class SettingsShowWidget extends GetView<SettingsController> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   SettingsButton(
-                      text: "E-mail e password",
-                      icon: "E-mail",
-                      onPressed: () {},
+                      text: "Cambia password",
+                      icon: "Password",
+                      onPressed: () => controller.editingPassword = true,
                       trailing: const Icon(Icons.arrow_forward_ios)),
                   SettingsButton(
                     text: "Notifiche",
                     icon: "Notification",
-                    trailing: Obx(() => MSwitcher(
+                    trailing: Obx(() => MSwitcherOld(
                           value: controller.notificationsEnabled.value,
                           onChanged: (bool value) async {
-                            print("Changed: $value");
+                            print("Changed: ");
                             return await controller.openNotificationsSettings();
                           },
                         )),

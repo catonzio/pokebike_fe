@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:pokebike/app/modules/settings/views/settings_edit_password_widget.dart';
 import 'package:pokebike/app/modules/settings/views/settings_edit_widget.dart';
 import 'package:pokebike/app/modules/settings/views/settings_show_widget.dart';
 import 'package:pokebike/app/shared/default_page.dart';
@@ -27,9 +28,11 @@ class SettingsView extends GetView<SettingsController> {
         ),
         body: Obx(() => AnimatedSwitcher(
               duration: const Duration(milliseconds: 300),
-              child: controller.editing
-                  ? const SettingsEditWidget()
-                  : const SettingsShowWidget(),
+              child: controller.editingPassword
+                  ? const SettingsEditPasswordWidget()
+                  : controller.editing
+                      ? const SettingsEditWidget()
+                      : const SettingsShowWidget(),
             )));
   }
 }
