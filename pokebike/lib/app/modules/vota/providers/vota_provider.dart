@@ -16,7 +16,7 @@ class VotaProvider extends GetConnect {
     if (response.success) {
       return Turno.fromJson(response.data);
     } else {
-      return null;
+      throw Exception(response.message);
     }
   }
 

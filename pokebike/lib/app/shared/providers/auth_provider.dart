@@ -44,6 +44,11 @@ class AuthProvider extends GetConnect {
     return handleApiEndpoint(request, "post", "/check-token");
   }
 
+  Future<ApiResponse> setDeviceToken(String deviceToken) {
+    return handleApiEndpoint(request, "post", "/users/device-token",
+        data: {'device_token': deviceToken});
+  }
+
   Future<ApiResponse> askVerificationCode() async {
     return handleApiEndpoint(request, "get", "/send-email-verification");
   }

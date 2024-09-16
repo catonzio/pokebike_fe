@@ -13,4 +13,9 @@ class SplashController extends GetxController {
     ApiResponse response = await provider.checkToken();
     return response.success;
   }
+
+  Future<void> setDeviceToken(String deviceToken) async {
+    ApiResponse response = await provider.setDeviceToken(deviceToken);
+    print(response);
+  }
 }

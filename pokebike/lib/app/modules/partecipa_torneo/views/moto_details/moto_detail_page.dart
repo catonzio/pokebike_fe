@@ -22,65 +22,68 @@ class MotoDetailPage extends GetView<PartecipaTorneoController> {
     try {
       moto = controller.filteredList[index];
     } on RangeError {
-      moto = controller.filteredList.where((Moto p0) => p0.id == index).first;
+      Iterable<Moto> motos =
+          controller.filteredList.where((Moto p0) => p0.id == index);
+      if (motos.isNotEmpty) {
+        moto = motos.first;
+      }
     }
 
     return DefaultPage(
-          backButton: !controller.isMotoChosen.value,
-          body: SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Hero(
-                  tag: moto.id,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () => context.navigator.push(
-                        MaterialPageRoute(
-                            builder: (context) => MotoDetailPhoto(
-                                tag: moto.id.toString(),
-                                avatarUrl: moto.avatar)),
-                      ),
-                      child: AspectRatio(
-                        aspectRatio: 16 / 9,
-                        child: MimageNetwork(
-                          borderRadius: BorderRadius.circular(16),
-                          path: moto.avatar,
-                        ),
-                      ),
+      backButton: !controller.isMotoChosen.value,
+      body: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Hero(
+              tag: moto.id,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () => context.navigator.push(
+                    MaterialPageRoute(
+                        builder: (context) => MotoDetailPhoto(
+                            tag: moto.id.toString(), avatarUrl: moto.avatar)),
+                  ),
+                  child: AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child: MimageNetwork(
+                      borderRadius: BorderRadius.circular(16),
+                      path: moto.avatar,
                     ),
                   ),
                 ),
-                Expanded(
-                    child: Obx(
-                  () => controller.isMotoChosen.value
-                      ? const MotoDetailChosen()
-                      : GestureDetector(
-                          onHorizontalDragEnd: (details) {
-                            if (details.velocity.pixelsPerSecond.dx > 0) {
-                              createNewRoute(context, true);
-                            } else {
-                              createNewRoute(context, false);
-                            }
-                          },
-                          child: MotoDetailBody(
-                            moto: moto,
-                            index: index,
-                            totalLen: controller.filteredList.length - 1,
-                            onPrevious: () => createNewRoute(context, true),
-                            onNext: () => createNewRoute(context, false),
-                          ),
-                        ),
-                )),
-              ],
+              ),
             ),
-          ),
-        );
+            Expanded(
+                child: Obx(
+              () => controller.isMotoChosen.value
+                  ? const MotoDetailChosen()
+                  : GestureDetector(
+                      onHorizontalDragEnd: (details) {
+                        if (details.velocity.pixelsPerSecond.dx > 0) {
+                          createNewRoute(context, true);
+                        } else {
+                          createNewRoute(context, false);
+                        }
+                      },
+                      child: MotoDetailBody(
+                        moto: moto,
+                        index: index,
+                        totalLen: controller.filteredList.length - 1,
+                        onPrevious: () => createNewRoute(context, true),
+                        onNext: () => createNewRoute(context, false),
+                      ),
+                    ),
+            )),
+          ],
+        ),
+      ),
+    );
   }
 
   void createNewRoute(BuildContext context, bool left) {

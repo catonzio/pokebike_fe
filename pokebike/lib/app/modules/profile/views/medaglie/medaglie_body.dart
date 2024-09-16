@@ -16,9 +16,7 @@ class MedaglieBody extends GetView<ProfileController> {
           width: context.width,
           padding: const EdgeInsets.all(8.0),
           child: RefreshIndicator(
-            onRefresh: () async {
-              controller.fetchCoccarde();
-            },
+            onRefresh: controller.fetchCoccarde,
             child: ListView(
               shrinkWrap: true,
               padding: const EdgeInsets.only(

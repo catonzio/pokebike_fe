@@ -4,15 +4,12 @@ import 'package:get/get.dart';
 import 'package:pokebike/app/config/themes.dart';
 import 'package:pokebike/app/shared/bindings/initial_bindings.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:pokebike/initializer.dart';
 
 import 'app/routes/app_pages.dart';
 
 Future<void> main() async {
-  final initializer = Initializer();
-  await initializer.initialize();
-
   WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const App());
 }
 

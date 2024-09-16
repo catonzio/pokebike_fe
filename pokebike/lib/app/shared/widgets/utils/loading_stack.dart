@@ -8,12 +8,17 @@ import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
 class LoadingStack extends StatelessWidget {
   final Widget child;
   final RxBool isLoading;
+  final Widget topper;
+  final double sigmaX;
+  final double sigmaY;
 
-  const LoadingStack({
-    super.key,
-    required this.child,
-    required this.isLoading,
-  });
+  const LoadingStack(
+      {super.key,
+      required this.child,
+      required this.isLoading,
+      this.sigmaX = 5,
+      this.sigmaY = 5,
+      this.topper = const Center(child: MCircularProgressIndicator())});
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +27,8 @@ class LoadingStack extends StatelessWidget {
             child,
             if (isLoading.value)
               BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                child: const Center(child: MCircularProgressIndicator()),
+                filter: ImageFilter.blur(sigmaX: sigmaX, sigmaY: sigmaY),
+                child: topper,
               ).animate().fade()
           ],
         ));

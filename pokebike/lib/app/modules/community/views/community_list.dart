@@ -58,7 +58,7 @@ class CommunityList extends StatelessWidget {
                 : isHorizontal
                     ? HorizontalCommunityList(children: children)
                     : RefreshIndicator(
-                        onRefresh: () => controller.refreshList(),
+                        onRefresh: controller.refreshList,
                         child: PaginatorWidget(
                           body: VerticalCommunityList(
                               controller: controller, children: children),

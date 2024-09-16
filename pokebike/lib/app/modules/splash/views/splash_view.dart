@@ -5,6 +5,8 @@ import 'package:pokebike/app/modules/splash/controllers/splash_controller.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/controllers/storage.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/initializer.dart';
+import 'package:pokebike/messaging.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -17,23 +19,12 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      PermissionStatus status = await Permission.notification.request();
-      print(status);
+      await _initializeApp();
+      await _checkPermissions();
 
-      bool tokenValid = await SplashController.to.checkToken();
-      String route = Routes.PRESENTATION;
+      String route = await _checkToken();
 
-      if (tokenValid) {
-        route = Routes.HOME;
-      } else {
-        if (Storage.to.hasSeenPresentation) {
-          route = Routes.LOGIN_REGISTER;
-        } else {
-          route = Routes.PRESENTATION;
-        }
-      }
-
-      if (context.mounted) {
+      if (mounted) {
         context.navigator.pushReplacementNamed(route);
       }
     });
@@ -44,7 +35,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF08080a),
+      backgroundColor: const Color(0xFF08080a),
       body: Image.asset(
         "assets/images/splash.png",
         width: context.width,
@@ -57,5 +48,34 @@ class _SplashViewState extends State<SplashView> {
       //   fit: BoxFit.cover,
       // ),
     );
+  }
+
+  Future<void> _initializeApp() async {
+    final initializer = Initializer();
+    await initializer.initialize();
+
+    MessagingInitializer messagingInitialize = MessagingInitializer();
+    await messagingInitialize.initialize();
+  }
+
+  Future<void> _checkPermissions() async {
+    // PermissionStatus status = await Permission.notification.request();
+    await Permission.notification.request();
+  }
+
+  Future<String> _checkToken() async {
+    bool tokenValid = await SplashController.to.checkToken();
+    String route = Routes.PRESENTATION;
+
+    if (tokenValid) {
+      route = Routes.HOME;
+    } else {
+      if (Storage.to.hasSeenPresentation) {
+        route = Routes.LOGIN_REGISTER;
+      } else {
+        route = Routes.PRESENTATION;
+      }
+    }
+    return route;
   }
 }

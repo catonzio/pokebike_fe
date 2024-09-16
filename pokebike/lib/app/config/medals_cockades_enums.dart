@@ -1,12 +1,12 @@
 import 'dart:ui';
 
 enum Medals {
-  none(0, 0, "none", Color(0xFF434343)),
-  bronzo(0, 40, "bronzo", Color(0xFFb27e68)),
-  argento(40, 120, "argento", Color(0xFFc0c0c0)),
-  oro(120, 180, "oro", Color(0xFFffd700)),
-  platino(180, 250, "platino", Color(0xFFe5e4e2)),
-  diamante(250, null, "diamante", Color(0xFFb9f2ff));
+  none(0, 40, "none", Color(0xFF434343)),
+  bronzo(40, 120, "bronzo", Color(0xFFb27e68)),
+  argento(120, 180, "argento", Color(0xFFc0c0c0)),
+  oro(180, 250, "oro", Color(0xFFffd700)),
+  platino(250, 500, "platino", Color(0xFFe5e4e2)),
+  diamante(500, null, "diamante", Color(0xFFb9f2ff));
 
   final int lb;
   final int? ub;

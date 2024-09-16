@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
+import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 import 'package:pokebike/app/modules/partecipa_torneo/controllers/partecipa_torneo_controller.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:pokebike/app/shared/utils/api_utils.dart';
 import 'package:pokebike/app/shared/widgets/default_dialog.dart';
 
 class MotoChosenButton extends GetView<PartecipaTorneoController> {
-  final int index;
+  final int motoId;
 
-  const MotoChosenButton({super.key, required this.index});
+  const MotoChosenButton({super.key, required this.motoId});
 
   @override
   Widget build(BuildContext context) {
@@ -90,8 +92,13 @@ class MotoChosenButton extends GetView<PartecipaTorneoController> {
     );
   }
 
-  _dialogOkTap(BuildContext context) {
-    controller.chooseMoto(index);
-    context.navigator.pop();
+  _dialogOkTap(BuildContext context) async {
+    ApiResponse response = await controller.chooseMoto(motoId);
+    if (context.mounted) {
+      handleApiResponse(context, response,
+          successMessage: "Moto selezionata",
+          errorMessage: "Errore nel selezionare la moto");
+      context.navigator.pop();
+    }
   }
 }

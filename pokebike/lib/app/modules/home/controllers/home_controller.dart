@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:pokebike/app/shared/providers/auth_provider.dart';
+import 'package:pokebike/firebase.dart';
 
 class HomeController extends GetxController {
   final RxBool _isLoadingStories = false.obs;
@@ -17,10 +19,10 @@ class HomeController extends GetxController {
   // final RxList<String> communities = <String>[].obs;
 
   @override
-  void onInit() {
-    super.onInit();
+  void onReady() {
+    super.onReady();
     _loadStories();
-    // _loadCommunity();
+    _initializeDeviceToken();
   }
 
   void _loadStories() async {
@@ -28,6 +30,13 @@ class HomeController extends GetxController {
     await Future.delayed(const Duration(seconds: 2));
     stories.addAll(List.generate(10, (index) => "Story $index"));
     isLoadingStories = false;
+  }
+
+  Future<void> _initializeDeviceToken() async {
+    String? token = await FirebaseInitializer.initialize();
+    if (token != null) {
+      Get.find<AuthProvider>().setDeviceToken(token);
+    }
   }
 
   // void _loadCommunity() async {

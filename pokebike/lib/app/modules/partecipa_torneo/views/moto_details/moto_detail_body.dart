@@ -88,7 +88,7 @@ class MotoDetailBody extends StatelessWidget {
                     flex: 4,
                     child: SizedBox(
                         height: context.height * 0.05,
-                        child: MotoChosenButton(index: moto.id))),
+                        child: MotoChosenButton(motoId: moto.id))),
                 Expanded(
                     flex: 3,
                     child: index < totalLen

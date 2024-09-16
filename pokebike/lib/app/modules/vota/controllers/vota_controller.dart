@@ -15,6 +15,10 @@ class VotaController extends GetxController {
 
   final Rxn<Turno> turno = Rxn<Turno>();
 
+  final RxString _errorMessage = "".obs;
+  String get errorMessage => _errorMessage.value;
+  set errorMessage(String value) => _errorMessage.value = value;
+
   VotaController({required this.provider});
 
   @override
@@ -25,7 +29,12 @@ class VotaController extends GetxController {
 
   Future<void> fetchTurno() async {
     isFetchingTurno = true;
-    turno.value = await provider.fetchTurno();
+
+    try {
+      turno.value = await provider.fetchTurno();
+    } on Exception catch (e) {
+      errorMessage = e.toString().replaceFirst("Exception: ", "");
+    }
     isFetchingTurno = false;
   }
 

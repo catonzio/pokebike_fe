@@ -6,22 +6,22 @@ import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/extensions/nums_utils.dart';
 
 Medals medagliaName(int numCatture) {
-  if (numCatture.inRange(lb: 0, ub: Medals.bronzo.ub)) {
+  if (numCatture.inRange(lb: Medals.none.lb, ub: Medals.none.ub)) {
+    return Medals.none;
+  }
+  if (numCatture.inRange(lb: Medals.bronzo.lb, ub: Medals.bronzo.ub)) {
     return Medals.bronzo;
   }
-  if (numCatture.inRange(lb: Medals.bronzo.ub, ub: Medals.argento.ub)) {
+  if (numCatture.inRange(lb: Medals.argento.lb, ub: Medals.argento.ub)) {
     return Medals.argento;
   }
-  if (numCatture.inRange(lb: Medals.argento.ub, ub: Medals.oro.ub)) {
+  if (numCatture.inRange(lb: Medals.oro.lb, ub: Medals.oro.ub)) {
     return Medals.oro;
   }
-  if (numCatture.inRange(lb: Medals.oro.ub, ub: Medals.platino.ub)) {
+  if (numCatture.inRange(lb: Medals.platino.lb, ub: Medals.platino.ub)) {
     return Medals.platino;
-  }
-  if (numCatture.inRange(lb: Medals.platino.ub)) {
-    return Medals.diamante;
   } else {
-    return Medals.none;
+    return Medals.diamante;
   }
 }
 

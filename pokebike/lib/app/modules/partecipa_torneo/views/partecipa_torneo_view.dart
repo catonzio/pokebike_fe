@@ -12,7 +12,7 @@ class PartecipaTorneoView extends GetView<PartecipaTorneoController> {
 
   @override
   Widget build(BuildContext context) {
-    return controller.isMotoChosen.value
+    return Obx(() => controller.isMotoChosen.value
         ? MotoDetailPage(index: controller.motoIndex.value)
         : DefaultPage(
             backButton: true,
@@ -34,13 +34,13 @@ class PartecipaTorneoView extends GetView<PartecipaTorneoController> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: RefreshIndicator(
-                          child: const PartecipaTorneoGrid(),
-                          onRefresh: () async => controller.refreshList()),
+                          onRefresh: controller.refreshList,
+                          child: const PartecipaTorneoGrid()),
                     ),
                   )
                 ],
               ),
-            ));
+            )));
   }
 
   void _onSearchField(String value) {

@@ -13,8 +13,9 @@ class Themes {
         progressIndicatorTheme: theme.progressIndicatorTheme.copyWith(
           circularTrackColor: MColors.primaryLight,
           color: Colors.grey,
-          refreshBackgroundColor: Colors.blue,
-        )
+          refreshBackgroundColor: MColors.primary,
+        ),
+        dividerColor: MColors.primary
         // colorScheme: theme.colorScheme.copyWith(secondary: MColors.secondary),
         );
     return theme;

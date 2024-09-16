@@ -58,7 +58,7 @@ class SingleMedagliaDetail extends StatelessWidget {
           children: [
             MIcon(
               name:
-                  "Medal icon ${numCatturate < (medaglia.ub ?? Medals.diamante.lb) ? 'none' : medaglia.iconName}"
+                  "Medal icon ${numCatturate < (medaglia.lb) ? 'none' : medaglia.iconName}"
                       .trim(),
               size: medalSize * 0.15,
             ),

@@ -13,7 +13,7 @@ import 'package:pokebike/app/shared/providers/moto_provider.dart';
 class MotoDetailsController extends GetxController {
   final CollezioneMoto? collezioneMoto =
       (Get.arguments as MotoDetailsArguments).collezioneMoto;
-  final Moto? moto = (Get.arguments as MotoDetailsArguments).moto;
+  Moto? moto = (Get.arguments as MotoDetailsArguments).moto;
   final bool isOwnMoto = (Get.arguments as MotoDetailsArguments).isOwnMoto;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -23,6 +23,8 @@ class MotoDetailsController extends GetxController {
 
   final RxBool isShowingInfo = false.obs;
   final RxBool isEditingMoto = false.obs;
+
+  final RxBool isFavorita = false.obs;
 
   final RxBool isSendingData = false.obs;
 
@@ -45,6 +47,7 @@ class MotoDetailsController extends GetxController {
     availableMarche.addAll(tipoMarcaController.marche);
 
     if (moto != null) {
+      isFavorita.value = moto!.isFavorita;
       marcaController.text = moto!.marcaMoto.nome;
       modelloController.text = moto!.nome;
       tipoController.text = moto!.tipoMoto.nome;
@@ -154,6 +157,8 @@ class MotoDetailsController extends GetxController {
   Future<ApiResponse> setFavorita() async {
     if (moto != null) {
       final ApiResponse response = await provider.setFavorita(moto!.id);
+      isFavorita.value = true;
+      moto = moto?.copyWith(isFavorita: true);
       return response;
     } else {
       return ApiResponse.error(message: "Errore nel caricamento", data: null);

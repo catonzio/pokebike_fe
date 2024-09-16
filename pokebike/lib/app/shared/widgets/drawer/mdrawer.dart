@@ -59,10 +59,10 @@ class Mdrawer extends StatelessWidget {
           title: "Sei sicuro di voler uscire?",
           message:
               "Una volta uscito dovrai effettuare nuovamente l'accesso per utilizzare l'app",
-          redTitle: "Annulla",
-          redAction: (BuildContext context) => context.navigator.pop(),
-          whiteTitle: "Esci",
-          whiteAction: _dialogEsciTap),
+          redTitle: "Esci",
+          redAction: _dialogEsciTap,
+          whiteTitle: "Annulla",
+          whiteAction: (BuildContext context) => context.navigator.pop()),
     );
 
     // show the dialog
@@ -77,6 +77,7 @@ class Mdrawer extends StatelessWidget {
   _dialogEsciTap(BuildContext context) {
     final MDrawerController controller = Get.find<MDrawerController>();
     controller.logout();
-    context.navigator.pushNamedAndRemoveUntil(Routes.LOGIN_REGISTER, (_) => false);
+    context.navigator
+        .pushNamedAndRemoveUntil(Routes.LOGIN_REGISTER, (_) => false);
   }
 }

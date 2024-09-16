@@ -13,9 +13,11 @@ class MotoProvider extends GetConnect {
   }
 
   Future<List<Moto>> fetchMotos(int? limit, int? skip) async {
-    String suffix = (limit != null ? "limit=$limit" : "") + (skip != null ? "&skip=$skip" : "");
+    String suffix = (limit != null ? "limit=$limit" : "") +
+        (skip != null ? "&skip=$skip" : "");
 
-    ApiResponse response = await handleApiEndpoint(request, "get", "/motos?$suffix");
+    ApiResponse response =
+        await handleApiEndpoint(request, "get", "/motos?$suffix");
     if (response.success) {
       return (response.data as List).map((e) => Moto.fromJson(e)).toList();
     } else {
@@ -27,7 +29,8 @@ class MotoProvider extends GetConnect {
     return handleApiEndpoint(request, "post", "/motos", data: data);
   }
 
-  Future<List<CollezioneMoto>> fetchCollezioneMoto(int? limit, int? skip) async {
+  Future<List<CollezioneMoto>> fetchCollezioneMoto(
+      int? limit, int? skip) async {
     ApiResponse response =
         await handleApiEndpoint(request, 'get', '/collezione-motos');
     if (response.success) {
@@ -54,5 +57,14 @@ class MotoProvider extends GetConnect {
 
   Future<ApiResponse> setFavorita(int motoId) {
     return handleApiEndpoint(request, "get", "/motos/set-favorita/$motoId");
+  }
+
+  Future<ApiResponse> createPartecipazione(int motoId, {int? profileId}) {
+    return handleApiEndpoint(request, "post",
+        "/partecipaziones?moto_id=$motoId${profileId != null ? "&profile_id=$profileId" : ""}");
+  }
+
+  Future<ApiResponse> checkAlreadyChosen() {
+    return handleApiEndpoint(request, "get", "/partecipaziones/exists");
   }
 }
