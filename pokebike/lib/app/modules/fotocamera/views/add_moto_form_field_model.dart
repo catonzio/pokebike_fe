@@ -7,6 +7,7 @@ class MotoFormFieldModel {
   final Function()? onTap;
   final bool isNumeric;
   final int maxLines;
+  final bool readOnly;
 
   MotoFormFieldModel(
       {required this.label,
@@ -14,7 +15,8 @@ class MotoFormFieldModel {
       this.validator,
       this.onTap,
       this.isNumeric = false,
-      this.maxLines = 1});
+      this.maxLines = 1,
+      this.readOnly = false});
 }
 
 class MotoFormFieldModelDropdown extends MotoFormFieldModel {

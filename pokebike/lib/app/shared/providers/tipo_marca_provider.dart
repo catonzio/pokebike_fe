@@ -9,7 +9,7 @@ class TipoMarcaProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.baseUrl = Constants.apiBaseUrl;
-    httpClient.timeout = const Duration(seconds: 30);
+    httpClient.timeout = const Duration(seconds: 60);
   }
 
   Future<List<TipoMoto>> fetchTipos() async {
@@ -42,6 +42,37 @@ class TipoMarcaProvider extends GetConnect {
       return (response.data as List).map<String>((dynamic e) => e).toList();
     } else {
       return [];
+    }
+  }
+
+  Future<List<TipoMoto>> fetchTiposMarcaId(int marcaId) async {
+    ApiResponse response = await handleApiEndpoint(request, "get",
+        "/collezione-motos/tipo-from-marca?marcaId=$marcaId&names=true");
+    if (response.success) {
+      return (response.data as List).map((e) => TipoMoto.fromJson(e)).toList();
+    } else {
+      return [];
+    }
+  }
+
+  Future<List<String>> fetchModelloFromMarcaId(int marcaId) async {
+    ApiResponse response = await handleApiEndpoint(
+        request, "get", "/collezione-motos/modello?marcaId=$marcaId");
+    if (response.success) {
+      return (response.data as List).map((el) => el as String).toList();
+    } else {
+      return [];
+    }
+  }
+
+  Future<TipoMoto> fetchTipoFromMarcaModello(
+      int marcaId, String modello) async {
+    ApiResponse response = await handleApiEndpoint(request, "get",
+        "/collezione-motos/tipo-marca-modello?marcaId=$marcaId&modello=$modello");
+    if (response.success) {
+      return TipoMoto.fromJson(response.data);
+    } else {
+      return const TipoMoto(id: 0, nome: "");
     }
   }
 }

@@ -14,30 +14,35 @@ class AddMotoFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FormField field;
+    Widget field;
 
     if (model is MotoFormFieldModelDropdown) {
-      List<DropdownMenuItem> items = (model as MotoFormFieldModelDropdown)
-          .items
+      MotoFormFieldModelDropdown mmodel = model as MotoFormFieldModelDropdown;
+      List<DropdownMenuItem> items = mmodel.items
           .map((e) => DropdownMenuItem(
                 value: e,
                 child: Text(e),
               ))
           .toList();
       field = DropdownButtonFormField(
+        key: ValueKey(mmodel.items),
         items: items,
-        value: model.controller.text.isEmpty ? null : model.controller.text,
-        validator: (dynamic value) => model.validator!(value as String?),
+        value: mmodel.controller.text.isNotEmpty &&
+                mmodel.items.contains(mmodel.controller.text.trim())
+            ? mmodel.controller.text
+            : null,
+        validator: (dynamic value) => mmodel.validator!(value as String?),
         onChanged: (dynamic value) {
-          model.controller.text = value.toString();
+          mmodel.controller.text = value.toString();
         },
-        decoration: transparentInputDecoration(model.label),
+        decoration: transparentInputDecoration(mmodel.label),
       );
     } else {
       field = TextFormField(
         controller: model.controller,
         minLines: 1,
         maxLines: model.maxLines,
+        readOnly: model.readOnly,
         inputFormatters: model.isNumeric
             ? <TextInputFormatter>[
                 FilteringTextInputFormatter.digitsOnly,

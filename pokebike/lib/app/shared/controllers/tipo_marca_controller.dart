@@ -16,12 +16,15 @@ class TipoMarcaController extends GetxController {
   List<String> get nomiTipi => tipi.map((e) => e.nome).toList();
   List<String> get nomiMarche => marche.map((e) => e.nome).toList();
 
-  @override
-  void onInit() {
-    super.onInit();
-    fetchMarche();
-    fetchTipi();
-    fetchModelli();
+  Future<void> initialize() async {
+    await Future.wait([
+      fetchMarche(),
+      fetchTipi(),
+      fetchModelli(),
+    ]);
+
+    // print(
+    //     "Marche len: ${marche.length}, Tipi len: ${tipi.length} Modelli len: ${modelli.length}");
   }
 
   Future<void> fetchMarche() async {

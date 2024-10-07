@@ -16,12 +16,9 @@ class AddMotoFormController extends GetxController {
   final TextEditingController marcaController = TextEditingController();
   final TextEditingController modelloController = TextEditingController();
   final TextEditingController tipoController = TextEditingController();
-  final TextEditingController annoController =
-      TextEditingController(text: "1234");
-  final TextEditingController luogoController =
-      TextEditingController(text: "Qui");
-  final TextEditingController descrizioneController =
-      TextEditingController(text: "Descrizione");
+  final TextEditingController annoController = TextEditingController();
+  final TextEditingController luogoController = TextEditingController();
+  final TextEditingController descrizioneController = TextEditingController();
 
   final TipoMarcaProvider provider;
 
@@ -37,20 +34,39 @@ class AddMotoFormController extends GetxController {
   void onInit() {
     super.onInit();
     final TipoMarcaController tipoMarcaController = TipoMarcaController.to;
-    availableTipos.addAll(tipoMarcaController.tipi);
     availableMarche.addAll(tipoMarcaController.marche);
-    availableNames.addAll(tipoMarcaController.modelli);
+    marcaController.addListener(_marcaOnChanged);
+    modelloController.addListener(_modelloOnChanged);
+    // availableNames.addAll(tipoMarcaController.modelli);
+  }
 
-    // marcaController.addListener(() async {
-    //   availableTipos.clear();
-    //   List<TipoMoto> motos = await provider.fetchTipos(marcaId: marcaMotoString.id);
-    //   availableTipos.addAll(motos);
-    // });
-    // tipoController.addListener(() async {
-    //   availableNames.clear();
-    //   List<String> motos = await provider.fetchModelli();
-    //   availableNames.addAll(motos);
-    // });
+  @override
+  void dispose() {
+    super.dispose();
+    marcaController.dispose();
+    modelloController.dispose();
+    tipoController.dispose();
+    annoController.dispose();
+    luogoController.dispose();
+    descrizioneController.dispose();
+  }
+
+  Future<void> _marcaOnChanged() async {
+    String value = marcaController.text.trim();
+    modelloController.clear();
+    availableNames.clear();
+    tipoController.clear();
+    List<String> modelli =
+        await provider.fetchModelloFromMarcaId(marcaIdFromName(value));
+    availableNames.addAll(modelli);
+  }
+
+  Future<void> _modelloOnChanged() async {
+    String marca = marcaController.text.trim();
+    String modello = modelloController.text.trim();
+    TipoMoto tipo = await provider.fetchTipoFromMarcaModello(
+        marcaIdFromName(marca), modello);
+    tipoController.text = tipo.nome;
   }
 
   String? marcaValidator(dynamic value) {
@@ -103,15 +119,17 @@ class AddMotoFormController extends GetxController {
       'luogo': luogoController.text.trim(),
       'descrizione': descrizioneController.text.trim(),
       'data_cattura': DateTime.now().toIso8601String(),
-      'marca_moto_id': availableMarche
-          .where((marca) => marca.nome == marcaController.text)
-          .first
-          .id,
-      'tipo_moto_id': availableTipos
-          .where((tipo) => tipo.nome == tipoController.text)
-          .first
-          .id,
+      'marca_moto_id': marcaIdFromName(marcaController.text.trim()),
+      'tipo_moto_id': tipoIdFromName(tipoController.text.trim()),
     };
+  }
+
+  int tipoIdFromName(String nome) {
+    return availableTipos.where((tipo) => tipo.nome == nome).first.id;
+  }
+
+  int marcaIdFromName(String nome) {
+    return availableMarche.where((marca) => marca.nome == nome).first.id;
   }
 
   void clear() {

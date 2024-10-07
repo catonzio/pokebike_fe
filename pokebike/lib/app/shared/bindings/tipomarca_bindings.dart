@@ -6,6 +6,6 @@ class TipoMarcaBindings extends Bindings {
   @override
   void dependencies() {
     TipoMarcaProvider tipoMarcaProvider = Get.put(TipoMarcaProvider());
-    Get.put(TipoMarcaController(provider: tipoMarcaProvider));
+    Get.put(TipoMarcaController(provider: tipoMarcaProvider), permanent: true);
   }
 }

@@ -39,14 +39,14 @@ class BezierClipper extends CustomClipper<Path> {
     double rb3Y = lb1Y;
 
     // ending point
-    double epX = w - spX;
+    double epX = w;
     double epY = h;
 
     Path path = Path()
       ..moveTo(spX, spY)
       ..cubicTo(lb1X, lb1Y, lb2X, lb2Y, lb3X, lb3Y)
       // ..lineTo(lb3X, lb3Y + 0)
-      ..arcToPoint(Offset(rb1X, rb1Y + 60), radius: const Radius.circular(1))
+      ..arcToPoint(Offset(rb1X, rb1Y + 50), radius: const Radius.circular(1))
       // ..quadraticBezierTo(cpX, cpY, rb1X, rb1Y)
       ..lineTo(rb1X, rb1Y)
       ..cubicTo(rb2X, rb2Y, rb3X, rb3Y, epX, epY)

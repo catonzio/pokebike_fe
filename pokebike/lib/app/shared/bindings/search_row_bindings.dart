@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pokebike/app/data/enums/order_by.dart';
 import 'package:pokebike/app/shared/controllers/filter_box_controller.dart';
 import 'package:pokebike/app/shared/controllers/filter_sheet_controller.dart';
 import 'package:pokebike/app/shared/controllers/tipo_marca_controller.dart';
@@ -14,7 +15,8 @@ class SearchRowBindings extends Bindings {
     Map<String, FilterBoxController> controllers = {
       'ordinaPer': Get.put(
           FilterBoxController(
-              title: 'ordinaPer', options: ['Più recenti', 'Dalla A alla Z']),
+              title: 'Ordina per',
+              options: [OrderBy.recent.name, OrderBy.alphabet.name]),
           tag: 'Ordina per'),
       'tipo': Get.put(
           FilterBoxController(

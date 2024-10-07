@@ -4,6 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:pokebike/app/modules/splash/controllers/splash_controller.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/controllers/storage.dart';
+import 'package:pokebike/app/shared/controllers/tipo_marca_controller.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/initializer.dart';
 import 'package:pokebike/messaging.dart';
@@ -37,7 +38,7 @@ class _SplashViewState extends State<SplashView> {
     return Scaffold(
       backgroundColor: const Color(0xFF08080a),
       body: Image.asset(
-        "assets/images/splash.png",
+        "assets/images/splash_old.png",
         width: context.width,
         height: context.height,
         fit: BoxFit.contain,
@@ -66,6 +67,8 @@ class _SplashViewState extends State<SplashView> {
   Future<String> _checkToken() async {
     bool tokenValid = await SplashController.to.checkToken();
     String route = Routes.PRESENTATION;
+
+    await TipoMarcaController.to.initialize();
 
     if (tokenValid) {
       route = Routes.HOME;

@@ -62,9 +62,7 @@ Future<ApiResponse> handleApiEndpoint(
         data = FormData(data);
       }
     }
-    if (url.contains('modello')) {
-      print("Modello");
-    }
+    
     final response = await request(url, method,
         query: method == 'get' ? data : null,
         body: ['post', 'put', 'patch'].contains(method) ? data : null,

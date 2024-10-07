@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:pokebike/firebase_options.dart';
 
 class FirebaseInitializer {
@@ -20,7 +19,7 @@ class FirebaseInitializer {
   Future<String?> requestPermissions() async {
     final messaging = FirebaseMessaging.instance;
 
-    final settings = await messaging.requestPermission(
+    await messaging.requestPermission(
       alert: true,
       announcement: false,
       badge: true,

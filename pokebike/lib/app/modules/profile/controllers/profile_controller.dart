@@ -125,12 +125,12 @@ class ProfileController extends GetxController {
   bool get isClassifica => selectedIndex.value == 1;
 
   List<PaginationItem> get items => [
-        PaginationItem(
-            text: "Collezione",
-            index: 0,
-            leftPadding: 0.0,
-            rightPadding: 8.0,
-            onPressed: () => changeIndex(0)),
+        // PaginationItem(
+        //     text: "Collezione",
+        //     index: 0,
+        //     leftPadding: 0.0,
+        //     rightPadding: 8.0,
+        //     onPressed: () => changeIndex(0)),
         PaginationItem(
             text: "Medaglie",
             index: 0,
