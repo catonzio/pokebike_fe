@@ -54,7 +54,7 @@ class RegisterView extends GetView<RegisterController> {
           flex: 1,
           child: Padding(
             padding: const EdgeInsets.only(top: 64),
-            child: ShimmerTitle.dark(text: "Benvenuto!"),
+            child: ShimmerTitle.dark(text: 'welcome'.tr),
           ),
         ),
         Expanded(
@@ -79,15 +79,14 @@ class RegisterView extends GetView<RegisterController> {
                 child: MButton(
                   onPressed: () => _register(context),
                   backgroundColor: MColors.secondaryDark,
-                  child: const Text("Avanti"),
+                  child: Text('frwd'.tr),
                 ),
               ),
               SizedBox(
                 width: double.infinity,
                 child: InkWell(
                   onTap: () => _onAlreadyAccount(context),
-                  child: const Text("Hai già un account? Accedi",
-                      textAlign: TextAlign.center),
+                  child: Text('alreadyAccount'.tr, textAlign: TextAlign.center),
                 ),
               ),
             ],
@@ -100,37 +99,37 @@ class RegisterView extends GetView<RegisterController> {
   Widget _formBody(BuildContext context) {
     List<RegisterFormFieldModel> fields = [
       RegisterFormFieldModel(
-          label: "E-mail",
+          label: 'email'.tr,
           validator: controller.emailValidator,
           controller: controller.emailController,
           isPassword: false),
       RegisterFormFieldModel(
-          label: "Nome",
+          label: 'name'.tr,
           validator: controller.nomeValidator,
           controller: controller.nomeController,
           isPassword: false),
       RegisterFormFieldModel(
-          label: "Cognome",
+          label: 'surname'.tr,
           validator: controller.cognomeValidator,
           controller: controller.cognomeController,
           isPassword: false),
       RegisterFormFieldModel(
-          label: "Username",
+          label: 'username'.tr,
           validator: controller.usernameValidator,
           controller: controller.usernameController,
           isPassword: false),
       RegisterFormFieldModel(
-          label: "Password",
+          label: 'password'.tr,
           validator: controller.passwordValidator,
           controller: controller.passwordController,
           isPassword: true),
       RegisterFormFieldModel(
-          label: "Conferma Password",
+          label: 'passwordConfirm'.tr,
           validator: controller.confirmPasswordValidator,
           controller: controller.confirmPasswordController,
           isPassword: true),
       RegisterFormFieldModel(
-          label: "Data di nascita",
+          label: 'birthday'.tr,
           validator: controller.birthdateValidator,
           controller: controller.birthdateController,
           isPassword: false,
@@ -147,7 +146,7 @@ class RegisterView extends GetView<RegisterController> {
       Padding(
         padding: const EdgeInsets.only(top: 16.0),
         child: Obx(() => PhotoPicker(
-              text: controller.avatar.value?.name ?? "Seleziona l'avatar",
+              text: controller.avatar.value?.name ?? 'selectAvatar'.tr,
               validator: controller.avatarValidator,
               onSuccess: controller.setAvatar,
             )),
@@ -155,9 +154,8 @@ class RegisterView extends GetView<RegisterController> {
       CheckboxFormField(
         value: controller.isPrivacyAccepted,
         onChanged: controller.togglePrivacy,
-        title: const Text("Privacy"),
-        validator: (value) =>
-            value == false ? "Devi accettare la privacy" : null,
+        title: Text('privacy'.tr),
+        validator: (value) => value == false ? 'acceptPrivacy'.tr : null,
       ),
     ]);
   }
@@ -168,7 +166,8 @@ class RegisterView extends GetView<RegisterController> {
       if (context.mounted) {
         handleApiResponse(context, response, onSuccess: (dynamic data) {
           Storage.to.apiToken = data;
-          context.navigator.pushNamedAndRemoveUntil(Routes.CONFIRM_REGISTER, (_) => false);
+          context.navigator
+              .pushNamedAndRemoveUntil(Routes.CONFIRM_REGISTER, (_) => false);
         });
       }
     }

@@ -62,11 +62,10 @@ class SettingsEditPasswordWidget extends GetView<SettingsController> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   MButton.red(
-                      onPressed: () => _salva(context),
-                      child: const Text("Salva")),
+                      onPressed: () => _salva(context), child: Text('save'.tr)),
                   MButton.white(
                       onPressed: () => controller.editingPassword = false,
-                      child: Text("Annulla",
+                      child: Text('nullify'.tr,
                           style: context.textTheme.bodySmall!
                               .copyWith(color: MColors.primaryDark))),
                 ],

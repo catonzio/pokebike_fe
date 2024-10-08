@@ -30,7 +30,7 @@ class NotificationsView extends GetView<NotificationsController> {
           iconSize: 24,
         )
       ],
-      title: "Notifiche",
+      title: 'notifications'.tr,
       backButton: true,
       body: Obx(() => controller.list.isNotEmpty || controller.isFetching
           ? Skeletonizer(
@@ -58,16 +58,16 @@ class NotificationsView extends GetView<NotificationsController> {
         builder: (context) {
           return Dialog(
             child: DefaultDialog(
-                title: "Elimina notifiche",
-                message: "Sei sicuro di voler eliminare tutte le notifiche?",
-                redTitle: "Elimina",
+                title: 'deleteNotifications'.tr,
+                message: 'deleteNotificationsSure'.tr,
+                redTitle: 'delete'.tr,
                 redAction: (context) async {
                   await controller.deleteAll();
                   if (context.mounted) {
                     context.navigator.pop();
                   }
                 },
-                whiteTitle: "Annulla",
+                whiteTitle: 'nullify'.tr,
                 whiteAction: (context) => context.navigator.pop()),
           );
         });
@@ -82,7 +82,7 @@ class EmptyNotificheBody extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: context.height * 0.2),
       child: Text(
-        "Non ci sono nuove notifiche",
+        'noNewNotifications'.tr,
         style: context.textTheme.displaySmall,
         textAlign: TextAlign.center,
       ),

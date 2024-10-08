@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 extension ContextUtils on BuildContext {
   ScaffoldMessengerState get scaffold => ScaffoldMessenger.of(this);
@@ -17,7 +18,7 @@ extension ContextUtils on BuildContext {
       elevation: 30,
       action: action ??
           SnackBarAction(
-            label: "Ok",
+            label: 'ok'.tr,
             onPressed: () => scaffold.clearSnackBars(),
           ),
     ));

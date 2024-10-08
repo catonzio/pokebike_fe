@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
@@ -13,15 +14,15 @@ class EmptyClassificaBody extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const Text(
-          "Non hai ancora partecipato a nessun torneo",
+        Text(
+          'noTournamentsPartecipations'.tr,
           textAlign: TextAlign.center,
         ),
         MButton(
             onPressed: () => context.navigator.pushNamed(Routes
                 .PARTECIPA_TORNEO), // Get.find<ProfileController>().setTorneo(Torneo()),
             backgroundColor: MColors.secondaryDark,
-            child: const Text("Partecipa al torneo"))
+            child: Text('partecipateTournaments'.tr))
       ],
     );
   }

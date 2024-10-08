@@ -23,7 +23,7 @@ class TopMoto extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
-              child: Text("TOP MOTO",
+              child: Text('topMoto'.tr.toUpperCase(),
                   style: context.textTheme.headlineSmall!
                       .copyWith(fontWeight: FontWeight.bold)),
             ),

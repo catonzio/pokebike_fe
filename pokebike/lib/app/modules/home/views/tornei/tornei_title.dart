@@ -10,7 +10,7 @@ class TorneiTitle extends StatelessWidget {
     return Container(
       alignment: Alignment.centerLeft,
       child: ShimmerTitle.light(
-        text: "Tornei",
+        text: 'tournaments'.tr,
         style: context.textTheme.headlineLarge!
             .copyWith(fontWeight: FontWeight.bold),
         textAlign: TextAlign.start,

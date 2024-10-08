@@ -13,12 +13,12 @@ class EmptyPartecipaTorneoGrid extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
-          "Non hai ancora collezionato nessuna moto",
+          'noCollecting'.tr,
           style: context.textTheme.titleMedium,
         ),
         MButton.red(
             onPressed: () => context.navigator.pushNamed(Routes.FOTOCAMERA),
-            child: const Text("Inizia a collezionare")),
+            child: Text('startCollecting'.tr)),
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:pokebike/app/data/enums/garage_type.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 
@@ -14,50 +15,50 @@ class DrawerItem {
       this.arguments});
 }
 
-const List<DrawerItem> drawerItems = [
+List<DrawerItem> drawerItems = [
   DrawerItem(
-    title: "Home",
+    title: 'home'.tr,
     icon: "Home icon white",
     path: Routes.HOME,
   ),
   DrawerItem(
-      title: "Il mio garage",
+      title: 'myGarage'.tr,
       icon: "Garage icon white",
       path: Routes.GARAGE,
       arguments: GarageType.garage),
   DrawerItem(
-    title: "Torneo",
+    title: 'tournament'.tr,
     icon: "Torneo icon white",
     path: Routes.TORNEO,
   ),
   DrawerItem(
-    title: "Community",
+    title: 'community'.tr,
     icon: "Community icon white",
     path: Routes.COMMUNITY,
   ),
   DrawerItem(
-      title: "Collezione",
+      title: 'collection'.tr,
       icon: "Collection icon white",
       path: Routes.GARAGE,
       arguments: GarageType.collection),
   DrawerItem(
-      title: "Classifica",
+      title: 'leaderboard'.tr,
       icon: "Classifica icon white",
       path: Routes.LEADERBOARD),
   DrawerItem(
-    title: "Profilo",
+    title: 'profile'.tr,
     icon: "Profile icon white",
     path: Routes.PROFILE,
   ),
   DrawerItem(
-    title: "Notifiche",
+    title: 'notifications'.tr,
     icon: "Notification icon white",
     path: Routes.NOTIFICATIONS,
   )
 ];
 
-const DrawerItem drawerItemLogout = DrawerItem(
-  title: "Logout",
+DrawerItem drawerItemLogout = DrawerItem(
+  title: 'logout'.tr,
   icon: "Logout icon white",
   path: Routes.LOGIN,
 );

@@ -23,7 +23,7 @@ class UpperRow extends GetView<LeaderboardController> {
                   : MColors.secondary,
               withBorders: false,
               onPressed: controller.showLeaderboard,
-              child: const Text("Classifica generale"),
+              child: Text('generalLeaderboard'.tr),
             ),
             MButton(
               width: context.width * 0.4,
@@ -33,7 +33,7 @@ class UpperRow extends GetView<LeaderboardController> {
                   : MColors.primaryLight,
               withBorders: false,
               onPressed: controller.showWinner,
-              child: const Text("Vincitore"),
+              child: Text('winner'.tr),
             )
           ],
         ));

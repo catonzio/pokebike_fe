@@ -15,15 +15,15 @@ class EmptyMedaglieBody extends GetView<ProfileController> {
           child: ListView(
             shrinkWrap: true,
             padding: const EdgeInsets.only(bottom: 0),
-            children: const [
-              DividerTitle("MEDAGLIE"),
+            children: [
+              DividerTitle('medals'.tr.toUpperCase()),
               Text(
-                "Non hai vinto ancora nessuna medaglia",
+                'noMedals'.tr,
                 textAlign: TextAlign.center,
               ),
-              DividerTitle("COCCARDE"),
+              DividerTitle('cockades'.tr.toUpperCase()),
               Text(
-                "Non hai vinto ancora nessuna coccarda",
+                'noCockades'.tr,
                 textAlign: TextAlign.center,
               ),
             ],

@@ -30,7 +30,7 @@ class HomeView extends GetView<HomeController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ShimmerTitle.light(
-              text: "Ciao Biker!",
+              text: 'helloBiker'.tr,
             ),
             // StoriesWidget(height: storiesHeight),
             SizedBox(

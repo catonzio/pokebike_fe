@@ -34,10 +34,10 @@ class FilterModalSheet extends GetView<FilterSheetController> {
             Padding(
               padding: const EdgeInsets.only(top: 8.0, bottom: 16),
               child: MButton(
-                  label: "Applica", onTap: () => _applicaClicked(context)),
+                  label: 'apply'.tr, onTap: () => _applicaClicked(context)),
             ),
             MButton(
-              label: "Cancella",
+              label: 'cancel'.tr,
               onTap: () => context.navigator.pop(),
               color: Colors.white,
               textColor: MColors.primary,

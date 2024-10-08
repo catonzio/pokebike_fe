@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/data/models/notifica/notifica.dart';
 import 'package:pokebike/app/shared/extensions/date_utils.dart';
@@ -28,7 +29,8 @@ class NotificaCard extends StatelessWidget {
           ),
           subtitle: AutoSizeText(notifica.data.body,
               maxLines: 2, overflow: TextOverflow.ellipsis),
-          trailing: Text("Ricevuta ${notifica.createdAt.toFormattedString()}")),
+          trailing: Text('received'
+              .trParams({'when': notifica.createdAt.toFormattedString()}))),
     );
   }
 }

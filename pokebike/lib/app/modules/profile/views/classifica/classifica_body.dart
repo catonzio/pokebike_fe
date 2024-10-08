@@ -29,9 +29,8 @@ class ClassificaBody extends GetView<ProfileController> {
                   child: Obx(() => Skeletonizer(
                         enabled: controller.isFetchingClassificaTile.value,
                         child: controller.classificaTile.value == null
-                            ? const Center(
-                                child:
-                                    Text("Errore caricamento partecipazione"))
+                            ? Center(
+                                child: Text('errorLoadingPartecipation'.tr))
                             : ClassificaProfileRow(
                                 classificaTile:
                                     controller.classificaTile.value!,

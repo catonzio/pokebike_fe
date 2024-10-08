@@ -55,7 +55,7 @@ class CapturingView extends GetView<FotocameraController> {
               height: context.height * 0.04,
               child: CameraRowButton(
                 isSelected: false,
-                text: "Condividi",
+                text: 'share'.tr,
                 onTap: () => {},
               ),
             ),
@@ -74,15 +74,15 @@ class CapturingView extends GetView<FotocameraController> {
         children: [
           {
             "index": 0,
-            "label": "IL MIO GARAGE",
+            "label": 'myGarage'.tr.toUpperCase(),
           },
           {
             "index": 1,
-            "label": "COLLEZIONE",
+            "label": 'collection'.tr.toUpperCase(),
           },
           {
             "index": 2,
-            "label": "STORIA",
+            "label": 'story'.tr.toUpperCase(),
           },
         ]
             .map((Map<String, dynamic> e) => SizedBox(

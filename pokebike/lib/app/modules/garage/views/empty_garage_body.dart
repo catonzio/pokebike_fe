@@ -12,8 +12,7 @@ class EmptyGarageBody extends StatelessWidget {
     return SliverList.list(
       children: [
         Center(
-          child: Text("Non hai ancora aggiunto moto",
-              style: context.textTheme.titleMedium),
+          child: Text('noMotoAdded'.tr, style: context.textTheme.titleMedium),
         ),
         SizedBox(
           height: context.height * 0.1,
@@ -21,7 +20,7 @@ class EmptyGarageBody extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(bottom: context.height * 0.1),
           child: MButton(
-            label: "Aggiungi",
+            label: 'add'.tr,
             onTap: () => context.navigator.pushNamed(Routes.FOTOCAMERA),
           ),
         )

@@ -17,14 +17,14 @@ class AddMotoForm extends StatelessWidget {
     return GetX<AddMotoFormController>(builder: (controller) {
       List<MotoFormFieldModel> fields = [
         MotoFormFieldModelDropdown(
-            label: "Marca",
+            label: 'brand'.tr,
             items: controller.availableMarche
                 .map((element) => element.nome)
                 .toList(),
             validator: controller.marcaValidator,
             controller: controller.marcaController),
         MotoFormFieldModelDropdown(
-            label: "Modello",
+            label: 'model'.tr,
             items: controller.availableNames.map((element) => element).toList(),
             validator: controller.modelloValidator,
             controller: controller.modelloController),
@@ -36,22 +36,22 @@ class AddMotoForm extends StatelessWidget {
         //     validator: controller.tipoValidator,
         //     controller: controller.tipoController),
         MotoFormFieldModel(
-            label: "Tipo",
+            label: 'type'.tr,
             validator: controller.tipoValidator,
             controller: controller.tipoController,
             isNumeric: false,
             readOnly: true),
         MotoFormFieldModel(
-            label: "Anno",
+            label: 'year'.tr,
             validator: controller.annoValidator,
             controller: controller.annoController,
             isNumeric: true),
         MotoFormFieldModel(
-            label: "Luogo",
+            label: 'location'.tr,
             validator: controller.luogoValidator,
             controller: controller.luogoController),
         MotoFormFieldModel(
-            label: "Descrizione",
+            label: 'description'.tr,
             validator: controller.descrizioneValidator,
             controller: controller.descrizioneController,
             maxLines: 5)
@@ -76,7 +76,7 @@ class AddMotoForm extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 32),
                   child: MButton.red(
                     onPressed: () => _addMoto(controller),
-                    child: const Text("Aggiungi moto"),
+                    child: Text('addMoto'.tr),
                   ),
                 ),
               ]),

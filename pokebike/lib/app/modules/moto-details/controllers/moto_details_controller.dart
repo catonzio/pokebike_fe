@@ -159,7 +159,7 @@ class MotoDetailsController extends GetxController {
 
   Future<ApiResponse> salva() async {
     if (moto == null) {
-      return ApiResponse.error(message: "Moto is null", data: null);
+      return ApiResponse.error(message: 'noInternet'.tr, data: null);
     }
     isSendingData.value = true;
     final ApiResponse response = await provider.updateMoto(moto!.id, getData());
@@ -174,7 +174,7 @@ class MotoDetailsController extends GetxController {
       moto = moto?.copyWith(isFavorita: true);
       return response;
     } else {
-      return ApiResponse.error(message: "Errore nel caricamento", data: null);
+      return ApiResponse.error(message: 'noInternet'.tr, data: null);
     }
   }
 }

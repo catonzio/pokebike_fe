@@ -28,7 +28,7 @@ class Mdrawer extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(top: context.height * 0.1, bottom: 32.0),
             child: ShimmerTitle.light(
-              text: "Ciao Biker!",
+              text: 'helloBiker'.tr,
             ),
           ),
           ...drawerItems.map((e) => Padding(
@@ -56,12 +56,11 @@ class Mdrawer extends StatelessWidget {
     Dialog alert = Dialog(
       backgroundColor: MColors.grey,
       child: DefaultDialog(
-          title: "Sei sicuro di voler uscire?",
-          message:
-              "Una volta uscito dovrai effettuare nuovamente l'accesso per utilizzare l'app",
-          redTitle: "Esci",
+          title: 'logoutTitle'.tr,
+          message: 'logoutMessage'.tr,
+          redTitle: 'exit'.tr,
           redAction: _dialogEsciTap,
-          whiteTitle: "Annulla",
+          whiteTitle: 'nullify'.tr,
           whiteAction: (BuildContext context) => context.navigator.pop()),
     );
 

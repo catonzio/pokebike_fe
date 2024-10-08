@@ -18,9 +18,8 @@ class CommunityList extends StatelessWidget {
   const CommunityList({super.key, this.isHorizontal = false});
 
   void initState(GetXState<CommunityController> state) {
-    state.controller
-        ?.initialFetch()
-        .then((value) => handleApiResponse(state.context, value));
+    state.controller?.initialFetch().then((value) =>
+        state.context.mounted ? handleApiResponse(state.context, value) : null);
   }
 
   @override
@@ -52,9 +51,9 @@ class CommunityList extends StatelessWidget {
           return Skeletonizer(
             enabled: controller.isFetching,
             child: children.isEmpty
-                ? const Align(
+                ? Align(
                     alignment: Alignment.topCenter,
-                    child: Text("La community è vuota"))
+                    child: Text('emptyCommunity'.tr))
                 : isHorizontal
                     ? HorizontalCommunityList(children: children)
                     : RefreshIndicator(

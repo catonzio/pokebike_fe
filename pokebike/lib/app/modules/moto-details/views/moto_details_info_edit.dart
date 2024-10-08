@@ -18,33 +18,33 @@ class MotoDetailsInfoEdit extends GetView<MotoDetailsController> {
   Widget build(BuildContext context) {
     List<MotoFormFieldModel> fields = [
       MotoFormFieldModelDropdown(
-          label: "Marca",
+          label: 'brand'.tr,
           items: controller.availableMarche
               .map((element) => element.nome)
               .toList(),
           validator: controller.marcaValidator,
           controller: controller.marcaController),
       MotoFormFieldModel(
-          label: "Modello",
+          label: 'model'.tr,
           validator: controller.modelloValidator,
           controller: controller.modelloController),
       MotoFormFieldModelDropdown(
-          label: "Tipo",
+          label: 'type'.tr,
           items:
               controller.availableTipos.map((element) => element.nome).toList(),
           validator: controller.tipoValidator,
           controller: controller.tipoController),
       MotoFormFieldModel(
-          label: "Anno",
+          label: 'year'.tr,
           validator: controller.annoValidator,
           controller: controller.annoController,
           isNumeric: true),
       MotoFormFieldModel(
-          label: "Luogo",
+          label: 'location'.tr,
           validator: controller.luogoValidator,
           controller: controller.luogoController),
       MotoFormFieldModel(
-          label: "Descrizione",
+          label: 'description'.tr,
           validator: controller.descrizioneValidator,
           controller: controller.descrizioneController,
           maxLines: 5)
@@ -63,9 +63,9 @@ class MotoDetailsInfoEdit extends GetView<MotoDetailsController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 8.0),
-                    child: Text("Data cattura"),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Text('captureDate'.tr),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 12.0),
@@ -87,14 +87,14 @@ class MotoDetailsInfoEdit extends GetView<MotoDetailsController> {
               padding: const EdgeInsets.only(top: 32, bottom: 16),
               child: MButton.red(
                 onPressed: () => _salva(context),
-                child: const Text("Salva"),
+                child: Text('save'.tr),
               ),
             ),
             MButton.white(
                 onPressed: () => controller.annullaEdit(),
-                child: const Text(
-                  "Annulla",
-                  style: TextStyle(color: Colors.black),
+                child: Text(
+                  'nullify'.tr,
+                  style: const TextStyle(color: Colors.black),
                 ))
           ]),
     );
@@ -102,10 +102,11 @@ class MotoDetailsInfoEdit extends GetView<MotoDetailsController> {
 
   Future<void> _salva(BuildContext context) async {
     if (controller.formKey.currentState!.validate()) {
-      controller.salva().then((ApiResponse response) => handleApiResponse(
-          context, response,
-          successMessage: "Dati salvati correttamente",
-          onSuccess: (_) => controller.isEditingMoto.value = false));
+      controller.salva().then((ApiResponse response) => context.mounted
+          ? handleApiResponse(context, response,
+              successMessage: 'dataSaved'.tr,
+              onSuccess: (_) => controller.isEditingMoto.value = false)
+          : null);
     }
   }
 }

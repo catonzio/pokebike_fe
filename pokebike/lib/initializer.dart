@@ -3,9 +3,11 @@ import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 import 'package:get_storage/get_storage.dart';
 import 'package:pokebike/app/config/constants.dart';
+import 'package:pokebike/app/shared/controllers/storage.dart';
 
 late List<CameraDescription> cameras;
 
@@ -19,6 +21,7 @@ class Initializer {
 
   loadStorage() async {
     await GetStorage.init(Constants.settingsStorage);
+    Get.updateLocale(Locale(Storage.to.currentLocale.toLowerCase()));
   }
 
   loadCameras() async {

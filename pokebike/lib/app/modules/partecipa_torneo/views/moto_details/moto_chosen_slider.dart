@@ -20,7 +20,7 @@ class MotoChosenButton extends GetView<PartecipaTorneoController> {
       child: MButton.red(
         onPressed: () => _showDialog(context),
         padding: const EdgeInsets.all(8),
-        child: const Text("Scelgo te!"),
+        child: Text('chooseYou'.tr),
       ),
     );
     // return GestureDetector(
@@ -74,12 +74,11 @@ class MotoChosenButton extends GetView<PartecipaTorneoController> {
     Dialog alert = Dialog(
       backgroundColor: MColors.grey,
       child: DefaultDialog(
-          title: "È questa la moto che vuoi utilizzare per la gara?",
-          message:
-              "Una volta scelta non potrai più cambiarla fino al prossimo torneo.",
-          redTitle: "Scegli",
+          title: 'motoForRaceTitle'.tr,
+          message: 'motoForRaceMessage'.tr,
+          redTitle: 'choose'.tr,
           redAction: _dialogOkTap,
-          whiteTitle: "Annulla",
+          whiteTitle: 'nullify'.tr,
           whiteAction: (BuildContext context) => context.navigator.pop()),
     );
 
@@ -96,8 +95,8 @@ class MotoChosenButton extends GetView<PartecipaTorneoController> {
     ApiResponse response = await controller.chooseMoto(motoId);
     if (context.mounted) {
       handleApiResponse(context, response,
-          successMessage: "Moto selezionata",
-          errorMessage: "Errore nel selezionare la moto");
+          successMessage: 'selectedMoto'.tr,
+          errorMessage: 'selectedMotoError'.tr);
       context.navigator.pop();
     }
   }

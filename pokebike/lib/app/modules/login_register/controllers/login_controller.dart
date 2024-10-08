@@ -16,10 +16,8 @@ class LoginController extends GetxController {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<FormFieldState> emailFormKey = GlobalKey<FormFieldState>();
 
-  final TextEditingController emailController =
-      TextEditingController(text: "email1@email.com");
-  final TextEditingController passwordController =
-      TextEditingController(text: "password");
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   final AuthProvider provider;
 
@@ -27,20 +25,20 @@ class LoginController extends GetxController {
 
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return "L'email non può essere vuota";
+      return 'emailNoEmpty'.tr;
     }
     if (!value.isEmail) {
-      return "Inserisci un'email valida";
+      return 'emailNotValid'.tr;
     }
     return null;
   }
 
   String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return "La password non può essere vuota";
+      return 'pwdNoEmpty'.tr;
     }
     if (value.length < 8) {
-      return "La password deve essere di almeno 8 caratteri";
+      return 'pwd8chars'.tr;
     }
     return null;
   }

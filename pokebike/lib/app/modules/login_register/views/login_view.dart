@@ -47,7 +47,7 @@ class LoginView extends GetView<LoginController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        ShimmerTitle.dark(text: "Bentornato!"),
+        ShimmerTitle.dark(text: 'welcomeBack'.tr),
         SizedBox(
           height: context.height * 0.25,
           child: Form(
@@ -66,7 +66,7 @@ class LoginView extends GetView<LoginController> {
                     ? null
                     : () => _login(context),
                 backgroundColor: MColors.secondaryDark,
-                child: const Text("Accedi"),
+                child: Text('access'.tr),
               ),
             ),
             SizedBox(
@@ -75,8 +75,7 @@ class LoginView extends GetView<LoginController> {
                 onTap: controller.isPerformingLogin.value
                     ? null
                     : () => _onRegister(context),
-                child: const Text("Non hai un account? Registrati",
-                    textAlign: TextAlign.center),
+                child: Text('noAccount'.tr, textAlign: TextAlign.center),
               ),
             ),
           ],
@@ -90,7 +89,7 @@ class LoginView extends GetView<LoginController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const Text("E-mail"),
+        Text('email'.tr),
         TextFormField(
             key: controller.emailFormKey,
             controller: controller.emailController,
@@ -98,8 +97,8 @@ class LoginView extends GetView<LoginController> {
             maxLines: 1,
             style: Themes.darkFormTextStyle,
             validator: controller.emailValidator,
-            decoration: lightInputDecoration("E-mail")),
-        const Text("Password"),
+            decoration: lightInputDecoration('email'.tr)),
+        Text('password'.tr),
         Obx(() => TextFormField(
             controller: controller.passwordController,
             obscureText: controller.obscurePassword,
@@ -107,7 +106,7 @@ class LoginView extends GetView<LoginController> {
             maxLines: 1,
             style: Themes.darkFormTextStyle,
             validator: controller.passwordValidator,
-            decoration: lightInputDecoration("Password",
+            decoration: lightInputDecoration('password'.tr,
                 isPassword: true,
                 toggleObscurePassword: controller.toggleObscurePassword))),
         SizedBox(
@@ -116,9 +115,9 @@ class LoginView extends GetView<LoginController> {
             onTap: controller.isPerformingLogin.value
                 ? null
                 : () => _passwordForgotten(context),
-            child: const Text("Password dimenticata?",
+            child: Text('pwdForgot'.tr,
                 textAlign: TextAlign.end,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w400)),
@@ -131,15 +130,19 @@ class LoginView extends GetView<LoginController> {
   _login(BuildContext context) async {
     if (controller.formKey.currentState?.validate() ?? false) {
       controller.login().then((ApiResponse response) {
-        handleApiResponse(context, response, onSuccess: (dynamic data) {
-          Storage.to.apiToken = data;
-          controller.checkToken().then((bool value) => value
-              ? context.navigator
-                  .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
-              : context.navigator.pushNamedAndRemoveUntil(
-                  Routes.CONFIRM_REGISTER, (_) => false));
-          // context.navigator.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
-        });
+        if (context.mounted) {
+          handleApiResponse(context, response, onSuccess: (dynamic data) {
+            Storage.to.apiToken = data;
+            controller.checkToken().then((bool value) => !context.mounted
+                ? null
+                : value
+                    ? context.navigator
+                        .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
+                    : context.navigator.pushNamedAndRemoveUntil(
+                        Routes.CONFIRM_REGISTER, (_) => false));
+            // context.navigator.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
+          });
+        }
       });
     }
   }
@@ -147,9 +150,14 @@ class LoginView extends GetView<LoginController> {
   _passwordForgotten(BuildContext context) {
     if (controller.emailFormKey.currentState?.validate() ?? false) {
       controller.passwordForgot().then((ApiResponse value) {
-        handleApiResponse(context, value,
-            successMessage:
-                "Email di reset ${value.message.contains('throttled') ? 'gia ' : ''}inviata");
+        if (context.mounted) {
+          handleApiResponse(context, value,
+              successMessage: 'resetEmailSent'.trParams({
+                'status': value.message.contains('throttled')
+                    ? '${'already'.tr} '
+                    : ''
+              }));
+        }
       });
     }
   }

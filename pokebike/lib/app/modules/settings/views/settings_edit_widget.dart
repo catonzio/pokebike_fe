@@ -38,8 +38,7 @@ class SettingsEditWidget extends GetView<SettingsController> {
                       duration: const Duration(milliseconds: 500),
                     ),
               ),
-              if (controller.saving)
-                const MCircularProgressIndicator()
+              if (controller.saving) const MCircularProgressIndicator()
             ],
           )),
     );
@@ -66,16 +65,15 @@ class SettingsEditWidget extends GetView<SettingsController> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   MButton.red(
-                      onPressed: () => _salva(context),
-                      child: const Text("Salva")),
+                      onPressed: () => _salva(context), child: Text('save'.tr)),
                   MButton.white(
                       onPressed: () => controller.editing = false,
-                      child: Text("Annulla",
+                      child: Text('nullify'.tr,
                           style: context.textTheme.bodySmall!
                               .copyWith(color: MColors.primaryDark))),
                   InkWell(
                     onTap: () => deleteAccount(context),
-                    child: const Text("Elimina account"),
+                    child: Text('deleteAccount'.tr),
                   )
                 ],
               ),
@@ -90,12 +88,11 @@ class SettingsEditWidget extends GetView<SettingsController> {
     Dialog alert = Dialog(
       backgroundColor: MColors.grey,
       child: DefaultDialog(
-          title: "Sei sicuro di voler eliminare il tuo account?",
-          message:
-              "Una volta confermato non potrai più accedere al tuo profilo",
-          redTitle: "Elimina",
+          title: 'deleteAccountTitle'.tr,
+          message: 'deleteAccountMessage'.tr,
+          redTitle: 'delete'.tr,
           redAction: _dialogEliminaTap,
-          whiteTitle: "Annulla",
+          whiteTitle: 'nullify'.tr,
           whiteAction: (BuildContext context) => context.navigator.pop()),
     );
 
@@ -109,19 +106,22 @@ class SettingsEditWidget extends GetView<SettingsController> {
   }
 
   _dialogEliminaTap(BuildContext context) {
-    controller.deleteUser().then((ApiResponse value) => handleApiResponse(
-        context, value,
-        onSuccess: (_) => context.navigator
-            .pushNamedAndRemoveUntil(Routes.SPLASH, (_) => false)));
+    controller.deleteUser().then((ApiResponse value) => !context.mounted
+        ? null
+        : handleApiResponse(context, value,
+            onSuccess: (_) => context.navigator
+                .pushNamedAndRemoveUntil(Routes.SPLASH, (_) => false)));
   }
 
   _salva(BuildContext context) async {
     controller.salva().then((ApiResponse response) {
-      handleApiResponse(context, response,
-          successMessage: "Salvataggio completato", onSuccess: (_) {
-        controller.editing = false;
-        controller.user.value = User.fromJson(response.data);
-      });
+      !context.mounted
+          ? null
+          : handleApiResponse(context, response,
+              successMessage: 'savingCompleted'.tr, onSuccess: (_) {
+              controller.editing = false;
+              controller.user.value = User.fromJson(response.data);
+            });
     });
   }
 }

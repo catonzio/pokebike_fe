@@ -49,14 +49,14 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ShimmerTitle.dark(
-              text: "Conferma",
+              text: 'confirm'.tr,
               // style: TextStyle(
               //     fontSize: 34,
               //     fontWeight: FontWeight.bold,
               //     color: MColors.primaryDark),
             ),
             ShimmerTitle.dark(
-              text: "Registrazione",
+              text: 'register'.tr,
               // style: TextStyle(
               //     fontSize: 34,
               //     fontWeight: FontWeight.bold,
@@ -71,7 +71,7 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
         MButton(
           onPressed: () => _confirm(context),
           backgroundColor: MColors.secondaryDark,
-          child: const Text("Registrati"),
+          child: Text('registerYou'.tr),
         )
       ],
     );
@@ -82,7 +82,7 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        const Text("Inserisci il codice ricevuto via email"),
+        Text('codeViaEmail'.tr),
         TextFormField(
             controller: controller.codeController,
             keyboardType: TextInputType.number,
@@ -91,14 +91,14 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
             maxLines: 1,
             style: Themes.darkFormTextStyle,
             validator: controller.codeValidator,
-            decoration: lightInputDecoration("Inserisci il codice")),
+            decoration: lightInputDecoration('insertCode'.tr)),
         SizedBox(
           width: double.infinity,
           child: InkWell(
             onTap: () => _askAnotherCode(context),
-            child: const Text("Richiedi un altro codice",
+            child: Text('anotherCode'.tr,
                 textAlign: TextAlign.end,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w400)),
@@ -131,7 +131,8 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
   }
 
   _askAnotherCode(BuildContext context) {
-    controller.askCode().then((ApiResponse value) =>
-        handleApiResponse(context, value, successMessage: "Codice inviato"));
+    controller.askCode().then((ApiResponse value) => context.mounted
+        ? handleApiResponse(context, value, successMessage: 'codeSent'.tr)
+        : null);
   }
 }

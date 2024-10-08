@@ -177,7 +177,13 @@ class SettingsController extends GetxController {
     if (user.value != null) {
       return provider.deleteUser(user.value!.id);
     } else {
-      return ApiResponse.error(message: "User is null", data: {});
+      return ApiResponse.error(message: 'noInternet'.tr, data: {});
     }
+  }
+
+  void updateLocale(Locale locale) {
+    Get.updateLocale(locale);
+    Storage.to.currentLocale = locale.languageCode.toLowerCase();
+    print(Storage.to.currentLocale);
   }
 }

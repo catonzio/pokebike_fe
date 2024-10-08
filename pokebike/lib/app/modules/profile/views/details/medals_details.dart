@@ -16,7 +16,7 @@ class MedalsDetails extends StatelessWidget {
 
     return DefaultPage(
       backButton: true,
-      title: "Moto catturate",
+      title: 'capturedMotos'.tr,
       body: ListView(
         itemExtent: context.height * 0.2,
         padding: const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
@@ -50,7 +50,10 @@ class SingleMedagliaDetail extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
-          "Moto catturate: $realNum${medaglia.ub == null ? "" : "/${medaglia.ub}"}",
+          'percMotosCaptured'.trParams({
+            'realNum': realNum.toString(),
+            'limit': medaglia.ub == null ? "" : "/${medaglia.ub}"
+          }),
           style: context.textTheme.titleMedium,
         ),
         Stack(

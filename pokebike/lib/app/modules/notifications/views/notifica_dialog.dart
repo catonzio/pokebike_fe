@@ -31,8 +31,8 @@ class NotificaDialog extends StatelessWidget {
                   const Divider(),
                   Padding(
                     padding: const EdgeInsets.only(top: 28),
-                    child:
-                        Text(notifica.data.body, style: context.textTheme.bodyLarge),
+                    child: Text(notifica.data.body,
+                        style: context.textTheme.bodyLarge),
                   ),
                   const Spacer(),
                   Column(
@@ -41,13 +41,19 @@ class NotificaDialog extends StatelessWidget {
                     children: [
                       notifica.readAt != null
                           ? Text(
-                              "Letta ${notifica.readAt!.toFormattedString(withHour: true)}",
+                              'read'.trParams({
+                                'when': notifica.readAt!
+                                    .toFormattedString(withHour: true)
+                              }),
                               style: context.textTheme.labelSmall,
                             )
                           : const SizedBox.shrink(),
                       // Spacer(),
                       Text(
-                        "Ricevuta ${notifica.createdAt.toFormattedString(withHour: true)}",
+                        'received'.trParams({
+                          'when': notifica.createdAt
+                              .toFormattedString(withHour: true)
+                        }),
                         style: context.textTheme.labelSmall,
                       )
                     ],

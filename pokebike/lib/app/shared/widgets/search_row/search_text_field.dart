@@ -13,7 +13,7 @@ class SearchTextField extends StatelessWidget {
     return TextField(
       focusNode: focusNode,
       decoration: InputDecoration(
-        hintText: "Cerca",
+        hintText: 'search'.tr,
         hintStyle:
             context.textTheme.bodyLarge!.copyWith(color: MColors.primary),
         filled: true,

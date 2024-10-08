@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 
 class NavbarItem {
@@ -19,26 +20,26 @@ class NavbarItem {
 
 final List<NavbarItem> bottomNavbarItems = [
   NavbarItem(
-    label: "Home",
+    label: 'home'.tr,
     iconName: "Home icon",
     size: 30,
     route: Routes.HOME,
   ),
   NavbarItem(
-    label: "Garage",
+    label: 'garage'.tr,
     iconName: "Garage icon",
     size: 30,
     route: Routes.GARAGE,
   ),
   NavbarItem(
-    label: "Fotocamera",
+    label: 'photocamera'.tr,
     iconName: "Logo",
     size: 70,
     route: Routes.FOTOCAMERA,
     // shouldPop: false,
   ),
   NavbarItem(
-    label: "Torneo",
+    label: 'tournament'.tr,
     iconName: "Torneo icon",
     size: 30,
     route: Routes.TORNEO,
@@ -50,7 +51,7 @@ final List<NavbarItem> bottomNavbarItems = [
     ],
   ),
   NavbarItem(
-    label: "Profilo",
+    label: 'profile'.tr,
     iconName: "Profile icon",
     size: 30,
     route: Routes.PROFILE,

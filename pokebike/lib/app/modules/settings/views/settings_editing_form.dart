@@ -18,19 +18,19 @@ class SettingsEditingForm extends GetView<SettingsController> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextFormField(
-              decoration: transparentInputDecoration("Nome"),
+              decoration: transparentInputDecoration('name'.tr),
               controller: controller.nameController,
             ),
             TextFormField(
-              decoration: transparentInputDecoration("Cognome"),
+              decoration: transparentInputDecoration('surname'.tr),
               controller: controller.surnameController,
             ),
             TextFormField(
-              decoration: transparentInputDecoration("Username"),
+              decoration: transparentInputDecoration('uusername'.tr),
               controller: controller.usernameController,
             ),
             TextFormField(
-              decoration: transparentInputDecoration("Data di nascita"),
+              decoration: transparentInputDecoration('birthday'.tr),
               controller: controller.dataController,
               onTap: () => selectDate(context),
             ),

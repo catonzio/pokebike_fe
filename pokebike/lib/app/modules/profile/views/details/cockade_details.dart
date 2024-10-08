@@ -58,7 +58,10 @@ class SingleCockadeDetail extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
-          "Moto catturate: $realNum${cockade.ub == null ? "" : "/${cockade.ub}"}",
+          'percMotosCaptured'.trParams({
+            'realNum': realNum.toString(),
+            'limit': cockade.ub == null ? '' : "/${cockade.ub}"
+          }),
           style: context.textTheme.titleMedium,
         ),
         Stack(

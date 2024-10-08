@@ -56,7 +56,7 @@ class PresentationView extends GetView<PresentationController> {
                           ))),
                   SizedBox(width: context.width * 0.3),
                   InkWell(
-                    child: const Text("Salta"),
+                    child: Text('jump'.tr),
                     onTap: () => _skipPresentation(context),
                   )
                 ],

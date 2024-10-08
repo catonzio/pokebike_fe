@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:pokebike/app/data/enums/order_by.dart';
 
 class SearchOptions {
@@ -13,7 +14,7 @@ class SearchOptions {
 
   @override
   String toString() {
-    return {"Ordina per": orderBy.name, "Tipo": tipo, "Marca": marca}
+    return {'orderBy'.tr: orderBy.name, 'type'.tr: tipo, 'brand'.tr: marca}
         .toString();
   }
 }

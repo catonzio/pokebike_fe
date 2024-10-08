@@ -40,7 +40,7 @@ class CollezioneWidget extends GetView<CollezioneController> {
         ),
       ),
       elements.isEmpty
-          ? const Center(child: Text("Nessuna moto trovata con questi filtri"))
+          ? Center(child: Text('noMotoFoundFilter'.tr))
           : GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,

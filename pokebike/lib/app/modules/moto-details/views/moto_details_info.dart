@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
 
 import 'package:pokebike/app/data/models/moto/moto.dart';
@@ -16,13 +17,14 @@ class MotoDetailsInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         MotoDetailsInfoRow(
-            label: "Data cattura", value: moto.dataCattura.toFormattedString()),
-        MotoDetailsInfoRow(label: "Marca", value: moto.marcaMoto.nome),
-        MotoDetailsInfoRow(label: "Modello", value: moto.nome),
-        MotoDetailsInfoRow(label: "Tipo", value: moto.tipoMoto.nome),
-        MotoDetailsInfoRow(label: "Anno", value: moto.anno.toString()),
-        MotoDetailsInfoRow(label: "Luogo", value: moto.luogo),
-        MotoDetailsInfoRow(label: "Descrizione", value: moto.descrizione),
+            label: 'captureDate'.tr,
+            value: moto.dataCattura.toFormattedString()),
+        MotoDetailsInfoRow(label: 'brand'.tr, value: moto.marcaMoto.nome),
+        MotoDetailsInfoRow(label: 'model'.tr, value: moto.nome),
+        MotoDetailsInfoRow(label: 'type'.tr, value: moto.tipoMoto.nome),
+        MotoDetailsInfoRow(label: 'year'.tr, value: moto.anno.toString()),
+        MotoDetailsInfoRow(label: 'location'.tr, value: moto.luogo),
+        MotoDetailsInfoRow(label: 'description'.tr, value: moto.descrizione),
       ],
     );
   }
@@ -39,14 +41,11 @@ class CollezioneMotoDetailsInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         MotoDetailsInfoRow(
-            label: "Marca", value: collezioneMoto.marcaMoto.nome),
-        MotoDetailsInfoRow(label: "Modello", value: collezioneMoto.modello),
-        MotoDetailsInfoRow(label: "Tipo", value: collezioneMoto.tipoMoto.nome),
-        MotoDetailsInfoRow(label: "Nazione", value: collezioneMoto.nazione),
-        // MotoDetailsInfoRow(
-        //     label: "Data cattura", value: moto.dataCattura.toFormattedString()),
-        // MotoDetailsInfoRow(label: "Luogo", value: moto.luogo),
-        // MotoDetailsInfoRow(label: "Descrizione", value: moto.descrizione),
+            label: 'brand'.tr, value: collezioneMoto.marcaMoto.nome),
+        MotoDetailsInfoRow(label: 'model'.tr, value: collezioneMoto.modello),
+        MotoDetailsInfoRow(
+            label: 'type'.tr, value: collezioneMoto.tipoMoto.nome),
+        MotoDetailsInfoRow(label: 'nation'.tr, value: collezioneMoto.nazione),
       ],
     );
   }

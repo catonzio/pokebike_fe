@@ -96,15 +96,14 @@ class AddMotoView extends GetView<FotocameraController> {
           builder: (BuildContext context) {
             return Dialog(
               child: DefaultDialog(
-                  title: "Moto già inserita",
-                  message:
-                      "La moto che stai tentando di salvare è già presente nella tua collezione. Sei sicuro di volerla sostituire con questa nuova cattura?",
-                  redTitle: "Sostituisci",
+                  title: 'motoAlreadyInserted'.tr,
+                  message: 'motoAlreadyInsertedSubtitle'.tr,
+                  redTitle: 'substitute'.tr,
                   redAction: (context) {
                     _addMoto(context, data);
                     context.navigator.pop(true);
                   },
-                  whiteTitle: "Annulla",
+                  whiteTitle: 'nullify'.tr,
                   whiteAction: (context) => context.navigator.pop(false)),
             );
           },
@@ -123,8 +122,7 @@ class AddMotoView extends GetView<FotocameraController> {
 
     ApiResponse response = await controller.addMoto(data);
     if (context.mounted) {
-      handleApiResponse(context, response,
-          successMessage: "Moto salvata correttamente",
+      handleApiResponse(context, response, successMessage: 'motoSaved'.tr,
           onSuccess: (dynamic data) {
         controller.isCapturing = true;
       });
@@ -139,7 +137,7 @@ class AddMotoView extends GetView<FotocameraController> {
       return response.data as bool;
     } else {
       if (context.mounted) {
-        context.createSnackbar("Controlla la connessione ad internet");
+        context.createSnackbar('noInternet'.tr);
       }
     }
     return null;

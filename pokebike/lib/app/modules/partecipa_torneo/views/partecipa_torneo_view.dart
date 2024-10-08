@@ -16,12 +16,11 @@ class PartecipaTorneoView extends GetView<PartecipaTorneoController> {
         ? MotoDetailPage(index: controller.motoIndex.value)
         : DefaultPage(
             backButton: true,
-            title: "Scegli la tua moto",
+            title: 'chooseMoto'.tr,
             body: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  // ShimmerTitle.light(text: "Scegli la tua moto"),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: SearchRow(

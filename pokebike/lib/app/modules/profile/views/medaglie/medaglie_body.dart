@@ -22,7 +22,7 @@ class MedaglieBody extends GetView<ProfileController> {
               padding: const EdgeInsets.only(
                   bottom: Constants.bottomNavbarHeight * 2 / 3),
               children: [
-                const DividerTitle("MEDAGLIE"),
+                DividerTitle('medals'.tr.toUpperCase()),
                 Skeletonizer(
                     enabled: controller.isLoadingNumCatture.value,
                     child: Obx(() => MedaglieRowWidget(
@@ -30,7 +30,7 @@ class MedaglieBody extends GetView<ProfileController> {
                                   .user.value?.profile?.numMotoCatturate ??
                               0,
                         ))),
-                const DividerTitle("COCCARDE"),
+                DividerTitle('cockades'.tr.toUpperCase()),
                 Skeletonizer(
                     enabled: controller.isLoadingCoccarde.value,
                     child: const CoccardeGridWidget())

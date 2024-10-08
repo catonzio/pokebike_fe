@@ -109,7 +109,9 @@ class ProfileHeader extends StatelessWidget {
                     style: context.textTheme.headlineSmall!.copyWith(
                       fontWeight: FontWeight.bold,
                     )),
-                Text("${numMotoCatturate ?? '-'} moto catturate",
+                Text(
+                    'numMotosCaptured'.trParams(
+                        {'howMany': numMotoCatturate?.toString() ?? '-'}),
                     style: context.textTheme.bodyLarge),
                 MIcon(
                   name:

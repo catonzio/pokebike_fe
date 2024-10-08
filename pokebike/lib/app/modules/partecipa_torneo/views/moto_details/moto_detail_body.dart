@@ -58,7 +58,7 @@ class MotoDetailBody extends StatelessWidget {
               child: Hero(
                 tag: "visualizza_moto",
                 child: Text(
-                  "Visualizza informazioni",
+                  'seeInfo'.tr,
                   style: context.textTheme.bodyMedium
                       ?.copyWith(color: Colors.amber),
                 ),

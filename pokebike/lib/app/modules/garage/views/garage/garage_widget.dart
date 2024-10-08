@@ -39,8 +39,7 @@ class GarageWidget extends GetView<GarageWController> {
               focusNode: controller.focusNode),
         ),
         elements.isEmpty
-            ? const Center(
-                child: Text("Nessuna moto trovata con questi filtri"))
+            ? Center(child: Text('noMotoFoundFilter'.tr))
             : GridView.builder(
                 gridDelegate: Constants.gridDelegate,
                 shrinkWrap: true,

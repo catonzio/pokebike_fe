@@ -71,7 +71,8 @@ class ClassificaProfileRow extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "Punti ${classificaTile.puntiTotali}",
+                    'points'.trParams(
+                        {'howMany': classificaTile.puntiTotali.toString()}),
                     style: context.textTheme.labelSmall,
                   ),
                 ),

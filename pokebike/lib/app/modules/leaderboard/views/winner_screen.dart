@@ -27,7 +27,7 @@ class WinnerScreen extends StatelessWidget {
                   isLoading: (controller.winner.value == null).obs,
                   topper: Center(
                       child: Text(
-                    "Il vincitore non è ancora stato scelto",
+                    'noWinner'.tr,
                     style: context.textTheme.displaySmall,
                     textAlign: TextAlign.center,
                   )),
@@ -43,9 +43,9 @@ class WinnerScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Text("Il vincitore è:"),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text('winnerIs'.tr),
         ),
         Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16),

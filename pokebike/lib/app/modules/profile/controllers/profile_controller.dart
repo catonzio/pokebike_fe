@@ -132,13 +132,13 @@ class ProfileController extends GetxController {
         //     rightPadding: 8.0,
         //     onPressed: () => changeIndex(0)),
         PaginationItem(
-            text: "Medaglie",
+            text: 'medals'.tr,
             index: 0,
             leftPadding: 8.0,
             rightPadding: 8.0,
             onPressed: () => changeIndex(0)),
         PaginationItem(
-            text: "Classifica",
+            text: 'leaderboard'.tr,
             index: 1,
             leftPadding: 8.0,
             rightPadding: 0.0,

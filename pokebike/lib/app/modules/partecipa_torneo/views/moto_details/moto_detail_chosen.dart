@@ -16,12 +16,11 @@ class MotoDetailChosen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
-            "Moto registrata al torneo con successo",
+            'motoRegistered'.tr,
             style: context.textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
-          MButton(
-              label: "Torna alla home", onTap: () => _tornaAllaHome(context))
+          MButton(label: 'backHome'.tr, onTap: () => _tornaAllaHome(context))
         ],
       ),
     );

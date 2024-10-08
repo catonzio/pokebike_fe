@@ -18,17 +18,17 @@ class SettingsEditingPasswordForm extends GetView<SettingsController> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextFormField(
-              decoration: transparentInputDecoration("Vecchia password"),
+              decoration: transparentInputDecoration('oldPassword'.tr),
               controller: controller.oldPasswordController,
               validator: controller.oldPasswordValidator,
             ),
             TextFormField(
-              decoration: transparentInputDecoration("Nuova password"),
+              decoration: transparentInputDecoration('newPassword'.tr),
               controller: controller.newPasswordController,
               validator: controller.newPasswordValidator,
             ),
             TextFormField(
-              decoration: transparentInputDecoration("Conferma password"),
+              decoration: transparentInputDecoration('passwordConfirm'.tr),
               controller: controller.confirmPasswordController,
               validator: controller.confirmPasswordValidator,
             ),

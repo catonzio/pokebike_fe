@@ -68,7 +68,7 @@ class PhotoPicker extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Text("Da dove vuoi selezionare l'immagine?"),
+                  Text('whereSelectImg'.tr),
                   Row(
                     children: [
                       Expanded(
@@ -76,7 +76,7 @@ class PhotoPicker extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: MButton(
-                                label: "Camera",
+                                label: 'camera'.tr,
                                 onTap: () =>
                                     context.navigator.pop(ImageSource.camera)),
                           )),
@@ -85,7 +85,7 @@ class PhotoPicker extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: MButton(
-                                label: "Galleria",
+                                label: 'gallery'.tr,
                                 onTap: () =>
                                     context.navigator.pop(ImageSource.gallery)),
                           ))

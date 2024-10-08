@@ -22,7 +22,7 @@ class PaginationRow extends GetView<GarageController> {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 8),
                   child: PaginationButton(
-                    text: "Garage",
+                    text: 'garage'.tr,
                     height: height,
                     isSelected: controller.isShowingGarage.value,
                     onPressed: () => controller.toggleShowing(true),
@@ -34,7 +34,7 @@ class PaginationRow extends GetView<GarageController> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8),
                   child: PaginationButton(
-                    text: "Collezione",
+                    text: 'collection'.tr,
                     height: height,
                     isSelected: !(controller.isShowingGarage.value),
                     onPressed: () => controller.toggleShowing(false),
@@ -46,4 +46,3 @@ class PaginationRow extends GetView<GarageController> {
     );
   }
 }
-

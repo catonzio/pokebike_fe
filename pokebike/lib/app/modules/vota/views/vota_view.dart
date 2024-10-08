@@ -17,7 +17,7 @@ class VotaView extends GetView<VotaController> {
   Widget build(BuildContext context) {
     return DefaultPage(
         backButton: true,
-        title: "Vota",
+        title: 'vote'.tr,
         body: Padding(
           padding: const EdgeInsets.fromLTRB(
               16.0, 16.0, 16.0, Constants.bottomNavbarHeight),

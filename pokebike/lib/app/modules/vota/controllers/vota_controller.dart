@@ -40,9 +40,7 @@ class VotaController extends GetxController {
 
   Future<ApiResponse> vota(int toPartecipazioneId) async {
     if (hasVoted.value) {
-      return ApiResponse.error(
-          message: "Non puoi effettuare un'altra votazione su questo turno",
-          data: null);
+      return ApiResponse.error(message: 'alreadyVoted'.tr, data: null);
     }
 
     ApiResponse response =

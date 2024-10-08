@@ -13,8 +13,6 @@ extension OrderByExtension on OrderBy {
         return "Dalla A alla Z";
       case OrderBy.recent:
         return "Più recenti";
-      default:
-        return "";
-    }
+      }
   }
 }

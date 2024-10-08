@@ -37,11 +37,11 @@ class VotaRow extends GetView<VotaController> {
               padding: const EdgeInsets.all(16.0),
               child: GestureDetector(
                 onTap: () async {
-                  ApiResponse response = await controller.vota(partecipazione.id);
+                  ApiResponse response =
+                      await controller.vota(partecipazione.id);
                   if (context.mounted) {
                     handleApiResponse(context, response,
-                        successMessage:
-                            "Hai votato per ${partecipazione.fullName}");
+                        successMessage: 'pointGained'.tr);
                   }
                 },
                 child: VotaMotoImage(

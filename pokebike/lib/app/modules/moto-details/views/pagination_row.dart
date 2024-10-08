@@ -19,7 +19,7 @@ class PaginationRow extends GetView<MotoDetailsController> {
             TextButton(
                 onPressed: () => controller.toggleShowingInfo(value: true),
                 child: Text(
-                  "Informazioni",
+                  'info'.tr,
                   style: context.textTheme.bodyMedium?.copyWith(
                       color: controller.isShowingInfo.value
                           ? MColors.secondaryDark
@@ -28,7 +28,7 @@ class PaginationRow extends GetView<MotoDetailsController> {
             TextButton(
                 onPressed: () => controller.toggleShowingInfo(value: false),
                 child: Text(
-                  "Stato",
+                  'state'.tr,
                   style: context.textTheme.bodyMedium?.copyWith(
                       color: controller.isShowingInfo.value
                           ? Colors.white

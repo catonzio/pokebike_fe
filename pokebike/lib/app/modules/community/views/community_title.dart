@@ -16,7 +16,7 @@ class CommunityTitle extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ShimmerTitle.light(
-            text: "Community",
+            text: 'community'.tr,
             style: context.textTheme.headlineLarge!
                 .copyWith(fontWeight: FontWeight.bold),
           ),
@@ -24,7 +24,7 @@ class CommunityTitle extends StatelessWidget {
             InkWell(
               onTap: onTap,
               child: Text(
-                "Vedi Tutti",
+                'seeAll'.tr,
                 style: context.textTheme.bodySmall,
               ),
             )

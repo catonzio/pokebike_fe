@@ -23,7 +23,7 @@ class ConfirmRegisterController extends GetxController {
 
   String? codeValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return "Il codice non può essere vuoto";
+      return 'codeEmpty'.tr;
     }
     return null;
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/indicator.dart';
 
 class StatisticsRow extends StatelessWidget {
@@ -19,7 +20,7 @@ class StatisticsRow extends StatelessWidget {
     return Column(
       children: [
         StatisticsElement(
-          text: "Vittorie:",
+          text: 'wins'.tr,
           value: "$numeroVittorie / $numeroPartecipazioni",
           percentage: numeroVittorie / numeroPartecipazioni,
           boxShadow: boxShadow,

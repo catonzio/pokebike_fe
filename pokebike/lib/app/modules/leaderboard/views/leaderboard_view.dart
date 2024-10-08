@@ -14,7 +14,7 @@ class LeaderboardView extends GetView<LeaderboardController> {
   Widget build(BuildContext context) {
     return DefaultPage(
       backButton: true,
-      title: "Classifica",
+      title: 'leaderboard'.tr,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,

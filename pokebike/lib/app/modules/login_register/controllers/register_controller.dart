@@ -15,14 +15,14 @@ class RegisterController extends GetxController {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  final TextEditingController emailController = TextEditingController(text: "email21@email.com");
-  final TextEditingController nomeController = TextEditingController(text: "nome");
-  final TextEditingController cognomeController = TextEditingController(text: "cognome");
-  final TextEditingController usernameController = TextEditingController(text: "username2");
-  final TextEditingController passwordController = TextEditingController(text: "password");
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController nomeController = TextEditingController();
+  final TextEditingController cognomeController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
-      TextEditingController(text: "password");
-  final TextEditingController birthdateController = TextEditingController(text: "14-05-1997");
+      TextEditingController();
+  final TextEditingController birthdateController = TextEditingController();
   final Rx<XFile?> avatar = Rx<XFile?>(null);
 
   final AuthProvider provider;
@@ -31,65 +31,65 @@ class RegisterController extends GetxController {
 
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return "L'email non può essere vuota";
+      return 'emailNoEmpty'.tr;
     }
     if (!value.isEmail) {
-      return "Inserisci un'email valida";
+      return 'emailNotValid'.tr;
     }
     return null;
   }
 
   String? nomeValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return "Il nome non può essere vuoto";
+      return 'nameNoEmpty'.tr;
     }
     return null;
   }
 
   String? cognomeValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return "Il cognome non può essere vuoto";
+      return 'surnameNoEmpty'.tr;
     }
     return null;
   }
 
   String? usernameValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return "L'username non può essere vuoto";
+      return 'usernameNoEmpty'.tr;
     }
     return null;
   }
 
   String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return "La password non può essere vuota";
+      return 'pwdNoEmpty'.tr;
     }
     if (value.length < 8) {
-      return "La password deve essere di almeno 8 caratteri";
+      return 'pwd8chars'.tr;
     }
     return null;
   }
 
   String? confirmPasswordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return "La password non può essere vuota";
+      return 'pwdNoEmpty'.tr;
     }
     if (value != passwordController.text) {
-      return "Le password non corrispondono";
+      return 'pwdNoCoincide'.tr;
     }
     return null;
   }
 
   String? birthdateValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return "La data di nascita non può essere vuota";
+      return 'birthdayNoEmpty'.tr;
     }
     return null;
   }
 
   String? avatarValidator(XFile? value) {
     if (value == null && avatar.value == null) {
-      return "Devi selezionare un avatar";
+      return 'mustSelectAvatar'.tr;
     }
     return null;
   }

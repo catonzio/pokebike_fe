@@ -55,7 +55,7 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: Text(
-              "Registrati con Google",
+              'registerGoogle'.tr,
               style: context.textTheme.bodySmall
                   ?.copyWith(color: MColors.primaryDark),
             ),
@@ -73,14 +73,14 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
           child: MButton(
             onPressed: () => _access(context),
             backgroundColor: MColors.secondary,
-            child: Text("Accedi", style: context.textTheme.bodySmall),
+            child: Text('access'.tr, style: context.textTheme.bodySmall),
           ),
         ),
         MButton(
           onPressed: () => _register(context),
           backgroundColor: Colors.white,
           child: Text(
-            "Registrati",
+            'registerYou'.tr,
             style: context.textTheme.bodySmall!
                 .copyWith(color: MColors.primaryDark),
           ),
@@ -122,7 +122,7 @@ class OppureRow extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                "oppure",
+                'or'.tr,
                 textAlign: TextAlign.center,
                 style: context.textTheme.titleMedium,
               ),

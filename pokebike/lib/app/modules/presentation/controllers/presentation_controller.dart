@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/texts.dart';
+// import 'package:pokebike/app/config/texts.dart';
 
 class PresentationController extends GetxController {
   final RxInt _index = 0.obs;
@@ -13,15 +13,21 @@ class PresentationController extends GetxController {
   ];
 
   final List<String> titles = [
-    Texts.presentation1Title,
-    Texts.presentation2Title,
-    Texts.presentation3Title,
+    // Texts.presentation1Title,
+    // Texts.presentation2Title,
+    // Texts.presentation3Title,
+    'presentation1Title'.tr,
+    'presentation2Title'.tr,
+    'presentation3Title'.tr,
   ];
 
   final List<String> subtitles = [
-    Texts.presentation1Subtitle1,
-    Texts.presentation2Subtitle1,
-    Texts.presentation3Subtitle1,
+    // Texts.presentation1Subtitle1,
+    // Texts.presentation2Subtitle1,
+    // Texts.presentation3Subtitle1,
+    'presentation1Subtitle1'.tr,
+    'presentation2Subtitle1'.tr,
+    'presentation3Subtitle1'.tr,
   ];
 
   RxString get imagePath => imagesPaths[index].obs;

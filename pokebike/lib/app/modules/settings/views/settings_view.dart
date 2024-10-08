@@ -18,7 +18,7 @@ class SettingsView extends GetView<SettingsController> {
   Widget build(BuildContext context) {
     return DefaultPage(
         appBar: AppBar(
-          title: ShimmerTitle.light(text: "Profilo"),
+          title: ShimmerTitle.light(text: 'profile'.tr),
           backgroundColor: Colors.transparent,
           surfaceTintColor: Colors.transparent,
           centerTitle: true,
