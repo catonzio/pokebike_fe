@@ -6,14 +6,16 @@ import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
 class SettingsButton extends StatelessWidget {
   final String text;
-  final String icon;
+  final String? iconName;
+  final Widget? icon;
   final Widget trailing;
   final Function()? onPressed;
 
   const SettingsButton(
       {super.key,
       required this.text,
-      required this.icon,
+      this.iconName,
+      this.icon,
       required this.trailing,
       this.onPressed});
 
@@ -21,7 +23,7 @@ class SettingsButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
         contentPadding: const EdgeInsets.all(12),
-        leading: MIcon(name: "$icon icon white"),
+        leading: icon ?? MIcon(name: "$iconName icon white"),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(50),
         ),

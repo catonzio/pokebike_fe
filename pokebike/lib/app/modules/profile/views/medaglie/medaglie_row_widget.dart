@@ -10,15 +10,18 @@ Medals medagliaName(int numCatture) {
     return Medals.none;
   }
   if (numCatture.inRange(lb: Medals.bronzo.lb, ub: Medals.bronzo.ub)) {
-    return Medals.bronzo;
+    return Medals.none;
   }
   if (numCatture.inRange(lb: Medals.argento.lb, ub: Medals.argento.ub)) {
-    return Medals.argento;
+    return Medals.bronzo;
   }
   if (numCatture.inRange(lb: Medals.oro.lb, ub: Medals.oro.ub)) {
-    return Medals.oro;
+    return Medals.argento;
   }
   if (numCatture.inRange(lb: Medals.platino.lb, ub: Medals.platino.ub)) {
+    return Medals.oro;
+  }
+  if (numCatture.inRange(lb: Medals.platino.ub, ub: Medals.diamante.lb)) {
     return Medals.platino;
   } else {
     return Medals.diamante;
@@ -43,14 +46,15 @@ class MedaglieRowWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               MedagliaWidget(
-                  numCatture > Medals.none.ub! ? "bronzo" : "none", "Bronzo"),
+                  numCatture > Medals.bronzo.ub! ? "bronzo" : "none", "Bronzo"),
               MedagliaWidget(
-                  numCatture > Medals.bronzo.ub! ? "argento" : "none",
+                  numCatture > Medals.argento.ub! ? "argento" : "none",
                   "Argento"),
               MedagliaWidget(
-                  numCatture > Medals.argento.ub! ? "oro" : "none", "Oro"),
+                  numCatture > Medals.oro.ub! ? "oro" : "none", "Oro"),
               MedagliaWidget(
-                  numCatture > Medals.oro.ub! ? "platino" : "none", "Platino"),
+                  numCatture > Medals.platino.ub! ? "platino" : "none",
+                  "Platino"),
               MedagliaWidget(
                   numCatture > Medals.platino.ub! ? "diamante" : "none",
                   "Diamante"),

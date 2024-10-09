@@ -159,7 +159,8 @@ class AppTranslations extends Translations {
           'apply': 'Applica',
           'cancel': 'Cancella',
           'search': 'Cerca',
-          'updatedLanguage': 'Lingua aggiornata'
+          'updatedLanguage': 'Lingua aggiornata',
+          'chooseLanguage': 'Scegli la lingua'
         },
         'en': {
           'hello': 'Hello',
@@ -315,6 +316,7 @@ class AppTranslations extends Translations {
           'cancel': 'Cancel',
           'search': 'Search',
           'updatedLanguage': 'Updated language',
+          'chooseLanguage': 'Choose the language'
         },
         'es': {
           'hello': 'Hola',
@@ -472,7 +474,8 @@ class AppTranslations extends Translations {
           'apply': 'Aplicar',
           'cancel': 'Cancelar',
           'search': 'Buscar',
-          'updatedLanguage': 'Idioma actualizado'
+          'updatedLanguage': 'Idioma actualizado',
+          'chooseLanguage': 'Elige tu idioma'
         },
         'fr': {
           'hello': 'Bonjour',
@@ -631,7 +634,8 @@ class AppTranslations extends Translations {
           'apply': 'Appliquer',
           'cancel': 'Annuler',
           'search': 'Rechercher',
-          'updatedLanguage': 'Langue mise à jour'
+          'updatedLanguage': 'Langue mise à jour',
+          'chooseLanguage': 'Choisissez votre langue'
         }
       };
 }

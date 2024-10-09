@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
+import 'package:pokebike/app/modules/settings/views/language_selection_widget.dart';
 import 'package:pokebike/app/modules/settings/views/profile_container.dart';
 import 'package:pokebike/app/modules/settings/views/settings_button.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/utils/mswitcher.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -42,12 +42,12 @@ class SettingsShowWidget extends GetView<SettingsController> {
                 children: [
                   SettingsButton(
                       text: 'changePassword'.tr,
-                      icon: "Password",
+                      iconName: "Password",
                       onPressed: () => controller.editingPassword = true,
                       trailing: const Icon(Icons.arrow_forward_ios)),
                   SettingsButton(
                     text: 'notifications'.tr,
-                    icon: "Notification",
+                    iconName: "Notification",
                     trailing: Obx(() => MSwitcherOld(
                           value: controller.notificationsEnabled.value,
                           onChanged: (bool value) async {
@@ -58,28 +58,10 @@ class SettingsShowWidget extends GetView<SettingsController> {
                   ),
                   SettingsButton(
                       text: 'privacyPolicy'.tr,
-                      icon: "Policy",
+                      iconName: "Policy",
                       onPressed: () {},
                       trailing: const Icon(Icons.arrow_forward_ios)),
-                  DropdownButton<Locale>(
-                    value: Get.locale,
-                    items: const [
-                      DropdownMenuItem(
-                          value: Locale('en'), child: Text("English")),
-                      DropdownMenuItem(
-                          value: Locale('it'), child: Text("Italian")),
-                      DropdownMenuItem(
-                          value: Locale('es'), child: Text("Spanish")),
-                      DropdownMenuItem(
-                          value: Locale('fr'), child: Text("French")),
-                    ],
-                    onChanged: (locale) {
-                      if (locale != null) {
-                        controller.updateLocale(locale);
-                        context.createSnackbar('updatedLanguage'.tr);
-                      }
-                    },
-                  )
+                  const LanguageSelectionWidget(),
                 ],
               ),
             ),
