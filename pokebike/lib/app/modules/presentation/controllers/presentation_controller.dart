@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:pokebike/app/config/constants.dart';
 // import 'package:pokebike/app/config/texts.dart';
 
 class PresentationController extends GetxController {
@@ -7,9 +8,9 @@ class PresentationController extends GetxController {
   set index(int value) => _index.value = value;
 
   final List<String> imagesPaths = [
-    "assets/images/presentation/presentation_1.png",
-    "assets/images/presentation/presentation_2.png",
-    "assets/images/presentation/presentation_3.png",
+    "${Constants.apiStorageUrl}/presentation/presentation_1.png",
+    "${Constants.apiStorageUrl}/presentation/presentation_2.png",
+    "${Constants.apiStorageUrl}/presentation/presentation_3.png",
   ];
 
   final List<String> titles = [

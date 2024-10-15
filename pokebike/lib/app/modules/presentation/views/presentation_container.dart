@@ -35,7 +35,7 @@ class PresentationContainer extends StatelessWidget {
             width: context.width,
             height: height,
             decoration: BoxDecoration(
-              image: getDarkDecorationImage(imagePath, 0.2),
+              image: getDarkDecorationImageApi(imagePath, 0.2),
               borderRadius: const BorderRadius.only(
                 bottomRight: Radius.circular(100),
               ),

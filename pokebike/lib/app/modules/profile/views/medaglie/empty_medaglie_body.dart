@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/modules/profile/controllers/profile_controller.dart';
 import 'package:pokebike/app/modules/profile/views/medaglie/divider_title.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class EmptyMedaglieBody extends GetView<ProfileController> {
   const EmptyMedaglieBody({super.key});

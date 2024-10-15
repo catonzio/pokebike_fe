@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Constants {
-  static const String apiBaseUrl = "https://danilocatone.com/pokebike/api";
+  static const String baseUrl = "https://danilocatone.com/pokebike";
+  static const String apiBaseUrl = "$baseUrl/api";
+  static const String apiStorageUrl = "$baseUrl/storage";
   // static const String apiBaseUrl = "http://127.0.0.1:8080/api";
 
   static const String settingsStorage = "settings";
@@ -10,7 +12,8 @@ class Constants {
   static const double fabOffset = 200;
   static const int numCommunityHome = 7;
 
-  static const String iubendaUrl = "https://www.iubenda.com/privacy-policy/21057524";
+  static const String iubendaUrl =
+      "https://www.iubenda.com/privacy-policy/21057524";
 
   static const SliverGridDelegate gridDelegate =
       SliverGridDelegateWithFixedCrossAxisCount(
