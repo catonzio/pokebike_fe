@@ -1,11 +1,34 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pokebike/app/data/enums/order_by.dart';
 import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/modules/garage/controllers/garage_w_controller.dart';
 import 'package:pokebike/app/shared/controllers/searchable_list_controller.dart';
 import 'package:pokebike/app/shared/providers/moto_provider.dart';
+
+List<CollezioneMoto> _processList(List args) {
+  List<CollezioneMoto> list =
+      args[0]; //.map((el) => CollezioneMoto.fromJson(el));
+  List<Moto> motos = args[1]; //.map((el) => Moto.fromJson(el));
+  // List<Moto> motos = GarageWController.to.list;
+  final motoMap = {
+    for (Moto moto in motos)
+      '${moto.marcaMoto.nome}-${moto.tipoMoto.nome}-${moto.nome.toLowerCase()}':
+          moto
+  };
+
+  for ((int, CollezioneMoto) element in list.indexed) {
+    int index = element.$1;
+    CollezioneMoto collezioneMoto = element.$2;
+    final key =
+        '${collezioneMoto.marcaMoto.nome}-${collezioneMoto.tipoMoto.nome}-${collezioneMoto.modello.toLowerCase()}';
+    if (motoMap.containsKey(key)) {
+      list[index] = collezioneMoto.copyWith(moto: motoMap[key]);
+    }
+  }
+  return list;
+}
 
 class CollezioneController extends SearchableListController<CollezioneMoto> {
   final MotoProvider provider;
@@ -30,11 +53,14 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
   }
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     scrollController = ScrollController();
     skip = 0;
     super.onInit();
   }
+
+  late Worker listWorker;
+  late Worker motosWorker;
 
   @override
   Future<List<CollezioneMoto>> fetchOthers() async {
@@ -43,29 +69,8 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
 
   Future<void> _afterInit() async {
     final GarageWController controller = GarageWController.to;
-    final List<Moto> motos = controller.list;
-
-    // Run in an isolate
-    await compute(_processList, [list, motos]);
-  }
-
-  void _processList(List<dynamic> args) {
-    List<CollezioneMoto> list = args[0];
-    List<Moto> motos = args[1];
-
-    final motoMap = {
-      for (Moto moto in motos)
-        '${moto.marcaMoto}-${moto.tipoMoto}-${moto.nome.toLowerCase()}': moto
-    };
-
-    for ((int, CollezioneMoto) element in list.indexed) {
-      int index = element.$1;
-      CollezioneMoto collezioneMoto = element.$2;
-      final key =
-          '${collezioneMoto.marcaMoto}-${collezioneMoto.tipoMoto}-${collezioneMoto.modello.toLowerCase()}';
-      if (motoMap.containsKey(key)) {
-        list[index] = collezioneMoto.copyWith(moto: motoMap[key]);
-      }
-    }
+    _processList([list, controller.list]);
+    // await compute(_processList,
+    //     [list as List<CollezioneMoto>, controller.list as List<Moto>]);
   }
 }

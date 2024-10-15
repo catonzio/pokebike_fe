@@ -12,7 +12,7 @@ class GarageWController extends SearchableMotoController {
       : super(fetchFunction: provider.fetchMotos);
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     scrollController = ScrollController();
     skip = 0;
     super.onInit();

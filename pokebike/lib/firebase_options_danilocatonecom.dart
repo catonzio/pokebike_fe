@@ -51,11 +51,11 @@ class DefaultFirebaseOptions {
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAS_XreIzqsXFakn_JyTSzDC6xJtrzjDLU',
-    appId: '1:776310891261:android:9ed2c50455e76eefba1494',
-    messagingSenderId: '776310891261',
-    projectId: 'pokebike-1fc5d',
-    storageBucket: 'pokebike-1fc5d.appspot.com',
+    apiKey: 'AIzaSyCgxGw4yheBvy2qW7H96qEMDLoAFG-3xU4',
+    appId: '1:995219122710:android:dd2eefce4cad63516ba337',
+    messagingSenderId: '995219122710',
+    projectId: 'pokebike-9ac6c',
+    storageBucket: 'pokebike-9ac6c.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(

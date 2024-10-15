@@ -16,7 +16,7 @@ class Moto with _$Moto {
   const factory Moto({
     required int id,
     required String nome,
-    required String descrizione,
+    @Default('') String descrizione,
     required int anno,
     required String luogo,
     required DateTime dataCattura,

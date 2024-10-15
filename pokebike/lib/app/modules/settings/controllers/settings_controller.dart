@@ -109,36 +109,36 @@ class SettingsController extends GetxController {
 
   String? oldPasswordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Inserisci la vecchia password';
+      return 'insertOldPassword'.tr;
     }
     if (value.length < 8) {
-      return 'La password deve essere di almeno 8 caratteri';
+      return 'pwd8chars'.tr;
     }
     return null;
   }
 
   String? newPasswordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Inserisci la nuova password';
+      return 'insertNewPassword'.tr;
     }
     if (value.length < 8) {
-      return 'La password deve essere di almeno 8 caratteri';
+      return 'pwd8chars'.tr;
     }
     if (value.trim() != confirmPasswordController.text.trim()) {
-      return 'Le password non coincidono';
+      return 'pwdNoCoincide'.tr;
     }
     return null;
   }
 
   String? confirmPasswordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Inserisci la password di conferma';
+      return 'insertConfirmPassword'.tr;
     }
     if (value.length < 8) {
-      return 'La password deve essere di almeno 8 caratteri';
+      return 'pwd8chars'.tr;
     }
     if (value.trim() != newPasswordController.text.trim()) {
-      return 'Le password non coincidono';
+      return 'pwdNoCoincide'.tr;
     }
     return null;
   }

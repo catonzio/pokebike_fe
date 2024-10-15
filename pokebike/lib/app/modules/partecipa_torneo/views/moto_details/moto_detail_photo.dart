@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
+// import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
 
 class InteractiveController extends GetxController {
@@ -37,7 +37,8 @@ class MotoDetailPhoto extends StatelessWidget {
   final String tag;
   final String avatarUrl;
 
-  const MotoDetailPhoto({super.key, required this.tag, required this.avatarUrl});
+  const MotoDetailPhoto(
+      {super.key, required this.tag, required this.avatarUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -55,13 +56,14 @@ class MotoDetailPhoto extends StatelessWidget {
 
     return Hero(
       tag: tag,
+      // child: interaction,
       child: GestureDetector(
-        onVerticalDragEnd: (details) {
-          if (!interactiveController.isZoomed.value &&
-              details.primaryVelocity! != 0) {
-            context.navigator.pop();
-          }
-        },
+        // onVerticalDragEnd: (details) {
+        //   if (!interactiveController.isZoomed.value &&
+        //       details.primaryVelocity! != 0) {
+        //     context.navigator.pop();
+        //   }
+        // },
         onDoubleTapDown: (details) => interactiveController.doubleTap(details),
         child: interaction,
       ),

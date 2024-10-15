@@ -30,7 +30,7 @@ class SearchableMotoController extends SearchableListController<Moto> {
             providerFunc: fetchFunction);
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     scrollController = ScrollController();
     super.onInit();
   }

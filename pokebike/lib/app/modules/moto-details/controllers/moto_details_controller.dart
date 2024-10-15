@@ -27,7 +27,7 @@ class MotoDetailsController extends GetxController {
   final RxList<TipoMoto> availableTipos = <TipoMoto>[].obs;
   final RxList<MarcaMoto> availableMarche = <MarcaMoto>[].obs;
 
-  final RxBool isShowingInfo = false.obs;
+  final RxBool isShowingInfo = true.obs;
   final RxBool isEditingMoto = false.obs;
 
   final RxBool isFavorita = false.obs;
@@ -90,35 +90,28 @@ class MotoDetailsController extends GetxController {
 
   String? marcaValidator(dynamic value) {
     if (value == null || value.isEmpty) {
-      return 'Inserisci la marca';
+      return 'insertBrand'.tr;
     }
     return null;
   }
 
   String? modelloValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Inserisci il modello';
-    }
-    return null;
-  }
-
-  String? tipoValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Inserisci il tipo';
+      return 'insertModel'.tr;
     }
     return null;
   }
 
   String? annoValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Inserisci l\'anno';
+      return 'insertYear'.tr;
     }
     return null;
   }
 
   String? luogoValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Inserisci il luogo';
+      return 'insertLocation'.tr;
     }
     return null;
   }

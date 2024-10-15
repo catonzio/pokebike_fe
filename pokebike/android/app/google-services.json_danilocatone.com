@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "776310891261",
-    "project_id": "pokebike-1fc5d",
-    "storage_bucket": "pokebike-1fc5d.appspot.com"
+    "project_number": "995219122710",
+    "project_id": "pokebike-9ac6c",
+    "storage_bucket": "pokebike-9ac6c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:776310891261:android:9ed2c50455e76eefba1494",
+        "mobilesdk_app_id": "1:995219122710:android:dd2eefce4cad63516ba337",
         "android_client_info": {
           "package_name": "com.resmedia.pokebike"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAS_XreIzqsXFakn_JyTSzDC6xJtrzjDLU"
+          "current_key": "AIzaSyCgxGw4yheBvy2qW7H96qEMDLoAFG-3xU4"
         }
       ],
       "services": {

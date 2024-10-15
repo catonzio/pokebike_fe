@@ -13,7 +13,7 @@ class NotificationsController extends ApiPaginationController<Notifica> {
       : super(providerFunc: provider.fetchNotifiche);
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     scrollController = ScrollController();
     skip = 0;
     super.onInit();

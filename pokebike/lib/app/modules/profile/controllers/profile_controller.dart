@@ -61,6 +61,11 @@ class ProfileController extends GetxController {
     fetchCoccarde();
   }
 
+  Future<void> refreshInfo() async {
+    initialize(
+        ProfileArguments(user: user.value, profileId: user.value?.profile?.id));
+  }
+
   Future<void> setUser(ProfileArguments? arguments) async {
     // se gli arguments sono vuoti
     if (arguments == null ||
@@ -75,10 +80,11 @@ class ProfileController extends GetxController {
     } else if (arguments.user != null) {
       user.value = arguments.user;
       setUserProfile();
-
+      isOwnProfile.value = false;
       // se negli arguments c'e il profileId
     } else if (arguments.user == null && arguments.profileId != null) {
       user.value = await provider.fetchUserWithProfile(arguments.profileId!);
+      isOwnProfile.value = false;
     } else {
       throw Exception("Wrong arguments for ProfileController");
     }

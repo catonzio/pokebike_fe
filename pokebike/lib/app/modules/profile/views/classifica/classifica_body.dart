@@ -15,50 +15,53 @@ class ClassificaBody extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return Obx(() => Skeletonizer(
         enabled: controller.isLoadingClassifica.value,
-        child: ListView.separated(
-            // physics: const NeverScrollableScrollPhysics(),
-            padding: const EdgeInsets.fromLTRB(
-                0, 0, 0, Constants.bottomNavbarHeight),
-            keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              if (index == 0) {
-                return Container(
-                  height: context.height * 0.13,
-                  padding: EdgeInsets.fromLTRB(8, context.height * 0.05, 8, 0),
-                  child: Obx(() => Skeletonizer(
-                        enabled: controller.isFetchingClassificaTile.value,
-                        child: controller.classificaTile.value == null
-                            ? Center(
-                                child: Text('errorLoadingPartecipation'.tr))
-                            : ClassificaProfileRow(
-                                classificaTile:
-                                    controller.classificaTile.value!,
-                                shouldNavigate: false,
-                              ),
-                      )),
+        child: RefreshIndicator(
+          onRefresh: controller.refreshInfo,
+          child: ListView.separated(
+              // physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.fromLTRB(
+                  0, 0, 0, Constants.bottomNavbarHeight),
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return Container(
+                    height: context.height * 0.13,
+                    padding: EdgeInsets.fromLTRB(8, context.height * 0.05, 8, 0),
+                    child: Obx(() => Skeletonizer(
+                          enabled: controller.isFetchingClassificaTile.value,
+                          child: controller.classificaTile.value == null
+                              ? Center(
+                                  child: Text('errorLoadingPartecipation'.tr))
+                              : ClassificaProfileRow(
+                                  classificaTile:
+                                      controller.classificaTile.value!,
+                                  shouldNavigate: false,
+                                ),
+                        )),
+                  );
+                } else if (index == 1) {
+                  Profile? profile = controller.user.value?.profile;
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: StatisticsRow(
+                      numeroVittorie: profile?.numVittorie ?? 0,
+                      numeroSconfitte: profile?.numSconfitte ?? 0,
+                    ),
+                  );
+                } else {
+                  return const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: TopMoto(),
+                  );
+                }
+              },
+              separatorBuilder: (context, index) {
+                return SizedBox(
+                  height: context.height * 0.05,
                 );
-              } else if (index == 1) {
-                Profile? profile = controller.user.value?.profile;
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: StatisticsRow(
-                    numeroVittorie: profile?.numVittorie ?? 0,
-                    numeroSconfitte: profile?.numSconfitte ?? 0,
-                  ),
-                );
-              } else {
-                return const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: TopMoto(),
-                );
-              }
-            },
-            separatorBuilder: (context, index) {
-              return SizedBox(
-                height: context.height * 0.05,
-              );
-            },
-            itemCount: 3)));
+              },
+              itemCount: 3),
+        )));
   }
 }

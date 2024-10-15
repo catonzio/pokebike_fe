@@ -1,18 +1,19 @@
 import 'dart:ui';
 
 enum Medals {
-  none(0, 40, "none", Color(0xFF434343)),
-  bronzo(40, 120, "bronzo", Color(0xFFb27e68)),
-  argento(120, 180, "argento", Color(0xFFc0c0c0)),
-  oro(180, 250, "oro", Color(0xFFffd700)),
-  platino(250, 500, "platino", Color(0xFFe5e4e2)),
-  diamante(500, null, "diamante", Color(0xFFb9f2ff));
+  none(0, 40, "none", "none", Color(0xFF434343)),
+  bronzo(40, 120, "bronzo", "bronze", Color(0xFFb27e68)),
+  argento(120, 180, "argento", "silver", Color(0xFFc0c0c0)),
+  oro(180, 250, "oro", "gold", Color(0xFFffd700)),
+  platino(250, 500, "platino", "platinum", Color(0xFFe5e4e2)),
+  diamante(500, 973, "diamante", "diamond", Color(0xFFb9f2ff));
 
   final int lb;
   final int? ub;
   final String iconName;
   final Color color;
-  const Medals(this.lb, this.ub, this.iconName, this.color);
+  final String name;
+  const Medals(this.lb, this.ub, this.iconName, this.name, this.color);
 }
 
 enum Cockades {

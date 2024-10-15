@@ -10,6 +10,8 @@ class Constants {
   static const double fabOffset = 200;
   static const int numCommunityHome = 7;
 
+  static const String iubendaUrl = "https://www.iubenda.com/privacy-policy/21057524";
+
   static const SliverGridDelegate gridDelegate =
       SliverGridDelegateWithFixedCrossAxisCount(
     crossAxisCount: 2,

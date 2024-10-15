@@ -160,7 +160,20 @@ class AppTranslations extends Translations {
           'cancel': 'Cancella',
           'search': 'Cerca',
           'updatedLanguage': 'Lingua aggiornata',
-          'chooseLanguage': 'Scegli la lingua'
+          'chooseLanguage': 'Scegli la lingua',
+          'insertBrand': 'Inserisci la marca',
+          'insertModel': 'Inserisci il modello',
+          'insertYear': 'Inserisci l\'anno',
+          'insertLocation': 'Inserisci il luogo',
+          'insertOldPassword': 'Inserisci la vecchia password',
+          'insertNewPassword': 'Inserisci la nuova password',
+          'insertConfirmPassword': 'Inserisci la password di conferma',
+          'medal': 'Medaglia @name',
+          'bronze': 'Bronzo',
+          'silver': 'Argento',
+          'gold': 'Oro',
+          'platinum': 'Platino',
+          'diamond': 'Diamante'
         },
         'en': {
           'hello': 'Hello',
@@ -316,7 +329,20 @@ class AppTranslations extends Translations {
           'cancel': 'Cancel',
           'search': 'Search',
           'updatedLanguage': 'Updated language',
-          'chooseLanguage': 'Choose the language'
+          'chooseLanguage': 'Choose the language',
+          'insertBrand': 'Insert brand',
+          'insertModel': 'Insert model',
+          'insertYear': 'Insert year',
+          'insertLocation': 'Insert location',
+          'insertOldPassword': 'Insert old password',
+          'insertNewPassword': 'Insert new password',
+          'insertConfirmPassword': 'Insert confirm password',
+          'medal': '@name medal',
+          'bronze': 'Bronze',
+          'silver': 'Silver',
+          'gold': 'Gold',
+          'platinum': 'Platinum',
+          'diamond': 'Diamond'
         },
         'es': {
           'hello': 'Hola',
@@ -475,7 +501,20 @@ class AppTranslations extends Translations {
           'cancel': 'Cancelar',
           'search': 'Buscar',
           'updatedLanguage': 'Idioma actualizado',
-          'chooseLanguage': 'Elige tu idioma'
+          'chooseLanguage': 'Elige tu idioma',
+          'insertBrand': 'Inserta la marca',
+          'insertModel': 'Inserta el modelo',
+          'insertYear': 'Inserta el año',
+          'insertLocation': 'Inserta el lugar',
+          'insertOldPassword': 'Inserta la contraseña antigua',
+          'insertNewPassword': 'Inserta la nueva contraseña',
+          'insertConfirmPassword': 'Inserta la contraseña de confirmación',
+          'medal': 'Medalla @name',
+          'bronze': 'Bronce',
+          'silver': 'Plata',
+          'gold': 'Oro',
+          'platinum': 'Platino',
+          'diamond': 'Diamante'
         },
         'fr': {
           'hello': 'Bonjour',
@@ -635,7 +674,20 @@ class AppTranslations extends Translations {
           'cancel': 'Annuler',
           'search': 'Rechercher',
           'updatedLanguage': 'Langue mise à jour',
-          'chooseLanguage': 'Choisissez votre langue'
+          'chooseLanguage': 'Choisissez votre langue',
+          'insertBrand': 'Insérer la marque',
+          'insertModel': 'Insérer le modèle',
+          'insertYear': 'Insérer l\'année',
+          'insertLocation': 'Insérer le lieu',
+          'insertOldPassword': 'Insérer l\'ancien mot de passe',
+          'insertNewPassword': 'Insérer le nouveau mot de passe',
+          'insertConfirmPassword': 'Insérer le mot de passe de confirmation',
+          'medal': 'Médaille @name',
+          'bronze': 'Bronze',
+          'silver': 'Argent',
+          'gold': 'Or',
+          'platinum': 'Platine',
+          'diamond': 'Diamant'
         }
       };
 }

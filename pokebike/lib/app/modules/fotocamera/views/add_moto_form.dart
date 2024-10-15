@@ -37,7 +37,7 @@ class AddMotoForm extends StatelessWidget {
         //     controller: controller.tipoController),
         MotoFormFieldModel(
             label: 'type'.tr,
-            validator: controller.tipoValidator,
+            // validator: controller.tipoValidator,
             controller: controller.tipoController,
             isNumeric: false,
             readOnly: true),
@@ -52,7 +52,7 @@ class AddMotoForm extends StatelessWidget {
             controller: controller.luogoController),
         MotoFormFieldModel(
             label: 'description'.tr,
-            validator: controller.descrizioneValidator,
+            // validator: controller.descrizioneValidator,
             controller: controller.descrizioneController,
             maxLines: 5)
       ];

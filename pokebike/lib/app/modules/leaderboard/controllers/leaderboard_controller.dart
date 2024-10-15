@@ -35,7 +35,7 @@ class LeaderboardController extends ApiPaginationController<ClassificaTile> {
       : super(providerFunc: provider.fetchLeaderboard);
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     scrollController = ScrollController();
     super.onInit();
   }

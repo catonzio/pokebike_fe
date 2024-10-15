@@ -32,10 +32,10 @@ class ApiPaginationController<T> extends GetxController {
   }) : afterInit = afterInit ?? _defaultAfterInit;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     super.onInit();
     scrollController.addListener(_scrollListener);
-    initialFetch();
+    await initialFetch();
     afterInit();
   }
 
@@ -71,6 +71,7 @@ class ApiPaginationController<T> extends GetxController {
     // list.clear();
     skip = 0;
     await initialFetch(reload: true);
+    afterInit();
   }
 
   Future<List<T>> fetchOthers() async {

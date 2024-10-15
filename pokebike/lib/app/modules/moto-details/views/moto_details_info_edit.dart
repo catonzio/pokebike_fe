@@ -32,7 +32,7 @@ class MotoDetailsInfoEdit extends GetView<MotoDetailsController> {
           label: 'type'.tr,
           items:
               controller.availableTipos.map((element) => element.nome).toList(),
-          validator: controller.tipoValidator,
+          // validator: controller.tipoValidator,
           controller: controller.tipoController),
       MotoFormFieldModel(
           label: 'year'.tr,
@@ -45,7 +45,7 @@ class MotoDetailsInfoEdit extends GetView<MotoDetailsController> {
           controller: controller.luogoController),
       MotoFormFieldModel(
           label: 'description'.tr,
-          validator: controller.descrizioneValidator,
+          // validator: controller.descrizioneValidator,
           controller: controller.descrizioneController,
           maxLines: 5)
     ];

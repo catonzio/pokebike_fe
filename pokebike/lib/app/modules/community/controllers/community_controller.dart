@@ -20,7 +20,7 @@ class CommunityController extends SearchableListController<User> {
             providerFunc: _communityProvider.getUsers);
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     scrollController = ScrollController();
     skip = 0;
     super.onInit();

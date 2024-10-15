@@ -113,11 +113,17 @@ class ProfileHeader extends StatelessWidget {
                     'numMotosCaptured'.trParams(
                         {'howMany': numMotoCatturate?.toString() ?? '-'}),
                     style: context.textTheme.bodyLarge),
-                MIcon(
-                  name:
-                      "Medal icon ${medagliaName(numMotoCatturate ?? 0).iconName}"
-                          .trim(),
-                  size: Size(context.width, context.height).shortestSide * 0.1,
+                Tooltip(
+                  triggerMode: TooltipTriggerMode.tap,
+                  message: 'medal'.trParams(
+                      {'name': medagliaName(numMotoCatturate ?? 0).name.tr}),
+                  child: MIcon(
+                    name:
+                        "Medal icon ${medagliaName(numMotoCatturate ?? 0).iconName}"
+                            .trim(),
+                    size:
+                        Size(context.width, context.height).shortestSide * 0.1,
+                  ),
                 )
               ]),
         ),

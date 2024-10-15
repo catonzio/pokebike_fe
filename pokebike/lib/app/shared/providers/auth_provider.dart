@@ -22,7 +22,7 @@ class AuthProvider extends GetConnect {
 
   Future<ApiResponse> register(String email, String nome, String cognome,
       String username, String password, String birthdate, XFile avatar) async {
-    return handleApiEndpoint(request, "post", "/register",
+    ApiResponse response = await handleApiEndpoint(request, "post", "/register",
         data: {
           'name': nome,
           'surname': cognome,
@@ -34,6 +34,7 @@ class AuthProvider extends GetConnect {
         },
         contentType: 'multipart/form-data',
         auth: false);
+    return response;
   }
 
   Future<ApiResponse> logout() async {

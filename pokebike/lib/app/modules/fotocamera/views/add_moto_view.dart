@@ -6,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/data/api_response.dart';
+import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/modules/fotocamera/views/add_moto_form.dart';
+import 'package:pokebike/app/modules/garage/controllers/garage_w_controller.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/utils/api_utils.dart';
 import 'package:pokebike/app/shared/widgets/default_dialog.dart';
@@ -125,6 +127,9 @@ class AddMotoView extends GetView<FotocameraController> {
       handleApiResponse(context, response, successMessage: 'motoSaved'.tr,
           onSuccess: (dynamic data) {
         controller.isCapturing = true;
+        if (Get.isRegistered<GarageWController>()) {
+          GarageWController.to.list.add(Moto.fromJson(data));
+        }
       });
     }
     return response.success;

@@ -24,7 +24,7 @@ class MotoFormFieldModelDropdown extends MotoFormFieldModel {
 
   MotoFormFieldModelDropdown({
     required super.label,
-    required super.validator,
+    super.validator,
     required super.controller,
     required this.items,
     super.onTap,

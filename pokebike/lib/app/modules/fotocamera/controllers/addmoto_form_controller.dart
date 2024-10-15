@@ -67,39 +67,33 @@ class AddMotoFormController extends GetxController {
     TipoMoto tipo = await provider.fetchTipoFromMarcaModello(
         marcaIdFromName(marca), modello);
     tipoController.text = tipo.nome;
+    availableTipos.add(tipo);
   }
 
   String? marcaValidator(dynamic value) {
     if (value == null || value.isEmpty) {
-      return 'Inserisci la marca';
+      return 'insertBrand'.tr;
     }
     return null;
   }
 
   String? modelloValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Inserisci il modello';
-    }
-    return null;
-  }
-
-  String? tipoValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Inserisci il tipo';
+      return 'insertModel'.tr;
     }
     return null;
   }
 
   String? annoValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Inserisci l\'anno';
+      return 'insertYear'.tr;
     }
     return null;
   }
 
   String? luogoValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Inserisci il luogo';
+      return 'insertLocation'.tr;
     }
     return null;
   }
@@ -125,11 +119,23 @@ class AddMotoFormController extends GetxController {
   }
 
   int tipoIdFromName(String nome) {
-    return availableTipos.where((tipo) => tipo.nome == nome).first.id;
+    List<TipoMoto> tipi =
+        availableTipos.where((tipo) => tipo.nome == nome).toList();
+    if (tipi.isEmpty) {
+      throw Exception("Tipi is empty!");
+    } else {
+      return tipi.first.id;
+    }
   }
 
   int marcaIdFromName(String nome) {
-    return availableMarche.where((marca) => marca.nome == nome).first.id;
+    List<MarcaMoto> marche =
+        availableMarche.where((marca) => marca.nome == nome).toList();
+    if (marche.isEmpty) {
+      throw Exception("Marche is empty!");
+    } else {
+      return marche.first.id;
+    }
   }
 
   void clear() {
