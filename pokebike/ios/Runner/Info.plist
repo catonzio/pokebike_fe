@@ -45,5 +45,16 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+    <key>LSApplicationQueriesSchema</key>
+    <array>
+        <string>sms</string>
+        <string>sms</string>
+    </array>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>This app requires access to your photo library to allow you to select an avatar for your profile.</string>
+    <key>NSCameraUsageDescription</key>
+    <string>This app requires access to the camera to take photos of motorbiikes and create profile avatars.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>This app requiries access to the microphone if you iintend to record videos.</string>
 </dict>
 </plist>
