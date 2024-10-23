@@ -27,10 +27,13 @@ class LanguageSelectionWidget extends GetView<SettingsController> {
             DropdownMenuItem(value: Locale('es'), child: Text("Spanish")),
             DropdownMenuItem(value: Locale('fr'), child: Text("French")),
           ],
-          onChanged: (locale) {
+          onChanged: (locale) async {
             if (locale != null) {
-              controller.updateLocale(locale);
-              context.createSnackbar('updatedLanguage'.tr);
+              bool result = await controller.updateLocale(locale);
+              if (context.mounted) {
+                context.createSnackbar(
+                    result ? 'updatedLanguage'.tr : 'nonUpdatedLanguage'.tr);
+              }
             }
           },
           underline: const SizedBox.shrink(),

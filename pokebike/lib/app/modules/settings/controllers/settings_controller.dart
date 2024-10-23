@@ -181,9 +181,13 @@ class SettingsController extends GetxController {
     }
   }
 
-  void updateLocale(Locale locale) {
-    Get.updateLocale(locale);
-    Storage.to.currentLocale = locale.languageCode.toLowerCase();
-    print(Storage.to.currentLocale);
+  Future<bool> updateLocale(Locale locale) async {
+    ApiResponse response =
+        await provider.setLanguage(locale.languageCode.toLowerCase());
+    if (response.success) {
+      Get.updateLocale(locale);
+      Storage.to.currentLocale = locale.languageCode.toLowerCase();
+    }
+    return response.success;
   }
 }

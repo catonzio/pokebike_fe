@@ -21,4 +21,9 @@ class SettingsProvider extends GetConnect {
     return handleApiEndpoint(request, "put", "/users/update-password",
         data: params);
   }
+
+  Future<ApiResponse> setLanguage(String locale) async {
+    return handleApiEndpoint(
+        request, "get", "/users/set-language?language=$locale");
+  }
 }
