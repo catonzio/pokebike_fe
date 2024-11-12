@@ -30,8 +30,8 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _accessRegisterColumn(context),
-              const OppureRow(),
-              _googleAccessButton(context)
+              // const OppureRow(),
+              // _googleAccessButton(context)
             ],
           ),
         ),
@@ -39,31 +39,31 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
     ));
   }
 
-  MButton _googleAccessButton(BuildContext context) {
-    return MButton(
-      onPressed: () => _googleRegister(context),
-      backgroundColor: Colors.white,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            "assets/icons/google.png",
-            height: context.height * 0.04,
-            fit: BoxFit.contain,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text(
-              'registerGoogle'.tr,
-              style: context.textTheme.bodySmall
-                  ?.copyWith(color: MColors.primaryDark),
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  // MButton _googleAccessButton(BuildContext context) {
+  //   return MButton(
+  //     onPressed: () => _googleRegister(context),
+  //     backgroundColor: Colors.white,
+  //     child: Row(
+  //       crossAxisAlignment: CrossAxisAlignment.center,
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: [
+  //         Image.asset(
+  //           "assets/icons/google.png",
+  //           height: context.height * 0.04,
+  //           fit: BoxFit.contain,
+  //         ),
+  //         Padding(
+  //           padding: const EdgeInsets.only(left: 8.0),
+  //           child: Text(
+  //             'registerGoogle'.tr,
+  //             style: context.textTheme.bodySmall
+  //                 ?.copyWith(color: MColors.primaryDark),
+  //           ),
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Column _accessRegisterColumn(BuildContext context) {
     return Column(
