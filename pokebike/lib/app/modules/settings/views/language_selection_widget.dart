@@ -22,7 +22,8 @@ class LanguageSelectionWidget extends GetView<SettingsController> {
         trailing: DropdownButton<Locale>(
           value: Get.locale,
           items: const [
-            DropdownMenuItem(value: Locale('en'), child: Text("English")),
+            DropdownMenuItem(value: Locale('en'), child: Text("English (UK)")),
+            DropdownMenuItem(value: Locale('us'), child: Text("English (US)")),
             DropdownMenuItem(value: Locale('it'), child: Text("Italian")),
             DropdownMenuItem(value: Locale('es'), child: Text("Spanish")),
             DropdownMenuItem(value: Locale('fr'), child: Text("French")),

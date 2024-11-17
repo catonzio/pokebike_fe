@@ -44,12 +44,13 @@ class AddMotoView extends GetView<FotocameraController> {
             SliverPadding(
               padding: EdgeInsets.only(bottom: context.keyboardHeight / 1.5),
               sliver: SliverFillRemaining(
+                hasScrollBody: false,
                 child: Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                       gradient: RadialGradient(
                           center: Alignment.bottomCenter,
-                          radius: 1.2,
+                          radius: 2,
                           colors: [
                         MColors.secondary.withOpacity(0.3),
                         Colors.black

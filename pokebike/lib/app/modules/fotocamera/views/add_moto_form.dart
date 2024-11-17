@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/modules/fotocamera/controllers/addmoto_form_controller.dart';
 import 'package:pokebike/app/modules/fotocamera/views/add_moto_form_field.dart';
 import 'package:pokebike/app/modules/fotocamera/views/add_moto_form_field_model.dart';
@@ -59,12 +60,15 @@ class AddMotoForm extends StatelessWidget {
       return Form(
         key: controller.formKey,
         child: Padding(
-          padding: const EdgeInsets.only(top: 32),
-          child: ListView(
-              // padding: const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
+          padding: const EdgeInsets.only(
+              top: 32, bottom: Constants.bottomNavbarHeight),
+          child: Column(
+              // padding: EdgeInsets.only(
+              //     bottom: Constants.bottomNavbarHeight +
+              //         context.keyboardHeight / 1.5),
               // itemExtent: context.height * 0.11,
               // mainAxisSize: MainAxisSize.min,
-              physics: const NeverScrollableScrollPhysics(),
+              // physics: const NeverScrollableScrollPhysics(),
               children: [
                 ...fields.map((MotoFormFieldModel e) {
                   return Padding(

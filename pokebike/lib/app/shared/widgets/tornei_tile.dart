@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
@@ -39,8 +40,12 @@ class TorneiTile extends StatelessWidget {
                     color: MColors.secondaryDark.withOpacity(0.5),
                   ),
                   alignment: Alignment.centerLeft,
-                  padding: const EdgeInsets.all(32.0),
-                  child: Text(text, style: context.textTheme.bodyLarge!)),
+                  padding: const EdgeInsets.all(16.0),
+                  child: AutoSizeText(
+                    text,
+                    style: context.textTheme.bodyLarge!,
+                    maxLines: 1,
+                  )),
             ),
           ),
           Positioned(

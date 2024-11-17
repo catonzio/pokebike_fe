@@ -20,13 +20,14 @@ class Mdrawer extends StatelessWidget {
           image: DecorationImage(
               image: AssetImage("assets/images/drawer_bg.png"),
               fit: BoxFit.cover)),
-      padding: const EdgeInsets.only(left: 16.0, bottom: 128),
+      padding: const EdgeInsets.only(left: 16.0, bottom: 48),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: EdgeInsets.only(top: context.height * 0.1, bottom: 32.0),
+            padding: EdgeInsets.only(
+                top: context.height * 0.1, bottom: context.height * 0.03),
             child: ShimmerTitle.light(
               text: 'helloBiker'.tr,
             ),

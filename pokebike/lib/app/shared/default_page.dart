@@ -197,6 +197,7 @@ class DefaultPage extends GetView<MDrawerController> {
           Center(
               child: SizedBox(
                   width: context.width * 0.6,
+                  // height: context.height * 0.1,
                   child: titleStyle == null
                       ? ShimmerTitle.light(
                           text: title!,
