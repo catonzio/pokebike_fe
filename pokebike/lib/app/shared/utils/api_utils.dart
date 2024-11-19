@@ -70,10 +70,6 @@ Future<ApiResponse> handleApiEndpoint(
         contentType: contentType,
         uploadProgress: uploadProgress);
 
-    if (response.status.code == 413) {
-      return ApiResponse.error(message: "Immagine troppo grande", data: null);
-    }
-
     if (response.body == null) {
       return ApiResponse.error(
         status: response.status.code,

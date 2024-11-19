@@ -139,7 +139,8 @@ class LoginView extends GetView<LoginController> {
                     ? context.navigator
                         .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
                     : context.navigator.pushNamedAndRemoveUntil(
-                        Routes.CONFIRM_REGISTER, (_) => false));
+                        Routes.CONFIRM_REGISTER,
+                        (r) => r.settings.name == Routes.LOGIN_REGISTER));
             // context.navigator.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
           });
         }

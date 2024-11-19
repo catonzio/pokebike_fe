@@ -135,35 +135,43 @@ class RegisterView extends GetView<RegisterController> {
           isPassword: false,
           onTap: () => _askBirthdate(context))
     ];
-    return ListView(itemExtent: context.height * 0.12, children: [
-      ...fields.map((RegisterFormFieldModel e) {
-        return RegisterFormField(
-          model: e,
-          toggleObscurePassword: controller.toggleObscurePassword,
-          obscurePassword: controller.obscurePassword,
-        );
-      }),
-      Padding(
-        padding: const EdgeInsets.only(top: 16.0),
-        child: Obx(() => PhotoPicker(
-              text: controller.avatar.value?.name ?? 'selectAvatar'.tr,
-              validator: controller.avatarValidator,
-              onSuccess: controller.setAvatar,
-            )),
-      ),
-      CheckboxFormField(
-        value: controller.isPrivacyAccepted,
-        onChanged: controller.togglePrivacy,
-        title: Text('privacy'.tr),
-        validator: (value) => value == false ? 'acceptPrivacy'.tr : null,
-      ),
-    ]);
+    return SingleChildScrollView(
+      child: Column(children: [
+        ...fields.map((RegisterFormFieldModel e) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: RegisterFormField(
+              model: e,
+              toggleObscurePassword: controller.toggleObscurePassword,
+              obscurePassword: controller.obscurePassword,
+            ),
+          );
+        }),
+        Padding(
+          padding: const EdgeInsets.only(top: 16.0),
+          child: Obx(() => PhotoPicker(
+                text: controller.avatar.value?.name ?? 'selectAvatar'.tr,
+                validator: controller.avatarValidator,
+                onSuccess: controller.setAvatar,
+              )),
+        ),
+        CheckboxFormField(
+          value: controller.isPrivacyAccepted,
+          onChanged: controller.togglePrivacy,
+          title: Text('privacy'.tr),
+          validator: (value) => value == false ? 'acceptPrivacy'.tr : null,
+        ),
+      ]),
+    );
   }
 
   _register(BuildContext context) async {
     if (controller.formKey.currentState!.validate()) {
       ApiResponse response = await controller.register();
       if (context.mounted) {
+        if (!response.success) {
+          controller.formKey.currentState?.validate();
+        }
         handleApiResponse(context, response, onSuccess: (dynamic data) {
           Storage.to.apiToken = data;
           context.navigator

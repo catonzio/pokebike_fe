@@ -69,38 +69,41 @@ class MotoDetailBody extends StatelessWidget {
           tag: "bottom",
           child: Material(
             type: MaterialType.transparency,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                    flex: 3,
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: index > 0
-                          ? GestureDetector(
-                              onTap: () => onPrevious(),
-                              child: SvgPicture.asset(
-                                  "assets/images/left_selection_arrow.svg"))
-                          : const SizedBox.shrink(),
-                    )),
-                Expanded(
-                    flex: 4,
-                    child: SizedBox(
-                        height: context.height * 0.05,
-                        child: MotoChosenButton(motoId: moto.id))),
-                Expanded(
-                    flex: 3,
-                    child: index < totalLen
-                        ? Align(
-                            alignment: Alignment.centerRight,
-                            child: GestureDetector(
-                                onTap: () => onNext(),
+            child: SizedBox(
+              height: context.height * 0.23,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                      flex: 3,
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: index > 0
+                            ? GestureDetector(
+                                onTap: () => onPrevious(),
                                 child: SvgPicture.asset(
-                                    "assets/images/right_selection_arrow.svg")),
-                          )
-                        : const SizedBox.shrink())
-              ],
+                                    "assets/images/left_selection_arrow.svg"))
+                            : const SizedBox.shrink(),
+                      )),
+                  Expanded(
+                      flex: 4,
+                      child: SizedBox(
+                          height: context.height * 0.05,
+                          child: MotoChosenButton(motoId: moto.id))),
+                  Expanded(
+                      flex: 3,
+                      child: index < totalLen
+                          ? Align(
+                              alignment: Alignment.centerRight,
+                              child: GestureDetector(
+                                  onTap: () => onNext(),
+                                  child: SvgPicture.asset(
+                                      "assets/images/right_selection_arrow.svg")),
+                            )
+                          : const SizedBox.shrink())
+                ],
+              ),
             ),
           ),
         ),

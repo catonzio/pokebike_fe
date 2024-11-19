@@ -24,6 +24,7 @@ class SplashViewState extends State<SplashView> {
       await _checkPermissions();
 
       String route = await _checkToken();
+      await TipoMarcaController.to.initialize();
 
       if (mounted) {
         context.navigator.pushReplacementNamed(route);
@@ -41,7 +42,7 @@ class SplashViewState extends State<SplashView> {
         "assets/images/splash_old.png",
         width: context.width,
         height: context.height,
-        fit: BoxFit.contain,
+        fit: BoxFit.cover,
         alignment: Alignment.center,
       ),
       // body: SvgPicture.asset(
@@ -66,9 +67,7 @@ class SplashViewState extends State<SplashView> {
 
   Future<String> _checkToken() async {
     bool tokenValid = await SplashController.to.checkToken();
-    String route = Routes.PRESENTATION;
-
-    await TipoMarcaController.to.initialize();
+    String route = Routes.PRESENTATION;    
 
     if (tokenValid) {
       route = Routes.HOME;

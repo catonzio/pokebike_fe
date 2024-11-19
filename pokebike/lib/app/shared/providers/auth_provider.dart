@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/api_response.dart';
@@ -9,6 +10,20 @@ class AuthProvider extends GetConnect {
   void onInit() {
     httpClient.baseUrl = Constants.apiBaseUrl;
     httpClient.timeout = const Duration(seconds: 10);
+  }
+
+  Future<ApiResponse> googleLogin(GoogleSignInAccount googleUser) async {
+    String? token = (await googleUser.authentication).accessToken;
+    ApiResponse response =
+        await handleApiEndpoint(request, "post", "/google/login",
+            data: {
+              'email': googleUser.email,
+              'name_surname': googleUser.displayName,
+              'avatarUrl': googleUser.photoUrl,
+              'token': token
+            },
+            auth: false);
+    return response;
   }
 
   Future<ApiResponse> login(String email, String password) async {

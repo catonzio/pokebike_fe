@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/app_translations.dart';
+import 'package:pokebike/app/config/translations/app_translations.dart';
 import 'package:pokebike/app/config/themes.dart';
 import 'package:pokebike/app/shared/bindings/initial_bindings.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

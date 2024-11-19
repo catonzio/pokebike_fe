@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
+import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
+import 'package:pokebike/app/shared/controllers/storage.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/utils/decoration_image.dart';
 
@@ -30,8 +32,8 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _accessRegisterColumn(context),
-              // const OppureRow(),
-              // _googleAccessButton(context)
+              const OppureRow(),
+              _googleAccessButton(context)
             ],
           ),
         ),
@@ -39,31 +41,31 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
     ));
   }
 
-  // MButton _googleAccessButton(BuildContext context) {
-  //   return MButton(
-  //     onPressed: () => _googleRegister(context),
-  //     backgroundColor: Colors.white,
-  //     child: Row(
-  //       crossAxisAlignment: CrossAxisAlignment.center,
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       children: [
-  //         Image.asset(
-  //           "assets/icons/google.png",
-  //           height: context.height * 0.04,
-  //           fit: BoxFit.contain,
-  //         ),
-  //         Padding(
-  //           padding: const EdgeInsets.only(left: 8.0),
-  //           child: Text(
-  //             'registerGoogle'.tr,
-  //             style: context.textTheme.bodySmall
-  //                 ?.copyWith(color: MColors.primaryDark),
-  //           ),
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
+  MButton _googleAccessButton(BuildContext context) {
+    return MButton(
+      onPressed: () => _googleRegister(context),
+      backgroundColor: Colors.white,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            "assets/icons/google.png",
+            height: context.height * 0.04,
+            fit: BoxFit.contain,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text(
+              'registerGoogle'.tr,
+              style: context.textTheme.bodySmall
+                  ?.copyWith(color: MColors.primaryDark),
+            ),
+          )
+        ],
+      ),
+    );
+  }
 
   Column _accessRegisterColumn(BuildContext context) {
     return Column(
@@ -97,7 +99,28 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
     context.navigator.pushNamed(Routes.REGISTER);
   }
 
-  _googleRegister(BuildContext context) {}
+  _googleRegister(BuildContext context) async {
+    ApiResponse response = await controller.googleRegister();
+    if (!response.success && response.status == 410) {
+      if (context.mounted) {
+        context.navigator.pushNamed(Routes.REGISTER, arguments: response.data);
+      }
+    }
+    if (response.success) {
+      Storage.to.apiToken = response.data;
+      controller.checkToken().then((bool value) => !context.mounted
+                ? null
+                : value
+                    ? context.navigator
+                        .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
+                    : context.navigator.pushNamedAndRemoveUntil(
+                        Routes.CONFIRM_REGISTER,
+                        (r) => r.settings.name == Routes.LOGIN_REGISTER));
+      // if (context.mounted) {
+      //   context.navigator.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
+      // }
+    }
+  }
 }
 
 class OppureRow extends StatelessWidget {

@@ -25,9 +25,42 @@ class RegisterController extends GetxController {
   final TextEditingController birthdateController = TextEditingController();
   final Rx<XFile?> avatar = Rx<XFile?>(null);
 
+  final Map<String, bool> fieldsUniqueValidationFail = {
+    'email': false,
+    'username': false,
+    'avatar': false,
+  };
+
   final AuthProvider provider;
 
   RegisterController({required this.provider});
+
+  @override
+  onInit() {
+    super.onInit();
+    final data = Get.arguments as Map<String, dynamic>?;
+    if (data != null) {
+      setRegisterData(data);
+    }
+  }
+
+  void setRegisterData(Map<String, dynamic> data) {
+    if (data.containsKey("email")) {
+      emailController.text = data["email"] ?? "";
+    }
+    if (data.containsKey("name_surname")) {
+      final text = data["name_surname"] ?? "";
+      if (text.isNotEmpty) {
+        final nameSurname = text.split(" ");
+        if (nameSurname.isNotEmpty) {
+          nomeController.text = nameSurname[0];
+        }
+        if (nameSurname.length > 1) {
+          cognomeController.text = nameSurname[1];
+        }
+      }
+    }
+  }
 
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -35,6 +68,10 @@ class RegisterController extends GetxController {
     }
     if (!value.isEmail) {
       return 'emailNotValid'.tr;
+    }
+    if (fieldsUniqueValidationFail['email']!) {
+      fieldsUniqueValidationFail['email'] = false;
+      return 'emailNotUnique'.tr;
     }
     return null;
   }
@@ -56,6 +93,10 @@ class RegisterController extends GetxController {
   String? usernameValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'usernameNoEmpty'.tr;
+    }
+    if (fieldsUniqueValidationFail['username']!) {
+      fieldsUniqueValidationFail['username'] = false;
+      return 'usernameNotUnique'.tr;
     }
     return null;
   }
@@ -91,6 +132,10 @@ class RegisterController extends GetxController {
     if (value == null && avatar.value == null) {
       return 'mustSelectAvatar'.tr;
     }
+    if (fieldsUniqueValidationFail['avatar']!) {
+      fieldsUniqueValidationFail['avatar'] = false;
+      return 'avatarTooBig'.tr;
+    }
     return null;
   }
 
@@ -110,6 +155,12 @@ class RegisterController extends GetxController {
       avatar.value!,
     );
     isPerformingRegister.value = false;
+    if (response.status == 422 && response.message.contains("validation")) {
+      final Map<String, dynamic> data = response.data;
+      for (MapEntry<String, dynamic> validations in data.entries) {
+        fieldsUniqueValidationFail[validations.key] = true;
+      }
+    }
     return response;
   }
 
