@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
 
 import 'package:pokebike/app/modules/garage/views/collezione/collezione_card_widget.dart';
-import 'package:pokebike/app/modules/partecipa_torneo/views/moto_details/moto_detail_photo.dart';
+import 'package:pokebike/app/shared/widgets/photo_detail.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 
 class MotoMainPhoto extends StatelessWidget {
@@ -26,7 +26,7 @@ class MotoMainPhoto extends StatelessWidget {
                   ? null
                   : context.navigator.push(
                       MaterialPageRoute(
-                          builder: (context) => MotoDetailPhoto(
+                          builder: (context) => PhotoDetail(
                                 tag: collezioneMoto.moto!.id.toString(),
                                 avatarUrl: collezioneMoto.moto!.avatar,
                               )),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
-import 'package:pokebike/app/modules/home/views/stories/story_widget.dart';
+import 'package:pokebike/app/shared/widgets/mcircular_avatar.dart';
 import 'package:pokebike/app/modules/profile/profile_arguments.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/classifica_body.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/empty_classifica_body.dart';
@@ -93,7 +93,7 @@ class ProfileHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        StoryWidget(
+        MCircularAvatar(
           radius: context.width * 0.1,
           imagePath: user!.avatar,
         ),
@@ -146,6 +146,8 @@ class ProfileBody extends GetView<ProfileController> {
                 : (controller.numPartecipazioni > 0 ||
                         controller.isLoadingClassifica.value
                     ? const ClassificaBody()
-                    : const EmptyClassificaBody()))));
+                    : EmptyClassificaBody(
+                        isOwnProfile: controller.isOwnProfile.value,
+                      )))));
   }
 }

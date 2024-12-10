@@ -73,6 +73,9 @@ class FotocameraController extends GetxController {
 
   Future<ApiResponse> addMoto(Map<String, dynamic> data) async {
     // isUploadingMoto.value = true;
+    if (!data.containsKey('is_garage')) {
+      data['is_garage'] = selectedIndex == 0;
+    }
     final ApiResponse result = await provider.addMoto(data);
     // isUploadingMoto.value = false;
     return result;

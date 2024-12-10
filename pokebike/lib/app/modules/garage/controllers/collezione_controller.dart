@@ -1,16 +1,16 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/enums/order_by.dart';
 import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
 import 'package:pokebike/app/data/models/moto/moto.dart';
-import 'package:pokebike/app/modules/garage/controllers/garage_w_controller.dart';
 import 'package:pokebike/app/shared/controllers/searchable_list_controller.dart';
 import 'package:pokebike/app/shared/providers/moto_provider.dart';
 
 List<CollezioneMoto> _processList(List args) {
   List<CollezioneMoto> list =
-      args[0]; //.map((el) => CollezioneMoto.fromJson(el));
-  List<Moto> motos = args[1]; //.map((el) => Moto.fromJson(el));
+      (args[0] as List).map((el) => CollezioneMoto.fromJson(el)).toList();
+  List<Moto> motos = (args[1] as List).map((el) => Moto.fromJson(el)).toList();
   // List<Moto> motos = GarageWController.to.list;
   final motoMap = {
     for (Moto moto in motos)
@@ -68,8 +68,18 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
   }
 
   Future<void> _afterInit() async {
-    final GarageWController controller = GarageWController.to;
-    _processList([list, controller.list]);
+    // final GarageWController controller = GarageWController.to;
+    List<Moto> motos = await provider.fetchMotos(isGarage: false);
+    // _processList([list, motos]);
+
+    compute(_processList, [
+      list.map((e) => e.toJson()).toList(),
+      motos.map((e) => e.toJson()).toList()
+    ]).then((e) {
+      list.clear();
+      list.addAll(e);
+    });
+
     // await compute(_processList,
     //     [list as List<CollezioneMoto>, controller.list as List<Moto>]);
   }

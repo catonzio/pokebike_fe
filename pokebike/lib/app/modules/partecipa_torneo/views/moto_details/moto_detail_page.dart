@@ -4,7 +4,7 @@ import 'package:pokebike/app/data/models/moto/moto.dart';
 import 'package:pokebike/app/modules/partecipa_torneo/controllers/partecipa_torneo_controller.dart';
 import 'package:pokebike/app/modules/partecipa_torneo/views/moto_details/moto_detail_body.dart';
 import 'package:pokebike/app/modules/partecipa_torneo/views/moto_details/moto_detail_chosen.dart';
-import 'package:pokebike/app/modules/partecipa_torneo/views/moto_details/moto_detail_photo.dart';
+import 'package:pokebike/app/shared/widgets/photo_detail.dart';
 import 'package:pokebike/app/shared/default_page.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
@@ -46,7 +46,7 @@ class MotoDetailPage extends GetView<PartecipaTorneoController> {
                 child: GestureDetector(
                   onTap: () => context.navigator.push(
                     MaterialPageRoute(
-                        builder: (context) => MotoDetailPhoto(
+                        builder: (context) => PhotoDetail(
                             tag: moto.id.toString(), avatarUrl: moto.avatar)),
                   ),
                   child: AspectRatio(

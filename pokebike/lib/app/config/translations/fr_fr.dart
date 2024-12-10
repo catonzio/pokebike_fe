@@ -122,7 +122,9 @@ const Map<String, String> frFrTranslations = {
   'noCockades': 'Vous n\'avez pas encore gagné de cocardes',
   'numMotosCaptured': '@howMany motos capturées',
   'errorLoadingPartecipation': 'Erreur lors du chargement de la participation',
-  'noTournamentsPartecipations':
+  'youNoTournamentsPartecipations':
+      'Vous n\'avez encore participé à aucun tournoi',
+  'heNoTournamentsPartecipations':
       'Vous n\'avez encore participé à aucun tournoi',
   'partecipateTournaments': 'Participer au tournoi',
   'wins': 'Victoires',
@@ -143,7 +145,7 @@ const Map<String, String> frFrTranslations = {
   'points': 'Points @howMany',
   'home': 'Accueil',
   'photocamera': 'Appareil photo',
-  'logout': 'Se déconnecter',
+  'logout': 'Logout',
   'logoutTitle': 'Êtes-vous sûr de vouloir vous déconnecter ?',
   'logoutMessage':
       'Une fois déconnecté, vous devrez vous reconnecter pour utiliser l\'application',

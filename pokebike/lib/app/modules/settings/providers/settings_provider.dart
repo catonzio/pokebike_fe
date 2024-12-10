@@ -14,7 +14,15 @@ class SettingsProvider extends GetConnect {
   }
 
   Future<ApiResponse> updateUser(int id, Map<String, dynamic> params) {
-    return handleApiEndpoint(request, "put", "/users/$id", data: params);
+    // WORKAROUND for PHP backend. No files with PUT/PATCH requests
+    params['_method'] = 'PUT';
+    return handleApiEndpoint(
+      request,
+      "post",
+      "/users/$id",
+      data: params,
+      contentType: 'multipart/form-data',
+    );
   }
 
   Future<ApiResponse> updatePassword(Map<String, dynamic> params) {

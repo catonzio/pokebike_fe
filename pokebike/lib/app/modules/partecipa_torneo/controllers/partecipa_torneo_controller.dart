@@ -14,7 +14,9 @@ class PartecipaTorneoController extends SearchableMotoController {
   MotoProvider provider;
 
   PartecipaTorneoController({required this.provider})
-      : super(fetchFunction: provider.fetchMotos);
+      : super(
+            fetchFunction: (l, s) =>
+                provider.fetchMotos(limit: l, skip: s, isGarage: true));
 
   @override
   Future<void> onReady() async {

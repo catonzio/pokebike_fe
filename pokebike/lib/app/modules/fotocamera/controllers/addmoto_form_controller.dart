@@ -92,9 +92,9 @@ class AddMotoFormController extends GetxController {
   }
 
   String? luogoValidator(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'insertLocation'.tr;
-    }
+    // if (value == null || value.isEmpty) {
+    //   return 'insertLocation'.tr;
+    // }
     return null;
   }
 

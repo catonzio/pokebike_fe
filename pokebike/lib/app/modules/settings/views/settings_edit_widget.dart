@@ -6,7 +6,7 @@ import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
-import 'package:pokebike/app/modules/home/views/stories/story_widget.dart';
+import 'package:pokebike/app/shared/widgets/mcircular_avatar.dart';
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 import 'package:pokebike/app/modules/settings/views/settings_editing_form.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
@@ -53,10 +53,12 @@ class SettingsEditWidget extends GetView<SettingsController> {
           children: [
             Expanded(
               flex: 1,
-              child: StoryWidget(
-                imagePath: controller.user.value?.avatar ?? "",
-                radius: 45,
-              ),
+              child: Obx(() => MCircularAvatar(
+                    imagePath: controller.user.value?.avatar,
+                    file: controller.newAvatar.value,
+                    radius: 45,
+                    onModify: (file) => controller.newAvatar.value = file,
+                  )),
             ),
             const Expanded(flex: 3, child: SettingsEditingForm()),
             Expanded(

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:app_settings/app_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
@@ -23,7 +24,11 @@ class SettingsController extends GetxController {
   bool get editingPassword => isEditingPassword.value;
 
   final RxBool isEditing = false.obs;
-  set editing(bool value) => isEditing.value = value;
+  set editing(bool value) {
+    isEditing.value = value;
+    newAvatar.value = null;
+  }
+
   bool get editing => isEditing.value;
 
   final RxBool isSaving = false.obs;
@@ -44,6 +49,7 @@ class SettingsController extends GetxController {
       TextEditingController();
 
   final Rxn<User> user = Rxn<User>();
+  final Rxn<XFile> newAvatar = Rxn<XFile>();
 
   final SettingsProvider provider;
 
@@ -161,11 +167,18 @@ class SettingsController extends GetxController {
   }
 
   Future<ApiResponse> salva() async {
+    final String name = nameController.text.trim();
+    final String surname = surnameController.text.trim();
+    final String username = usernameController.text.trim();
+    final String birthdate = dataController.text.trim().replaceAll("/", "-");
     Map<String, dynamic> data = {
-      'name': nameController.text.trim(),
-      'surname': surnameController.text.trim(),
-      'username': usernameController.text.trim(),
-      'birthdate': dataController.text.trim().replaceAll("/", "-")
+      'name': name == user.value!.name ? null : name,
+      'surname': surname == user.value!.surname ? null : surname,
+      'username': username == user.value!.username ? null : username,
+      'birthdate': birthdate == user.value!.birthdate.toFormattedString()
+          ? null
+          : birthdate,
+      'avatar': newAvatar.value
     };
     saving = true;
     ApiResponse response = await provider.updateUser(user.value?.id ?? 0, data);

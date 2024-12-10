@@ -58,11 +58,11 @@ Future<ApiResponse> handleApiEndpoint(
           data[el.key] = multipartFile;
         }
       }
-      if (method == 'post') {
+      if (method == 'post' || method == 'put') {
         data = FormData(data);
       }
     }
-    
+
     final response = await request(url, method,
         query: method == 'get' ? data : null,
         body: ['post', 'put', 'patch'].contains(method) ? data : null,
@@ -95,6 +95,7 @@ Future<ApiResponse> handleApiEndpoint(
         success: body.containsKey("success") && body["success"]);
   } catch (e) {
     e.printError();
+    e.printInfo();
     return ApiResponse.error(
       status: 500,
       message: e.toString(),

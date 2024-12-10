@@ -47,7 +47,7 @@ class GarageView extends GetView<GarageController> {
       slivers: [
         SliverAppBar(
           automaticallyImplyLeading: false,
-          expandedHeight: context.height * 0.285,
+          expandedHeight: context.height * 0.295,
           snap: false,
           pinned: false,
           floating: false,
@@ -60,7 +60,7 @@ class GarageView extends GetView<GarageController> {
                       enabled: controller.user.value == null,
                       child: controller.user.value != null
                           ? ProfileWidget(
-                              radius: context.height * 0.06,
+                              radius: context.height * 0.07,
                               text: fullName(controller.user.value!),
                               imagePath: controller.user.value!.avatar,
                             )

@@ -162,7 +162,11 @@ class DefaultPage extends GetView<MDrawerController> {
             )
           ],
       bottom: PreferredSize(
-          preferredSize: const Size(0, 0),
+          preferredSize: Size(
+              0,
+              backButton && (title?.isNotEmpty ?? false)
+                  ? context.width * 0
+                  : 0),
           child: backButton ? _createBackButton(context) : const SizedBox()),
       toolbarHeight: context.height * (backButton ? 0.14 : 0.08),
     );

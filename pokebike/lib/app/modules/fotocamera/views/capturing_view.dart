@@ -47,19 +47,19 @@ class CapturingView extends GetView<FotocameraController> {
           CameraButton(
             onTap: () => controller.makePhoto(),
           ),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: SizedBox(
-              width: context.width * 0.3,
-              height: context.height * 0.04,
-              child: CameraRowButton(
-                isSelected: false,
-                text: 'share'.tr,
-                onTap: () => {},
-              ),
-            ),
-          )
+          // const Spacer(),
+          // Padding(
+          //   padding: const EdgeInsets.only(right: 8),
+          //   child: SizedBox(
+          //     width: context.width * 0.3,
+          //     height: context.height * 0.04,
+          //     child: CameraRowButton(
+          //       isSelected: false,
+          //       text: 'share'.tr,
+          //       onTap: () => {},
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
@@ -80,10 +80,10 @@ class CapturingView extends GetView<FotocameraController> {
             "index": 1,
             "label": 'collection'.tr.toUpperCase(),
           },
-          {
-            "index": 2,
-            "label": 'story'.tr.toUpperCase(),
-          },
+          // {
+          //   "index": 2,
+          //   "label": 'story'.tr.toUpperCase(),
+          // },
         ]
             .map((Map<String, dynamic> e) => SizedBox(
                 width: context.width * 0.3,
