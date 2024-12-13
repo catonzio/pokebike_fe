@@ -62,6 +62,10 @@ class MCircularAvatar extends StatelessWidget {
                             ? LocalImage(file: file)
                             : CachedNetworkImage(
                                 imageUrl: imagePath!,
+                                width: 195,
+                                height: 195,
+                                maxWidthDiskCache: 195,
+                                maxHeightDiskCache: 195,
                                 imageBuilder: (context, imageProvider) {
                                   return CircleAvatar(
                                     radius: radius,
@@ -132,6 +136,8 @@ class LocalImage extends StatelessWidget {
         child: Image.file(
       File(file!.path),
       fit: BoxFit.cover,
+      cacheHeight: 215,
+      cacheWidth: 215,
     ));
   }
 }

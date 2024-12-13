@@ -29,7 +29,12 @@ class ElementCard extends StatelessWidget {
             color: MColors.primary,
             borderRadius: BorderRadius.circular(8),
             image: DecorationImage(
-                image: Image.network(element.user.avatar).image, fit: BoxFit.cover),
+                image: Image.network(
+                  element.user.avatar,
+                  cacheHeight: 500,
+                  cacheWidth: 500,
+                ).image,
+                fit: BoxFit.cover),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

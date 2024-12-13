@@ -58,6 +58,8 @@ class ClassificaProfileRow extends StatelessWidget {
                   child: MimageNetwork(
                     path: classificaTile.user.avatar,
                     borderRadius: BorderRadius.circular(8.0),
+                    cacheHeight: 128,
+                    cacheWidth: 128,
                   ),
                 ),
                 Expanded(

@@ -9,7 +9,7 @@ class TipoMarcaProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.baseUrl = Constants.apiBaseUrl;
-    httpClient.timeout = const Duration(seconds: 60);
+    httpClient.timeout = const Duration(seconds: 30);
   }
 
   Future<List<TipoMoto>> fetchTipos() async {

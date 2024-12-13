@@ -42,6 +42,8 @@ class VotaMotoImage extends GetView<VotaController> {
                 path: motoAvatar,
                 borderRadius: BorderRadius.circular(16),
                 shouldDarken: controller.hasVoted.value,
+                cacheHeight: 106,
+                cacheWidth: 106,
               ),
               AnimatedOpacity(
                 opacity: controller.hasVoted.value ? 1 : 0,

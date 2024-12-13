@@ -24,7 +24,9 @@ class GarageWidget extends GetView<GarageWController> {
         child: controller.isFetching
             ? _gridOfElements(controller.fakeList)
             : (controller.list.isEmpty
-                ? const EmptyGarageBody()
+                ? EmptyGarageBody(
+                    onRefresh: controller.refreshList,
+                  )
                 : _gridOfElements(controller.filteredList))));
   }
 

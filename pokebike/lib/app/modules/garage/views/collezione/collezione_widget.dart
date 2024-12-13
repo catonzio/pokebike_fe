@@ -5,7 +5,6 @@ import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
 import 'package:pokebike/app/data/search_options.dart';
 import 'package:pokebike/app/modules/garage/controllers/collezione_controller.dart';
 import 'package:pokebike/app/modules/garage/views/collezione/collezione_card_widget.dart';
-import 'package:pokebike/app/modules/garage/views/empty_garage_body.dart';
 import 'package:pokebike/app/modules/moto-details/moto_details_arguments.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
@@ -22,9 +21,7 @@ class CollezioneWidget extends GetView<CollezioneController> {
           enabled: controller.isFetching,
           child: controller.isFetching
               ? _gridOfElements(controller.fakeList)
-              : (controller.list.isEmpty
-                  ? const EmptyGarageBody()
-                  : _gridOfElements(controller.filteredList)));
+              : _gridOfElements(controller.filteredList));
     });
   }
 

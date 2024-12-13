@@ -7,6 +7,7 @@ class SettingsProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.baseUrl = Constants.apiBaseUrl;
+    httpClient.timeout = Duration(seconds: 30);
   }
 
   Future<ApiResponse> deleteUser(int userId) {

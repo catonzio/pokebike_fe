@@ -54,6 +54,8 @@ class MotoDetailPage extends GetView<PartecipaTorneoController> {
                     child: MimageNetwork(
                       borderRadius: BorderRadius.circular(16),
                       path: moto.avatar,
+                      cacheHeight: 1038,
+                      cacheWidth: 583,
                     ),
                   ),
                 ),

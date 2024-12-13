@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -42,33 +43,56 @@ Future<ApiResponse> handleApiEndpoint(
     bool auth = true,
     String contentType = 'application/json',
     dynamic Function(double)? uploadProgress}) async {
+  // Combine all arguments into a Map
+  final args = {
+    'request':
+        request, // Functions are not serializable; avoid passing directly
+    'method': method,
+    'url': url,
+    'data': data, // Ensure data is serializable
+    'apiToken': Storage.to.apiToken,
+    'auth': auth,
+    'contentType': contentType,
+    'uploadProgress': uploadProgress
+  };
+
+  // Use compute to handle the operation
+  return await compute(handleApiEndpointIsolate, args);
+}
+
+Future<ApiResponse> handleApiEndpointIsolate(Map<String, dynamic> args) async {
+  // Extract arguments from the Map
+  String method = args['method'];
+  dynamic data = args['data'];
+  final String apiToken = args['apiToken'];
+  final request = args['request'];
+  final String url = args['url'];
+  final bool auth = args['auth'];
+  final String contentType = args['contentType'];
+  final dynamic Function(double)? uploadProgress = args['uploadProgress'];
+
   try {
     method = method.toLowerCase();
     Map<String, String>? headers =
-        auth ? {"Authorization": "Bearer ${Storage.to.apiToken}"} : null;
+        auth ? {"Authorization": "Bearer $apiToken"} : null;
 
     if (data != null && data is Map<String, dynamic>) {
-      for (MapEntry el in data.entries) {
-        if (el.value is XFile) {
-          XFile xfile = el.value as XFile;
-          // final fileBytes = await el.value.readAsBytes();
-          final fileBytes = File(xfile.path);
-          final multipartFile = MultipartFile(fileBytes,
-              filename: el.value.name, contentType: 'application/octet-stream');
-          data[el.key] = multipartFile;
-        }
-      }
+      // data = await compute(castXFileMultipart, data);
+      data = castXFileMultipart(data);
       if (method == 'post' || method == 'put') {
         data = FormData(data);
       }
     }
 
-    final response = await request(url, method,
-        query: method == 'get' ? data : null,
-        body: ['post', 'put', 'patch'].contains(method) ? data : null,
-        headers: headers,
-        contentType: contentType,
-        uploadProgress: uploadProgress);
+    final Response response = await request(
+      url,
+      method,
+      query: method == 'get' ? data : null,
+      body: ['post', 'put', 'patch'].contains(method) ? data : null,
+      headers: headers,
+      contentType: contentType,
+      uploadProgress: uploadProgress,
+    );
 
     if (response.body == null) {
       return ApiResponse.error(
@@ -102,4 +126,18 @@ Future<ApiResponse> handleApiEndpoint(
       data: null,
     );
   }
+}
+
+Map<String, dynamic> castXFileMultipart(Map<String, dynamic> data) {
+  for (MapEntry el in data.entries) {
+    if (el.value is XFile) {
+      XFile xfile = el.value as XFile;
+      // final fileBytes = await el.value.readAsBytes();
+      final fileBytes = File(xfile.path);
+      final multipartFile = MultipartFile(fileBytes,
+          filename: el.value.name, contentType: 'application/octet-stream');
+      data[el.key] = multipartFile;
+    }
+  }
+  return data;
 }

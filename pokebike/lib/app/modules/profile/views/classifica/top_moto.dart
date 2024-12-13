@@ -53,6 +53,8 @@ class TopMoto extends StatelessWidget {
                             child: MimageNetwork(
                               path: e.avatar,
                               borderRadius: BorderRadius.circular(8),
+                              cacheHeight: 300,
+                              cacheWidth: 300,
                             ),
                           ),
                         ))

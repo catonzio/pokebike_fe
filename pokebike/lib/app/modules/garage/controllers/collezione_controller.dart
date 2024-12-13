@@ -68,18 +68,23 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
   }
 
   Future<void> _afterInit() async {
+    if (list.isEmpty) return;
     // final GarageWController controller = GarageWController.to;
     List<Moto> motos = await provider.fetchMotos(isGarage: false);
     // _processList([list, motos]);
 
-    compute(_processList, [
+    print("START");
+    print("${list.length}, ${motos.length}");
+    await compute(_processList, [
       list.map((e) => e.toJson()).toList(),
       motos.map((e) => e.toJson()).toList()
     ]).then((e) {
-      list.clear();
-      list.addAll(e);
+      if (e.isNotEmpty) {
+        list.clear();
+        list.addAll(e);
+      }
     });
-
+    print("DONE");
     // await compute(_processList,
     //     [list as List<CollezioneMoto>, controller.list as List<Moto>]);
   }

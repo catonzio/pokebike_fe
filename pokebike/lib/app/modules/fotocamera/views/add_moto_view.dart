@@ -77,7 +77,10 @@ class AddMotoView extends GetView<FotocameraController> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Image(
-                image: (snapshot.data as Image).image, fit: BoxFit.cover);
+              image: ResizeImage((snapshot.data as Image).image,
+                  width: 1080, height: 1080),
+              fit: BoxFit.cover,
+            );
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           } else {

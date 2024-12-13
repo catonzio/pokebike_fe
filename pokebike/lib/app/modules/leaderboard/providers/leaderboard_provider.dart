@@ -26,7 +26,7 @@ class LeaderboardProvider extends GetConnect {
         (skip != null ? "&skip=$skip" : "");
     ApiResponse response = await handleApiEndpoint(
         request, 'get', '/profiles/leaderboard?$suffix');
-    if (response.success) {
+    if (response.success && response.data != null) {
       return (response.data as List)
           .map<ClassificaTile>((e) => ClassificaTile.fromJson(e))
           .toList();

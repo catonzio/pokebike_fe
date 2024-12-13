@@ -23,6 +23,8 @@ class GarageCardWidget extends StatelessWidget {
           child: MimageNetwork(
             path: moto.avatar,
             borderRadius: BorderRadius.circular(16),
+            cacheHeight: 370,
+            cacheWidth: 370,
           ),
         ),
         if (moto.isFavorita)

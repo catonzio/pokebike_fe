@@ -97,6 +97,7 @@ class LoginView extends GetView<LoginController> {
             maxLines: 1,
             style: Themes.darkFormTextStyle,
             validator: controller.emailValidator,
+            keyboardType: TextInputType.emailAddress,
             decoration: lightInputDecoration('email'.tr)),
         Text('password'.tr),
         Obx(() => TextFormField(
