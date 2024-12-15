@@ -21,17 +21,29 @@ class WinnerScreen extends StatelessWidget {
         return Skeletonizer(
           enabled: controller.isFetchingWinner,
           child: controller.winner.value == null
+              // ? Container(
+              //     height: context.height * 0.3,
+              //     color: Colors.blue,
+              //     alignment: Alignment.center,
+              //     child: Text(
+              //       'noWinner'.tr,
+              //       style: context.textTheme.displaySmall,
+              //       textAlign: TextAlign.center,
+              //     ))
+              // : _getBody(controller.winner.value!)
               ? LoadingStack(
                   sigmaX: 8,
                   sigmaY: 8,
                   isLoading: (controller.winner.value == null).obs,
-                  topper: Center(
+                  topper: Container(
+                      height: context.height * 0.3,
+                      alignment: Alignment.center,
                       child: Text(
-                    'noWinner'.tr,
-                    style: context.textTheme.displaySmall,
-                    textAlign: TextAlign.center,
-                  )),
-                  child: _getBody(User.fake(1)),
+                        'noWinner'.tr,
+                        style: context.textTheme.displaySmall,
+                        textAlign: TextAlign.center,
+                      )),
+                  child: SizedBox.shrink(), // _getBody(User.fake(1)),
                 )
               : _getBody(controller.winner.value!),
         );

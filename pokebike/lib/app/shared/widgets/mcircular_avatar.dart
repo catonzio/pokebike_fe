@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/widgets/image_picker.dart';
+import 'package:pokebike/app/shared/widgets/utils/image_picker.dart';
 import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
 import 'package:pokebike/app/shared/widgets/photo_detail.dart';
 

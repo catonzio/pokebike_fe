@@ -52,9 +52,9 @@ class DefaultPage extends GetView<MDrawerController> {
           ? Stack(
               children: [
                 body,
-                Positioned(
-                  child: _createBackButton(context),
-                ),
+                // Positioned(
+                //   child: _createBackButton(context),
+                // ),
               ],
             )
           : body,
@@ -62,44 +62,38 @@ class DefaultPage extends GetView<MDrawerController> {
       resizeToAvoidBottomInset: false,
     );
 
-    return SafeArea(
-      child: GetX(builder: (MDrawerController controller) {
-        return SafeArea(
-          child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            body: Stack(
-              children: [
-                const Mdrawer(),
-                const DrawerBackgroundRedContainer(),
-                InkWell(
-                  onTap:
-                      controller.isDrawerOpen ? controller.toggleDrawer : null,
-                  child: ClipRRect(
-                    borderRadius:
-                        BorderRadius.circular(controller.isDrawerOpen ? 16 : 0),
-                    child: page,
-                  ),
-                )
-                    .animate(target: controller.isDrawerOpen ? 1.0 : 0)
-                    .move(
-                        duration: const Duration(milliseconds: 300),
-                        begin: Offset.zero,
-                        end: Offset(context.width * 0.6, 0),
-                        curve: Curves.easeInOutCubic)
-                    .scale(
-                        duration: const Duration(milliseconds: 300),
-                        begin: const Offset(1, 1),
-                        end: const Offset(0.8, 0.8),
-                        curve: Curves.easeInOutCubic),
-              ],
-            ),
-            floatingActionButton: _buildFAB(),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.endContained,
-          ),
-        );
-      }),
-    );
+    return GetX(builder: (MDrawerController controller) {
+      return Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Stack(
+          children: [
+            const Mdrawer(),
+            const DrawerBackgroundRedContainer(),
+            InkWell(
+              onTap: controller.isDrawerOpen ? controller.toggleDrawer : null,
+              child: ClipRRect(
+                borderRadius:
+                    BorderRadius.circular(controller.isDrawerOpen ? 16 : 0),
+                child: page,
+              ),
+            )
+                .animate(target: controller.isDrawerOpen ? 1.0 : 0)
+                .move(
+                    duration: const Duration(milliseconds: 300),
+                    begin: Offset.zero,
+                    end: Offset(context.width * 0.6, 0),
+                    curve: Curves.easeInOutCubic)
+                .scale(
+                    duration: const Duration(milliseconds: 300),
+                    begin: const Offset(1, 1),
+                    end: const Offset(0.8, 0.8),
+                    curve: Curves.easeInOutCubic),
+          ],
+        ),
+        floatingActionButton: _buildFAB(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endContained,
+      );
+    });
   }
 
   AnimatedSwitcher _buildFAB() {

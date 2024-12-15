@@ -56,7 +56,7 @@ class ProfileView extends StatelessWidget {
             : null,
         backButton: !controller.isOwnProfile.value,
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(bottom: 16.0, left: 16, right: 16),
           child: Obx(() => Skeletonizer(
                 enabled: controller.isFetchingUser.value ||
                     controller.isFetchingProfile.value ||
@@ -138,7 +138,7 @@ class ProfileBody extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: context.height * 0.56,
+        height: context.height * 0.5,
         child: Obx(() => AnimatedSwitcher(
             duration: const Duration(milliseconds: 500),
             child: controller.isMedaglie

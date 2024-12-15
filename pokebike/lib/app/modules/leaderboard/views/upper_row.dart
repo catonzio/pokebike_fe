@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -23,7 +24,10 @@ class UpperRow extends GetView<LeaderboardController> {
                   : MColors.secondary,
               withBorders: false,
               onPressed: controller.showLeaderboard,
-              child: Text('generalLeaderboard'.tr),
+              child: AutoSizeText(
+                'generalLeaderboard'.tr,
+                maxLines: 1,
+              ),
             ),
             MButton(
               width: context.width * 0.4,

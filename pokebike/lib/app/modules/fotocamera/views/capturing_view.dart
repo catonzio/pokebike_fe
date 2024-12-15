@@ -30,7 +30,11 @@ class CapturingView extends GetView<FotocameraController> {
           color: Colors.grey,
         ),
         child: Obx(() => controller.isInitialized
-            ? CameraPreview(controller.cameraController)
+            ? (controller.cameraError && controller.cameraController == null)
+                ? const Center(
+                    child: Text("Nessuna camera trovata"),
+                  )
+                : CameraPreview(controller.cameraController!)
             : const MCircularProgressIndicator()));
   }
 
@@ -45,7 +49,7 @@ class CapturingView extends GetView<FotocameraController> {
             width: context.width * 0.41,
           ),
           CameraButton(
-            onTap: () => controller.makePhoto(),
+            onTap: () => controller.makePhoto(context),
           ),
           // const Spacer(),
           // Padding(

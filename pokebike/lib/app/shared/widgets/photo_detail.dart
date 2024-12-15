@@ -55,34 +55,36 @@ class PhotoDetail extends StatelessWidget {
       ),
     );
 
-    return Hero(
-      tag: tag,
-      // child: interaction,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          GestureDetector(
-            // onVerticalDragEnd: (details) {
-            //   if (!interactiveController.isZoomed.value &&
-            //       details.primaryVelocity! != 0) {
-            //     context.navigator.pop();
-            //   }
-            // },
-            onDoubleTapDown: (details) =>
-                interactiveController.doubleTap(details),
-            child: interaction,
-          ),
-          Positioned(
-            top: 10,
-            left: 10,
-            child: Material(
-              color: Colors.transparent,
-              child: MBackButton(
-                onPressed: () => context.navigator.pop(),
-              ),
+    return SafeArea(
+      child: Hero(
+        tag: tag,
+        // child: interaction,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            GestureDetector(
+              // onVerticalDragEnd: (details) {
+              //   if (!interactiveController.isZoomed.value &&
+              //       details.primaryVelocity! != 0) {
+              //     context.navigator.pop();
+              //   }
+              // },
+              onDoubleTapDown: (details) =>
+                  interactiveController.doubleTap(details),
+              child: interaction,
             ),
-          )
-        ],
+            Positioned(
+              top: 10,
+              left: 10,
+              child: Material(
+                color: Colors.transparent,
+                child: MBackButton(
+                  onPressed: () => context.navigator.pop(),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

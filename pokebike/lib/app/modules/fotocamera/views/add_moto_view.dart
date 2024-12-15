@@ -73,7 +73,9 @@ class AddMotoView extends GetView<FotocameraController> {
       width: context.width,
       color: MColors.primaryDark,
       child: FutureBuilder(
-        future: xFileToImage(controller.image!),
+        future: controller.image != null
+            ? xFileToImage(controller.image!)
+            : Future.error("Unable"),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Image(
