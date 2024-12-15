@@ -49,7 +49,7 @@ class Mdrawer extends StatelessWidget {
 
   void _onTap(BuildContext context, String path, dynamic arguments) {
     final MDrawerController controller = Get.find<MDrawerController>();
-    context.navigator.pushNamed(path, arguments: arguments);
+    context.pushNamed(path, arguments: arguments);
     controller.toggleDrawer();
   }
 

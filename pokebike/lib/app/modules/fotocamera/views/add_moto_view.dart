@@ -52,7 +52,7 @@ class AddMotoView extends GetView<FotocameraController> {
                           center: Alignment.bottomCenter,
                           radius: 2,
                           colors: [
-                        MColors.secondary.withOpacity(0.3),
+                        MColors.secondary.withValues(alpha: 0.3),
                         Colors.black
                       ])),
                   child: AddMotoForm(

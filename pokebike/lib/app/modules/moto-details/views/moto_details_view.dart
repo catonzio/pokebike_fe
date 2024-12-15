@@ -74,7 +74,10 @@ class MotoDetailsView extends StatelessWidget {
               gradient: RadialGradient(
                   center: Alignment.bottomCenter,
                   radius: 1.2,
-                  colors: [MColors.secondary.withOpacity(0.05), Colors.black])),
+                  colors: [
+                MColors.secondary.withValues(alpha: 0.05),
+                Colors.black
+              ])),
           child: CustomScrollView(
             slivers: [
               SliverAppBar(

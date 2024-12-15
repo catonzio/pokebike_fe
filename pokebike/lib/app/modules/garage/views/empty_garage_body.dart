@@ -21,7 +21,7 @@ class EmptyGarageBody extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(bottom: context.height * 0.05),
           child: MButton.red(
-            onPressed: () => context.navigator.pushNamed(Routes.FOTOCAMERA),
+            onPressed: () => context.pushNamed(Routes.FOTOCAMERA),
             child: Text('add'.tr),
           ),
         ),

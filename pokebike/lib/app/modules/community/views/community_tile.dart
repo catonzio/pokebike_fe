@@ -74,7 +74,7 @@ class CommunityTileBottomRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: MColors.primary.withOpacity(0.5),
+          color: MColors.primary.withValues(alpha: 0.5),
           borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(16),
               bottomRight: Radius.circular(16))),

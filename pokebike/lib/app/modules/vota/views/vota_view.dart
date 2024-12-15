@@ -43,7 +43,7 @@ class VotaView extends GetView<VotaController> {
                       Text(
                         "VS",
                         style: context.textTheme.displaySmall?.copyWith(
-                          color: Colors.white.withOpacity(0.3),
+                          color: Colors.white.withValues(alpha: 0.3),
                           fontWeight: FontWeight.normal,
                         ),
                       ),

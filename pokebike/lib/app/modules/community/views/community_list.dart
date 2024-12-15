@@ -39,7 +39,7 @@ class CommunityList extends StatelessWidget {
                       profileImagePath: e.avatar,
                       onTap: () {
                         controller.focusNode.unfocus();
-                        context.navigator.pushNamed(
+                        context.pushNamed(
                           Routes.PROFILE,
                           arguments: ProfileArguments(user: e),
                         );

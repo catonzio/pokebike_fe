@@ -16,19 +16,17 @@ class UpperButtons extends StatelessWidget {
       children: [
         UpperButton(
           icon: "Garage icon white",
-          onTap: () => context.navigator
-              .pushNamed(Routes.GARAGE, arguments: GarageType.garage),
+          onTap: () => context.pushNamed(Routes.GARAGE, arguments: GarageType.garage),
           text: 'myGarage'.tr,
         ),
         UpperButton(
           icon: "Collection icon white",
-          onTap: () => context.navigator
-              .pushNamed(Routes.GARAGE, arguments: GarageType.collection),
+          onTap: () => context.pushNamed(Routes.GARAGE, arguments: GarageType.collection),
           text: 'collection'.tr,
         ),
         UpperButton(
           icon: "Profile icon white",
-          onTap: () => context.navigator.pushNamed(Routes.PROFILE),
+          onTap: () => context.pushNamed(Routes.PROFILE),
           text: 'profile'.tr,
         )
       ],

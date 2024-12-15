@@ -92,32 +92,31 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
   }
 
   _access(BuildContext context) {
-    context.navigator.pushNamed(Routes.LOGIN);
+    context.pushNamed(Routes.LOGIN);
   }
 
   _register(BuildContext context) {
-    context.navigator.pushNamed(Routes.REGISTER);
+    context.pushNamed(Routes.REGISTER);
   }
 
   _googleRegister(BuildContext context) async {
     ApiResponse response = await controller.googleRegister();
     if (!response.success && response.status == 410) {
       if (context.mounted) {
-        context.navigator.pushNamed(Routes.REGISTER, arguments: response.data);
+        context.pushNamed(Routes.REGISTER, arguments: response.data);
       }
     }
     if (response.success) {
       Storage.to.apiToken = response.data;
       controller.checkToken().then((bool value) => !context.mounted
-                ? null
-                : value
-                    ? context.navigator
-                        .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
-                    : context.navigator.pushNamedAndRemoveUntil(
-                        Routes.CONFIRM_REGISTER,
-                        (r) => r.settings.name == Routes.LOGIN_REGISTER));
+          ? null
+          : value
+              ? context.navigator
+                  .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
+              : context.navigator.pushNamedAndRemoveUntil(Routes.CONFIRM_REGISTER,
+                  (r) => r.settings.name == Routes.LOGIN_REGISTER));
       // if (context.mounted) {
-      //   context.navigator.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
+      //   context.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
       // }
     }
   }

@@ -20,7 +20,7 @@ class ElementCard extends StatelessWidget {
     final double width = context.width * 0.42;
     final double height = context.height * 0.22;
     return GestureDetector(
-      onTap: () => context.navigator.pushNamed(Routes.PROFILE,
+      onTap: () => context.pushNamed(Routes.PROFILE,
           arguments: ProfileArguments(profileId: element.id)),
       child: Container(
           width: width,
@@ -44,7 +44,7 @@ class ElementCard extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.8),
+                      color: Colors.white.withValues(alpha: 0.8),
                       border: Border.all(color: MColors.secondary, width: 2),
                       shape: BoxShape.circle),
                   padding: const EdgeInsets.all(16),
@@ -62,7 +62,7 @@ class ElementCard extends StatelessWidget {
                   width: double.maxFinite,
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.7),
+                      color: Colors.white.withValues(alpha: 0.7),
                       borderRadius: BorderRadius.circular(8)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

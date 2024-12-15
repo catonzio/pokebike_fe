@@ -52,7 +52,7 @@ class MotoDetailBody extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
-              onTap: () => context.navigator.pushNamed(Routes.MOTO_DETAILS,
+              onTap: () => context.pushNamed(Routes.MOTO_DETAILS,
                   arguments:
                       MotoDetailsArguments(moto: moto, isOwnMoto: false)),
               child: Hero(

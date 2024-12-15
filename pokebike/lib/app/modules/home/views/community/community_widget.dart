@@ -16,7 +16,7 @@ class CommunityWidget extends StatelessWidget {
       child: Column(
         children: [
           CommunityTitle(
-            onTap: () => context.navigator.pushNamed(Routes.COMMUNITY),
+            onTap: () => context.pushNamed(Routes.COMMUNITY),
           ),
           SizedBox(
               height: height * 0.75,

@@ -65,7 +65,7 @@ class CollezioneWidget extends GetView<CollezioneController> {
     controller.focusNode.unfocus();
     // final bool isGarage = controller.isShowingGarage.value;
     // if (m != null) {
-    context.navigator.pushNamed(Routes.MOTO_DETAILS,
+    context.pushNamed(Routes.MOTO_DETAILS,
         arguments: MotoDetailsArguments(
             moto: collezioneMoto.moto,
             collezioneMoto: collezioneMoto,

@@ -13,7 +13,7 @@ class Storage {
 
   final ReadWriteValue<bool> _hasSeenPresentation =
       false.val('seenPresentation', getBox: _box);
-  bool get hasSeenPresentation => _hasSeenPresentation.val;
+  bool get hasSeenPresentation => false;//_hasSeenPresentation.val;
   set hasSeenPresentation(bool value) => _hasSeenPresentation.val = value;
 
   final ReadWriteValue<String> _currentLocale =

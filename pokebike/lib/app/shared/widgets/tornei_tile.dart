@@ -34,14 +34,14 @@ class TorneiTile extends StatelessWidget {
                   ).image,
                   fit: BoxFit.cover,
                   colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.3), BlendMode.darken),
+                      Colors.black.withValues(alpha: 0.3), BlendMode.darken),
                 ),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: MColors.secondaryDark.withOpacity(0.5),
+                    color: MColors.secondaryDark.withValues(alpha: 0.5),
                   ),
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.all(16.0),

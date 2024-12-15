@@ -37,6 +37,7 @@ extension ContextUtils on BuildContext {
 
     if (routeExists) {
       navigator.popUntil((route) => route.settings.name == routeName);
+      navigator.pop();
     }
 
     return navigator.pushNamed(routeName, arguments: arguments);

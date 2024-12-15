@@ -61,7 +61,7 @@ class MotoChosenButton extends GetView<PartecipaTorneoController> {
     //         ),
     //         Icon(
     //           Icons.keyboard_arrow_up_outlined,
-    //           color: Colors.black.withOpacity(0.5),
+    //           color: Colors.black.withValues(alpha: 0.5),
     //           size: 28,
     //         )
     //       ],

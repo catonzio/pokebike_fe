@@ -218,11 +218,11 @@ class DefaultPage extends GetView<MDrawerController> {
   }
 
   void _tapCommunity(BuildContext context) {
-    context.navigator.pushNamed(Routes.COMMUNITY);
+    context.pushNamed(Routes.COMMUNITY);
   }
 
   _tapNotifications(BuildContext context) {
-    context.navigator.pushNamed(Routes.NOTIFICATIONS);
+    context.pushNamed(Routes.NOTIFICATIONS);
   }
 }
 

@@ -17,7 +17,7 @@ class EmptyPartecipaTorneoGrid extends StatelessWidget {
           style: context.textTheme.titleMedium,
         ),
         MButton.red(
-            onPressed: () => context.navigator.pushNamed(Routes.FOTOCAMERA),
+            onPressed: () => context.pushNamed(Routes.FOTOCAMERA),
             child: Text('startCollecting'.tr)),
       ],
     );

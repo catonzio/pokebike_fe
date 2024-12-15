@@ -23,7 +23,7 @@ class EmptyClassificaBody extends StatelessWidget {
         ),
         if (isOwnProfile)
           MButton(
-              onPressed: () => context.navigator.pushNamed(Routes
+              onPressed: () => context.pushNamed(Routes
                   .PARTECIPA_TORNEO), // Get.find<ProfileController>().setTorneo(Torneo()),
               backgroundColor: MColors.secondaryDark,
               child: Text('partecipateTournaments'.tr))

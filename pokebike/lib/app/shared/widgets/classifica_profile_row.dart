@@ -20,7 +20,7 @@ class ClassificaProfileRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => shouldNavigate
-          ? context.navigator.pushNamed(Routes.PROFILE,
+          ? context.pushNamed(Routes.PROFILE,
               arguments: ProfileArguments(profileId: classificaTile.id))
           : null,
       child: Container(

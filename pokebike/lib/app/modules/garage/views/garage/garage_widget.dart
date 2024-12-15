@@ -64,7 +64,7 @@ class GarageWidget extends GetView<GarageWController> {
     controller.focusNode.unfocus();
     // final bool isGarage = controller.isShowingGarage.value;
     if (m != null) {
-      context.navigator.pushNamed(Routes.MOTO_DETAILS,
+      context.pushNamed(Routes.MOTO_DETAILS,
           arguments: MotoDetailsArguments(moto: m, isOwnMoto: true));
       // .then((value) => controller.isShowingGarage.value = isGarage);
     }

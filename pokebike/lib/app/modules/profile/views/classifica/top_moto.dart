@@ -44,7 +44,7 @@ class TopMoto extends StatelessWidget {
                           child: InkWell(
                             borderRadius: BorderRadius.circular(8),
                             onTap: () {
-                              context.navigator.pushNamed(Routes.MOTO_DETAILS,
+                              context.pushNamed(Routes.MOTO_DETAILS,
                                   arguments: MotoDetailsArguments(
                                       moto: e,
                                       isOwnMoto:
