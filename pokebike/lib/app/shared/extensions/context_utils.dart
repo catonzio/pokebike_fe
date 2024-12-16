@@ -23,4 +23,23 @@ extension ContextUtils on BuildContext {
           ),
     ));
   }
+
+  Future<T?> pushNamed<T extends Object?>(String routeName,
+      {Object? arguments}) {
+    bool routeExists = false;
+
+    navigator.popUntil((route) {
+      if (route.settings.name == routeName) {
+        routeExists = true;
+      }
+      return true; // Continue traversing the stack
+    });
+
+    if (routeExists) {
+      navigator.popUntil((route) => route.settings.name == routeName);
+      navigator.pop();
+    }
+
+    return navigator.pushNamed(routeName, arguments: arguments);
+  }
 }

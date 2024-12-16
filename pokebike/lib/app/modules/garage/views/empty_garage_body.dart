@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/garage/controllers/garage_w_controller.dart';
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 
 class EmptyGarageBody extends StatelessWidget {
-  const EmptyGarageBody({super.key});
+  final Future<void> Function() onRefresh;
+  const EmptyGarageBody({super.key, required this.onRefresh});
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +21,14 @@ class EmptyGarageBody extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(bottom: context.height * 0.05),
           child: MButton.red(
-            onPressed: () => context.navigator.pushNamed(Routes.FOTOCAMERA),
+            onPressed: () => context.pushNamed(Routes.FOTOCAMERA),
             child: Text('add'.tr),
           ),
         ),
         Padding(
           padding: EdgeInsets.only(bottom: context.height * 0.1),
           child: MButton.white(
-            onPressed: GarageWController.to.refreshList,
+            onPressed: onRefresh,
             child: Text(
               'refresh'.tr,
               style:

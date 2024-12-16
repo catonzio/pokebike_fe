@@ -122,7 +122,8 @@ const Map<String, String> esEsTranslations = {
   'noCockades': 'Aún no has ganado ninguna cinta',
   'numMotosCaptured': '@howMany motos capturadas',
   'errorLoadingPartecipation': 'Error al cargar la participación',
-  'noTournamentsPartecipations': 'Aún no has participado en ningún torneo',
+  'youNoTournamentsPartecipations': 'Aún no has participado en ningún torneo',
+  'heNoTournamentsPartecipations': 'Aún no has participado en ningún torneo',
   'partecipateTournaments': 'Participa en el torneo',
   'wins': 'Victorias',
   'topMoto': 'Moto principal',
@@ -141,7 +142,7 @@ const Map<String, String> esEsTranslations = {
   'points': 'Puntos @howMany',
   'home': 'Inicio',
   'photocamera': 'Cámara',
-  'logout': 'Cerrar sesión',
+  'logout': 'Logout',
   'logoutTitle': '¿Estás seguro de que deseas salir?',
   'logoutMessage':
       'Una vez que salgas, deberás iniciar sesión nuevamente para usar la aplicación',

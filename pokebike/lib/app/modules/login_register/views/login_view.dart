@@ -97,6 +97,7 @@ class LoginView extends GetView<LoginController> {
             maxLines: 1,
             style: Themes.darkFormTextStyle,
             validator: controller.emailValidator,
+            keyboardType: TextInputType.emailAddress,
             decoration: lightInputDecoration('email'.tr)),
         Text('password'.tr),
         Obx(() => TextFormField(
@@ -138,10 +139,9 @@ class LoginView extends GetView<LoginController> {
                 : value
                     ? context.navigator
                         .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
-                    : context.navigator.pushNamedAndRemoveUntil(
-                        Routes.CONFIRM_REGISTER,
+                    : context.navigator.pushNamedAndRemoveUntil(Routes.CONFIRM_REGISTER,
                         (r) => r.settings.name == Routes.LOGIN_REGISTER));
-            // context.navigator.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
+            // context.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
           });
         }
       });

@@ -52,7 +52,7 @@ class AddMotoView extends GetView<FotocameraController> {
                           center: Alignment.bottomCenter,
                           radius: 2,
                           colors: [
-                        MColors.secondary.withOpacity(0.3),
+                        MColors.secondary.withValues(alpha: 0.3),
                         Colors.black
                       ])),
                   child: AddMotoForm(
@@ -73,11 +73,16 @@ class AddMotoView extends GetView<FotocameraController> {
       width: context.width,
       color: MColors.primaryDark,
       child: FutureBuilder(
-        future: xFileToImage(controller.image!),
+        future: controller.image != null
+            ? xFileToImage(controller.image!)
+            : Future.error("Unable"),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Image(
-                image: (snapshot.data as Image).image, fit: BoxFit.cover);
+              image: ResizeImage((snapshot.data as Image).image,
+                  width: 1080, height: 1080),
+              fit: BoxFit.cover,
+            );
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           } else {

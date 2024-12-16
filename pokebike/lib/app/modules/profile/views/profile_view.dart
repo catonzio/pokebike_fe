@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokebike/app/data/models/user/user.dart';
-import 'package:pokebike/app/modules/home/views/stories/story_widget.dart';
+import 'package:pokebike/app/shared/widgets/mcircular_avatar.dart';
 import 'package:pokebike/app/modules/profile/profile_arguments.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/classifica_body.dart';
 import 'package:pokebike/app/modules/profile/views/classifica/empty_classifica_body.dart';
@@ -56,7 +56,7 @@ class ProfileView extends StatelessWidget {
             : null,
         backButton: !controller.isOwnProfile.value,
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.only(bottom: 16.0, left: 16, right: 16),
           child: Obx(() => Skeletonizer(
                 enabled: controller.isFetchingUser.value ||
                     controller.isFetchingProfile.value ||
@@ -93,7 +93,7 @@ class ProfileHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        StoryWidget(
+        MCircularAvatar(
           radius: context.width * 0.1,
           imagePath: user!.avatar,
         ),
@@ -138,7 +138,7 @@ class ProfileBody extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: context.height * 0.56,
+        height: context.height * 0.5,
         child: Obx(() => AnimatedSwitcher(
             duration: const Duration(milliseconds: 500),
             child: controller.isMedaglie
@@ -146,6 +146,8 @@ class ProfileBody extends GetView<ProfileController> {
                 : (controller.numPartecipazioni > 0 ||
                         controller.isLoadingClassifica.value
                     ? const ClassificaBody()
-                    : const EmptyClassificaBody()))));
+                    : EmptyClassificaBody(
+                        isOwnProfile: controller.isOwnProfile.value,
+                      )))));
   }
 }

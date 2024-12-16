@@ -21,7 +21,7 @@ DecorationImage getDecorationImage(
   return DecorationImage(
     image: AssetImage(path),
     colorFilter: ColorFilter.mode(
-      color.withOpacity(opacity),
+      color.withValues(alpha: opacity),
       blendMode,
     ),
     fit: BoxFit.cover,
@@ -33,7 +33,7 @@ DecorationImage getDecorationImageApi(
   return DecorationImage(
     image: Image.network(path).image,
     colorFilter: ColorFilter.mode(
-      color.withOpacity(opacity),
+      color.withValues(alpha: opacity),
       blendMode,
     ),
     fit: BoxFit.cover,

@@ -6,7 +6,8 @@ import 'package:pokebike/app/routes/app_pages.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
 
 class EmptyClassificaBody extends StatelessWidget {
-  const EmptyClassificaBody({super.key});
+  final bool isOwnProfile;
+  const EmptyClassificaBody({super.key, required this.isOwnProfile});
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +16,17 @@ class EmptyClassificaBody extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
-          'noTournamentsPartecipations'.tr,
+          isOwnProfile
+              ? 'youNoTournamentsPartecipations'.tr
+              : 'heNoTournamentsPartecipations'.tr,
           textAlign: TextAlign.center,
         ),
-        MButton(
-            onPressed: () => context.navigator.pushNamed(Routes
-                .PARTECIPA_TORNEO), // Get.find<ProfileController>().setTorneo(Torneo()),
-            backgroundColor: MColors.secondaryDark,
-            child: Text('partecipateTournaments'.tr))
+        if (isOwnProfile)
+          MButton(
+              onPressed: () => context.pushNamed(Routes
+                  .PARTECIPA_TORNEO), // Get.find<ProfileController>().setTorneo(Torneo()),
+              backgroundColor: MColors.secondaryDark,
+              child: Text('partecipateTournaments'.tr))
       ],
     );
   }

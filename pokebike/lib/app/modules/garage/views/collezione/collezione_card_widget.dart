@@ -107,6 +107,8 @@ class CollezioneCardWidget extends StatelessWidget {
       child = MimageNetwork(
         path: collezioneMoto.moto!.avatar,
         borderRadius: borderRadius,
+        cacheHeight: 500,
+        cacheWidth: 500,
       );
     } else {
       child = Container(

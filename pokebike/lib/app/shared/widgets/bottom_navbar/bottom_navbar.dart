@@ -59,7 +59,7 @@ class BottomNavbar extends GetView<BottomNavbarController> {
     final bottomNavbarItem = bottomNavbarItems[newIndex];
     final navigatorFunc = bottomNavbarItem.shouldPop
         ? context.navigator.popAndPushNamed
-        : context.navigator.pushNamed;
+        : context.pushNamed;
     navigatorFunc(bottomNavbarItem.route).then((_) {
       controller.currentIndex.value = oldIndex;
     });

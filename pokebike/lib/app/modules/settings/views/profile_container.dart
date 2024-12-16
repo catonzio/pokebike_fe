@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/modules/home/views/stories/story_widget.dart';
+import 'package:pokebike/app/shared/widgets/mcircular_avatar.dart';
 import 'package:pokebike/app/shared/widgets/utils/micon.dart';
 
 class ProfileContainer extends StatelessWidget {
@@ -20,7 +20,7 @@ class ProfileContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
         contentPadding: const EdgeInsets.all(16),
-        leading: StoryWidget(
+        leading: MCircularAvatar(
           imagePath: imagePath,
           radius: 32,
           // backgroundImage: NetworkImage(imagePath),

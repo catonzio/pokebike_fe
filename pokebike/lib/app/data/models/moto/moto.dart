@@ -15,10 +15,11 @@ part 'moto.g.dart';
 class Moto with _$Moto {
   const factory Moto({
     required int id,
+    required bool isGarage,
     required String nome,
     @Default('') String descrizione,
     required int anno,
-    required String luogo,
+    @Default('') String luogo,
     required DateTime dataCattura,
     required MarcaMoto marcaMoto,
     required TipoMoto tipoMoto,
@@ -32,6 +33,7 @@ class Moto with _$Moto {
 
   factory Moto.fake(int index) => Moto(
         id: index,
+        isGarage: false,
         nome: "Moto $index",
         descrizione:
             "Erede di un retaggio nato nel 1957, l’irriverente e ricercato Sportster S di Harley-Davidson evolve i tratti universalmente amati dei suoi predecessori: velocità scattante, agilità sorprendente e divertimento assicurato.",

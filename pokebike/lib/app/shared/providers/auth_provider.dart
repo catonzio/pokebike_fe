@@ -9,7 +9,7 @@ class AuthProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.baseUrl = Constants.apiBaseUrl;
-    httpClient.timeout = const Duration(seconds: 10);
+    httpClient.timeout = const Duration(seconds: 30);
   }
 
   Future<ApiResponse> googleLogin(GoogleSignInAccount googleUser) async {

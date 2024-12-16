@@ -17,7 +17,7 @@ class VotaRow extends GetView<VotaController> {
 
   @override
   Widget build(BuildContext context) {
-    final double totalHeight = context.height * 0.3;
+    final double totalHeight = context.height * 0.285;
     final double playerRowHeight = totalHeight * 0.15;
     final double motoImageHeight = totalHeight * 0.7;
 

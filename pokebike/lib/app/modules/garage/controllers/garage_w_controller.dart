@@ -9,7 +9,9 @@ class GarageWController extends SearchableMotoController {
   final MotoProvider provider;
 
   GarageWController({required this.provider})
-      : super(fetchFunction: provider.fetchMotos);
+      : super(
+            fetchFunction: (l, s) =>
+                provider.fetchMotos(limit: l, skip: s, isGarage: true));
 
   @override
   Future<void> onInit() async {

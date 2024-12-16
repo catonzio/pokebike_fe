@@ -19,14 +19,18 @@ class MimageNetwork extends StatelessWidget {
   final String path;
   final BoxFit fit;
   final BorderRadius? borderRadius;
-  final bool shouldDarken;
+  final double lightLevel;
+  final double? cacheWidth;
+  final double? cacheHeight;
 
   const MimageNetwork(
       {super.key,
       required this.path,
       this.fit = BoxFit.cover,
       this.borderRadius,
-      this.shouldDarken = false});
+      this.lightLevel = 1,
+      this.cacheHeight,
+      this.cacheWidth});
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +39,13 @@ class MimageNetwork extends StatelessWidget {
       child: CachedNetworkImage(
         imageUrl: path,
         fit: fit,
-        color: shouldDarken ? Colors.black.withOpacity(0.6) : null,
-        colorBlendMode: shouldDarken ? BlendMode.darken : null,
+        alignment: Alignment.center,
+        width: cacheWidth,
+        height: cacheHeight,
+        maxWidthDiskCache: cacheWidth?.toInt(),
+        maxHeightDiskCache: cacheHeight?.toInt(),
+        color: lightLevel < 1 ? Colors.black.withValues(alpha: 1 - lightLevel) : null,
+        colorBlendMode: lightLevel < 1 ? BlendMode.darken : null,
         progressIndicatorBuilder: (context, url, progress) => Skeletonizer(
           enabled: true,
           child: LinearProgressIndicator(value: progress.progress),

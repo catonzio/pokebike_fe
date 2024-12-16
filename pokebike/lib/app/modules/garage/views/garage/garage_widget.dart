@@ -24,7 +24,9 @@ class GarageWidget extends GetView<GarageWController> {
         child: controller.isFetching
             ? _gridOfElements(controller.fakeList)
             : (controller.list.isEmpty
-                ? const EmptyGarageBody()
+                ? EmptyGarageBody(
+                    onRefresh: controller.refreshList,
+                  )
                 : _gridOfElements(controller.filteredList))));
   }
 
@@ -62,7 +64,7 @@ class GarageWidget extends GetView<GarageWController> {
     controller.focusNode.unfocus();
     // final bool isGarage = controller.isShowingGarage.value;
     if (m != null) {
-      context.navigator.pushNamed(Routes.MOTO_DETAILS,
+      context.pushNamed(Routes.MOTO_DETAILS,
           arguments: MotoDetailsArguments(moto: m, isOwnMoto: true));
       // .then((value) => controller.isShowingGarage.value = isGarage);
     }

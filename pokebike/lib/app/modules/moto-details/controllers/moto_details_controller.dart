@@ -48,6 +48,9 @@ class MotoDetailsController extends GetxController {
 
   @override
   void onInit() {
+    super.onInit();
+    initialize(arguments);
+
     final TipoMarcaController tipoMarcaController = TipoMarcaController.to;
     availableTipos.addAll(tipoMarcaController.tipi);
     availableMarche.addAll(tipoMarcaController.marche);
@@ -62,8 +65,6 @@ class MotoDetailsController extends GetxController {
       luogoController.text = moto!.luogo;
       descrizioneController.text = moto!.descrizione;
     }
-    super.onInit();
-    initialize(arguments);
   }
 
   void initialize(MotoDetailsArguments? arguments) {

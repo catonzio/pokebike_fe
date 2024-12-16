@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -66,10 +67,11 @@ class ShimmerTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return AutoSizeText(
       text,
       style: GoogleFonts.poppins(textStyle: style),
-      textAlign: textAlign,
+      textAlign: textAlign ?? TextAlign.center,
+      maxLines: 1,
     )
         .animate(
           onPlay: (controller) => controller.repeat(),

@@ -26,10 +26,13 @@ class LoadingStack extends StatelessWidget {
           children: [
             child,
             if (isLoading.value)
-              BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: sigmaX, sigmaY: sigmaY),
-                child: topper,
-              ).animate().fade()
+              Container(
+                color: Colors.transparent,
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: sigmaX, sigmaY: sigmaY),
+                  child: topper,
+                ).animate().fade(),
+              )
           ],
         ));
   }

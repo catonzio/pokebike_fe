@@ -12,6 +12,7 @@ class FirebaseInitializer {
 
   Future<void> initializeFirebase() async {
     await Firebase.initializeApp(
+      name: "PokeBike",
       options: DefaultFirebaseOptions.currentPlatform,
     );
   }

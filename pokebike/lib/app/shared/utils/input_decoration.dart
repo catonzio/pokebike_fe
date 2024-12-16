@@ -47,7 +47,7 @@ InputDecoration defaultInputDecoration(String hintText,
       fillColor: fillColor,
       hintText: hintText,
       hintStyle: TextStyle(
-          color: textColor.withOpacity(0.4),
+          color: textColor.withValues(alpha: 0.4),
           fontSize: 14,
           fontWeight: FontWeight.w400),
       errorStyle: const TextStyle(fontSize: 12, color: MColors.error),

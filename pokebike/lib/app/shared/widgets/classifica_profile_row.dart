@@ -20,7 +20,7 @@ class ClassificaProfileRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => shouldNavigate
-          ? context.navigator.pushNamed(Routes.PROFILE,
+          ? context.pushNamed(Routes.PROFILE,
               arguments: ProfileArguments(profileId: classificaTile.id))
           : null,
       child: Container(
@@ -58,6 +58,8 @@ class ClassificaProfileRow extends StatelessWidget {
                   child: MimageNetwork(
                     path: classificaTile.user.avatar,
                     borderRadius: BorderRadius.circular(8.0),
+                    cacheHeight: 128,
+                    cacheWidth: 128,
                   ),
                 ),
                 Expanded(

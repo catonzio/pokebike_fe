@@ -41,7 +41,7 @@ class CoccardaWidget extends StatelessWidget {
     double percentage =
         cockade.ub == null ? 0 : max(0, numCatturate) / cockade.ub!;
     return GestureDetector(
-      onTap: () => context.navigator.pushNamed(Routes.COCKADES_DETAILS,
+      onTap: () => context.pushNamed(Routes.COCKADES_DETAILS,
           arguments: CockadesDetailsArguments(
               numCatturate: numCatturate, typeName: text)),
       child: Column(

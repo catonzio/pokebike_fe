@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pokebike/app/data/api_response.dart';
 import 'package:pokebike/app/shared/providers/moto_provider.dart';
+import 'package:pokebike/app/shared/widgets/utils/image_picker.dart';
 import 'package:pokebike/initializer.dart';
 
 class FotocameraController extends GetxController {
@@ -24,8 +25,8 @@ class FotocameraController extends GetxController {
 
   final ScrollController scrollController = ScrollController();
 
-  CameraController cameraController =
-      CameraController(cameras[0], ResolutionPreset.max);
+  late final CameraController? cameraController;
+  late final bool cameraError;
 
   final Rx<XFile?> _image = Rx<XFile?>(null);
   XFile? get image => _image.value;
@@ -33,13 +34,21 @@ class FotocameraController extends GetxController {
 
   final MotoProvider provider;
 
-  FotocameraController(this.provider);
+  FotocameraController(this.provider) {
+    if (cameras.isEmpty) {
+      cameraError = true;
+      cameraController = null;
+    } else {
+      cameraController = CameraController(cameras[0], ResolutionPreset.max);
+      cameraError = false;
+    }
+  }
 
   @override
   Future<void> onInit() async {
     // cameraController = CameraController(cameras[0], ResolutionPreset.max);
     cameraController
-        .initialize()
+        ?.initialize()
         .then((value) => isInitialized = true)
         .onError((error, stackTrace) {
       print(error);
@@ -56,9 +65,10 @@ class FotocameraController extends GetxController {
     super.onInit();
   }
 
-  makePhoto() async {
+  makePhoto(BuildContext context) async {
+    // image = await selectAvatar(context);
     try {
-      image = await cameraController.takePicture();
+      image = await cameraController?.takePicture();
     } catch (e) {
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: ImageSource.gallery);
@@ -68,11 +78,20 @@ class FotocameraController extends GetxController {
         // controller.avatar = image.path;
       }
     }
+
+    isCapturing = false;
+  }
+
+  void takePhotoFromGallery(BuildContext context) async {
+    image = await selectAvatar(context, source: ImageSource.gallery);
     isCapturing = false;
   }
 
   Future<ApiResponse> addMoto(Map<String, dynamic> data) async {
     // isUploadingMoto.value = true;
+    if (!data.containsKey('is_garage')) {
+      data['is_garage'] = selectedIndex == 0;
+    }
     final ApiResponse result = await provider.addMoto(data);
     // isUploadingMoto.value = false;
     return result;

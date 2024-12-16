@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
-import 'package:pokebike/app/shared/utils/decoration_image.dart';
 import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
+import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
 
 class PresentationContainer extends StatelessWidget {
   final String imagePath;
@@ -30,17 +30,34 @@ class PresentationContainer extends StatelessWidget {
               child: child,
             );
           },
+          // child: Container(child: MimageNetwork(path: imagePath)),
           child: Container(
             key: ValueKey(imagePath),
             width: context.width,
             height: height,
             decoration: BoxDecoration(
-              image: getDarkDecorationImageApi(imagePath, 0.2),
-              borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(100),
-              ),
+                // image: getDarkDecorationImageApi(imagePath, 0.2),
+                // borderRadius: const BorderRadius.only(
+                //   bottomRight: Radius.circular(100),
+                // ),
+                ),
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: ClipRRect(
+                      borderRadius: const BorderRadius.only(
+                        bottomRight: Radius.circular(100),
+                      ),
+                      child: MimageNetwork(
+                        path: imagePath,
+                        lightLevel: 0.7,
+                        cacheWidth: 1080,
+                        cacheHeight: 2018,
+                      )),
+                ),
+                InternalText(title: title, subtitle: subtitle),
+              ],
             ),
-            child: InternalText(title: title, subtitle: subtitle),
           ),
         ));
   }

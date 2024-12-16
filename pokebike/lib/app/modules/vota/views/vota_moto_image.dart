@@ -27,7 +27,7 @@ class VotaMotoImage extends GetView<VotaController> {
               color: (reversed
                       ? MColors.votaSecondPlayerColor
                       : MColors.votaFirstPlayerColor)
-                  .withOpacity(0.4),
+                  .withValues(alpha: 0.4),
               blurRadius: 64,
               spreadRadius: 8,
               offset: Offset.zero,
@@ -41,7 +41,9 @@ class VotaMotoImage extends GetView<VotaController> {
               MimageNetwork(
                 path: motoAvatar,
                 borderRadius: BorderRadius.circular(16),
-                shouldDarken: controller.hasVoted.value,
+                lightLevel: controller.hasVoted.value ? 0.4 : 1,
+                cacheHeight: 106,
+                cacheWidth: 106,
               ),
               AnimatedOpacity(
                 opacity: controller.hasVoted.value ? 1 : 0,

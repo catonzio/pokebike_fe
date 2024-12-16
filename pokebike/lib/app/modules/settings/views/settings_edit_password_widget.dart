@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:pokebike/app/config/colors.dart';
 import 'package:pokebike/app/config/constants.dart';
 import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/modules/home/views/stories/story_widget.dart';
+import 'package:pokebike/app/shared/widgets/mcircular_avatar.dart';
 import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
 import 'package:pokebike/app/modules/settings/views/settings_editing_password_form.dart';
 import 'package:pokebike/app/shared/extensions/context_utils.dart';
@@ -50,7 +50,7 @@ class SettingsEditPasswordWidget extends GetView<SettingsController> {
           children: [
             Expanded(
               flex: 1,
-              child: StoryWidget(
+              child: MCircularAvatar(
                 imagePath: controller.user.value?.avatar ?? "",
                 radius: 45,
               ),

@@ -33,6 +33,8 @@ class CommunityTile extends StatelessWidget {
             child: MimageNetwork(
               borderRadius: BorderRadius.circular(16),
               path: imagePath,
+              cacheHeight: 350,
+              cacheWidth: 450,
             ),
           ),
           Positioned(
@@ -72,7 +74,7 @@ class CommunityTileBottomRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: MColors.primary.withOpacity(0.5),
+          color: MColors.primary.withValues(alpha: 0.5),
           borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(16),
               bottomRight: Radius.circular(16))),
@@ -88,6 +90,8 @@ class CommunityTileBottomRow extends StatelessWidget {
             child: MimageNetwork(
               borderRadius: BorderRadius.circular(50),
               path: imagePath,
+              cacheHeight: 55,
+              cacheWidth: 55,
             ),
           ),
           Expanded(

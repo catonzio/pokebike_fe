@@ -121,7 +121,9 @@ const Map<String, String> enUsUkTranslations = {
   'noCockades': 'You haven’t won any rosettes yet',
   'numMotosCaptured': '@howMany bikes captured',
   'errorLoadingPartecipation': 'Error loading participation',
-  'noTournamentsPartecipations':
+  'youNoTournamentsPartecipations':
+      'You haven’t participated in any tournaments yet',
+  'heNoTournamentsPartecipations':
       'You haven’t participated in any tournaments yet',
   'partecipateTournaments': 'Participate in the tournament',
   'wins': 'Wins',

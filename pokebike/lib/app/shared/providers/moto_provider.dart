@@ -12,12 +12,13 @@ class MotoProvider extends GetConnect {
     httpClient.timeout = const Duration(seconds: 30);
   }
 
-  Future<List<Moto>> fetchMotos(int? limit, int? skip) async {
+  Future<List<Moto>> fetchMotos(
+      {int? limit, int? skip, bool isGarage = true}) async {
     String suffix = (limit != null ? "limit=$limit" : "") +
         (skip != null ? "&skip=$skip" : "");
 
-    ApiResponse response =
-        await handleApiEndpoint(request, "get", "/motos?$suffix");
+    ApiResponse response = await handleApiEndpoint(
+        request, "get", "/motos?is_garage=$isGarage&$suffix");
     if (response.success) {
       return (response.data as List).map((e) => Moto.fromJson(e)).toList();
     } else {
@@ -42,8 +43,9 @@ class MotoProvider extends GetConnect {
     }
   }
 
-  Future<ApiResponse> updateMoto(int id, Map<String, dynamic> data) {
-    return handleApiEndpoint(request, "put", "/motos/$id", data: data);
+  Future<ApiResponse> updateMoto(int id, Map<String, dynamic> data) async {
+    ApiResponse result = await handleApiEndpoint(request, "put", "/motos/$id", data: data);
+    return result;
   }
 
   Future<ApiResponse> checkMotoDuplicate(

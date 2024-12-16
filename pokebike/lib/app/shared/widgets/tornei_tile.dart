@@ -27,17 +27,21 @@ class TorneiTile extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: Image.asset("assets/images/$imageName").image,
+                  image: Image.asset(
+                    "assets/images/$imageName",
+                    cacheWidth: 600,
+                    cacheHeight: 400,
+                  ).image,
                   fit: BoxFit.cover,
                   colorFilter: ColorFilter.mode(
-                      Colors.black.withOpacity(0.3), BlendMode.darken),
+                      Colors.black.withValues(alpha: 0.3), BlendMode.darken),
                 ),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: MColors.secondaryDark.withOpacity(0.5),
+                    color: MColors.secondaryDark.withValues(alpha: 0.5),
                   ),
                   alignment: Alignment.centerLeft,
                   padding: const EdgeInsets.all(16.0),
