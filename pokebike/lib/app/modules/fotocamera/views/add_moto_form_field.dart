@@ -31,7 +31,7 @@ class AddMotoFormField extends StatelessWidget {
                 mmodel.items.contains(mmodel.controller.text.trim())
             ? mmodel.controller.text
             : null,
-        validator: (dynamic value) => mmodel.validator!(value as String?),
+        validator: (dynamic value) => mmodel.validator?.call(value as String?),
         onChanged: (dynamic value) {
           mmodel.controller.text = value.toString();
         },

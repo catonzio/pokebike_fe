@@ -46,8 +46,9 @@ Future<ImageSource?> selectImageSource(BuildContext context) async {
   return source;
 }
 
-Future<XFile?> selectAvatar(BuildContext context) async {
-  final ImageSource? source = await selectImageSource(context);
+Future<XFile?> selectAvatar(BuildContext context, {ImageSource? source}) async {
+  source = source ?? await selectImageSource(context);
+  // final ImageSource? source = await selectImageSource(context);
   if (source != null) {
     final ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: source);

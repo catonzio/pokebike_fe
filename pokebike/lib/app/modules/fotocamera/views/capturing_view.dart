@@ -51,19 +51,19 @@ class CapturingView extends GetView<FotocameraController> {
           CameraButton(
             onTap: () => controller.makePhoto(context),
           ),
-          // const Spacer(),
-          // Padding(
-          //   padding: const EdgeInsets.only(right: 8),
-          //   child: SizedBox(
-          //     width: context.width * 0.3,
-          //     height: context.height * 0.04,
-          //     child: CameraRowButton(
-          //       isSelected: false,
-          //       text: 'share'.tr,
-          //       onTap: () => {},
-          //     ),
-          //   ),
-          // )
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: SizedBox(
+              width: context.width * 0.3,
+              height: context.height * 0.04,
+              child: CameraRowButton(
+                isSelected: false,
+                text: 'gallery'.tr,
+                onTap: () => controller.takePhotoFromGallery(context),
+              ),
+            ),
+          )
         ],
       ),
     );

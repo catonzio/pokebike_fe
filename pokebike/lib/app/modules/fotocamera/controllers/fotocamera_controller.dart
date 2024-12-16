@@ -66,21 +66,24 @@ class FotocameraController extends GetxController {
   }
 
   makePhoto(BuildContext context) async {
-    image = await selectAvatar(context);
-    // try {
-    //   image = await cameraController?.takePicture();
-    // } catch (e) {
-    //   final ImagePicker picker = ImagePicker();
-    //   final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    //   if (image != null) {
-    //     print(image.path);
-    //     this.image = image;
-    //     // controller.avatar = image.path;
-    //   }
-    // }
+    // image = await selectAvatar(context);
+    try {
+      image = await cameraController?.takePicture();
+    } catch (e) {
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+      if (image != null) {
+        print(image.path);
+        this.image = image;
+        // controller.avatar = image.path;
+      }
+    }
 
-    //  catch (e) {
-    // }
+    isCapturing = false;
+  }
+
+  void takePhotoFromGallery(BuildContext context) async {
+    image = await selectAvatar(context, source: ImageSource.gallery);
     isCapturing = false;
   }
 

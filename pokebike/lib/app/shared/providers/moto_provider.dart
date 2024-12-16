@@ -43,8 +43,9 @@ class MotoProvider extends GetConnect {
     }
   }
 
-  Future<ApiResponse> updateMoto(int id, Map<String, dynamic> data) {
-    return handleApiEndpoint(request, "put", "/motos/$id", data: data);
+  Future<ApiResponse> updateMoto(int id, Map<String, dynamic> data) async {
+    ApiResponse result = await handleApiEndpoint(request, "put", "/motos/$id", data: data);
+    return result;
   }
 
   Future<ApiResponse> checkMotoDuplicate(

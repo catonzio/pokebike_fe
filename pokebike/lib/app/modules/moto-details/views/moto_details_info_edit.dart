@@ -40,7 +40,7 @@ class MotoDetailsInfoEdit extends GetView<MotoDetailsController> {
           isNumeric: true),
       MotoFormFieldModel(
           label: 'location'.tr,
-          validator: controller.luogoValidator,
+          // validator: controller.luogoValidator,
           controller: controller.luogoController),
       MotoFormFieldModel(
           label: 'description'.tr,
