@@ -73,7 +73,6 @@ class FotocameraController extends GetxController {
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: ImageSource.gallery);
       if (image != null) {
-        print(image.path);
         this.image = image;
         // controller.avatar = image.path;
       }
@@ -84,7 +83,9 @@ class FotocameraController extends GetxController {
 
   void takePhotoFromGallery(BuildContext context) async {
     image = await selectAvatar(context, source: ImageSource.gallery);
-    isCapturing = false;
+    if (image != null) {
+      isCapturing = false;
+    }
   }
 
   Future<ApiResponse> addMoto(Map<String, dynamic> data) async {

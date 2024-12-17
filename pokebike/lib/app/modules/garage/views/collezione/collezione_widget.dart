@@ -69,7 +69,8 @@ class CollezioneWidget extends GetView<CollezioneController> {
         arguments: MotoDetailsArguments(
             moto: collezioneMoto.moto,
             collezioneMoto: collezioneMoto,
-            isOwnMoto: false));
+            isOwnMoto: true,
+            canSetFavourite: false));
     // .then((value) => controller.isShowingGarage.value = isGarage);
     // }
   }

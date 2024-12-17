@@ -44,7 +44,9 @@ class MotoProvider extends GetConnect {
   }
 
   Future<ApiResponse> updateMoto(int id, Map<String, dynamic> data) async {
-    ApiResponse result = await handleApiEndpoint(request, "put", "/motos/$id", data: data);
+    data["_method"] = "PUT";
+    ApiResponse result =
+        await handleApiEndpoint(request, "post", "/motos/$id", data: data);
     return result;
   }
 

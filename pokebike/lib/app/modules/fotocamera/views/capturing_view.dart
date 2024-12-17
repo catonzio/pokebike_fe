@@ -24,7 +24,7 @@ class CapturingView extends GetView<FotocameraController> {
 
   Container _imagePreview(BuildContext context) {
     return Container(
-        height: context.height * 0.64,
+        height: context.height * 0.6,
         width: context.width,
         decoration: const BoxDecoration(
           color: Colors.grey,

@@ -21,6 +21,7 @@ class MotoDetailsController extends GetxController {
   set moto(Moto? value) => _moto.value = value;
 
   final RxBool isOwnMoto = false.obs;
+  final RxBool canSetFavourite = false.obs;
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -71,6 +72,7 @@ class MotoDetailsController extends GetxController {
     collezioneMoto = arguments?.collezioneMoto;
     moto = arguments?.moto;
     isOwnMoto.value = arguments?.isOwnMoto ?? false;
+    canSetFavourite.value = arguments?.canSetFavourite ?? false;
   }
 
   void toggleShowingInfo({bool? value}) {
@@ -157,6 +159,8 @@ class MotoDetailsController extends GetxController {
     }
     isSendingData.value = true;
     final ApiResponse response = await provider.updateMoto(moto!.id, getData());
+    moto = Moto.fromJson(response.data);
+
     isSendingData.value = false;
     return response;
   }

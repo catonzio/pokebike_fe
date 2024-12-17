@@ -65,7 +65,7 @@ class GarageWidget extends GetView<GarageWController> {
     // final bool isGarage = controller.isShowingGarage.value;
     if (m != null) {
       context.pushNamed(Routes.MOTO_DETAILS,
-          arguments: MotoDetailsArguments(moto: m, isOwnMoto: true));
+          arguments: MotoDetailsArguments(moto: m, isOwnMoto: true, canSetFavourite: true));
       // .then((value) => controller.isShowingGarage.value = isGarage);
     }
   }

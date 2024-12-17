@@ -54,7 +54,7 @@ class MotoDetailBody extends StatelessWidget {
           child: InkWell(
               onTap: () => context.pushNamed(Routes.MOTO_DETAILS,
                   arguments:
-                      MotoDetailsArguments(moto: moto, isOwnMoto: false)),
+                      MotoDetailsArguments(moto: moto)),
               child: Hero(
                 tag: "visualizza_moto",
                 child: Text(

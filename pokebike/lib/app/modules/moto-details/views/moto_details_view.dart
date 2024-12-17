@@ -59,13 +59,14 @@ class MotoDetailsView extends StatelessWidget {
                         onTap: controller.toggleEditingMoto,
                       ),
                     )),
-                Obx(() => IconButton(
-                      onPressed: () => _setFavorita(context, controller),
-                      icon: const Icon(Icons.favorite),
-                      color: (controller.isFavorita.value)
-                          ? MColors.secondary
-                          : Colors.white,
-                    )),
+                if (controller.canSetFavourite.value)
+                  Obx(() => IconButton(
+                        onPressed: () => _setFavorita(context, controller),
+                        icon: const Icon(Icons.favorite),
+                        color: (controller.isFavorita.value)
+                            ? MColors.secondary
+                            : Colors.white,
+                      )),
               ]
             : null,
         body: Container(
