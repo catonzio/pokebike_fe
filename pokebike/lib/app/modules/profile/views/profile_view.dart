@@ -71,7 +71,7 @@ class ProfileView extends StatelessWidget {
                           height: context.height * 0.15,
                           child: ProfileHeader(user: controller.user.value)),
                     ),
-                    PaginationRow(items: controller.items),
+                    PaginationRow(key: UniqueKey(), items: controller.items),
                     const ProfileBody()
                     // NavigationBar()
                   ],

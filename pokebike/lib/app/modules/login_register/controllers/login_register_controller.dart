@@ -16,7 +16,7 @@ class LoginRegisterController extends GetxController {
         await GoogleSignIn().disconnect();
       } on Exception catch (_) {}
 
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAccount? googleUser = await GoogleSignIn(forceCodeForRefreshToken: true).signIn();
 
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;

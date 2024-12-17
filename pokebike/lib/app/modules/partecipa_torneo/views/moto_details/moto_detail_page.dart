@@ -90,7 +90,9 @@ class MotoDetailPage extends GetView<PartecipaTorneoController> {
 
   void createNewRoute(BuildContext context, bool left) {
     if ((left && index <= 0) ||
-        (!left && index >= controller.filteredList.length - 1)) return;
+        (!left && index >= controller.filteredList.length - 1)) {
+      return;
+    }
 
     final double delta = left ? -1 : 1;
 

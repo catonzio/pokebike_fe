@@ -56,9 +56,11 @@ class ProfileController extends GetxController {
 
   Future<void> initialize(ProfileArguments? argumentUser) async {
     await setUser(argumentUser);
-    fetchClassificaTile();
-    fetchTopMotos();
-    fetchCoccarde();
+    if (user.value != null) {
+      fetchClassificaTile();
+      fetchTopMotos();
+      fetchCoccarde();
+    }
   }
 
   Future<void> refreshInfo() async {

@@ -4,6 +4,6 @@ import 'package:pokebike/app/shared/widgets/pagination/pagination_controller.dar
 class PaginationBindings extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<PaginationController>(() => PaginationController());
+    Get.put(PaginationController());
   }
 }

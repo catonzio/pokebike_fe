@@ -53,6 +53,9 @@ class NotificationsController extends ApiPaginationController<Notifica> {
   }
 
   readAll() {
+    if (list.isEmpty) {
+      return;
+    }
     for ((int, Notifica) element in list.indexed) {
       int index = element.$1;
       Notifica notifica = element.$2;

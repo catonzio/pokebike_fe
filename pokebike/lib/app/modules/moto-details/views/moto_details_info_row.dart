@@ -23,7 +23,7 @@ class MotoDetailsInfoRow extends StatelessWidget {
               child: Text(
                 value,
                 style: context.textTheme.bodyLarge,
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.left,
               ))
         ],
       ),

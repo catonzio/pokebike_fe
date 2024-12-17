@@ -53,6 +53,9 @@ class NotificationsView extends GetView<NotificationsController> {
   }
 
   _deleteAll(BuildContext context) {
+    if (controller.list.isEmpty) {
+      return;
+    }
     showDialog(
         context: context,
         builder: (context) {
@@ -81,10 +84,13 @@ class EmptyNotificheBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: context.height * 0.2),
-      child: Text(
-        'noNewNotifications'.tr,
-        style: context.textTheme.displaySmall,
-        textAlign: TextAlign.center,
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: Text(
+          'noNewNotifications'.tr,
+          style: context.textTheme.displaySmall,
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
