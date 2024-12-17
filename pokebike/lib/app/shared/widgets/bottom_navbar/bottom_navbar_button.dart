@@ -30,13 +30,20 @@ class BottomNavbarButton extends StatelessWidget {
         : Get.currentRoute == item.route;
     // final Color color = isSelected ? selectedColor : unselectedColor;
     final String addName = isSelected ? " red" : "";
-    return MIcon(
+    // item.iconName.toLowerCase().contains("foto")
+    final mIcon = MIcon(
       name: item.iconName + addName,
       onTap: () => onTap(index),
       padding: const EdgeInsets.all(0),
       // color: color,
       size: item.size,
     );
+    return item.iconName.toLowerCase().contains("logo")
+        ? Transform.translate(
+            offset: Offset(4, 0),
+            child: mIcon,
+          )
+        : mIcon;
     // return Column(
     //   mainAxisSize: MainAxisSize.min,
     //   crossAxisAlignment: CrossAxisAlignment.center,
