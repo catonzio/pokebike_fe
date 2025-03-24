@@ -31,35 +31,41 @@ class BottomNavbarButton extends StatelessWidget {
     // final Color color = isSelected ? selectedColor : unselectedColor;
     final String addName = isSelected ? " red" : "";
     // item.iconName.toLowerCase().contains("foto")
-    final mIcon = MIcon(
+    Widget mIcon = MIcon(
       name: item.iconName + addName,
       onTap: () => onTap(index),
       padding: const EdgeInsets.all(0),
       // color: color,
       size: item.size,
     );
-    return item.iconName.toLowerCase().contains("logo")
+    mIcon = item.iconName.toLowerCase().contains("logo")
         ? Transform.translate(
             offset: Offset(4, 0),
             child: mIcon,
           )
         : mIcon;
-    // return Column(
-    //   mainAxisSize: MainAxisSize.min,
-    //   crossAxisAlignment: CrossAxisAlignment.center,
-    //   mainAxisAlignment: MainAxisAlignment.center,
-    //   children: [
-    //     MIcon(
-    //       name: item.iconName + addName,
-    //       onTap: () => onTap(index),
-    //       // color: color,
-    //       size: item.size,
-    //     ),
-    //     Text(
-    //       item.label,
-    //       style: context.textTheme.bodyMedium?.copyWith(color: color),
-    //     )
-    //   ],
+    return mIcon;
+    // return Container(
+    //   color: Colors.white,
+    //   child: Column(
+    //     mainAxisSize: MainAxisSize.min,
+    //     crossAxisAlignment: CrossAxisAlignment.center,
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     children: [
+    //       // MIcon(
+    //       //   name: item.iconName + addName,
+    //       //   onTap: () => onTap(index),
+    //       //   // color: color,
+    //       //   size: item.size,
+    //       // ),
+    //       mIcon,
+    //       Text(
+    //         item.label,
+    //         style: context.textTheme.bodyMedium
+    //             ?.copyWith(color: isSelected ? selectedColor : unselectedColor),
+    //       )
+    //     ],
+    //   ),
     // );
   }
 }
