@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/data/models/user/user.dart';
-import 'package:pokebike/app/modules/settings/providers/settings_provider.dart';
-import 'package:pokebike/app/shared/controllers/storage.dart';
-import 'package:pokebike/app/shared/extensions/date_utils.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/data/models/user/user.dart';
+import 'package:moto_hunters/app/modules/settings/providers/settings_provider.dart';
+import 'package:moto_hunters/app/shared/controllers/storage.dart';
+import 'package:moto_hunters/app/shared/extensions/date_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SettingsController extends GetxController {

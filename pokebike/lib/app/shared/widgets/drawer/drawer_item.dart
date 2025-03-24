@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/enums/garage_type.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/data/enums/garage_type.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
 
 class DrawerItem {
   final String title;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/notifica/notifica.dart';
-import 'package:pokebike/app/shared/extensions/date_utils.dart';
+import 'package:moto_hunters/app/data/models/notifica/notifica.dart';
+import 'package:moto_hunters/app/shared/extensions/date_utils.dart';
 
 class NotificaDialog extends StatelessWidget {
   const NotificaDialog({

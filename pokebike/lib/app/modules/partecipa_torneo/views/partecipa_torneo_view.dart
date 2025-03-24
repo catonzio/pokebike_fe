@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/search_options.dart';
-import 'package:pokebike/app/modules/partecipa_torneo/controllers/partecipa_torneo_controller.dart';
-import 'package:pokebike/app/modules/partecipa_torneo/views/moto_details/moto_detail_page.dart';
-import 'package:pokebike/app/modules/partecipa_torneo/views/partecipa_torneo_grid.dart';
-import 'package:pokebike/app/shared/default_page.dart';
-import 'package:pokebike/app/shared/widgets/search_row/search_row.dart';
+import 'package:moto_hunters/app/data/search_options.dart';
+import 'package:moto_hunters/app/modules/partecipa_torneo/controllers/partecipa_torneo_controller.dart';
+import 'package:moto_hunters/app/modules/partecipa_torneo/views/moto_details/moto_detail_page.dart';
+import 'package:moto_hunters/app/modules/partecipa_torneo/views/partecipa_torneo_grid.dart';
+import 'package:moto_hunters/app/shared/default_page.dart';
+import 'package:moto_hunters/app/shared/widgets/search_row/search_row.dart';
 
 class PartecipaTorneoView extends GetView<PartecipaTorneoController> {
   const PartecipaTorneoView({super.key});
@@ -32,7 +32,7 @@ class PartecipaTorneoView extends GetView<PartecipaTorneoController> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: RefreshIndicator(
+                      child: RefreshIndicator.adaptive(
                           onRefresh: controller.refreshList,
                           child: const PartecipaTorneoGrid()),
                     ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
-import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
-import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
+import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/mimage_network.dart';
 
 class PresentationContainer extends StatelessWidget {
   final String imagePath;

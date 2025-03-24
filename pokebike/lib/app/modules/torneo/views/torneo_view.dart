@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/shared/default_page.dart';
-import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
-import 'package:pokebike/app/shared/widgets/tornei_list.dart';
+import 'package:moto_hunters/app/shared/default_page.dart';
+import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
+import 'package:moto_hunters/app/shared/widgets/tornei_list.dart';
 
 import '../controllers/torneo_controller.dart';
 

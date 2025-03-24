@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:pokebike/app/config/constants.dart';
+import 'package:moto_hunters/app/config/constants.dart';
 
 class Storage {
   static Storage to = Get.find<Storage>();

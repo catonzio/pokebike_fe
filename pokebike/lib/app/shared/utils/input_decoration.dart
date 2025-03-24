@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokebike/app/config/colors.dart';
+import 'package:moto_hunters/app/config/colors.dart';
 
 InputDecoration transparentInputDecoration(String hintText,
     {bool isPassword = false,

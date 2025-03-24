@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/translations/app_translations.dart';
-import 'package:pokebike/app/config/themes.dart';
-import 'package:pokebike/app/shared/bindings/initial_bindings.dart';
+import 'package:moto_hunters/app/config/translations/app_translations.dart';
+import 'package:moto_hunters/app/config/themes.dart';
+import 'package:moto_hunters/app/shared/bindings/initial_bindings.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'app/routes/app_pages.dart';
@@ -22,7 +22,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: "Pokebike",
+      title: "MotoHunters",
       debugShowCheckedModeBanner: false,
       theme: Themes.dark(),
       locale: Get.deviceLocale,

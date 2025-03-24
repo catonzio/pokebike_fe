@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/medals_cockades_enums.dart';
-import 'package:pokebike/app/modules/profile/views/medaglie/medaglia_widget.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/extensions/nums_utils.dart';
+import 'package:moto_hunters/app/config/medals_cockades_enums.dart';
+import 'package:moto_hunters/app/modules/profile/views/medaglie/medaglia_widget.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/extensions/nums_utils.dart';
 
 Medals medagliaName(int numCatture) {
   if (numCatture.inRange(lb: Medals.none.lb, ub: Medals.none.ub, lbe: true)) {

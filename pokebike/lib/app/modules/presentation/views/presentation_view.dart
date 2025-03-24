@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/presentation/views/presentation_container.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/controllers/storage.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/widgets/back_button.dart';
+import 'package:moto_hunters/app/modules/presentation/views/presentation_container.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/controllers/storage.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/back_button.dart';
 
 import '../controllers/presentation_controller.dart';
 import 'circle_page_indicator.dart';

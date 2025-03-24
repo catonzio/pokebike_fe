@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/data/models/user/user.dart';
-import 'package:pokebike/app/shared/utils/api_utils.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/data/models/user/user.dart';
+import 'package:moto_hunters/app/shared/utils/api_utils.dart';
 
 class CommunityProvider extends GetConnect {
   @override
@@ -12,7 +12,8 @@ class CommunityProvider extends GetConnect {
   }
 
   Future<List<User>> getUsers(int? limit, int? skip) async {
-    String suffix = (limit != null ? "limit=$limit" : "") + (skip != null ? "&skip=$skip" : "");
+    String suffix = (limit != null ? "limit=$limit" : "") +
+        (skip != null ? "&skip=$skip" : "");
 
     final ApiResponse response =
         await handleApiEndpoint(request, "get", '/users?$suffix');

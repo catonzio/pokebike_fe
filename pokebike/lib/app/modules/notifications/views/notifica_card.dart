@@ -1,9 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/data/models/notifica/notifica.dart';
-import 'package:pokebike/app/shared/extensions/date_utils.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/data/models/notifica/notifica.dart';
+import 'package:moto_hunters/app/shared/extensions/date_utils.dart';
 
 class NotificaCard extends StatelessWidget {
   const NotificaCard({

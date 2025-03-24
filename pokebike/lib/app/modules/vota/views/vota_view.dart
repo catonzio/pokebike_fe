@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
-import 'package:pokebike/app/modules/vota/views/vota_row.dart';
-import 'package:pokebike/app/shared/default_page.dart';
-import 'package:pokebike/app/shared/widgets/utils/loading_stack.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/data/models/partecipazione/partecipazione.dart';
+import 'package:moto_hunters/app/modules/vota/views/vota_row.dart';
+import 'package:moto_hunters/app/shared/default_page.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/loading_stack.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../controllers/vota_controller.dart';

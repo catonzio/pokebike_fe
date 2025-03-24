@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/marca_moto/marca_moto.dart';
-import 'package:pokebike/app/data/models/tipo_moto/tipo_moto.dart';
-import 'package:pokebike/app/shared/controllers/tipo_marca_controller.dart';
-import 'package:pokebike/app/shared/providers/tipo_marca_provider.dart';
+import 'package:moto_hunters/app/data/models/marca_moto/marca_moto.dart';
+import 'package:moto_hunters/app/data/models/tipo_moto/tipo_moto.dart';
+import 'package:moto_hunters/app/shared/controllers/tipo_marca_controller.dart';
+import 'package:moto_hunters/app/shared/providers/tipo_marca_provider.dart';
 
 class AddMotoFormController extends GetxController {
   final RxBool isPerformingRegister = false.obs;

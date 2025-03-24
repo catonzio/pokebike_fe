@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/shared/widgets/mcircular_avatar.dart';
-import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
-import 'package:pokebike/app/modules/settings/views/settings_editing_password_form.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/utils/api_utils.dart';
-import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/shared/widgets/mcircular_avatar.dart';
+import 'package:moto_hunters/app/modules/login_register/views/mbutton.dart';
+import 'package:moto_hunters/app/modules/settings/views/settings_editing_password_form.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/utils/api_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/paginator_widget.dart';
 
 import '../controllers/settings_controller.dart';
 

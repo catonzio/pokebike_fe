@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pokebike/app/modules/community/views/community_title.dart';
-import 'package:pokebike/app/modules/community/views/community_list.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/modules/community/views/community_title.dart';
+import 'package:moto_hunters/app/modules/community/views/community_list.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 
 class CommunityWidget extends StatelessWidget {
   final double height;

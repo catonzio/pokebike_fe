@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/modules/profile/controllers/profile_controller.dart';
-import 'package:pokebike/app/modules/profile/views/medaglie/coccarde_wrap_widget.dart';
-import 'package:pokebike/app/modules/profile/views/medaglie/divider_title.dart';
-import 'package:pokebike/app/modules/profile/views/medaglie/medaglie_row_widget.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/modules/profile/controllers/profile_controller.dart';
+import 'package:moto_hunters/app/modules/profile/views/medaglie/coccarde_wrap_widget.dart';
+import 'package:moto_hunters/app/modules/profile/views/medaglie/divider_title.dart';
+import 'package:moto_hunters/app/modules/profile/views/medaglie/medaglie_row_widget.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class MedaglieBody extends GetView<ProfileController> {
@@ -15,7 +15,7 @@ class MedaglieBody extends GetView<ProfileController> {
     return Obx(() => Container(
           width: context.width,
           padding: const EdgeInsets.all(8.0),
-          child: RefreshIndicator(
+          child: RefreshIndicator.adaptive(
             onRefresh: controller.fetchCoccarde,
             child: ListView(
               shrinkWrap: true,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/shared/widgets/tornei_list.dart';
-import 'package:pokebike/app/modules/home/views/tornei/tornei_title.dart';
+import 'package:moto_hunters/app/shared/widgets/tornei_list.dart';
+import 'package:moto_hunters/app/modules/home/views/tornei/tornei_title.dart';
 
 class TorneiWidget extends StatelessWidget {
   final double height;

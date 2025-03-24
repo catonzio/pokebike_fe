@@ -4,16 +4,16 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/data/models/moto/moto.dart';
-import 'package:pokebike/app/modules/fotocamera/views/add_moto_form.dart';
-import 'package:pokebike/app/modules/garage/controllers/garage_w_controller.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/utils/api_utils.dart';
-import 'package:pokebike/app/shared/widgets/default_dialog.dart';
-import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
-import 'package:pokebike/app/shared/widgets/utils/loading_stack.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/data/models/moto/moto.dart';
+import 'package:moto_hunters/app/modules/fotocamera/views/add_moto_form.dart';
+import 'package:moto_hunters/app/modules/garage/controllers/garage_w_controller.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/utils/api_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/default_dialog.dart';
+import 'package:moto_hunters/app/shared/widgets/paginator_widget.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/loading_stack.dart';
 
 import '../controllers/fotocamera_controller.dart';
 

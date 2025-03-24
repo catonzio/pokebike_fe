@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/shared/utils/api_utils.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/shared/utils/api_utils.dart';
 
 class AuthProvider extends GetConnect {
   @override

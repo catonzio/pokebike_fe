@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pokebike/app/config/colors.dart';
+import 'package:moto_hunters/app/config/colors.dart';
 
 class Themes {
   static dark() {

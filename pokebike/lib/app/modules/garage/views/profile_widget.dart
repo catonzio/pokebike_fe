@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pokebike/app/shared/widgets/mcircular_avatar.dart';
-import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
+import 'package:moto_hunters/app/shared/widgets/mcircular_avatar.dart';
+import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
 
 class ProfileWidget extends StatelessWidget {
   final String text;
@@ -42,7 +42,11 @@ class ProfileWidget extends StatelessWidget {
         //     ),
         //   ),
         // ),
-        MCircularAvatar(radius: radius, imagePath: imagePath, padding: 8,),
+        MCircularAvatar(
+          radius: radius,
+          imagePath: imagePath,
+          padding: 8,
+        ),
         ShimmerTitle.light(
           text: text,
         )

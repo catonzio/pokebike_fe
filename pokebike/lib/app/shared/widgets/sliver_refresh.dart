@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
+import 'package:moto_hunters/app/shared/widgets/paginator_widget.dart';
 
 class SliverRefresh extends StatelessWidget {
   final Future<void> Function()? onRefresh;

@@ -6,8 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'package:get_storage/get_storage.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/shared/controllers/storage.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/shared/controllers/storage.dart';
 
 late List<CameraDescription> cameras;
 

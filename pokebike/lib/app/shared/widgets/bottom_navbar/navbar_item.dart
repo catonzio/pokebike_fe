@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
 
 class NavbarItem {
   final String label;

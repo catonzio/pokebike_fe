@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/shared/widgets/pagination/pagination_button.dart';
-import 'package:pokebike/app/shared/widgets/pagination/pagination_controller.dart';
-import 'package:pokebike/app/shared/widgets/pagination/pagination_item.dart';
+import 'package:moto_hunters/app/shared/widgets/pagination/pagination_button.dart';
+import 'package:moto_hunters/app/shared/widgets/pagination/pagination_controller.dart';
+import 'package:moto_hunters/app/shared/widgets/pagination/pagination_item.dart';
 
 class PaginationRow extends GetView<PaginationController> {
   final List<PaginationItem> items;

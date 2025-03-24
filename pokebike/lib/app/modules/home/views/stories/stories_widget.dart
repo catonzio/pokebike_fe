@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/home/controllers/home_controller.dart';
-import 'package:pokebike/app/shared/widgets/mcircular_avatar.dart';
-import 'package:pokebike/app/shared/utils/mimage_provider.dart';
+import 'package:moto_hunters/app/modules/home/controllers/home_controller.dart';
+import 'package:moto_hunters/app/shared/widgets/mcircular_avatar.dart';
+import 'package:moto_hunters/app/shared/utils/mimage_provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class StoriesWidget extends GetView<HomeController> {

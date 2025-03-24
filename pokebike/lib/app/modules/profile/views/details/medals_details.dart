@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/config/medals_cockades_enums.dart';
-import 'package:pokebike/app/shared/default_page.dart';
-import 'package:pokebike/app/shared/widgets/utils/micon.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/config/medals_cockades_enums.dart';
+import 'package:moto_hunters/app/shared/default_page.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
 
 class MedalsDetails extends StatelessWidget {
   const MedalsDetails({super.key});

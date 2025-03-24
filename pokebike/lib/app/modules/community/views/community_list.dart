@@ -2,15 +2,15 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/data/models/user/user.dart';
-import 'package:pokebike/app/modules/community/controllers/community_controller.dart';
-import 'package:pokebike/app/modules/profile/profile_arguments.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/utils/api_utils.dart';
-import 'package:pokebike/app/modules/community/views/community_tile.dart';
-import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/data/models/user/user.dart';
+import 'package:moto_hunters/app/modules/community/controllers/community_controller.dart';
+import 'package:moto_hunters/app/modules/profile/profile_arguments.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/utils/api_utils.dart';
+import 'package:moto_hunters/app/modules/community/views/community_tile.dart';
+import 'package:moto_hunters/app/shared/widgets/paginator_widget.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class CommunityList extends StatelessWidget {
@@ -56,7 +56,7 @@ class CommunityList extends StatelessWidget {
                     child: Text('emptyCommunity'.tr))
                 : isHorizontal
                     ? HorizontalCommunityList(children: children)
-                    : RefreshIndicator(
+                    : RefreshIndicator.adaptive(
                         onRefresh: controller.refreshList,
                         child: PaginatorWidget(
                           body: VerticalCommunityList(

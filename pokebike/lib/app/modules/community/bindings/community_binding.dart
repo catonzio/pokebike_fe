@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/community/providers/community_provider.dart';
-import 'package:pokebike/app/shared/bindings/search_row_bindings.dart';
+import 'package:moto_hunters/app/modules/community/providers/community_provider.dart';
+import 'package:moto_hunters/app/shared/bindings/search_row_bindings.dart';
 
 import '../controllers/community_controller.dart';
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/modules/fotocamera/views/add_moto_form_field.dart';
-import 'package:pokebike/app/modules/fotocamera/views/add_moto_form_field_model.dart';
-import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
-import 'package:pokebike/app/shared/extensions/date_utils.dart';
-import 'package:pokebike/app/shared/utils/api_utils.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/modules/fotocamera/views/add_moto_form_field.dart';
+import 'package:moto_hunters/app/modules/fotocamera/views/add_moto_form_field_model.dart';
+import 'package:moto_hunters/app/modules/login_register/views/mbutton.dart';
+import 'package:moto_hunters/app/shared/extensions/date_utils.dart';
+import 'package:moto_hunters/app/shared/utils/api_utils.dart';
 
 import '../controllers/moto_details_controller.dart';
 

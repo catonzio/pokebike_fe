@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/settings/views/settings_edit_password_widget.dart';
-import 'package:pokebike/app/modules/settings/views/settings_edit_widget.dart';
-import 'package:pokebike/app/modules/settings/views/settings_show_widget.dart';
-import 'package:pokebike/app/shared/default_page.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/widgets/back_button.dart';
-import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
+import 'package:moto_hunters/app/modules/settings/views/settings_edit_password_widget.dart';
+import 'package:moto_hunters/app/modules/settings/views/settings_edit_widget.dart';
+import 'package:moto_hunters/app/modules/settings/views/settings_show_widget.dart';
+import 'package:moto_hunters/app/shared/default_page.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/back_button.dart';
+import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
 
 import '../controllers/settings_controller.dart';
 

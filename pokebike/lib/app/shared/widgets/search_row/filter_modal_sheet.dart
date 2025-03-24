@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/data/search_options.dart';
-import 'package:pokebike/app/shared/controllers/filter_sheet_controller.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/mbutton.dart';
-import 'package:pokebike/app/shared/widgets/search_row/filter_modal_box.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/data/search_options.dart';
+import 'package:moto_hunters/app/shared/controllers/filter_sheet_controller.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/mbutton.dart';
+import 'package:moto_hunters/app/shared/widgets/search_row/filter_modal_box.dart';
 
 class FilterModalSheet extends GetView<FilterSheetController> {
   final Function(SearchOptions) onSave;

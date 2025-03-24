@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/enums/garage_type.dart';
-import 'package:pokebike/app/data/models/user/user.dart';
-import 'package:pokebike/app/modules/garage/controllers/collezione_controller.dart';
-import 'package:pokebike/app/modules/garage/controllers/garage_w_controller.dart';
-import 'package:pokebike/app/modules/profile/providers/profile_provider.dart';
+import 'package:moto_hunters/app/data/enums/garage_type.dart';
+import 'package:moto_hunters/app/data/models/user/user.dart';
+import 'package:moto_hunters/app/modules/garage/controllers/collezione_controller.dart';
+import 'package:moto_hunters/app/modules/garage/controllers/garage_w_controller.dart';
+import 'package:moto_hunters/app/modules/profile/providers/profile_provider.dart';
 
 class GarageController extends GetxController {
   final RxBool isShowingGarage = true.obs;

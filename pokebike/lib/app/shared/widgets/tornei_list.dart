@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/widgets/tornei_tile.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/tornei_tile.dart';
 
 class TorneiList extends StatelessWidget {
   final double itemExtent;

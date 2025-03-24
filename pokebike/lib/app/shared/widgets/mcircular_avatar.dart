@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/widgets/utils/image_picker.dart';
-import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
-import 'package:pokebike/app/shared/widgets/photo_detail.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/image_picker.dart';
+import 'package:moto_hunters/app/shared/widgets/paginator_widget.dart';
+import 'package:moto_hunters/app/shared/widgets/photo_detail.dart';
 
 class MCircularAvatar extends StatelessWidget {
   final String? text;

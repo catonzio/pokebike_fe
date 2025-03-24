@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
-import 'package:pokebike/app/shared/widgets/utils/gradient_text.dart';
-import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/data/models/collezione_moto/collezione_moto.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/gradient_text.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/mimage_network.dart';
 
 const borderGradient = LinearGradient(
   begin: Alignment.topCenter,

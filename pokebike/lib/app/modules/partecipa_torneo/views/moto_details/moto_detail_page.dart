@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/moto/moto.dart';
-import 'package:pokebike/app/modules/partecipa_torneo/controllers/partecipa_torneo_controller.dart';
-import 'package:pokebike/app/modules/partecipa_torneo/views/moto_details/moto_detail_body.dart';
-import 'package:pokebike/app/modules/partecipa_torneo/views/moto_details/moto_detail_chosen.dart';
-import 'package:pokebike/app/shared/widgets/photo_detail.dart';
-import 'package:pokebike/app/shared/default_page.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
+import 'package:moto_hunters/app/data/models/moto/moto.dart';
+import 'package:moto_hunters/app/modules/partecipa_torneo/controllers/partecipa_torneo_controller.dart';
+import 'package:moto_hunters/app/modules/partecipa_torneo/views/moto_details/moto_detail_body.dart';
+import 'package:moto_hunters/app/modules/partecipa_torneo/views/moto_details/moto_detail_chosen.dart';
+import 'package:moto_hunters/app/shared/widgets/photo_detail.dart';
+import 'package:moto_hunters/app/shared/default_page.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/mimage_network.dart';
 
 class MotoDetailPage extends GetView<PartecipaTorneoController> {
   final int index;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/data/models/profile/profile.dart';
-import 'package:pokebike/app/modules/profile/controllers/profile_controller.dart';
-import 'package:pokebike/app/shared/widgets/classifica_profile_row.dart';
-import 'package:pokebike/app/modules/profile/views/classifica/statistics_row.dart';
-import 'package:pokebike/app/modules/profile/views/classifica/top_moto.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/data/models/profile/profile.dart';
+import 'package:moto_hunters/app/modules/profile/controllers/profile_controller.dart';
+import 'package:moto_hunters/app/shared/widgets/classifica_profile_row.dart';
+import 'package:moto_hunters/app/modules/profile/views/classifica/statistics_row.dart';
+import 'package:moto_hunters/app/modules/profile/views/classifica/top_moto.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ClassificaBody extends GetView<ProfileController> {
@@ -15,7 +15,7 @@ class ClassificaBody extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return Obx(() => Skeletonizer(
         enabled: controller.isLoadingClassifica.value,
-        child: RefreshIndicator(
+        child: RefreshIndicator.adaptive(
           onRefresh: controller.refreshInfo,
           child: ListView.separated(
               // physics: const NeverScrollableScrollPhysics(),
@@ -27,7 +27,8 @@ class ClassificaBody extends GetView<ProfileController> {
                 if (index == 0) {
                   return Container(
                     height: context.height * 0.13,
-                    padding: EdgeInsets.fromLTRB(8, context.height * 0.05, 8, 0),
+                    padding:
+                        EdgeInsets.fromLTRB(8, context.height * 0.05, 8, 0),
                     child: Obx(() => Skeletonizer(
                           enabled: controller.isFetchingClassificaTile.value,
                           child: controller.classificaTile.value == null

@@ -2,12 +2,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/moto/moto.dart';
-import 'package:pokebike/app/modules/moto-details/moto_details_arguments.dart';
-import 'package:pokebike/app/modules/partecipa_torneo/views/moto_details/moto_chosen_slider.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/widgets/giant_title.dart';
+import 'package:moto_hunters/app/data/models/moto/moto.dart';
+import 'package:moto_hunters/app/modules/moto-details/moto_details_arguments.dart';
+import 'package:moto_hunters/app/modules/partecipa_torneo/views/moto_details/moto_chosen_slider.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/giant_title.dart';
 
 class MotoDetailBody extends StatelessWidget {
   final Moto moto;
@@ -53,8 +53,7 @@ class MotoDetailBody extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
               onTap: () => context.pushNamed(Routes.MOTO_DETAILS,
-                  arguments:
-                      MotoDetailsArguments(moto: moto)),
+                  arguments: MotoDetailsArguments(moto: moto)),
               child: Hero(
                 tag: "visualizza_moto",
                 child: Text(

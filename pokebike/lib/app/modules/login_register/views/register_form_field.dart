@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/themes.dart';
-import 'package:pokebike/app/modules/login_register/register_form_field.dart';
-import 'package:pokebike/app/shared/utils/input_decoration.dart';
+import 'package:moto_hunters/app/config/themes.dart';
+import 'package:moto_hunters/app/modules/login_register/register_form_field.dart';
+import 'package:moto_hunters/app/shared/utils/input_decoration.dart';
 
 class RegisterFormField extends StatelessWidget {
   final RegisterFormFieldModel model;

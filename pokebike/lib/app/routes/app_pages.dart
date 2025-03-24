@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/profile/views/details/cockade_details.dart';
-import 'package:pokebike/app/modules/profile/views/details/medals_details.dart';
+import 'package:moto_hunters/app/modules/profile/views/details/cockade_details.dart';
+import 'package:moto_hunters/app/modules/profile/views/details/medals_details.dart';
 
 import '../data/models/user/user.dart';
 import '../modules/community/bindings/community_binding.dart';

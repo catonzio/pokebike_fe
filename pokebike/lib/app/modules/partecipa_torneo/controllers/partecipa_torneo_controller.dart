@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/data/models/moto/moto.dart';
-import 'package:pokebike/app/shared/controllers/searchable_moto_controller.dart';
-import 'package:pokebike/app/shared/providers/moto_provider.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/data/models/moto/moto.dart';
+import 'package:moto_hunters/app/shared/controllers/searchable_moto_controller.dart';
+import 'package:moto_hunters/app/shared/providers/moto_provider.dart';
 
 class PartecipaTorneoController extends SearchableMotoController {
   final RxBool isMotoChosen = false.obs;

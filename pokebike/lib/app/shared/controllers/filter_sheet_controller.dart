@@ -1,8 +1,8 @@
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-// import 'package:pokebike/app/data/enums/order_by.dart';
-// import 'package:pokebike/app/data/enums/order_by.dart';
-import 'package:pokebike/app/data/search_options.dart';
-import 'package:pokebike/app/shared/controllers/filter_box_controller.dart';
+// import 'package:moto_hunters/app/data/enums/order_by.dart';
+// import 'package:moto_hunters/app/data/enums/order_by.dart';
+import 'package:moto_hunters/app/data/search_options.dart';
+import 'package:moto_hunters/app/shared/controllers/filter_box_controller.dart';
 
 class FilterSheetController extends GetxController {
   final Map<String, FilterBoxController> controllers;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/shared/controllers/filter_box_controller.dart';
-import 'package:pokebike/app/shared/widgets/utils/mcheckbox.dart';
-import 'package:pokebike/app/shared/widgets/utils/mradio_button.dart';
+import 'package:moto_hunters/app/shared/controllers/filter_box_controller.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/mcheckbox.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/mradio_button.dart';
 
 class FilterModalBox extends StatelessWidget {
   final FilterBoxController controller;
@@ -50,7 +50,8 @@ class FilterModalBox extends StatelessWidget {
                   //     ? OptionsWidget(controller: controller, options: options)
                   //     : const SizedBox()
                   Obx(() => controller.isExpanded.value
-                      ? OptionsWidget(controller: controller, options: controller.options)
+                      ? OptionsWidget(
+                          controller: controller, options: controller.options)
                       : const SizedBox()),
                 ],
               ),

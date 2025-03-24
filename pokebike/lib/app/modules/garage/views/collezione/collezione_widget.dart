@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
-import 'package:pokebike/app/data/search_options.dart';
-import 'package:pokebike/app/modules/garage/controllers/collezione_controller.dart';
-import 'package:pokebike/app/modules/garage/views/collezione/collezione_card_widget.dart';
-import 'package:pokebike/app/modules/moto-details/moto_details_arguments.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/widgets/search_row/search_row.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/data/models/collezione_moto/collezione_moto.dart';
+import 'package:moto_hunters/app/data/search_options.dart';
+import 'package:moto_hunters/app/modules/garage/controllers/collezione_controller.dart';
+import 'package:moto_hunters/app/modules/garage/views/collezione/collezione_card_widget.dart';
+import 'package:moto_hunters/app/modules/moto-details/moto_details_arguments.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/search_row/search_row.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class CollezioneWidget extends GetView<CollezioneController> {

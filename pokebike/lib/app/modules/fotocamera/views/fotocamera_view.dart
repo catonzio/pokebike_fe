@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/fotocamera/views/add_moto_view.dart';
-import 'package:pokebike/app/modules/fotocamera/views/capturing_view.dart';
-import 'package:pokebike/app/shared/default_page.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/widgets/back_button.dart';
+import 'package:moto_hunters/app/modules/fotocamera/views/add_moto_view.dart';
+import 'package:moto_hunters/app/modules/fotocamera/views/capturing_view.dart';
+import 'package:moto_hunters/app/shared/default_page.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/back_button.dart';
 
 import '../controllers/fotocamera_controller.dart';
 

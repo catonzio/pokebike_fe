@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
-import 'package:pokebike/app/config/colors.dart';
+import 'package:moto_hunters/app/config/colors.dart';
 
 class MBackButton extends StatelessWidget {
   final Function() onPressed;

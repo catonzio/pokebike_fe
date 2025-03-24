@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
-import 'package:pokebike/app/modules/moto-details/moto_details_arguments.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/data/models/collezione_moto/collezione_moto.dart';
+import 'package:moto_hunters/app/modules/moto-details/moto_details_arguments.dart';
 
-import 'package:pokebike/app/modules/moto-details/views/moto_details_info.dart';
-import 'package:pokebike/app/modules/moto-details/views/moto_details_info_edit.dart';
-import 'package:pokebike/app/modules/moto-details/views/moto_details_stato.dart';
-import 'package:pokebike/app/modules/moto-details/views/moto_main_photo.dart';
-import 'package:pokebike/app/modules/moto-details/views/pagination_row.dart';
-import 'package:pokebike/app/shared/default_page.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/utils/api_utils.dart';
-import 'package:pokebike/app/shared/widgets/utils/micon.dart';
+import 'package:moto_hunters/app/modules/moto-details/views/moto_details_info.dart';
+import 'package:moto_hunters/app/modules/moto-details/views/moto_details_info_edit.dart';
+import 'package:moto_hunters/app/modules/moto-details/views/moto_details_stato.dart';
+import 'package:moto_hunters/app/modules/moto-details/views/moto_main_photo.dart';
+import 'package:moto_hunters/app/modules/moto-details/views/pagination_row.dart';
+import 'package:moto_hunters/app/shared/default_page.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/utils/api_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
 
 import '../controllers/moto_details_controller.dart';
 

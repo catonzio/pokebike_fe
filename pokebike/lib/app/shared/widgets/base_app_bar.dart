@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pokebike/app/shared/widgets/back_button.dart';
+import 'package:moto_hunters/app/shared/widgets/back_button.dart';
 
 class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Function() onBackPressed;

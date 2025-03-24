@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/enums/order_by.dart';
-import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
-import 'package:pokebike/app/data/models/moto/moto.dart';
-import 'package:pokebike/app/shared/controllers/searchable_list_controller.dart';
-import 'package:pokebike/app/shared/providers/moto_provider.dart';
+import 'package:moto_hunters/app/data/enums/order_by.dart';
+import 'package:moto_hunters/app/data/models/collezione_moto/collezione_moto.dart';
+import 'package:moto_hunters/app/data/models/moto/moto.dart';
+import 'package:moto_hunters/app/shared/controllers/searchable_list_controller.dart';
+import 'package:moto_hunters/app/shared/providers/moto_provider.dart';
 
 List<CollezioneMoto> _processList(List args) {
   List<CollezioneMoto> list =

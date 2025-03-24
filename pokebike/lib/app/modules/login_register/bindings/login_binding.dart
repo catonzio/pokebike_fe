@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/shared/providers/auth_provider.dart';
+import 'package:moto_hunters/app/shared/providers/auth_provider.dart';
 
 import '../controllers/login_controller.dart';
 

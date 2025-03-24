@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.resmedia" "\0"
-            VALUE "FileDescription", "pokebike" "\0"
+            VALUE "FileDescription", "moto_hunters" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "pokebike" "\0"
+            VALUE "InternalName", "moto_hunters" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.resmedia. All rights reserved." "\0"
-            VALUE "OriginalFilename", "pokebike.exe" "\0"
-            VALUE "ProductName", "pokebike" "\0"
+            VALUE "OriginalFilename", "moto_hunters.exe" "\0"
+            VALUE "ProductName", "moto_hunters" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/enums/order_by.dart';
-import 'package:pokebike/app/shared/controllers/filter_box_controller.dart';
-import 'package:pokebike/app/shared/controllers/filter_sheet_controller.dart';
-import 'package:pokebike/app/shared/controllers/tipo_marca_controller.dart';
+import 'package:moto_hunters/app/data/enums/order_by.dart';
+import 'package:moto_hunters/app/shared/controllers/filter_box_controller.dart';
+import 'package:moto_hunters/app/shared/controllers/filter_sheet_controller.dart';
+import 'package:moto_hunters/app/shared/controllers/tipo_marca_controller.dart';
 
 class SearchRowBindings extends Bindings {
   @override

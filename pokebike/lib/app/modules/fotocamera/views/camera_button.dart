@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
+import 'package:moto_hunters/app/config/colors.dart';
 
 class CameraButton extends StatelessWidget {
   final Function() onTap;

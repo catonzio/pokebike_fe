@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/settings/controllers/settings_controller.dart';
-import 'package:pokebike/app/modules/settings/views/settings_button.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/modules/settings/controllers/settings_controller.dart';
+import 'package:moto_hunters/app/modules/settings/views/settings_button.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 
 class LanguageSelectionWidget extends GetView<SettingsController> {
   const LanguageSelectionWidget({super.key});

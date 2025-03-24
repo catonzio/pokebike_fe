@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/classifica_tile/classifica_tile.dart';
-import 'package:pokebike/app/modules/leaderboard/views/element_card.dart';
-import 'package:pokebike/app/modules/leaderboard/views/grid_view_selection.dart';
+import 'package:moto_hunters/app/data/models/classifica_tile/classifica_tile.dart';
+import 'package:moto_hunters/app/modules/leaderboard/views/element_card.dart';
+import 'package:moto_hunters/app/modules/leaderboard/views/grid_view_selection.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../controllers/leaderboard_controller.dart';

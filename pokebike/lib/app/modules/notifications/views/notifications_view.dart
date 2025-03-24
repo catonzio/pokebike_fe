@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/modules/notifications/views/notification_tile.dart';
-import 'package:pokebike/app/shared/default_page.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/widgets/default_dialog.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/modules/notifications/views/notification_tile.dart';
+import 'package:moto_hunters/app/shared/default_page.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/default_dialog.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../controllers/notifications_controller.dart';
@@ -35,7 +35,7 @@ class NotificationsView extends GetView<NotificationsController> {
       body: Obx(() => controller.list.isNotEmpty || controller.isFetching
           ? Skeletonizer(
               enabled: controller.isFetching,
-              child: RefreshIndicator(
+              child: RefreshIndicator.adaptive(
                   onRefresh: controller.refreshList,
                   child: ListView(
                     shrinkWrap: true,

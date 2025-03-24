@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/modules/fotocamera/controllers/addmoto_form_controller.dart';
-import 'package:pokebike/app/modules/fotocamera/views/add_moto_form_field.dart';
-import 'package:pokebike/app/modules/fotocamera/views/add_moto_form_field_model.dart';
-import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/modules/fotocamera/controllers/addmoto_form_controller.dart';
+import 'package:moto_hunters/app/modules/fotocamera/views/add_moto_form_field.dart';
+import 'package:moto_hunters/app/modules/fotocamera/views/add_moto_form_field_model.dart';
+import 'package:moto_hunters/app/modules/login_register/views/mbutton.dart';
 
 class AddMotoForm extends StatelessWidget {
   final Function(bool) onStartEndSend;

@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/garage/controllers/garage_controller.dart';
-import 'package:pokebike/app/modules/garage/views/pagination/pagination_button.dart';
+import 'package:moto_hunters/app/modules/garage/controllers/garage_controller.dart';
+import 'package:moto_hunters/app/modules/garage/views/pagination/pagination_button.dart';
 
 class PaginationRow extends GetView<GarageController> {
   const PaginationRow({super.key});

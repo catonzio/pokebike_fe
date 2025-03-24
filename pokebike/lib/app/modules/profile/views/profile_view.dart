@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/user/user.dart';
-import 'package:pokebike/app/shared/widgets/mcircular_avatar.dart';
-import 'package:pokebike/app/modules/profile/profile_arguments.dart';
-import 'package:pokebike/app/modules/profile/views/classifica/classifica_body.dart';
-import 'package:pokebike/app/modules/profile/views/classifica/empty_classifica_body.dart';
-import 'package:pokebike/app/modules/profile/views/medaglie/medaglie_body.dart';
-import 'package:pokebike/app/modules/profile/views/medaglie/medaglie_row_widget.dart';
-import 'package:pokebike/app/modules/settings/controllers/settings_controller.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/default_page.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/widgets/pagination/pagination_row.dart';
-import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
-import 'package:pokebike/app/shared/widgets/utils/micon.dart';
+import 'package:moto_hunters/app/data/models/user/user.dart';
+import 'package:moto_hunters/app/shared/widgets/mcircular_avatar.dart';
+import 'package:moto_hunters/app/modules/profile/profile_arguments.dart';
+import 'package:moto_hunters/app/modules/profile/views/classifica/classifica_body.dart';
+import 'package:moto_hunters/app/modules/profile/views/classifica/empty_classifica_body.dart';
+import 'package:moto_hunters/app/modules/profile/views/medaglie/medaglie_body.dart';
+import 'package:moto_hunters/app/modules/profile/views/medaglie/medaglie_row_widget.dart';
+import 'package:moto_hunters/app/modules/settings/controllers/settings_controller.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/default_page.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/pagination/pagination_row.dart';
+import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../controllers/profile_controller.dart';
@@ -138,16 +138,20 @@ class ProfileBody extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        height: context.height * 0.5,
-        child: Obx(() => AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
-            child: controller.isMedaglie
-                ? const MedaglieBody()
-                : (controller.numPartecipazioni > 0 ||
-                        controller.isLoadingClassifica.value
-                    ? const ClassificaBody()
-                    : EmptyClassificaBody(
-                        isOwnProfile: controller.isOwnProfile.value,
-                      )))));
+      height: context.height * 0.5,
+      child: Obx(
+        () => AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          child: controller.isMedaglie
+              ? const MedaglieBody()
+              : (controller.numPartecipazioni > 0 ||
+                      controller.isLoadingClassifica.value
+                  ? const ClassificaBody()
+                  : EmptyClassificaBody(
+                      isOwnProfile: controller.isOwnProfile.value,
+                    )),
+        ),
+      ),
+    );
   }
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/data/models/partecipazione/partecipazione.dart';
-import 'package:pokebike/app/modules/vota/controllers/vota_controller.dart';
-import 'package:pokebike/app/modules/vota/views/vota_moto_image.dart';
-import 'package:pokebike/app/modules/vota/views/vota_player_row.dart';
-import 'package:pokebike/app/shared/utils/api_utils.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/data/models/partecipazione/partecipazione.dart';
+import 'package:moto_hunters/app/modules/vota/controllers/vota_controller.dart';
+import 'package:moto_hunters/app/modules/vota/views/vota_moto_image.dart';
+import 'package:moto_hunters/app/modules/vota/views/vota_player_row.dart';
+import 'package:moto_hunters/app/shared/utils/api_utils.dart';
 
 class VotaRow extends GetView<VotaController> {
   final Partecipazione partecipazione;

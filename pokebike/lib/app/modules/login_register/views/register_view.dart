@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/config/themes.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/modules/login_register/register_form_field.dart';
-import 'package:pokebike/app/modules/login_register/views/checkbox_form_field.dart';
-import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
-import 'package:pokebike/app/modules/login_register/views/photo_picker.dart';
-import 'package:pokebike/app/modules/login_register/views/register_form_field.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/controllers/storage.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/utils/api_utils.dart';
-import 'package:pokebike/app/shared/utils/decoration_image.dart';
-import 'package:pokebike/app/shared/widgets/base_app_bar.dart';
-import 'package:pokebike/app/shared/widgets/utils/loading_stack.dart';
-import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/config/themes.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/modules/login_register/register_form_field.dart';
+import 'package:moto_hunters/app/modules/login_register/views/checkbox_form_field.dart';
+import 'package:moto_hunters/app/modules/login_register/views/mbutton.dart';
+import 'package:moto_hunters/app/modules/login_register/views/photo_picker.dart';
+import 'package:moto_hunters/app/modules/login_register/views/register_form_field.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/controllers/storage.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/utils/api_utils.dart';
+import 'package:moto_hunters/app/shared/utils/decoration_image.dart';
+import 'package:moto_hunters/app/shared/widgets/base_app_bar.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/loading_stack.dart';
+import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
 
 import '../controllers/register_controller.dart';
 

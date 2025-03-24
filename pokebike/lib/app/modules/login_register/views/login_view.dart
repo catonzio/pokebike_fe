@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/config/themes.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/controllers/storage.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/utils/api_utils.dart';
-import 'package:pokebike/app/shared/utils/decoration_image.dart';
-import 'package:pokebike/app/shared/utils/input_decoration.dart';
-import 'package:pokebike/app/shared/widgets/base_app_bar.dart';
-import 'package:pokebike/app/shared/widgets/utils/loading_stack.dart';
-import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/config/themes.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/modules/login_register/views/mbutton.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/controllers/storage.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/utils/api_utils.dart';
+import 'package:moto_hunters/app/shared/utils/decoration_image.dart';
+import 'package:moto_hunters/app/shared/utils/input_decoration.dart';
+import 'package:moto_hunters/app/shared/widgets/base_app_bar.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/loading_stack.dart';
+import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
 
 import '../controllers/login_controller.dart';
 
@@ -139,7 +139,8 @@ class LoginView extends GetView<LoginController> {
                 : value
                     ? context.navigator
                         .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
-                    : context.navigator.pushNamedAndRemoveUntil(Routes.CONFIRM_REGISTER,
+                    : context.navigator.pushNamedAndRemoveUntil(
+                        Routes.CONFIRM_REGISTER,
                         (r) => r.settings.name == Routes.LOGIN_REGISTER));
             // context.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
           });

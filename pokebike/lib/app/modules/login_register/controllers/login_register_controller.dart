@@ -1,14 +1,12 @@
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/shared/providers/auth_provider.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/shared/providers/auth_provider.dart';
 
 class LoginRegisterController extends GetxController {
-
   final AuthProvider provider;
 
   LoginRegisterController({required this.provider});
-
 
   Future<ApiResponse> googleRegister() async {
     try {
@@ -16,17 +14,16 @@ class LoginRegisterController extends GetxController {
         await GoogleSignIn().disconnect();
       } on Exception catch (_) {}
 
-      final GoogleSignInAccount? googleUser = await GoogleSignIn(forceCodeForRefreshToken: true).signIn();
+      final GoogleSignInAccount? googleUser =
+          await GoogleSignIn(forceCodeForRefreshToken: true).signIn();
+      if (googleUser == null) {
+        return ApiResponse.error(message: "Error", data: null);
+      }
+      // final GoogleSignInAuthentication? googleAuth =
+      //     await googleUser?.authentication;
 
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
-
-      print(googleAuth);
-
-      ApiResponse response =
-          await provider.googleLogin(googleUser!);
+      ApiResponse response = await provider.googleLogin(googleUser);
       return response;
-
     } on Exception catch (e) {
       // TODO
       print('exception->$e');

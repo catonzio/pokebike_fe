@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Constants {
-  // static const String baseUrl = "https://danilocatone.com/pokebike";
+  // static const String baseUrl = "https://danilocatone.com/moto_hunters";
   static const String baseUrl = "http://console.motohunters.it";
   static const String apiBaseUrl = "$baseUrl/api";
   static const String apiStorageUrl = "$baseUrl/storage";

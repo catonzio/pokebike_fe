@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/leaderboard/views/main_body.dart';
-import 'package:pokebike/app/modules/leaderboard/views/upper_row.dart';
-import 'package:pokebike/app/modules/leaderboard/views/winner_screen.dart';
-import 'package:pokebike/app/shared/default_page.dart';
+import 'package:moto_hunters/app/modules/leaderboard/views/main_body.dart';
+import 'package:moto_hunters/app/modules/leaderboard/views/upper_row.dart';
+import 'package:moto_hunters/app/modules/leaderboard/views/winner_screen.dart';
+import 'package:moto_hunters/app/shared/default_page.dart';
 
 import '../controllers/leaderboard_controller.dart';
 

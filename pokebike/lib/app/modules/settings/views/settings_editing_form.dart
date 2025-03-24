@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/shared/utils/input_decoration.dart';
+import 'package:moto_hunters/app/shared/utils/input_decoration.dart';
 
 import '../controllers/settings_controller.dart';
 

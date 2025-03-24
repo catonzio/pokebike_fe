@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/user/user.dart';
-import 'package:pokebike/app/modules/garage/views/collezione/collezione_widget.dart';
-import 'package:pokebike/app/modules/garage/views/garage/garage_widget.dart';
-import 'package:pokebike/app/modules/garage/views/pagination/pagination_row.dart';
-import 'package:pokebike/app/modules/garage/views/profile_widget.dart';
-import 'package:pokebike/app/shared/controllers/api_pagination_controller.dart';
-import 'package:pokebike/app/shared/default_page.dart';
-import 'package:pokebike/app/shared/widgets/sliver_refresh.dart';
+import 'package:moto_hunters/app/data/models/user/user.dart';
+import 'package:moto_hunters/app/modules/garage/views/collezione/collezione_widget.dart';
+import 'package:moto_hunters/app/modules/garage/views/garage/garage_widget.dart';
+import 'package:moto_hunters/app/modules/garage/views/pagination/pagination_row.dart';
+import 'package:moto_hunters/app/modules/garage/views/profile_widget.dart';
+import 'package:moto_hunters/app/shared/controllers/api_pagination_controller.dart';
+import 'package:moto_hunters/app/shared/default_page.dart';
+import 'package:moto_hunters/app/shared/widgets/sliver_refresh.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../controllers/garage_controller.dart';

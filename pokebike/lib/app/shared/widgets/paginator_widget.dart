@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/config/constants.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/config/constants.dart';
 
 class PaginatorWidget extends StatelessWidget {
   final Widget body;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/profile/views/classifica/indicator.dart';
+import 'package:moto_hunters/app/modules/profile/views/classifica/indicator.dart';
 
 class StatisticsRow extends StatelessWidget {
   final int numeroVittorie;

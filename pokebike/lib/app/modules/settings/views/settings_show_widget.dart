@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/data/models/user/user.dart';
-import 'package:pokebike/app/modules/settings/views/language_selection_widget.dart';
-import 'package:pokebike/app/modules/settings/views/profile_container.dart';
-import 'package:pokebike/app/modules/settings/views/settings_button.dart';
-import 'package:pokebike/app/shared/widgets/utils/mswitcher.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/data/models/user/user.dart';
+import 'package:moto_hunters/app/modules/settings/views/language_selection_widget.dart';
+import 'package:moto_hunters/app/modules/settings/views/profile_container.dart';
+import 'package:moto_hunters/app/modules/settings/views/settings_button.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/mswitcher.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/constants.dart';
-// import 'package:pokebike/app/config/texts.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+// import 'package:moto_hunters/app/config/texts.dart';
 
 class PresentationController extends GetxController {
   final RxInt _index = 0.obs;

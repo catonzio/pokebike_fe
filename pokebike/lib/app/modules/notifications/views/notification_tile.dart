@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/data/models/notifica/notifica.dart';
-import 'package:pokebike/app/modules/notifications/controllers/notifications_controller.dart';
-import 'package:pokebike/app/modules/notifications/views/notifica_card.dart';
-import 'package:pokebike/app/modules/notifications/views/notifica_dialog.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/data/models/notifica/notifica.dart';
+import 'package:moto_hunters/app/modules/notifications/controllers/notifications_controller.dart';
+import 'package:moto_hunters/app/modules/notifications/views/notifica_card.dart';
+import 'package:moto_hunters/app/modules/notifications/views/notifica_dialog.dart';
 
 class NotificationTile extends GetView<NotificationsController> {
   final Notifica notifica;

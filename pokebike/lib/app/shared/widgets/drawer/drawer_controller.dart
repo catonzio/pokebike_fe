@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/shared/controllers/storage.dart';
-import 'package:pokebike/app/shared/providers/auth_provider.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/shared/controllers/storage.dart';
+import 'package:moto_hunters/app/shared/providers/auth_provider.dart';
 
 class MDrawerController extends GetxController {
   static MDrawerController get to => Get.find();

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/constants.dart';
-// import 'package:pokebike/app/modules/home/views/stories/stories_widget.dart';
-import 'package:pokebike/app/modules/home/views/tornei/tornei_widget.dart';
-import 'package:pokebike/app/modules/home/views/upper_buttons/upper_buttons.dart';
-import 'package:pokebike/app/shared/default_page.dart';
-import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+// import 'package:moto_hunters/app/modules/home/views/stories/stories_widget.dart';
+import 'package:moto_hunters/app/modules/home/views/tornei/tornei_widget.dart';
+import 'package:moto_hunters/app/modules/home/views/upper_buttons/upper_buttons.dart';
+import 'package:moto_hunters/app/shared/default_page.dart';
+import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
 
 import '../controllers/home_controller.dart';
 import 'community/community_widget.dart';

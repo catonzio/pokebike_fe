@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/notifications/providers/notifica_provider.dart';
+import 'package:moto_hunters/app/modules/notifications/providers/notifica_provider.dart';
 
 import '../controllers/notifications_controller.dart';
 

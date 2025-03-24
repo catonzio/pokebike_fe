@@ -2,8 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/modules/login_register/views/mbutton.dart';
 
 import '../controllers/leaderboard_controller.dart';
 

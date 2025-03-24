@@ -507,7 +507,7 @@
 				DEVELOPMENT_TEAM = 8T84X4C5Y7;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Pokebike;
+				INFOPLIST_KEY_CFBundleDisplayName = MotoHunters;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -515,7 +515,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.resmedia.pokebike;
+				PRODUCT_BUNDLE_IDENTIFIER = com.resmedia.moto_hunters;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -533,7 +533,7 @@
 				DEVELOPMENT_TEAM = 8T84X4C5Y7;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.resmedia.pokebike.pokebikeNew.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.resmedia.moto_hunters.moto_huntersNew.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -552,7 +552,7 @@
 				DEVELOPMENT_TEAM = 8T84X4C5Y7;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.resmedia.pokebike.pokebikeNew.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.resmedia.moto_hunters.moto_huntersNew.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
@@ -569,7 +569,7 @@
 				DEVELOPMENT_TEAM = 8T84X4C5Y7;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.resmedia.pokebike.pokebikeNew.RunnerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.resmedia.moto_hunters.moto_huntersNew.RunnerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Runner.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Runner";
@@ -705,7 +705,7 @@
 				DEVELOPMENT_TEAM = 8T84X4C5Y7;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Pokebike;
+				INFOPLIST_KEY_CFBundleDisplayName = MotoHunters;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -713,7 +713,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.resmedia.pokebike;
+				PRODUCT_BUNDLE_IDENTIFIER = com.resmedia.moto_hunters;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -734,7 +734,7 @@
 				DEVELOPMENT_TEAM = 8T84X4C5Y7;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Pokebike;
+				INFOPLIST_KEY_CFBundleDisplayName = MotoHunters;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -742,7 +742,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.resmedia.pokebike;
+				PRODUCT_BUNDLE_IDENTIFIER = com.resmedia.moto_hunters;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

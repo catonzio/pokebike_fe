@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/mbutton.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/mbutton.dart';
 
 Future<ImageSource?> selectImageSource(BuildContext context) async {
   final ImageSource? source = await showModalBottomSheet<ImageSource>(

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/settings/providers/settings_provider.dart';
+import 'package:moto_hunters/app/modules/settings/providers/settings_provider.dart';
 
 import '../controllers/settings_controller.dart';
 

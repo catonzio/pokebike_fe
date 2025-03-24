@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/profile/controllers/profile_controller.dart';
-import 'package:pokebike/app/modules/profile/providers/profile_provider.dart';
+import 'package:moto_hunters/app/modules/profile/controllers/profile_controller.dart';
+import 'package:moto_hunters/app/modules/profile/providers/profile_provider.dart';
 
 // import '../controllers/profile_controller.dart';
 

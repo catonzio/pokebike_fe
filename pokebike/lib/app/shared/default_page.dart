@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/config/constants.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/widgets/back_button.dart';
-import 'package:pokebike/app/shared/widgets/bottom_navbar/bottom_navbar.dart';
-import 'package:pokebike/app/shared/widgets/drawer/drawer_controller.dart';
-import 'package:pokebike/app/shared/widgets/drawer/mdrawer.dart';
-import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
-import 'package:pokebike/app/shared/widgets/utils/micon.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/back_button.dart';
+import 'package:moto_hunters/app/shared/widgets/bottom_navbar/bottom_navbar.dart';
+import 'package:moto_hunters/app/shared/widgets/drawer/drawer_controller.dart';
+import 'package:moto_hunters/app/shared/widgets/drawer/mdrawer.dart';
+import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
 
 class DefaultPage extends GetView<MDrawerController> {
   final Widget body;

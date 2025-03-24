@@ -2,9 +2,9 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/fotocamera/views/camera_button.dart';
-import 'package:pokebike/app/modules/fotocamera/views/camera_row_button.dart';
-import 'package:pokebike/app/shared/widgets/paginator_widget.dart';
+import 'package:moto_hunters/app/modules/fotocamera/views/camera_button.dart';
+import 'package:moto_hunters/app/modules/fotocamera/views/camera_row_button.dart';
+import 'package:moto_hunters/app/shared/widgets/paginator_widget.dart';
 
 import '../controllers/fotocamera_controller.dart';
 

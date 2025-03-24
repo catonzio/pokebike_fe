@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/shared/providers/auth_provider.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/shared/providers/auth_provider.dart';
 
 class RegisterController extends GetxController {
   final RxBool obscurePassword = true.obs;

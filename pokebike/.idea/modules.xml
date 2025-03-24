@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/pokebike.iml" filepath="$PROJECT_DIR$/pokebike.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/pokebike_android.iml" filepath="$PROJECT_DIR$/android/pokebike_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/moto_hunters.iml"
+        filepath="$PROJECT_DIR$/moto_hunters.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/moto_hunters_android.iml"
+        filepath="$PROJECT_DIR$/android/moto_hunters_android.iml" />
     </modules>
   </component>
 </project>

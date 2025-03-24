@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/shared/providers/auth_provider.dart';
-import 'package:pokebike/firebase.dart';
+import 'package:moto_hunters/app/shared/providers/auth_provider.dart';
+import 'package:moto_hunters/firebase.dart';
 
 class HomeController extends GetxController {
   final RxBool _isLoadingStories = false.obs;

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/shared/providers/moto_provider.dart';
+import 'package:moto_hunters/app/shared/providers/moto_provider.dart';
 
 import '../controllers/partecipa_torneo_controller.dart';
 

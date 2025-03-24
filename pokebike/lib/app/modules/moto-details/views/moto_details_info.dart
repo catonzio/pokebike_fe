@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
+import 'package:moto_hunters/app/data/models/collezione_moto/collezione_moto.dart';
 
-import 'package:pokebike/app/data/models/moto/moto.dart';
-import 'package:pokebike/app/modules/moto-details/views/moto_details_info_row.dart';
-import 'package:pokebike/app/shared/extensions/date_utils.dart';
+import 'package:moto_hunters/app/data/models/moto/moto.dart';
+import 'package:moto_hunters/app/modules/moto-details/views/moto_details_info_row.dart';
+import 'package:moto_hunters/app/shared/extensions/date_utils.dart';
 
 class MotoDetailsInfo extends StatelessWidget {
   final Moto moto;

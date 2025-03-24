@@ -44,7 +44,9 @@ class MimageNetwork extends StatelessWidget {
         height: cacheHeight,
         maxWidthDiskCache: cacheWidth?.toInt(),
         maxHeightDiskCache: cacheHeight?.toInt(),
-        color: lightLevel < 1 ? Colors.black.withValues(alpha: 1 - lightLevel) : null,
+        color: lightLevel < 1
+            ? Colors.black.withValues(alpha: 1 - lightLevel)
+            : null,
         colorBlendMode: lightLevel < 1 ? BlendMode.darken : null,
         progressIndicatorBuilder: (context, url, progress) => Skeletonizer(
           enabled: true,

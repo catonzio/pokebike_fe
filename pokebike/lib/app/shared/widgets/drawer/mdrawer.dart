@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/widgets/drawer/drawer_controller.dart';
-import 'package:pokebike/app/shared/widgets/drawer/drawer_item.dart';
-import 'package:pokebike/app/shared/widgets/drawer/drawer_item_widget.dart';
-import 'package:pokebike/app/shared/widgets/default_dialog.dart';
-import 'package:pokebike/app/shared/widgets/shimmer_title.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/drawer/drawer_controller.dart';
+import 'package:moto_hunters/app/shared/widgets/drawer/drawer_item.dart';
+import 'package:moto_hunters/app/shared/widgets/drawer/drawer_item_widget.dart';
+import 'package:moto_hunters/app/shared/widgets/default_dialog.dart';
+import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
 
 class Mdrawer extends StatelessWidget {
   const Mdrawer({super.key});

@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/classifica_tile/classifica_tile.dart';
-import 'package:pokebike/app/data/models/moto/moto.dart';
-import 'package:pokebike/app/data/models/user/user.dart';
-import 'package:pokebike/app/modules/profile/profile_arguments.dart';
-import 'package:pokebike/app/modules/profile/providers/profile_provider.dart';
-import 'package:pokebike/app/shared/widgets/pagination/pagination_item.dart';
+import 'package:moto_hunters/app/data/models/classifica_tile/classifica_tile.dart';
+import 'package:moto_hunters/app/data/models/moto/moto.dart';
+import 'package:moto_hunters/app/data/models/user/user.dart';
+import 'package:moto_hunters/app/modules/profile/profile_arguments.dart';
+import 'package:moto_hunters/app/modules/profile/providers/profile_provider.dart';
+import 'package:moto_hunters/app/shared/widgets/pagination/pagination_item.dart';
 
 class ProfileController extends GetxController {
   ProfileArguments? argumentUser = Get.arguments as ProfileArguments?;

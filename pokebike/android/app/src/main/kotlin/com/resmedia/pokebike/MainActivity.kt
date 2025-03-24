@@ -1,4 +1,4 @@
-package com.resmedia.pokebike
+package com.resmedia.moto_hunters
 
 import io.flutter.embedding.android.FlutterActivity
 

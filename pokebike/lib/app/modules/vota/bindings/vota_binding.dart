@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/vota/providers/vota_provider.dart';
+import 'package:moto_hunters/app/modules/vota/providers/vota_provider.dart';
 
 import '../controllers/vota_controller.dart';
 

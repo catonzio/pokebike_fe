@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/shared/widgets/utils/micon.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
 
 class SettingsButton extends StatelessWidget {
   final String text;

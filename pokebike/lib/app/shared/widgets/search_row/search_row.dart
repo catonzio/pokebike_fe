@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/data/search_options.dart';
-import 'package:pokebike/app/shared/widgets/search_row/filter_modal_sheet.dart';
-import 'package:pokebike/app/shared/widgets/search_row/search_text_field.dart';
-import 'package:pokebike/app/shared/widgets/utils/micon.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/data/search_options.dart';
+import 'package:moto_hunters/app/shared/widgets/search_row/filter_modal_sheet.dart';
+import 'package:moto_hunters/app/shared/widgets/search_row/search_text_field.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
 
 class SearchRow extends StatelessWidget {
   final Function(String) onSearchField;
@@ -29,21 +29,21 @@ class SearchRow extends StatelessWidget {
           child: SearchTextField(onSearch: onSearchField, focusNode: focusNode),
         ),
         if (showButton)
-        Expanded(
-          flex: 2,
-          child: InkWell(
-            onTap: () => _showFilterDialog(context),
-            customBorder: const CircleBorder(),
-            child: Container(
-              decoration: const BoxDecoration(
-                  color: Colors.white, shape: BoxShape.circle),
-              padding: const EdgeInsets.all(6),
-              child: const MIcon(
-                name: "Filter icon",
+          Expanded(
+            flex: 2,
+            child: InkWell(
+              onTap: () => _showFilterDialog(context),
+              customBorder: const CircleBorder(),
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white, shape: BoxShape.circle),
+                padding: const EdgeInsets.all(6),
+                child: const MIcon(
+                  name: "Filter icon",
+                ),
               ),
             ),
           ),
-        ),
       ],
     );
   }

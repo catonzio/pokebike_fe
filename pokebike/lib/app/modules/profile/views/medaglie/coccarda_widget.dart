@@ -2,12 +2,12 @@ import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:pokebike/app/config/medals_cockades_enums.dart';
-import 'package:pokebike/app/modules/profile/views/details/cockade_details.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/extensions/nums_utils.dart';
-import 'package:pokebike/app/shared/widgets/utils/micon.dart';
+import 'package:moto_hunters/app/config/medals_cockades_enums.dart';
+import 'package:moto_hunters/app/modules/profile/views/details/cockade_details.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/extensions/nums_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
 
 Cockades getCockade(int numCatturate) {
   if (numCatturate.inRange(

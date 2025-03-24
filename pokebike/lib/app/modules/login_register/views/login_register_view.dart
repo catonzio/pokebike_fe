@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/modules/login_register/views/mbutton.dart';
-import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/controllers/storage.dart';
-import 'package:pokebike/app/shared/extensions/context_utils.dart';
-import 'package:pokebike/app/shared/utils/decoration_image.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/modules/login_register/views/mbutton.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/controllers/storage.dart';
+import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/app/shared/utils/decoration_image.dart';
 
 import '../controllers/login_register_controller.dart';
 
@@ -21,7 +21,7 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-          image: getDarkDecorationImage('assets/images/splash.png', 0.2)),
+          image: getDarkDecorationImage('assets/images/splash_old.png', 0.2)),
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -51,7 +51,7 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
         children: [
           Image.asset(
             "assets/icons/google.png",
-            height: context.height * 0.04,
+            height: context.height * 0.03,
             fit: BoxFit.contain,
           ),
           Padding(
@@ -113,7 +113,8 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
           : value
               ? context.navigator
                   .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
-              : context.navigator.pushNamedAndRemoveUntil(Routes.CONFIRM_REGISTER,
+              : context.navigator.pushNamedAndRemoveUntil(
+                  Routes.CONFIRM_REGISTER,
                   (r) => r.settings.name == Routes.LOGIN_REGISTER));
       // if (context.mounted) {
       //   context.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);

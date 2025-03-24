@@ -1,9 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/shared/widgets/bottom_navbar/navbar_item.dart';
-// import 'package:pokebike/app/routes/app_pages.dart';
-import 'package:pokebike/app/shared/widgets/utils/micon.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/shared/widgets/bottom_navbar/navbar_item.dart';
+// import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
 
 class BottomNavbarButton extends StatelessWidget {
   final int index;
@@ -38,34 +39,36 @@ class BottomNavbarButton extends StatelessWidget {
       // color: color,
       size: item.size,
     );
-    mIcon = item.iconName.toLowerCase().contains("logo")
-        ? Transform.translate(
-            offset: Offset(4, 0),
-            child: mIcon,
-          )
-        : mIcon;
-    return mIcon;
-    // return Container(
-    //   color: Colors.white,
-    //   child: Column(
-    //     mainAxisSize: MainAxisSize.min,
-    //     crossAxisAlignment: CrossAxisAlignment.center,
-    //     mainAxisAlignment: MainAxisAlignment.center,
-    //     children: [
-    //       // MIcon(
-    //       //   name: item.iconName + addName,
-    //       //   onTap: () => onTap(index),
-    //       //   // color: color,
-    //       //   size: item.size,
-    //       // ),
-    //       mIcon,
-    //       Text(
-    //         item.label,
-    //         style: context.textTheme.bodyMedium
-    //             ?.copyWith(color: isSelected ? selectedColor : unselectedColor),
+    // mIcon = item.iconName.toLowerCase().contains("logo")
+    //     ? Transform.translate(
+    //         offset: Offset(4, 0),
+    //         child: mIcon,
     //       )
-    //     ],
-    //   ),
-    // );
+    //     : mIcon;
+    // return mIcon;
+    return Container(
+      width: context.width * 0.9 * 0.2,
+      alignment: Alignment.bottomCenter,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // MIcon(
+          //   name: item.iconName + addName,
+          //   onTap: () => onTap(index),
+          //   // color: color,
+          //   size: item.size,
+          // ),
+          mIcon,
+          AutoSizeText(
+            item.label,
+            maxLines: 1,
+            style: context.textTheme.bodyMedium
+                ?.copyWith(color: isSelected ? selectedColor : unselectedColor),
+          )
+        ],
+      ),
+    );
   }
 }

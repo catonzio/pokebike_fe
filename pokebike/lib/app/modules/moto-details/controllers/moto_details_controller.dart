@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/data/models/collezione_moto/collezione_moto.dart';
-import 'package:pokebike/app/data/models/marca_moto/marca_moto.dart';
-import 'package:pokebike/app/data/models/moto/moto.dart';
-import 'package:pokebike/app/data/models/tipo_moto/tipo_moto.dart';
-import 'package:pokebike/app/modules/moto-details/moto_details_arguments.dart';
-import 'package:pokebike/app/shared/controllers/tipo_marca_controller.dart';
-import 'package:pokebike/app/shared/extensions/date_utils.dart';
-import 'package:pokebike/app/shared/providers/moto_provider.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/data/models/collezione_moto/collezione_moto.dart';
+import 'package:moto_hunters/app/data/models/marca_moto/marca_moto.dart';
+import 'package:moto_hunters/app/data/models/moto/moto.dart';
+import 'package:moto_hunters/app/data/models/tipo_moto/tipo_moto.dart';
+import 'package:moto_hunters/app/modules/moto-details/moto_details_arguments.dart';
+import 'package:moto_hunters/app/shared/controllers/tipo_marca_controller.dart';
+import 'package:moto_hunters/app/shared/extensions/date_utils.dart';
+import 'package:moto_hunters/app/shared/providers/moto_provider.dart';
 
 class MotoDetailsController extends GetxController {
   MotoDetailsArguments arguments = Get.arguments as MotoDetailsArguments;

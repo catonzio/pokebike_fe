@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:pokebike/app/data/models/moto/moto.dart';
-import 'package:pokebike/app/modules/profile/views/classifica/statistics_row.dart';
+import 'package:moto_hunters/app/data/models/moto/moto.dart';
+import 'package:moto_hunters/app/modules/profile/views/classifica/statistics_row.dart';
 
 class MotoDetailsStato extends StatelessWidget {
   final Moto moto;

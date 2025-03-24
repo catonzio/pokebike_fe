@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/enums/order_by.dart';
+import 'package:moto_hunters/app/data/enums/order_by.dart';
 
 class SearchOptions {
   final OrderBy orderBy;

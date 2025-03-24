@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/data/models/moto/moto.dart';
-import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/data/models/moto/moto.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/mimage_network.dart';
 
 class GarageCardWidget extends StatelessWidget {
   final int index;

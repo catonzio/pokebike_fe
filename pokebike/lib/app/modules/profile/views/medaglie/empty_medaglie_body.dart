@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/modules/profile/controllers/profile_controller.dart';
-import 'package:pokebike/app/modules/profile/views/medaglie/divider_title.dart';
+import 'package:moto_hunters/app/modules/profile/controllers/profile_controller.dart';
+import 'package:moto_hunters/app/modules/profile/views/medaglie/divider_title.dart';
 
 class EmptyMedaglieBody extends GetView<ProfileController> {
   const EmptyMedaglieBody({super.key});

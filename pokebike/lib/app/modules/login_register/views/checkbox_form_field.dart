@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/shared/widgets/utils/mcheckbox.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/mcheckbox.dart';
 
 class CheckboxFormField extends FormField<bool> {
   CheckboxFormField(

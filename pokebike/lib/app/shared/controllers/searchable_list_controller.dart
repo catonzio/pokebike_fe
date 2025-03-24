@@ -1,9 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/api_response.dart';
-import 'package:pokebike/app/data/enums/order_by.dart';
-import 'package:pokebike/app/data/search_options.dart';
-import 'package:pokebike/app/shared/controllers/api_pagination_controller.dart';
+import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/data/enums/order_by.dart';
+import 'package:moto_hunters/app/data/search_options.dart';
+import 'package:moto_hunters/app/shared/controllers/api_pagination_controller.dart';
 
 class SearchableListController<T> extends ApiPaginationController<T> {
   final FocusNode focusNode = FocusNode();

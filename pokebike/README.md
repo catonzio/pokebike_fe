@@ -1,4 +1,4 @@
-# pokebike
+# moto_hunters
 
 A new Flutter project.
 

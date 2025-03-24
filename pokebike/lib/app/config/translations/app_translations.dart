@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:pokebike/app/config/translations/en_usuk.dart';
-import 'package:pokebike/app/config/translations/es_es.dart';
-import 'package:pokebike/app/config/translations/fr_fr.dart';
-import 'package:pokebike/app/config/translations/it_IT.dart';
+import 'package:moto_hunters/app/config/translations/en_usuk.dart';
+import 'package:moto_hunters/app/config/translations/es_es.dart';
+import 'package:moto_hunters/app/config/translations/fr_fr.dart';
+import 'package:moto_hunters/app/config/translations/it_IT.dart';
 
 class AppTranslations extends Translations {
   @override

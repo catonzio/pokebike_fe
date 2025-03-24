@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/user/user.dart';
-import 'package:pokebike/app/modules/leaderboard/controllers/leaderboard_controller.dart';
+import 'package:moto_hunters/app/data/models/user/user.dart';
+import 'package:moto_hunters/app/modules/leaderboard/controllers/leaderboard_controller.dart';
 
-import 'package:pokebike/app/shared/widgets/giant_title.dart';
-import 'package:pokebike/app/shared/widgets/utils/loading_stack.dart';
-import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
+import 'package:moto_hunters/app/shared/widgets/giant_title.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/loading_stack.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/mimage_network.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class WinnerScreen extends StatelessWidget {

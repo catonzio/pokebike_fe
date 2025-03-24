@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pokebike/app/data/models/classifica_tile/classifica_tile.dart';
-import 'package:pokebike/app/data/models/user/user.dart';
-import 'package:pokebike/app/modules/leaderboard/providers/leaderboard_provider.dart';
-import 'package:pokebike/app/shared/controllers/api_pagination_controller.dart';
+import 'package:moto_hunters/app/data/models/classifica_tile/classifica_tile.dart';
+import 'package:moto_hunters/app/data/models/user/user.dart';
+import 'package:moto_hunters/app/modules/leaderboard/providers/leaderboard_provider.dart';
+import 'package:moto_hunters/app/shared/controllers/api_pagination_controller.dart';
 
 class LeaderboardController extends ApiPaginationController<ClassificaTile> {
   static LeaderboardController get to => Get.find<LeaderboardController>();

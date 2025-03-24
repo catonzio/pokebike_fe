@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:pokebike/app/config/colors.dart';
-import 'package:pokebike/app/modules/vota/controllers/vota_controller.dart';
-import 'package:pokebike/app/shared/widgets/utils/mimage_network.dart';
+import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/modules/vota/controllers/vota_controller.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/mimage_network.dart';
 
 class VotaMotoImage extends GetView<VotaController> {
   final double height;

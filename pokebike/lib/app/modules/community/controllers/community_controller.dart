@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pokebike/app/data/enums/order_by.dart';
-import 'package:pokebike/app/data/models/user/user.dart';
-import 'package:pokebike/app/modules/community/providers/community_provider.dart';
-import 'package:pokebike/app/shared/controllers/searchable_list_controller.dart';
+import 'package:moto_hunters/app/data/enums/order_by.dart';
+import 'package:moto_hunters/app/data/models/user/user.dart';
+import 'package:moto_hunters/app/modules/community/providers/community_provider.dart';
+import 'package:moto_hunters/app/shared/controllers/searchable_list_controller.dart';
 
 class CommunityController extends SearchableListController<User> {
   // ignore: unused_field
