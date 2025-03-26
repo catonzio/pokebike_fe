@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,9 +28,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
-        return windows;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -40,50 +49,23 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBeaFkUsnYuIFKPGMAEJT0dmUrUJsoVnmA',
-    appId: '1:995219122710:web:46d49b18d03efac26ba337',
-    messagingSenderId: '995219122710',
-    projectId: 'pokebike-9ac6c',
-    authDomain: 'pokebike-9ac6c.firebaseapp.com',
-    storageBucket: 'pokebike-9ac6c.appspot.com',
-    measurementId: 'G-LMKVTQXM07',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAS_XreIzqsXFakn_JyTSzDC6xJtrzjDLU',
-    appId: '1:776310891261:android:9ed2c50455e76eefba1494',
+    appId: '1:776310891261:android:231fd17cf4671386ba1494',
     messagingSenderId: '776310891261',
     projectId: 'pokebike-1fc5d',
-    storageBucket: 'pokebike-1fc5d.appspot.com',
+    storageBucket: 'pokebike-1fc5d.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBxahVRgVvjfXhk2_BL9tBaVM40MQskj5U',
-    appId: '1:995219122710:ios:9a8cc23a5dc7cdb86ba337',
-    messagingSenderId: '995219122710',
-    projectId: 'pokebike-9ac6c',
-    storageBucket: 'pokebike-9ac6c.appspot.com',
+    apiKey: 'AIzaSyBQnCXA5yfgGmuyEq0HY8roZX5b9vb6bvc',
+    appId: '1:776310891261:ios:764e50a6529366f0ba1494',
+    messagingSenderId: '776310891261',
+    projectId: 'pokebike-1fc5d',
+    storageBucket: 'pokebike-1fc5d.firebasestorage.app',
+    androidClientId: '776310891261-3rqig8972hj76co96ie4ouogvteqfphc.apps.googleusercontent.com',
+    iosClientId: '776310891261-64dv07g5f1726nn87lk2rsaurev0ernk.apps.googleusercontent.com',
     iosBundleId: 'com.resmedia.pokebike',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBxahVRgVvjfXhk2_BL9tBaVM40MQskj5U',
-    appId: '1:995219122710:ios:9a8cc23a5dc7cdb86ba337',
-    messagingSenderId: '995219122710',
-    projectId: 'pokebike-9ac6c',
-    storageBucket: 'pokebike-9ac6c.appspot.com',
-    iosBundleId: 'com.resmedia.pokebike',
-  );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyBeaFkUsnYuIFKPGMAEJT0dmUrUJsoVnmA',
-    appId: '1:995219122710:web:86223cc88be49ed06ba337',
-    messagingSenderId: '995219122710',
-    projectId: 'pokebike-9ac6c',
-    authDomain: 'pokebike-9ac6c.firebaseapp.com',
-    storageBucket: 'pokebike-9ac6c.appspot.com',
-    measurementId: 'G-VNMZQE8DBC',
   );
 
 }

@@ -2,17 +2,22 @@
   "project_info": {
     "project_number": "776310891261",
     "project_id": "pokebike-1fc5d",
-    "storage_bucket": "pokebike-1fc5d.appspot.com"
+    "storage_bucket": "pokebike-1fc5d.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:776310891261:android:9ed2c50455e76eefba1494",
+        "mobilesdk_app_id": "1:776310891261:android:231fd17cf4671386ba1494",
         "android_client_info": {
           "package_name": "com.resmedia.moto_hunters"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "776310891261-0e8pmdce9cvu33oqsarmt8t1n22c1la9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAS_XreIzqsXFakn_JyTSzDC6xJtrzjDLU"
@@ -20,7 +25,20 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776310891261-0e8pmdce9cvu33oqsarmt8t1n22c1la9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "776310891261-64dv07g5f1726nn87lk2rsaurev0ernk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.resmedia.pokebike",
+                "app_store_id": "6737813487"
+              }
+            }
+          ]
         }
       }
     }

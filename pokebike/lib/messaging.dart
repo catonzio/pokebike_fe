@@ -32,6 +32,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 class MessagingInitializer {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
   AndroidNotificationDetails androidNotificationDetails;
+  DarwinNotificationDetails darwinNotificationDetails;
 
   MessagingInitializer()
       : flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin(),
@@ -42,6 +43,12 @@ class MessagingInitializer {
           importance: Importance.max,
           priority: Priority.high,
           ticker: 'ticker',
+        ),
+        darwinNotificationDetails = const DarwinNotificationDetails(
+          presentAlert: true,
+          presentBadge: true,
+          presentSound: true,
+          presentBanner: true,
         );
 
   Future<void> initialize() async {
@@ -94,8 +101,11 @@ class MessagingInitializer {
     String? body = message.notification?.body ?? 'Default Body';
     String payload = message.data['payload'] ?? 'default_payload';
 
-    NotificationDetails notificationDetails =
-        NotificationDetails(android: androidNotificationDetails);
+    NotificationDetails notificationDetails = NotificationDetails(
+      android: androidNotificationDetails,
+      iOS: darwinNotificationDetails,
+      macOS: darwinNotificationDetails,
+    );
 
     await flutterLocalNotificationsPlugin
         .show(0, title, body, notificationDetails, payload: payload);
