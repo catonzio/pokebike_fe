@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAS_XreIzqsXFakn_JyTSzDC6xJtrzjDLU',
-    appId: '1:776310891261:android:231fd17cf4671386ba1494',
+    appId: '1:776310891261:android:9ed2c50455e76eefba1494',
     messagingSenderId: '776310891261',
     projectId: 'pokebike-1fc5d',
     storageBucket: 'pokebike-1fc5d.firebasestorage.app',

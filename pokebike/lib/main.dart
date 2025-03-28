@@ -22,7 +22,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: "MotoHunters",
-      debugShowCheckedModeBanner: false, 
+      debugShowCheckedModeBanner: false,
       theme: Themes.dark(),
       locale: Get.deviceLocale,
       fallbackLocale: const Locale('en'),

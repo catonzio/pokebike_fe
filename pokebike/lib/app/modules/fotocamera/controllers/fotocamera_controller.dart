@@ -39,7 +39,11 @@ class FotocameraController extends GetxController {
       cameraError = true;
       cameraController = null;
     } else {
-      cameraController = CameraController(cameras[0], ResolutionPreset.max);
+      cameraController = CameraController(
+        cameras[0],
+        ResolutionPreset.max,
+        enableAudio: false,
+      );
       cameraError = false;
     }
   }

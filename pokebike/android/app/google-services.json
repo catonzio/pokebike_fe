@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:776310891261:android:231fd17cf4671386ba1494",
+        "mobilesdk_app_id": "1:776310891261:android:9ed2c50455e76eefba1494",
         "android_client_info": {
-          "package_name": "com.resmedia.moto_hunters"
+          "package_name": "com.resmedia.pokebike"
         }
       },
       "oauth_client": [
