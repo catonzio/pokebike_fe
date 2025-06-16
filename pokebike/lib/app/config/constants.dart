@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'dart:io';
 
 class Constants {
   // static const String baseUrl = "https://danilocatone.com/moto_hunters";
-  static const String baseUrl = "http://console.motohunters.it";
-  static const String apiBaseUrl = "$baseUrl/api";
-  static const String apiStorageUrl = "$baseUrl/storage";
+  static const bool isLocal = true;
+  static final String baseUrl = isLocal
+      ? (Platform.isAndroid
+          ? "http://10.0.2.2:8080"
+          : "http://127.0.0.1:8080")
+      : "http://console.motohunters.it";
+  static final String apiBaseUrl = "$baseUrl/api";
+  static final String apiStorageUrl = "$baseUrl/storage";
   // static const String apiBaseUrl = "http://127.0.0.1:8080/api";
 
   static const String settingsStorage = "settings";

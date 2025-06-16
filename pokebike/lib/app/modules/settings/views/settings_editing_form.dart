@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:moto_hunters/app/shared/utils/input_decoration.dart';
 
 import '../controllers/settings_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class SettingsEditingForm extends GetView<SettingsController> {
   const SettingsEditingForm({
@@ -18,19 +19,19 @@ class SettingsEditingForm extends GetView<SettingsController> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextFormField(
-              decoration: transparentInputDecoration('name'.tr),
+              decoration: transparentInputDecoration(S.of(context).name),
               controller: controller.nameController,
             ),
             TextFormField(
-              decoration: transparentInputDecoration('surname'.tr),
+              decoration: transparentInputDecoration(S.of(context).surname),
               controller: controller.surnameController,
             ),
             TextFormField(
-              decoration: transparentInputDecoration('uusername'.tr),
+              decoration: transparentInputDecoration(S.of(context).username),
               controller: controller.usernameController,
             ),
             TextFormField(
-              decoration: transparentInputDecoration('birthday'.tr),
+              decoration: transparentInputDecoration(S.of(context).birthday),
               controller: controller.dataController,
               onTap: () => selectDate(context),
             ),

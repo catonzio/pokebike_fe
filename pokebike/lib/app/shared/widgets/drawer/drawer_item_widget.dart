@@ -18,7 +18,7 @@ class DrawerItemWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-              width: context.width * 0.13,
+              width: Get.context!.width * 0.13,
               alignment: Alignment.centerLeft,
               child: MIcon(name: item.icon)),
           Text(item.title)

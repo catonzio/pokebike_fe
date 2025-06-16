@@ -6,6 +6,7 @@ import 'package:moto_hunters/app/config/colors.dart';
 import 'package:moto_hunters/app/modules/login_register/views/mbutton.dart';
 
 import '../controllers/leaderboard_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class UpperRow extends GetView<LeaderboardController> {
   const UpperRow({super.key});
@@ -17,7 +18,7 @@ class UpperRow extends GetView<LeaderboardController> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             MButton(
-              width: context.width * 0.4,
+              width: Get.context!.width * 0.4,
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               backgroundColor: controller.isShowingWinner
                   ? MColors.primaryLight
@@ -25,19 +26,19 @@ class UpperRow extends GetView<LeaderboardController> {
               withBorders: false,
               onPressed: controller.showLeaderboard,
               child: AutoSizeText(
-                'generalLeaderboard'.tr,
+                S.of(context).generalLeaderboard,
                 maxLines: 1,
               ),
             ),
             MButton(
-              width: context.width * 0.4,
+              width: Get.context!.width * 0.4,
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               backgroundColor: controller.isShowingWinner
                   ? MColors.secondary
                   : MColors.primaryLight,
               withBorders: false,
               onPressed: controller.showWinner,
-              child: Text('winner'.tr),
+              child: Text(S.of(context).winner),
             )
           ],
         ));

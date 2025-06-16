@@ -29,7 +29,7 @@ class PaginationButton extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: context.textTheme.titleMedium,
+          style: Get.context!.textTheme.titleMedium,
         ),
       ),
     );

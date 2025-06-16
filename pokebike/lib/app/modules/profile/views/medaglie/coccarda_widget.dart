@@ -8,6 +8,7 @@ import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/extensions/nums_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
+import 'package:get/get.dart';
 
 Cockades getCockade(int numCatturate) {
   if (numCatturate.inRange(
@@ -41,7 +42,7 @@ class CoccardaWidget extends StatelessWidget {
     double percentage =
         cockade.ub == null ? 0 : max(0, numCatturate) / cockade.ub!;
     return GestureDetector(
-      onTap: () => context.pushNamed(Routes.COCKADES_DETAILS,
+      onTap: () => Get.context!.pushNamed(Routes.COCKADES_DETAILS,
           arguments: CockadesDetailsArguments(
               numCatturate: numCatturate, typeName: text)),
       child: Column(

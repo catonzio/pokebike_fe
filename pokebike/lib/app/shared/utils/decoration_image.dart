@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 DecorationImage getLightDecorationImage(String path, double opacity) {
   return getDecorationImage(path, opacity, Colors.white, BlendMode.lighten);

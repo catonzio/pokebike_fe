@@ -3,6 +3,7 @@ import 'package:moto_hunters/app/modules/community/views/community_title.dart';
 import 'package:moto_hunters/app/modules/community/views/community_list.dart';
 import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:get/get.dart';
 
 class CommunityWidget extends StatelessWidget {
   final double height;
@@ -16,7 +17,7 @@ class CommunityWidget extends StatelessWidget {
       child: Column(
         children: [
           CommunityTitle(
-            onTap: () => context.pushNamed(Routes.COMMUNITY),
+            onTap: () => Get.context!.pushNamed(Routes.COMMUNITY),
           ),
           SizedBox(
               height: height * 0.75,

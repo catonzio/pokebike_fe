@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moto_hunters/app/config/colors.dart';
 import 'package:moto_hunters/app/config/constants.dart';
+import 'package:get/get.dart';
 
 class PaginatorWidget extends StatelessWidget {
   final Widget body;

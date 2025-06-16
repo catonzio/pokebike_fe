@@ -35,7 +35,7 @@ class PartecipaTorneoGrid extends GetView<PartecipaTorneoController> {
                   moto: indexMoto.$2,
                   onTap: () {
                     controller.focusNode.unfocus();
-                    context.navigator.push(
+                    Get.context!.navigator.push(
                       MaterialPageRoute(
                           builder: (context) =>
                               MotoDetailPage(index: indexMoto.$1)),

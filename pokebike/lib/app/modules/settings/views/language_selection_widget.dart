@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:moto_hunters/app/modules/settings/controllers/settings_controller.dart';
 import 'package:moto_hunters/app/modules/settings/views/settings_button.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class LanguageSelectionWidget extends GetView<SettingsController> {
   const LanguageSelectionWidget({super.key});
@@ -10,7 +11,7 @@ class LanguageSelectionWidget extends GetView<SettingsController> {
   @override
   Widget build(BuildContext context) {
     return SettingsButton(
-        text: 'chooseLanguage'.tr,
+        text: S.of(context).chooseLanguage,
         icon: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Icon(
@@ -31,9 +32,9 @@ class LanguageSelectionWidget extends GetView<SettingsController> {
           onChanged: (locale) async {
             if (locale != null) {
               bool result = await controller.updateLocale(locale);
-              if (context.mounted) {
-                context.createSnackbar(
-                    result ? 'updatedLanguage'.tr : 'nonUpdatedLanguage'.tr);
+              if (Get.context!.mounted) {
+                Get.context!.createSnackbar(
+                    result ? S.of(context).updatedLanguage : S.of(context).nonUpdatedLanguage);
               }
             }
           },
@@ -44,7 +45,7 @@ class LanguageSelectionWidget extends GetView<SettingsController> {
     //   child: Row(
     //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     //     children: [
-    //       Text('chooseLanguage'.tr),
+    //       Text(S.of(context).chooseLanguage),
     //       ,
     //     ],
     //   ),

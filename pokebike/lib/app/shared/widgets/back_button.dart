@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:moto_hunters/app/config/colors.dart';
+import 'package:get/get.dart';
 
 class MBackButton extends StatelessWidget {
   final Function() onPressed;
@@ -15,8 +16,8 @@ class MBackButton extends StatelessWidget {
         onTap: onPressed,
         borderRadius: BorderRadius.circular(8),
         child: Container(
-            width: context.width * 0.09,
-            height: context.width * 0.09,
+            width: Get.context!.width * 0.09,
+            height: Get.context!.width * 0.09,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: MColors.primaryLight,

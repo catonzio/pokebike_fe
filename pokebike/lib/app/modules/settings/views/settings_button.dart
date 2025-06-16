@@ -33,11 +33,11 @@ class SettingsButton extends StatelessWidget {
         visualDensity: const VisualDensity(
             horizontal: VisualDensity.minimumDensity,
             vertical: VisualDensity.minimumDensity),
-        // minLeadingWidth: context.width * 0.2,
-        // minTileHeight: context.height * 0.02,
+        // minLeadingWidth: Get.context!.width * 0.2,
+        // minTileHeight: Get.context!.height * 0.02,
         title: Text(
           text,
-          style: context.textTheme.bodyLarge,
+          style: Get.context!.textTheme.bodyLarge,
         ),
         trailing: trailing,
         onTap: onPressed);

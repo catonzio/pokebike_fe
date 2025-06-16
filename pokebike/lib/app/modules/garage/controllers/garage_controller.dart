@@ -12,6 +12,8 @@ class GarageController extends GetxController {
   final CollezioneController collezioneController;
 
   final Rxn<User> user = Rxn<User>();
+  // Flag per mostrare solo una volta il dialog iniziale
+  final RxBool hasShownInitialInfo = false.obs;
 
   GarageController(
       {required this.garageWController, required this.collezioneController});

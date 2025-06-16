@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moto_hunters/app/config/colors.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class SearchTextField extends StatelessWidget {
   final Function(String) onSearch;
@@ -13,9 +14,9 @@ class SearchTextField extends StatelessWidget {
     return TextField(
       focusNode: focusNode,
       decoration: InputDecoration(
-        hintText: 'search'.tr,
+        hintText: S.of(context).search,
         hintStyle:
-            context.textTheme.bodyLarge!.copyWith(color: MColors.primary),
+            Get.context!.textTheme.bodyLarge!.copyWith(color: MColors.primary),
         filled: true,
         fillColor: Colors.white,
         prefixIcon: const MIcon(
@@ -30,7 +31,7 @@ class SearchTextField extends StatelessWidget {
         ),
         contentPadding: const EdgeInsets.only(left: 64, right: 16),
       ),
-      style: context.textTheme.bodyLarge!.copyWith(color: MColors.primary),
+      style: Get.context!.textTheme.bodyLarge!.copyWith(color: MColors.primary),
       cursorColor: MColors.primary,
       maxLines: 1,
       minLines: 1,

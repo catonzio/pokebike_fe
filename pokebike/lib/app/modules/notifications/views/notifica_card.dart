@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:moto_hunters/app/config/colors.dart';
 import 'package:moto_hunters/app/data/models/notifica/notifica.dart';
 import 'package:moto_hunters/app/shared/extensions/date_utils.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class NotificaCard extends StatelessWidget {
   const NotificaCard({
@@ -29,8 +30,11 @@ class NotificaCard extends StatelessWidget {
           ),
           subtitle: AutoSizeText(notifica.data.body,
               maxLines: 2, overflow: TextOverflow.ellipsis),
-          trailing: Text('received'
-              .trParams({'when': notifica.createdAt.toFormattedString()}))),
+          trailing: Text(
+            S.of(Get.context!).received(
+              notifica.createdAt.toFormattedString(),
+            ),
+          )),
     );
   }
 }

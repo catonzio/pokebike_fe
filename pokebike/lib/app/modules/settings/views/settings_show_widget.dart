@@ -11,6 +11,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../controllers/settings_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class SettingsShowWidget extends GetView<SettingsController> {
   const SettingsShowWidget({
@@ -22,7 +23,7 @@ class SettingsShowWidget extends GetView<SettingsController> {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: SizedBox(
-        height: context.height * 0.62,
+        height: Get.context!.height * 0.62,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.max,
@@ -31,24 +32,24 @@ class SettingsShowWidget extends GetView<SettingsController> {
                   enabled: controller.user.value == null,
                   child: controller.user.value != null
                       ? ProfileContainer(
-                          imagePath: controller.user.value!.avatar,
+                          avatar: controller.user.value!.avatar,
                           name: fullName(controller.user.value!),
                           onPressed: () => controller.editing = true,
                         )
                       : const SizedBox.shrink(),
                 )),
             SizedBox(
-              height: context.height * 0.43,
+              height: Get.context!.height * 0.43,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   SettingsButton(
-                      text: 'changePassword'.tr,
+                      text: S.of(context).changePassword,
                       iconName: "Password",
                       onPressed: () => controller.editingPassword = true,
                       trailing: const Icon(Icons.arrow_forward_ios)),
                   SettingsButton(
-                    text: 'notifications'.tr,
+                    text: S.of(context).notifications,
                     iconName: "Notification",
                     trailing: Obx(() => MSwitcherOld(
                           value: controller.notificationsEnabled.value,
@@ -59,7 +60,7 @@ class SettingsShowWidget extends GetView<SettingsController> {
                         )),
                   ),
                   SettingsButton(
-                      text: 'privacyPolicy'.tr,
+                      text: S.of(context).privacyPolicy,
                       iconName: "Policy",
                       onPressed: () {
                         launchUrl(Uri.parse(Constants.iubendaUrl));

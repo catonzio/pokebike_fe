@@ -7,9 +7,11 @@ import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/controllers/storage.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/back_button.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/dynamic_image.dart';
 
 import '../controllers/presentation_controller.dart';
 import 'circle_page_indicator.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class PresentationView extends GetView<PresentationController> {
   const PresentationView({super.key});
@@ -28,35 +30,35 @@ class PresentationView extends GetView<PresentationController> {
           children: [
             Image.asset(
               "assets/images/presentation/presentation_bg.png",
-              width: context.width,
-              height: context.height,
+              width: Get.context!.width,
+              height: Get.context!.height,
               fit: BoxFit.cover,
               alignment: Alignment.center,
             ),
             Obx(() => PresentationContainer(
-                  height: context.height * 0.855,
+                  height: Get.context!.height * 0.855,
                   onNext: () => _onNext(context),
-                  imagePath: controller.imagePath.value,
+                  image: controller.image.value,
                   title: controller.title.value,
                   subtitle: controller.subtitle.value,
                 )),
             Positioned(
-              bottom: context.height * 0.05,
-              height: context.height * 0.04,
-              left: context.width * 0.35,
+              bottom: Get.context!.height * 0.05,
+              height: Get.context!.height * 0.04,
+              left: Get.context!.width * 0.35,
               right: 0,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ...controller.imagesPaths.indexed
-                      .map(((int, String) e) => Obx(() => CirclePageIndicator(
+                  ...controller.imagesPaths.indexed.map(
+                      ((int, DynamicImage) e) => Obx(() => CirclePageIndicator(
                             selected: e.$1 == controller.index,
-                            width: context.width * 0.02,
+                            width: Get.context!.width * 0.02,
                           ))),
-                  SizedBox(width: context.width * 0.3),
+                  SizedBox(width: Get.context!.width * 0.3),
                   InkWell(
-                    child: Text('jump'.tr),
+                    child: Text(S.of(context).jump),
                     onTap: () => _skipPresentation(context),
                   )
                 ],
@@ -68,7 +70,7 @@ class PresentationView extends GetView<PresentationController> {
 
   _skipPresentation(BuildContext context) {
     Storage.to.hasSeenPresentation = true;
-    context.navigator.popAndPushNamed(Routes.LOGIN_REGISTER);
+    Get.context!.navigator.popAndPushNamed(Routes.LOGIN_REGISTER);
   }
 
   _onNext(BuildContext context) {

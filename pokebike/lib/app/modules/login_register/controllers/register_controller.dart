@@ -3,6 +3,9 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:moto_hunters/app/data/api_response.dart';
 import 'package:moto_hunters/app/shared/providers/auth_provider.dart';
+import 'package:moto_hunters/generated/l10n.dart';
+import 'dart:developer';
+import 'package:moto_hunters/app/shared/utils/image_compress_helper.dart';
 
 class RegisterController extends GetxController {
   final RxBool obscurePassword = true.obs;
@@ -64,77 +67,77 @@ class RegisterController extends GetxController {
 
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'emailNoEmpty'.tr;
+      return S.of(Get.context!).emailNoEmpty;
     }
     if (!value.isEmail) {
-      return 'emailNotValid'.tr;
+      return S.of(Get.context!).emailNotValid;
     }
     if (fieldsUniqueValidationFail['email']!) {
       fieldsUniqueValidationFail['email'] = false;
-      return 'emailNotUnique'.tr;
+      return S.of(Get.context!).emailNotUnique;
     }
     return null;
   }
 
   String? nomeValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'nameNoEmpty'.tr;
+      return S.of(Get.context!).nameNoEmpty;
     }
     return null;
   }
 
   String? cognomeValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'surnameNoEmpty'.tr;
+      return S.of(Get.context!).surnameNoEmpty;
     }
     return null;
   }
 
   String? usernameValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'usernameNoEmpty'.tr;
+      return S.of(Get.context!).usernameNoEmpty;
     }
     if (fieldsUniqueValidationFail['username']!) {
       fieldsUniqueValidationFail['username'] = false;
-      return 'usernameNotUnique'.tr;
+      return S.of(Get.context!).usernameNotUnique;
     }
     return null;
   }
 
   String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'pwdNoEmpty'.tr;
+      return S.of(Get.context!).pwdNoEmpty;
     }
     if (value.length < 8) {
-      return 'pwd8chars'.tr;
+      return S.of(Get.context!).pwd8chars;
     }
     return null;
   }
 
   String? confirmPasswordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'pwdNoEmpty'.tr;
+      return S.of(Get.context!).pwdNoEmpty;
     }
     if (value != passwordController.text) {
-      return 'pwdNoCoincide'.tr;
+      return S.of(Get.context!).pwdNoCoincide;
     }
     return null;
   }
 
   String? birthdateValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'birthdayNoEmpty'.tr;
+      return S.of(Get.context!).birthdayNoEmpty;
     }
     return null;
   }
 
   String? avatarValidator(XFile? value) {
     if (value == null && avatar.value == null) {
-      return 'mustSelectAvatar'.tr;
+      return S.of(Get.context!).mustSelectAvatar;
     }
     if (fieldsUniqueValidationFail['avatar']!) {
       fieldsUniqueValidationFail['avatar'] = false;
-      return 'avatarTooBig'.tr;
+      return S.of(Get.context!).avatarTooBig;
     }
     return null;
   }
@@ -145,23 +148,33 @@ class RegisterController extends GetxController {
 
   Future<ApiResponse> register() async {
     isPerformingRegister.value = true;
-    ApiResponse response = await provider.register(
-      emailController.text.trim(),
-      nomeController.text.trim(),
-      cognomeController.text.trim(),
-      usernameController.text.trim(),
-      passwordController.text.trim(),
-      birthdateController.text.trim(),
-      avatar.value!,
-    );
-    isPerformingRegister.value = false;
-    if (response.status == 422 && response.message.contains("validation")) {
-      final Map<String, dynamic> data = response.data;
-      for (MapEntry<String, dynamic> validations in data.entries) {
-        fieldsUniqueValidationFail[validations.key] = true;
+    try {
+      log('Register request payload: email=${emailController.text.trim()}, nome=${nomeController.text.trim()}, cognome=${cognomeController.text.trim()}, username=${usernameController.text.trim()}, birthdate=${birthdateController.text.trim()}, avatar=${avatar.value?.path}');
+      ApiResponse response = await provider.register(
+        emailController.text.trim(),
+        nomeController.text.trim(),
+        cognomeController.text.trim(),
+        usernameController.text.trim(),
+        passwordController.text.trim(),
+        birthdateController.text.trim(),
+        await compressImage(avatar.value!),
+      );
+      if (!response.success) {
+        log('Register failed: status=${response.status}, message=${response.message}, data=${response.data}');
       }
+      if (response.status == 422 && response.message.contains("validation")) {
+        final Map<String, dynamic> data = response.data;
+        for (MapEntry<String, dynamic> validations in data.entries) {
+          fieldsUniqueValidationFail[validations.key] = true;
+        }
+      }
+      return response;
+    } catch (e, st) {
+      log('Error during register: $e', stackTrace: st);
+      return ApiResponse.error(message: e.toString(), data: null);
+    } finally {
+      isPerformingRegister.value = false;
     }
-    return response;
   }
 
   togglePrivacy(bool? value) {

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:moto_hunters/app/config/themes.dart';
 import 'package:moto_hunters/app/modules/fotocamera/views/add_moto_form_field_model.dart';
 import 'package:moto_hunters/app/shared/utils/input_decoration.dart';
+import 'package:get/get.dart';
 
 class AddMotoFormField extends StatelessWidget {
   final MotoFormFieldModel model;

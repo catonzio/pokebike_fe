@@ -16,6 +16,7 @@ import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/loading_stack.dart';
 
 import '../controllers/confirm_register_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
   const ConfirmRegisterView({super.key});
@@ -24,7 +25,7 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
   Widget build(BuildContext context) {
     return Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: BaseAppBar(onBackPressed: () => context.navigator.pop()),
+        appBar: BaseAppBar(onBackPressed: () => Get.context!.navigator.pop()),
         body: Container(
           width: double.infinity,
           height: double.infinity,
@@ -49,14 +50,14 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ShimmerTitle.dark(
-              text: 'confirm'.tr,
+              text: S.of(context).confirm,
               // style: TextStyle(
               //     fontSize: 34,
               //     fontWeight: FontWeight.bold,
               //     color: MColors.primaryDark),
             ),
             ShimmerTitle.dark(
-              text: 'register'.tr,
+              text: S.of(context).register,
               // style: TextStyle(
               //     fontSize: 34,
               //     fontWeight: FontWeight.bold,
@@ -65,13 +66,13 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
           ],
         ),
         SizedBox(
-          height: context.height * 0.15,
+          height: Get.context!.height * 0.15,
           child: Form(key: controller.formKey, child: _formBody(context)),
         ),
         MButton(
           onPressed: () => _confirm(context),
           backgroundColor: MColors.secondaryDark,
-          child: Text('registerYou'.tr),
+          child: Text(S.of(context).registerYou),
         )
       ],
     );
@@ -82,7 +83,7 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Text('codeViaEmail'.tr),
+        Text(S.of(context).codeViaEmail),
         TextFormField(
             controller: controller.codeController,
             keyboardType: TextInputType.number,
@@ -91,12 +92,12 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
             maxLines: 1,
             style: Themes.darkFormTextStyle,
             validator: controller.codeValidator,
-            decoration: lightInputDecoration('insertCode'.tr)),
+            decoration: lightInputDecoration(S.of(context).insertCode)),
         SizedBox(
           width: double.infinity,
           child: InkWell(
             onTap: () => _askAnotherCode(context),
-            child: Text('anotherCode'.tr,
+            child: Text(S.of(context).anotherCode,
                 textAlign: TextAlign.end,
                 style: const TextStyle(
                     color: Colors.white,
@@ -111,18 +112,18 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
   void _confirm(BuildContext context) async {
     if (controller.formKey.currentState!.validate()) {
       ApiResponse result = await controller.confirmRegister();
-      if (context.mounted) {
+      if (Get.context!.mounted) {
         handleApiResponse(context, result, onSuccess: (value) {
-          context.navigator.pushReplacementNamed(Routes.HOME);
+          Get.context!.navigator.pushReplacementNamed(Routes.HOME);
         });
         // if (result) {
-        //   context.navigator.pushReplacementNamed(Routes.HOME);
+        //   Get.context!.navigator.pushReplacementNamed(Routes.HOME);
         // } else {
-        //   context.scaffold.showSnackBar(SnackBar(
+        //   Get.context!.scaffold.showSnackBar(SnackBar(
         //     content: const Text("Errore in fase di registrazione"),
         //     action: SnackBarAction(
         //       label: "Ok",
-        //       onPressed: () => context.scaffold.clearSnackBars,
+        //       onPressed: () => Get.context!.scaffold.clearSnackBars,
         //     ),
         //   ));
         // }
@@ -131,8 +132,8 @@ class ConfirmRegisterView extends GetView<ConfirmRegisterController> {
   }
 
   _askAnotherCode(BuildContext context) {
-    controller.askCode().then((ApiResponse value) => context.mounted
-        ? handleApiResponse(context, value, successMessage: 'codeSent'.tr)
+    controller.askCode().then((ApiResponse value) => Get.context!.mounted
+        ? handleApiResponse(context, value, successMessage: S.of(context).codeSent)
         : null);
   }
 }

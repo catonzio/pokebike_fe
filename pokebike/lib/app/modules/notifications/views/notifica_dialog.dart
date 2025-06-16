@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moto_hunters/app/data/models/notifica/notifica.dart';
 import 'package:moto_hunters/app/shared/extensions/date_utils.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class NotificaDialog extends StatelessWidget {
   const NotificaDialog({
@@ -15,8 +16,8 @@ class NotificaDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
         child: SizedBox(
-            width: context.width * 0.5,
-            height: context.height * 0.3,
+            width: Get.context!.width * 0.5,
+            height: Get.context!.height * 0.3,
             child: Padding(
               padding: const EdgeInsets.all(32),
               child: Column(
@@ -26,13 +27,13 @@ class NotificaDialog extends StatelessWidget {
                 children: [
                   Text(
                     notifica.data.title,
-                    style: context.textTheme.headlineLarge,
+                    style: Get.context!.textTheme.headlineLarge,
                   ),
                   const Divider(),
                   Padding(
                     padding: const EdgeInsets.only(top: 28),
                     child: Text(notifica.data.body,
-                        style: context.textTheme.bodyLarge),
+                        style: Get.context!.textTheme.bodyLarge),
                   ),
                   const Spacer(),
                   Column(
@@ -41,20 +42,18 @@ class NotificaDialog extends StatelessWidget {
                     children: [
                       notifica.readAt != null
                           ? Text(
-                              'read'.trParams({
-                                'when': notifica.readAt!
-                                    .toFormattedString(withHour: true)
-                              }),
-                              style: context.textTheme.labelSmall,
+                              S.of(context).read(
+                                notifica.readAt!.toFormattedString(withHour: true),
+                              ),
+                              style: Get.context!.textTheme.labelSmall,
                             )
                           : const SizedBox.shrink(),
                       // Spacer(),
                       Text(
-                        'received'.trParams({
-                          'when': notifica.createdAt
-                              .toFormattedString(withHour: true)
-                        }),
-                        style: context.textTheme.labelSmall,
+                        S.of(context).received(
+                          notifica.createdAt.toFormattedString(withHour: true),
+                        ),
+                        style: Get.context!.textTheme.labelSmall,
                       )
                     ],
                   )

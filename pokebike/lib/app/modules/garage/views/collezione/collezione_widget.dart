@@ -10,6 +10,7 @@ import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/search_row/search_row.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class CollezioneWidget extends GetView<CollezioneController> {
   const CollezioneWidget({super.key});
@@ -37,7 +38,7 @@ class CollezioneWidget extends GetView<CollezioneController> {
         ),
       ),
       elements.isEmpty
-          ? Center(child: Text('noMotoFoundFilter'.tr))
+          ? Center(child: Text(S.of(Get.context!).noMotoFoundFilter))
           : GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
@@ -65,7 +66,7 @@ class CollezioneWidget extends GetView<CollezioneController> {
     controller.focusNode.unfocus();
     // final bool isGarage = controller.isShowingGarage.value;
     // if (m != null) {
-    context.pushNamed(Routes.MOTO_DETAILS,
+    Get.context!.pushNamed(Routes.MOTO_DETAILS,
         arguments: MotoDetailsArguments(
             moto: collezioneMoto.moto,
             collezioneMoto: collezioneMoto,

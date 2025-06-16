@@ -7,6 +7,7 @@ import 'package:moto_hunters/app/modules/fotocamera/views/camera_row_button.dart
 import 'package:moto_hunters/app/shared/widgets/paginator_widget.dart';
 
 import '../controllers/fotocamera_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class CapturingView extends GetView<FotocameraController> {
   const CapturingView({super.key});
@@ -24,8 +25,8 @@ class CapturingView extends GetView<FotocameraController> {
 
   Container _imagePreview(BuildContext context) {
     return Container(
-        height: context.height * 0.6,
-        width: context.width,
+        height: Get.context!.height * 0.6,
+        width: Get.context!.width,
         decoration: const BoxDecoration(
           color: Colors.grey,
         ),
@@ -46,7 +47,7 @@ class CapturingView extends GetView<FotocameraController> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           SizedBox(
-            width: context.width * 0.41,
+            width: Get.context!.width * 0.41,
           ),
           CameraButton(
             onTap: () => controller.makePhoto(context),
@@ -55,13 +56,28 @@ class CapturingView extends GetView<FotocameraController> {
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: SizedBox(
-              width: context.width * 0.3,
-              height: context.height * 0.04,
-              child: CameraRowButton(
-                isSelected: false,
-                text: 'gallery'.tr,
-                onTap: () => controller.takePhotoFromGallery(context),
-              ),
+              width: Get.context!.width * 0.3,
+              height: Get.context!.height * 0.04,
+              child: Obx(() {
+                final isGarage = controller.selectedIndex == 0;
+                return CameraRowButton(
+                  isSelected: false,
+                  text: isGarage
+                      ? S.of(context).gallery
+                      : '🔒 ${S.of(context).gallery}',
+                  onTap: () {
+                    if (isGarage) {
+                      controller.takePhotoFromGallery(context);
+                    } else {
+                      Get.snackbar(
+                        '',
+                        S.of(context).galleryLockedMessage,
+                        snackPosition: SnackPosition.BOTTOM,
+                      );
+                    }
+                  },
+                );
+              }),
             ),
           )
         ],
@@ -78,20 +94,20 @@ class CapturingView extends GetView<FotocameraController> {
         children: [
           {
             "index": 0,
-            "label": 'myGarage'.tr.toUpperCase(),
+            "label": S.of(context).myGarage.toUpperCase(),
           },
           {
             "index": 1,
-            "label": 'collection'.tr.toUpperCase(),
+            "label": S.of(context).collection.toUpperCase(),
           },
           // {
           //   "index": 2,
-          //   "label": 'story'.tr.toUpperCase(),
+          //   "label": S.of(context).story.toUpperCase(),
           // },
         ]
             .map((Map<String, dynamic> e) => SizedBox(
-                width: context.width * 0.3,
-                height: context.height * 0.04,
+                width: Get.context!.width * 0.3,
+                height: Get.context!.height * 0.04,
                 child: Obx(() => CameraRowButton(
                       isSelected: e["index"] == controller.selectedIndex,
                       text: e["label"],

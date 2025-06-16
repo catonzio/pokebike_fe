@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:get/get.dart';
+import 'package:moto_hunters/app/config/constants.dart';
 
 class DefaultCacheManager extends CacheManager with ImageCacheManager {
   static const key = 'libCachedImageData';
@@ -37,7 +39,9 @@ class MimageNetwork extends StatelessWidget {
     return ClipRRect(
       borderRadius: borderRadius ?? BorderRadius.zero,
       child: CachedNetworkImage(
-        imageUrl: path,
+        imageUrl: Constants.isLocal && path.startsWith('http://localhost:8080')
+            ? path.replaceFirst('http://localhost:8080', Constants.baseUrl)
+            : path,
         fit: fit,
         alignment: Alignment.center,
         width: cacheWidth,

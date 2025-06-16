@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
+import 'package:get/get.dart';
 
 class MedagliaWidget extends StatelessWidget {
   final String iconName;

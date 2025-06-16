@@ -1,8 +1,11 @@
 import 'dart:io';
 
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moto_hunters/app/config/constants.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:moto_hunters/app/data/api_response.dart';
 import 'package:moto_hunters/app/shared/controllers/storage.dart';
@@ -16,21 +19,21 @@ void handleApiResponse(BuildContext context, ApiResponse response,
   if (response.success) {
     onSuccess?.call(response.data);
     if (successMessage != null && successMessage.isNotEmpty) {
-      context.createSnackbar(successMessage);
+      Get.context!.createSnackbar(successMessage);
     }
   } else {
     if (onError != null) {
       onError(response.data);
       if (errorMessage != null && errorMessage.isNotEmpty) {
-        context.createSnackbar(errorMessage);
+        Get.context!.createSnackbar(errorMessage);
       }
     } else {
-      context.createSnackbar(errorMessage ?? response.message);
-      // context.scaffold.showSnackBar(SnackBar(
+      Get.context!.createSnackbar(errorMessage ?? response.message);
+      // Get.context!.scaffold.showSnackBar(SnackBar(
       //   content: Text(response.message),
       //   action: SnackBarAction(
       //     label: "Ok",
-      //     onPressed: () => context.scaffold.clearSnackBars(),
+      //     onPressed: () => Get.context!.scaffold.clearSnackBars(),
       //   ),
       // ));
     }
@@ -57,18 +60,25 @@ Future<ApiResponse> handleApiEndpoint(
   };
 
   // Use compute to handle the operation
-  return await compute(handleApiEndpointIsolate, args);
+  return await handleApiEndpointIsolate(args);
 }
 
 Future<ApiResponse> handleApiEndpointIsolate(Map<String, dynamic> args) async {
   // Extract arguments from the Map
   String method = args['method'];
+  if (method == 'post') {
+    log('POST BODY: ${args['data']}');
+  }
   dynamic data = args['data'];
   final String apiToken = args['apiToken'];
   final request = args['request'];
   final String url = args['url'];
+  // Costruisci URL completo con host se necessario
+  final String fullUrl =
+      url.startsWith('http') ? url : '${Constants.apiBaseUrl}$url';
+
   final bool auth = args['auth'];
-  final String contentType = args['contentType'];
+  var contentType = args['contentType'] as String;
   final dynamic Function(double)? uploadProgress = args['uploadProgress'];
 
   try {
@@ -77,10 +87,12 @@ Future<ApiResponse> handleApiEndpointIsolate(Map<String, dynamic> args) async {
         auth ? {"Authorization": "Bearer $apiToken"} : null;
 
     if (data != null && data is Map<String, dynamic>) {
-      // data = await compute(castXFileMultipart, data);
+      // Accomoda XFile singoli e liste: aggiunge suffisso [] ai key
       data = castXFileMultipart(data);
       if (method == 'post' || method == 'put') {
         data = FormData(data);
+        // assicurati multipart
+        contentType = 'multipart/form-data';
       }
     }
 
@@ -93,8 +105,11 @@ Future<ApiResponse> handleApiEndpointIsolate(Map<String, dynamic> args) async {
       contentType: contentType,
       uploadProgress: uploadProgress,
     );
-
+    if (method == 'post') {
+      log('POST response: ${response.body}');
+    }
     if (response.body == null) {
+      log('API $method $fullUrl -headers: $headers error: status=${response.status.code}, body=${response.body}');
       return ApiResponse.error(
         status: response.status.code,
         message: "Problema di connessione",
@@ -104,7 +119,14 @@ Future<ApiResponse> handleApiEndpointIsolate(Map<String, dynamic> args) async {
 
     final Map<String, dynamic> body = response.body;
 
-    if (response.status.code == 401 && body["message"] == "Unauthenticated.") {
+    // Log dettagliato delle risposte di errore HTTP
+    final int statusCode = response.status.code!;
+
+    if (statusCode >= 400) {
+      log('API $method $fullUrl error: status=$statusCode, body=$body');
+    }
+
+    if (statusCode == 401 && body["message"] == "Unauthenticated.") {
       return ApiResponse.error(
         status: 401,
         message: "Unauthorized",
@@ -128,16 +150,49 @@ Future<ApiResponse> handleApiEndpointIsolate(Map<String, dynamic> args) async {
   }
 }
 
+/// Converte XFile o liste di XFile in MultipartFile aggiungendo '[]' ai key per array
 Map<String, dynamic> castXFileMultipart(Map<String, dynamic> data) {
-  for (MapEntry el in data.entries) {
-    if (el.value is XFile) {
-      XFile xfile = el.value as XFile;
-      // final fileBytes = await el.value.readAsBytes();
-      final fileBytes = File(xfile.path);
-      final multipartFile = MultipartFile(fileBytes,
-          filename: el.value.name, contentType: 'application/octet-stream');
-      data[el.key] = multipartFile;
+  log('=== CAST XFILE MULTIPART ===');
+  log('Input data keys: ${data.keys.toList()}');
+  
+  final Map<String, dynamic> newData = {};
+  data.forEach((key, value) {
+    log('Processing key: $key, value type: ${value.runtimeType}');
+    
+    if (value is XFile) {
+      final file = File(value.path);
+      log('Converting single XFile: ${value.name} -> key: $key');
+      // Mantieni il nome key originale per file singoli
+      newData[key] = MultipartFile(file,
+          filename: value.name, contentType: 'application/octet-stream');
+    } else if (value is Iterable && value.isNotEmpty && value.first is XFile) {
+      log('Converting XFile list: ${value.length} files -> mantengo key: $key');
+      final entries = (value as Iterable<XFile>).map((x) {
+        final file = File(x.path);
+        log('  - File: ${x.name}');
+        return MapEntry(
+            key, // Mantengo il nome originale 'images' per compatibilità backend
+            MultipartFile(file,
+                filename: x.name, contentType: 'application/octet-stream'));
+      });
+      newData.addEntries(entries);
+    } else if (key.endsWith('[]') && value is List && value.isNotEmpty) {
+      // Gestione speciale per array nel multipart: creo multiple entries con la stessa chiave
+      log('Converting array to multiple multipart entries: $key with ${value.length} values');
+      for (var item in value) {
+        // Aggiungo ogni elemento come entry separata con la stessa chiave
+        if (!newData.containsKey(key)) {
+          newData[key] = <String>[];
+        }
+        (newData[key] as List<String>).add(item.toString());
+        log('  - Added array item: $item to key $key');
+      }
+    } else {
+      log('Keeping as-is: $key = $value');
+      newData[key] = value;
     }
-  }
-  return data;
+  });
+  
+  log('Output data keys: ${newData.keys.toList()}');
+  return newData;
 }

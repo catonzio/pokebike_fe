@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moto_hunters/app/data/api_response.dart';
 import 'package:moto_hunters/app/shared/providers/auth_provider.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class ConfirmRegisterController extends GetxController {
   final RxBool isPerformingRegisterCheck = false.obs;
@@ -23,7 +24,7 @@ class ConfirmRegisterController extends GetxController {
 
   String? codeValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'codeEmpty'.tr;
+      return S.of(Get.context!).codeEmpty;
     }
     return null;
   }

@@ -7,6 +7,7 @@ import 'package:moto_hunters/app/modules/leaderboard/views/winner_screen.dart';
 import 'package:moto_hunters/app/shared/default_page.dart';
 
 import '../controllers/leaderboard_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class LeaderboardView extends GetView<LeaderboardController> {
   const LeaderboardView({super.key});
@@ -14,7 +15,7 @@ class LeaderboardView extends GetView<LeaderboardController> {
   Widget build(BuildContext context) {
     return DefaultPage(
       backButton: true,
-      title: 'leaderboard'.tr,
+      title: S.of(context).leaderboard,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,

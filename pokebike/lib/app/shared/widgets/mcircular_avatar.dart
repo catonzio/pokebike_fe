@@ -4,36 +4,41 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/config/constants.dart';
+import 'package:moto_hunters/app/data/models/api_media/api_media.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/image_picker.dart';
 import 'package:moto_hunters/app/shared/widgets/paginator_widget.dart';
 import 'package:moto_hunters/app/shared/widgets/photo_detail.dart';
+import 'package:get/get.dart';
 
 class MCircularAvatar extends StatelessWidget {
   final String? text;
   final double radius;
   final double padding;
-  final String? imagePath;
+  final ApiMedia? avatar;
   final XFile? file;
   final Function(XFile? file)? onModify;
   final Function()? onTap;
+  final bool canReport;
 
   const MCircularAvatar(
       {super.key,
       this.radius = 150,
       this.padding = 4,
-      this.imagePath,
+      this.avatar,
       this.file,
       this.text,
       this.onModify,
-      this.onTap});
+      this.onTap,
+      this.canReport = true});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Hero(
-          tag: imagePath ?? file?.path ?? "error",
+          tag: avatar?.url ?? file?.path ?? "error",
           child: Stack(
             children: [
               Material(
@@ -61,7 +66,13 @@ class MCircularAvatar extends StatelessWidget {
                         child: file != null
                             ? LocalImage(file: file)
                             : CachedNetworkImage(
-                                imageUrl: imagePath!,
+                                imageUrl: Constants.isLocal &&
+                                        avatar!.url
+                                            .startsWith('http://localhost:8080')
+                                    ? avatar!.url.replaceFirst(
+                                        'http://localhost:8080',
+                                        Constants.baseUrl)
+                                    : avatar!.url,
                                 width: 195,
                                 height: 195,
                                 maxWidthDiskCache: 195,
@@ -111,11 +122,12 @@ class MCircularAvatar extends StatelessWidget {
       XFile? file = await selectAvatar(context);
       onModify?.call(file);
     } else {
-      context.navigator.push(
+      Get.context!.navigator.push(
         MaterialPageRoute(
             builder: (context) => PhotoDetail(
-                  tag: imagePath ?? file?.path ?? "error",
-                  avatarUrl: imagePath ?? file?.path ?? "error",
+                  tag: avatar?.url ?? file?.path ?? "error",
+                  avatar: avatar!,
+                  canReport: canReport,
                 )),
       );
     }

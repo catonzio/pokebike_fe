@@ -10,15 +10,16 @@ import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
 
 import '../controllers/home_controller.dart';
 import 'community/community_widget.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // final double storiesHeight = context.height * 0.2;
-    final double upperButtonsHeight = context.height * 0.3;
-    final double communityHeight = context.height * 0.25;
+    // final double storiesHeight = Get.context!.height * 0.2;
+    final double upperButtonsHeight = Get.context!.height * 0.3;
+    final double communityHeight = Get.context!.height * 0.25;
 
     return DefaultPage(
         body: Padding(
@@ -30,7 +31,7 @@ class HomeView extends GetView<HomeController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ShimmerTitle.light(
-              text: 'helloBiker'.tr,
+              text: S.of(context).helloBiker,
             ),
             // StoriesWidget(height: storiesHeight),
             SizedBox(

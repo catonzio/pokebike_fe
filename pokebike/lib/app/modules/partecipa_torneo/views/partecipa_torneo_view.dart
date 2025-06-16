@@ -6,6 +6,7 @@ import 'package:moto_hunters/app/modules/partecipa_torneo/views/moto_details/mot
 import 'package:moto_hunters/app/modules/partecipa_torneo/views/partecipa_torneo_grid.dart';
 import 'package:moto_hunters/app/shared/default_page.dart';
 import 'package:moto_hunters/app/shared/widgets/search_row/search_row.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class PartecipaTorneoView extends GetView<PartecipaTorneoController> {
   const PartecipaTorneoView({super.key});
@@ -16,7 +17,7 @@ class PartecipaTorneoView extends GetView<PartecipaTorneoController> {
         ? MotoDetailPage(index: controller.motoIndex.value)
         : DefaultPage(
             backButton: true,
-            title: 'chooseMoto'.tr,
+            title: S.of(context).chooseMoto,
             body: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(

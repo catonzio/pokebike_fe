@@ -30,7 +30,7 @@ class FotocameraView extends GetView<FotocameraController> {
                     top: 0,
                     left: 0,
                     child:
-                        MBackButton(onPressed: () => context.navigator.pop()))
+                        MBackButton(onPressed: () => Get.context!.navigator.pop()))
               ],
             ),
           ),
@@ -43,7 +43,7 @@ class FotocameraView extends GetView<FotocameraController> {
     //         : const AddMotoView()),
     //     Positioned(
     //         child: MBackButton(
-    //       onPressed: context.navigator.pop,
+    //       onPressed: Get.context!.navigator.pop,
     //     )),
     //   ],
     // ));

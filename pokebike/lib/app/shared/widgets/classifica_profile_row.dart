@@ -8,6 +8,7 @@ import 'package:moto_hunters/app/modules/profile/profile_arguments.dart';
 import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/mimage_network.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class ClassificaProfileRow extends StatelessWidget {
   final ClassificaTile classificaTile;
@@ -20,12 +21,12 @@ class ClassificaProfileRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => shouldNavigate
-          ? context.pushNamed(Routes.PROFILE,
+          ? Get.context!.pushNamed(Routes.PROFILE,
               arguments: ProfileArguments(profileId: classificaTile.id))
           : null,
       child: Container(
           decoration: BoxDecoration(
-              color: context.theme.primaryColor,
+              color: Get.context!.theme.primaryColor,
               borderRadius: BorderRadius.circular(16),
               border: const Border.symmetric(
                   vertical: BorderSide(color: MColors.secondary, width: 0.5)),
@@ -48,7 +49,7 @@ class ClassificaProfileRow extends StatelessWidget {
                     child: AutoSizeText(
                       classificaTile.position.toString(),
                       maxLines: 1,
-                      style: context.textTheme.headlineLarge,
+                      style: Get.context!.textTheme.headlineLarge,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -56,7 +57,7 @@ class ClassificaProfileRow extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: MimageNetwork(
-                    path: classificaTile.user.avatar,
+                    path: classificaTile.user.avatar?.url ?? '',
                     borderRadius: BorderRadius.circular(8.0),
                     cacheHeight: 128,
                     cacheWidth: 128,
@@ -73,9 +74,10 @@ class ClassificaProfileRow extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'points'.trParams(
-                        {'howMany': classificaTile.puntiTotali.toString()}),
-                    style: context.textTheme.labelSmall,
+                    S
+                        .of(Get.context!)
+                        .points(classificaTile.puntiTotali.toString()),
+                    style: Get.context!.textTheme.labelSmall,
                   ),
                 ),
               ])),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moto_hunters/app/config/colors.dart';
+import 'package:get/get.dart';
 
 class MButton extends StatelessWidget {
   final Function()? onPressed;

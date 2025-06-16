@@ -81,7 +81,7 @@ class DefaultPage extends GetView<MDrawerController> {
                 .move(
                     duration: const Duration(milliseconds: 300),
                     begin: Offset.zero,
-                    end: Offset(context.width * 0.6, 0),
+                    end: Offset(Get.context!.width * 0.6, 0),
                     curve: Curves.easeInOutCubic)
                 .scale(
                     duration: const Duration(milliseconds: 300),
@@ -159,10 +159,10 @@ class DefaultPage extends GetView<MDrawerController> {
           preferredSize: Size(
               0,
               backButton && (title?.isNotEmpty ?? false)
-                  ? context.width * 0
+                  ? Get.context!.width * 0
                   : 0),
           child: backButton ? _createBackButton(context) : const SizedBox()),
-      toolbarHeight: context.height * (backButton ? 0.14 : 0.08),
+      toolbarHeight: Get.context!.height * (backButton ? 0.14 : 0.08),
     );
   }
 
@@ -170,7 +170,7 @@ class DefaultPage extends GetView<MDrawerController> {
     // final Widget bottomAppbar = Align(
     //   alignment: Alignment.topLeft,
     //   child: MBackButton(
-    //     onPressed: () => context.navigator.pop(),
+    //     onPressed: () => Get.context!.navigator.pop(),
     //   ),
     // );
     final Widget bottomAppbar = Padding(
@@ -179,7 +179,7 @@ class DefaultPage extends GetView<MDrawerController> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          MBackButton(onPressed: context.navigator.pop),
+          MBackButton(onPressed: Get.context!.navigator.pop),
           Row(
             children: bottomAppbarActions ?? [],
           )
@@ -194,8 +194,8 @@ class DefaultPage extends GetView<MDrawerController> {
           bottomAppbar,
           Center(
               child: SizedBox(
-                  width: context.width * 0.6,
-                  // height: context.height * 0.1,
+                  width: Get.context!.width * 0.6,
+                  // height: Get.context!.height * 0.1,
                   child: titleStyle == null
                       ? ShimmerTitle.light(
                           text: title!,
@@ -212,11 +212,11 @@ class DefaultPage extends GetView<MDrawerController> {
   }
 
   void _tapCommunity(BuildContext context) {
-    context.pushNamed(Routes.COMMUNITY);
+    Get.context!.pushNamed(Routes.COMMUNITY);
   }
 
   _tapNotifications(BuildContext context) {
-    context.pushNamed(Routes.NOTIFICATIONS);
+    Get.context!.pushNamed(Routes.NOTIFICATIONS);
   }
 }
 
@@ -228,10 +228,10 @@ class DrawerBackgroundRedContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      top: context.height * 0.15,
-      left: context.width * 0.54,
-      width: context.width * 0.3,
-      height: context.height * 0.7,
+      top: Get.context!.height * 0.15,
+      left: Get.context!.width * 0.54,
+      width: Get.context!.width * 0.3,
+      height: Get.context!.height * 0.7,
       child: Container(
         decoration: const BoxDecoration(
           color: MColors.secondaryUltraDark,

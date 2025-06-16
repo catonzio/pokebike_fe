@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moto_hunters/app/modules/profile/views/classifica/indicator.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class StatisticsRow extends StatelessWidget {
   final int numeroVittorie;
@@ -20,7 +21,7 @@ class StatisticsRow extends StatelessWidget {
     return Column(
       children: [
         StatisticsElement(
-          text: 'wins'.tr,
+          text: S.of(context).wins,
           value: "$numeroVittorie / $numeroPartecipazioni",
           percentage: numeroVittorie / numeroPartecipazioni,
           boxShadow: boxShadow,

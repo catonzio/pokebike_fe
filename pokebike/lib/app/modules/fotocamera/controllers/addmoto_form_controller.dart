@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:moto_hunters/app/data/models/marca_moto/marca_moto.dart';
 import 'package:moto_hunters/app/data/models/tipo_moto/tipo_moto.dart';
+import 'package:moto_hunters/app/data/models/collezione_moto/collezione_moto.dart';
 import 'package:moto_hunters/app/shared/controllers/tipo_marca_controller.dart';
 import 'package:moto_hunters/app/shared/providers/tipo_marca_provider.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class AddMotoFormController extends GetxController {
   final RxBool isPerformingRegister = false.obs;
@@ -19,6 +22,8 @@ class AddMotoFormController extends GetxController {
   final TextEditingController annoController = TextEditingController();
   final TextEditingController luogoController = TextEditingController();
   final TextEditingController descrizioneController = TextEditingController();
+  final TextEditingController cvController = TextEditingController();
+  final TextEditingController ccController = TextEditingController();
 
   final TipoMarcaProvider provider;
 
@@ -49,6 +54,8 @@ class AddMotoFormController extends GetxController {
     annoController.dispose();
     luogoController.dispose();
     descrizioneController.dispose();
+    cvController.dispose();
+    ccController.dispose();
   }
 
   Future<void> _marcaOnChanged() async {
@@ -64,36 +71,57 @@ class AddMotoFormController extends GetxController {
   Future<void> _modelloOnChanged() async {
     String marca = marcaController.text.trim();
     String modello = modelloController.text.trim();
-    TipoMoto tipo = await provider.fetchTipoFromMarcaModello(
-        marcaIdFromName(marca), modello);
-    tipoController.text = tipo.nome;
-    availableTipos.add(tipo);
+
+    if (marca.isEmpty || modello.isEmpty) return;
+
+    // Recupera i dati completi della collezione moto (con cc e cv)
+    CollezioneMoto? collezioneMoto = await provider
+        .fetchCollezioneMotoFromMarcaModello(marcaIdFromName(marca), modello);
+
+    if (collezioneMoto != null) {
+      // Popola il campo tipo
+      tipoController.text = collezioneMoto.tipoMoto.nome;
+      availableTipos.clear();
+      availableTipos.add(collezioneMoto.tipoMoto);
+
+      // TODO: Uncomment after running build_runner to regenerate models
+      // Popola automaticamente cc e cv se disponibili
+      ccController.text = collezioneMoto.cc;
+      cvController.text = collezioneMoto.cv;
+    } else {
+      // Fallback al metodo precedente se non trovato
+      TipoMoto tipo = await provider.fetchTipoFromMarcaModello(
+          marcaIdFromName(marca), modello);
+      tipoController.text = tipo.nome;
+      availableTipos.clear();
+      availableTipos.add(tipo);
+    }
   }
 
   String? marcaValidator(dynamic value) {
     if (value == null || value.isEmpty) {
-      return 'insertBrand'.tr;
+      return S.of(Get.context!).insertBrand;
     }
     return null;
   }
 
   String? modelloValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'insertModel'.tr;
+      return S.of(Get.context!).insertModel;
     }
     return null;
   }
 
   String? annoValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'insertYear'.tr;
+      return S.of(Get.context!).insertYear;
     }
     return null;
   }
 
   String? luogoValidator(String? value) {
     // if (value == null || value.isEmpty) {
-    //   return 'insertLocation'.tr;
+    //   return S.of(context).insertLocation;
     // }
     return null;
   }
@@ -101,6 +129,20 @@ class AddMotoFormController extends GetxController {
   String? descrizioneValidator(String? value) {
     if (value == null || value.isEmpty) {
       return 'Inserisci la descrizione';
+    }
+    return null;
+  }
+
+  String? cvValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Inserisci i CV';
+    }
+    return null;
+  }
+
+  String? ccValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Inserisci la cilindrata';
     }
     return null;
   }
@@ -115,6 +157,8 @@ class AddMotoFormController extends GetxController {
       'data_cattura': DateTime.now().toIso8601String(),
       'marca_moto_id': marcaIdFromName(marcaController.text.trim()),
       'tipo_moto_id': tipoIdFromName(tipoController.text.trim()),
+      'cv': cvController.text.trim(),
+      'cc': ccController.text.trim(),
     };
   }
 
@@ -132,7 +176,8 @@ class AddMotoFormController extends GetxController {
     List<MarcaMoto> marche =
         availableMarche.where((marca) => marca.nome == nome).toList();
     if (marche.isEmpty) {
-      throw Exception("Marche is empty!");
+      return -1;
+      //throw Exception("Marche is empty!");
     } else {
       return marche.first.id;
     }
@@ -145,5 +190,7 @@ class AddMotoFormController extends GetxController {
     annoController.text = "";
     luogoController.text = "";
     descrizioneController.text = "";
+    cvController.text = "";
+    ccController.text = "";
   }
 }

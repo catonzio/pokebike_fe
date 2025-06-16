@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:get/get.dart';
 
 enum Medals {
   none(0, 40, "none", "none", Color(0xFF434343)),

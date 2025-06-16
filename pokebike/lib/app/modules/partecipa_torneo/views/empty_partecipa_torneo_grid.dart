@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:moto_hunters/app/modules/login_register/views/mbutton.dart';
 import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class EmptyPartecipaTorneoGrid extends StatelessWidget {
   const EmptyPartecipaTorneoGrid({super.key});
@@ -13,12 +14,12 @@ class EmptyPartecipaTorneoGrid extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
-          'noCollecting'.tr,
-          style: context.textTheme.titleMedium,
+          S.of(context).noCollecting,
+          style: Get.context!.textTheme.titleMedium,
         ),
         MButton.red(
-            onPressed: () => context.pushNamed(Routes.FOTOCAMERA),
-            child: Text('startCollecting'.tr)),
+            onPressed: () => Get.context!.pushNamed(Routes.FOTOCAMERA),
+            child: Text(S.of(context).startCollecting)),
       ],
     );
   }

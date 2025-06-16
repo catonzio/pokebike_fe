@@ -6,6 +6,7 @@ import 'package:moto_hunters/app/config/constants.dart';
 import 'package:moto_hunters/app/config/medals_cockades_enums.dart';
 import 'package:moto_hunters/app/shared/default_page.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class CockadesDetailsArguments {
   final int numCatturate;
@@ -27,7 +28,7 @@ class CockadesDetails extends StatelessWidget {
       backButton: true,
       title: arguments.typeName,
       body: ListView(
-        itemExtent: context.height * 0.2,
+        itemExtent: Get.context!.height * 0.2,
         padding: const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
         children: Cockades.values
             .sublist(1)
@@ -53,16 +54,15 @@ class SingleCockadeDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     int realNum =
         cockade.ub == null ? numCatturate : min<int>(numCatturate, cockade.ub!);
-    final double medalSize = Size(context.width, context.height).shortestSide;
+    final double medalSize = Size(Get.context!.width, Get.context!.height).shortestSide;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
-          'percMotosCaptured'.trParams({
-            'realNum': realNum.toString(),
-            'limit': cockade.ub == null ? '' : "/${cockade.ub}"
-          }),
-          style: context.textTheme.titleMedium,
+          S.of(context).percMotosCaptured(
+            realNum.toString(),
+            cockade.ub == null ? '' : "/${cockade.ub}"),
+          style: Get.context!.textTheme.titleMedium,
         ),
         Stack(
           alignment: AlignmentDirectional.center,

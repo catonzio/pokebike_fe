@@ -19,6 +19,7 @@ import 'package:moto_hunters/app/shared/widgets/utils/loading_stack.dart';
 import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
 
 import '../controllers/register_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class RegisterView extends GetView<RegisterController> {
   const RegisterView({super.key});
@@ -29,7 +30,7 @@ class RegisterView extends GetView<RegisterController> {
         resizeToAvoidBottomInset: false,
         appBar: BaseAppBar(
             onBackPressed: () =>
-                context.navigator.popAndPushNamed(Routes.LOGIN_REGISTER)),
+                Get.context!.navigator.popAndPushNamed(Routes.LOGIN_REGISTER)),
         body: Container(
           width: double.infinity,
           height: double.infinity,
@@ -53,15 +54,15 @@ class RegisterView extends GetView<RegisterController> {
         Expanded(
           flex: 1,
           child: Padding(
-            padding: const EdgeInsets.only(top: 64),
-            child: ShimmerTitle.dark(text: 'welcome'.tr),
+            padding: const EdgeInsets.only(top: 84),
+            child: ShimmerTitle.dark(text: S.of(context).welcome),
           ),
         ),
         Expanded(
-          // height: context.height * 0.35,
+          // height: Get.context!.height * 0.35,
           flex: 4,
           child: Padding(
-            padding: EdgeInsets.only(bottom: context.keyboardHeight / 1.5),
+            padding: EdgeInsets.only(bottom: Get.context!.keyboardHeight / 1.5),
             child: Form(
                 key: controller.formKey,
                 child: DefaultTextStyle(
@@ -79,14 +80,15 @@ class RegisterView extends GetView<RegisterController> {
                 child: MButton(
                   onPressed: () => _register(context),
                   backgroundColor: MColors.secondaryDark,
-                  child: Text('frwd'.tr),
+                  child: Text(S.of(context).frwd),
                 ),
               ),
               SizedBox(
                 width: double.infinity,
                 child: InkWell(
                   onTap: () => _onAlreadyAccount(context),
-                  child: Text('alreadyAccount'.tr, textAlign: TextAlign.center),
+                  child: Text(S.of(context).alreadyAccount,
+                      textAlign: TextAlign.center),
                 ),
               ),
             ],
@@ -99,37 +101,37 @@ class RegisterView extends GetView<RegisterController> {
   Widget _formBody(BuildContext context) {
     List<RegisterFormFieldModel> fields = [
       RegisterFormFieldModel(
-          label: 'email'.tr,
+          label: S.of(context).email,
           validator: controller.emailValidator,
           controller: controller.emailController,
           isPassword: false),
       RegisterFormFieldModel(
-          label: 'name'.tr,
+          label: S.of(context).name,
           validator: controller.nomeValidator,
           controller: controller.nomeController,
           isPassword: false),
       RegisterFormFieldModel(
-          label: 'surname'.tr,
+          label: S.of(context).surname,
           validator: controller.cognomeValidator,
           controller: controller.cognomeController,
           isPassword: false),
       RegisterFormFieldModel(
-          label: 'username'.tr,
+          label: S.of(context).username,
           validator: controller.usernameValidator,
           controller: controller.usernameController,
           isPassword: false),
       RegisterFormFieldModel(
-          label: 'password'.tr,
+          label: S.of(context).password,
           validator: controller.passwordValidator,
           controller: controller.passwordController,
           isPassword: true),
       RegisterFormFieldModel(
-          label: 'passwordConfirm'.tr,
+          label: S.of(context).passwordConfirm,
           validator: controller.confirmPasswordValidator,
           controller: controller.confirmPasswordController,
           isPassword: true),
       RegisterFormFieldModel(
-          label: 'birthday'.tr,
+          label: S.of(context).birthday,
           validator: controller.birthdateValidator,
           controller: controller.birthdateController,
           isPassword: false,
@@ -150,16 +152,18 @@ class RegisterView extends GetView<RegisterController> {
         Padding(
           padding: const EdgeInsets.only(top: 16.0),
           child: Obx(() => PhotoPicker(
-                text: controller.avatar.value?.name ?? 'selectAvatar'.tr,
-                validator: controller.avatarValidator,
+                text:
+                    controller.avatar.value?.name ?? S.of(context).selectAvatar,
+                validator: (_) => null, //controller.avatarValidator,
                 onSuccess: controller.setAvatar,
               )),
         ),
         CheckboxFormField(
           value: controller.isPrivacyAccepted,
           onChanged: controller.togglePrivacy,
-          title: Text('privacy'.tr),
-          validator: (value) => value == false ? 'acceptPrivacy'.tr : null,
+          title: Text(S.of(context).privacy),
+          validator: (value) =>
+              value == false ? S.of(context).acceptPrivacy : null,
         ),
       ]),
     );
@@ -168,13 +172,13 @@ class RegisterView extends GetView<RegisterController> {
   _register(BuildContext context) async {
     if (controller.formKey.currentState!.validate()) {
       ApiResponse response = await controller.register();
-      if (context.mounted) {
+      if (Get.context!.mounted) {
         if (!response.success) {
           controller.formKey.currentState?.validate();
         }
         handleApiResponse(context, response, onSuccess: (dynamic data) {
           Storage.to.apiToken = data;
-          context.navigator
+          Get.context!.navigator
               .pushNamedAndRemoveUntil(Routes.CONFIRM_REGISTER, (_) => false);
         });
       }
@@ -182,7 +186,7 @@ class RegisterView extends GetView<RegisterController> {
   }
 
   _onAlreadyAccount(BuildContext context) {
-    context.navigator.popAndPushNamed(Routes.LOGIN);
+    Get.context!.navigator.popAndPushNamed(Routes.LOGIN);
   }
 
   _askBirthdate(BuildContext context) async {

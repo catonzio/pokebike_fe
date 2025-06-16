@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moto_hunters/app/config/colors.dart';
 import 'package:moto_hunters/app/data/models/moto/moto.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/mimage_network.dart';
+import 'package:get/get.dart';
 
 class GarageCardWidget extends StatelessWidget {
   final int index;
@@ -21,7 +22,7 @@ class GarageCardWidget extends StatelessWidget {
         GestureDetector(
           onTap: onTap,
           child: MimageNetwork(
-            path: moto.avatar,
+            path: moto.avatar?.url ?? '',
             borderRadius: BorderRadius.circular(16),
             cacheHeight: 370,
             cacheWidth: 370,

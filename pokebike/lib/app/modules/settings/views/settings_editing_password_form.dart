@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:moto_hunters/app/shared/utils/input_decoration.dart';
 
 import '../controllers/settings_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class SettingsEditingPasswordForm extends GetView<SettingsController> {
   const SettingsEditingPasswordForm({
@@ -18,17 +19,17 @@ class SettingsEditingPasswordForm extends GetView<SettingsController> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextFormField(
-              decoration: transparentInputDecoration('oldPassword'.tr),
+              decoration: transparentInputDecoration(S.of(context).oldPassword),
               controller: controller.oldPasswordController,
               validator: controller.oldPasswordValidator,
             ),
             TextFormField(
-              decoration: transparentInputDecoration('newPassword'.tr),
+              decoration: transparentInputDecoration(S.of(context).newPassword),
               controller: controller.newPasswordController,
               validator: controller.newPasswordValidator,
             ),
             TextFormField(
-              decoration: transparentInputDecoration('passwordConfirm'.tr),
+              decoration: transparentInputDecoration(S.of(context).passwordConfirm),
               controller: controller.confirmPasswordController,
               validator: controller.confirmPasswordValidator,
             ),

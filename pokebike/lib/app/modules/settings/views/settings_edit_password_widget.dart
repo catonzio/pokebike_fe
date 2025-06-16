@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:moto_hunters/app/config/colors.dart';
 import 'package:moto_hunters/app/config/constants.dart';
 import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/data/models/api_media/api_media.dart';
 import 'package:moto_hunters/app/shared/widgets/mcircular_avatar.dart';
 import 'package:moto_hunters/app/modules/login_register/views/mbutton.dart';
 import 'package:moto_hunters/app/modules/settings/views/settings_editing_password_form.dart';
@@ -13,6 +14,7 @@ import 'package:moto_hunters/app/shared/utils/api_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/paginator_widget.dart';
 
 import '../controllers/settings_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class SettingsEditPasswordWidget extends GetView<SettingsController> {
   const SettingsEditPasswordWidget({super.key});
@@ -20,14 +22,14 @@ class SettingsEditPasswordWidget extends GetView<SettingsController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.height - Constants.bottomNavbarHeight,
+      height: Get.context!.height - Constants.bottomNavbarHeight,
       padding: const EdgeInsets.all(16.0),
       child: Obx(() => Stack(
             children: [
               Positioned.fill(
-                bottom: context.keyboardHeight == 0
+                bottom: Get.context!.keyboardHeight == 0
                     ? Constants.bottomNavbarHeight / 4
-                    : context.keyboardHeight / 1.3,
+                    : Get.context!.keyboardHeight / 1.3,
                 child: _mainBody(context)
                     .animate(target: controller.saving ? 1 : 0)
                     .blur(
@@ -44,14 +46,14 @@ class SettingsEditPasswordWidget extends GetView<SettingsController> {
   Widget _mainBody(BuildContext context) {
     return SingleChildScrollView(
       child: SizedBox(
-        height: context.height - Constants.bottomNavbarHeight * 1.5,
+        height: Get.context!.height - Constants.bottomNavbarHeight * 1.5,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Expanded(
               flex: 1,
               child: MCircularAvatar(
-                imagePath: controller.user.value?.avatar ?? "",
+                avatar: controller.user.value?.avatar ?? ApiMedia.empty(),
                 radius: 45,
               ),
             ),
@@ -62,11 +64,12 @@ class SettingsEditPasswordWidget extends GetView<SettingsController> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   MButton.red(
-                      onPressed: () => _salva(context), child: Text('save'.tr)),
+                      onPressed: () => _salva(context),
+                      child: Text(S.of(context).save)),
                   MButton.white(
                       onPressed: () => controller.editingPassword = false,
-                      child: Text('nullify'.tr,
-                          style: context.textTheme.bodySmall!
+                      child: Text(S.of(context).nullify,
+                          style: Get.context!.textTheme.bodySmall!
                               .copyWith(color: MColors.primaryDark))),
                 ],
               ),
@@ -80,7 +83,7 @@ class SettingsEditPasswordWidget extends GetView<SettingsController> {
   _salva(BuildContext context) async {
     if (controller.formKey.currentState!.validate()) {
       ApiResponse response = await controller.salvaPassword();
-      if (context.mounted) {
+      if (Get.context!.mounted) {
         handleApiResponse(
           context,
           response,

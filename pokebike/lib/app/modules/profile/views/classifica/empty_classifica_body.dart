@@ -4,6 +4,7 @@ import 'package:moto_hunters/app/config/colors.dart';
 import 'package:moto_hunters/app/modules/login_register/views/mbutton.dart';
 import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class EmptyClassificaBody extends StatelessWidget {
   final bool isOwnProfile;
@@ -17,16 +18,16 @@ class EmptyClassificaBody extends StatelessWidget {
       children: [
         Text(
           isOwnProfile
-              ? 'youNoTournamentsPartecipations'.tr
-              : 'heNoTournamentsPartecipations'.tr,
+              ? S.of(context).youNoTournamentsPartecipations
+              : S.of(context).heNoTournamentsPartecipations,
           textAlign: TextAlign.center,
         ),
         if (isOwnProfile)
           MButton(
-              onPressed: () => context.pushNamed(Routes
+              onPressed: () => Get.context!.pushNamed(Routes
                   .PARTECIPA_TORNEO), // Get.find<ProfileController>().setTorneo(Torneo()),
               backgroundColor: MColors.secondaryDark,
-              child: Text('partecipateTournaments'.tr))
+              child: Text(S.of(context).partecipateTournaments))
       ],
     );
   }

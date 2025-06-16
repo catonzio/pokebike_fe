@@ -19,7 +19,7 @@ class TorneiWidget extends StatelessWidget {
           SizedBox(
               height: height * 0.75,
               child: TorneiList(
-                itemExtent: context.width * 0.6,
+                itemExtent: Get.context!.width * 0.6,
                 scrollDirection: Axis.horizontal,
               )),
         ],

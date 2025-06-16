@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:moto_hunters/app/config/colors.dart';
 import 'package:moto_hunters/app/config/constants.dart';
 import 'package:moto_hunters/app/data/api_response.dart';
+import 'package:moto_hunters/app/data/models/api_media/api_media.dart';
 import 'package:moto_hunters/app/data/models/user/user.dart';
 import 'package:moto_hunters/app/shared/widgets/mcircular_avatar.dart';
 import 'package:moto_hunters/app/modules/login_register/views/mbutton.dart';
@@ -16,6 +17,7 @@ import 'package:moto_hunters/app/shared/widgets/default_dialog.dart';
 import 'package:moto_hunters/app/shared/widgets/paginator_widget.dart';
 
 import '../controllers/settings_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class SettingsEditWidget extends GetView<SettingsController> {
   const SettingsEditWidget({super.key});
@@ -23,15 +25,15 @@ class SettingsEditWidget extends GetView<SettingsController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.height - Constants.bottomNavbarHeight * 1.5,
+      height: Get.context!.height - Constants.bottomNavbarHeight * 1.5,
       padding: const EdgeInsets.all(16.0),
       child: Obx(
         () => Stack(
           children: [
             Positioned.fill(
-              bottom: context.keyboardHeight == 0
+              bottom: Get.context!.keyboardHeight == 0
                   ? Constants.bottomNavbarHeight / 4
-                  : context.keyboardHeight / 1.3,
+                  : Get.context!.keyboardHeight / 1.3,
               child: _mainBody(context)
                   .animate(target: controller.saving ? 1 : 0)
                   .blur(
@@ -48,14 +50,14 @@ class SettingsEditWidget extends GetView<SettingsController> {
 
   Widget _mainBody(BuildContext context) {
     return SizedBox(
-      height: context.height - (Constants.bottomNavbarHeight * 1.5),
+      height: Get.context!.height - (Constants.bottomNavbarHeight * 1.5),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Expanded(
             flex: 2,
             child: Obx(() => MCircularAvatar(
-                  imagePath: controller.user.value?.avatar,
+                  avatar: controller.user.value?.avatar ?? ApiMedia.empty(),
                   file: controller.newAvatar.value,
                   radius: 45,
                   onModify: (file) => controller.newAvatar.value = file,
@@ -68,15 +70,16 @@ class SettingsEditWidget extends GetView<SettingsController> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 MButton.red(
-                    onPressed: () => _salva(context), child: Text('save'.tr)),
+                    onPressed: () => _salva(context),
+                    child: Text(S.of(context).save)),
                 MButton.white(
                     onPressed: () => controller.editing = false,
-                    child: Text('nullify'.tr,
-                        style: context.textTheme.bodySmall!
+                    child: Text(S.of(context).nullify,
+                        style: Get.context!.textTheme.bodySmall!
                             .copyWith(color: MColors.primaryDark))),
                 InkWell(
                   onTap: () => deleteAccount(context),
-                  child: Text('deleteAccount'.tr),
+                  child: Text(S.of(context).deleteAccount),
                 )
               ],
             ),
@@ -90,12 +93,12 @@ class SettingsEditWidget extends GetView<SettingsController> {
     Dialog alert = Dialog(
       backgroundColor: MColors.grey,
       child: DefaultDialog(
-          title: 'deleteAccountTitle'.tr,
-          message: 'deleteAccountMessage'.tr,
-          redTitle: 'delete'.tr,
+          title: S.of(context).deleteAccountTitle,
+          message: S.of(context).deleteAccountMessage,
+          redTitle: S.of(context).delete,
           redAction: _dialogEliminaTap,
-          whiteTitle: 'nullify'.tr,
-          whiteAction: (BuildContext context) => context.navigator.pop()),
+          whiteTitle: S.of(context).nullify,
+          whiteAction: (BuildContext context) => Get.context!.navigator.pop()),
     );
 
     // show the dialog
@@ -108,19 +111,19 @@ class SettingsEditWidget extends GetView<SettingsController> {
   }
 
   _dialogEliminaTap(BuildContext context) {
-    controller.deleteUser().then((ApiResponse value) => !context.mounted
+    controller.deleteUser().then((ApiResponse value) => !Get.context!.mounted
         ? null
         : handleApiResponse(context, value,
-            onSuccess: (_) => context.navigator
+            onSuccess: (_) => Get.context!.navigator
                 .pushNamedAndRemoveUntil(Routes.SPLASH, (_) => false)));
   }
 
   _salva(BuildContext context) async {
     controller.salva().then((ApiResponse response) {
-      !context.mounted
+      !Get.context!.mounted
           ? null
           : handleApiResponse(context, response,
-              successMessage: 'savingCompleted'.tr, onSuccess: (_) {
+              successMessage: S.of(context).savingCompleted, onSuccess: (_) {
               controller.editing = false;
               controller.user.value = User.fromJson(response.data);
             });

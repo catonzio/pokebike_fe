@@ -10,6 +10,7 @@ import 'package:moto_hunters/app/shared/widgets/back_button.dart';
 import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
 
 import '../controllers/settings_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class SettingsView extends GetView<SettingsController> {
   const SettingsView({super.key});
@@ -18,12 +19,12 @@ class SettingsView extends GetView<SettingsController> {
   Widget build(BuildContext context) {
     return DefaultPage(
         appBar: AppBar(
-          title: ShimmerTitle.light(text: 'profile'.tr),
+          title: ShimmerTitle.light(text: S.of(context).profile),
           backgroundColor: Colors.transparent,
           surfaceTintColor: Colors.transparent,
           centerTitle: true,
           leading: MBackButton(
-            onPressed: () => context.navigator.pop(),
+            onPressed: () => Get.context!.navigator.pop(),
           ),
         ),
         body: Obx(() => AnimatedSwitcher(

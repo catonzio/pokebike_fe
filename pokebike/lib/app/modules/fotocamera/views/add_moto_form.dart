@@ -6,6 +6,7 @@ import 'package:moto_hunters/app/modules/fotocamera/controllers/addmoto_form_con
 import 'package:moto_hunters/app/modules/fotocamera/views/add_moto_form_field.dart';
 import 'package:moto_hunters/app/modules/fotocamera/views/add_moto_form_field_model.dart';
 import 'package:moto_hunters/app/modules/login_register/views/mbutton.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class AddMotoForm extends StatelessWidget {
   final Function(bool) onStartEndSend;
@@ -18,14 +19,14 @@ class AddMotoForm extends StatelessWidget {
     return GetX<AddMotoFormController>(builder: (controller) {
       List<MotoFormFieldModel> fields = [
         MotoFormFieldModelDropdown(
-            label: 'brand'.tr,
+            label: S.of(context).brand,
             items: controller.availableMarche
                 .map((element) => element.nome)
                 .toList(),
             validator: controller.marcaValidator,
             controller: controller.marcaController),
         MotoFormFieldModelDropdown(
-            label: 'model'.tr,
+            label: S.of(context).model,
             items: controller.availableNames.map((element) => element).toList(),
             validator: controller.modelloValidator,
             controller: controller.modelloController),
@@ -37,22 +38,33 @@ class AddMotoForm extends StatelessWidget {
         //     validator: controller.tipoValidator,
         //     controller: controller.tipoController),
         MotoFormFieldModel(
-            label: 'type'.tr,
+            label: S.of(context).type,
             // validator: controller.tipoValidator,
             controller: controller.tipoController,
             isNumeric: false,
             readOnly: true),
         MotoFormFieldModel(
-            label: 'year'.tr,
+            label: 'CV',
+            controller: controller.cvController,
+            isNumeric: true,
+            readOnly: true),
+        MotoFormFieldModel(
+            label: 'CC',
+            controller: controller.ccController,
+            isNumeric: true,
+            readOnly: true),
+        MotoFormFieldModel(
+            label: S.of(context).year,
             validator: controller.annoValidator,
             controller: controller.annoController,
             isNumeric: true),
+
         MotoFormFieldModel(
-            label: 'location'.tr,
+            label: S.of(context).location,
             validator: controller.luogoValidator,
             controller: controller.luogoController),
         MotoFormFieldModel(
-            label: 'description'.tr,
+            label: S.of(context).description,
             // validator: controller.descrizioneValidator,
             controller: controller.descrizioneController,
             maxLines: 5)
@@ -65,8 +77,8 @@ class AddMotoForm extends StatelessWidget {
           child: Column(
               // padding: EdgeInsets.only(
               //     bottom: Constants.bottomNavbarHeight +
-              //         context.keyboardHeight / 1.5),
-              // itemExtent: context.height * 0.11,
+              //         Get.context!.keyboardHeight / 1.5),
+              // itemExtent: Get.context!.height * 0.11,
               // mainAxisSize: MainAxisSize.min,
               // physics: const NeverScrollableScrollPhysics(),
               children: [
@@ -80,7 +92,7 @@ class AddMotoForm extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 32),
                   child: MButton.red(
                     onPressed: () => _addMoto(controller),
-                    child: Text('addMoto'.tr),
+                    child: Text(S.of(context).addMoto),
                   ),
                 ),
               ]),

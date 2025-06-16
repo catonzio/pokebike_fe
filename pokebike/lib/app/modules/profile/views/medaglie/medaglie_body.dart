@@ -6,6 +6,7 @@ import 'package:moto_hunters/app/modules/profile/views/medaglie/coccarde_wrap_wi
 import 'package:moto_hunters/app/modules/profile/views/medaglie/divider_title.dart';
 import 'package:moto_hunters/app/modules/profile/views/medaglie/medaglie_row_widget.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class MedaglieBody extends GetView<ProfileController> {
   const MedaglieBody({super.key});
@@ -13,7 +14,7 @@ class MedaglieBody extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Container(
-          width: context.width,
+          width: Get.context!.width,
           padding: const EdgeInsets.all(8.0),
           child: RefreshIndicator.adaptive(
             onRefresh: controller.fetchCoccarde,
@@ -22,7 +23,7 @@ class MedaglieBody extends GetView<ProfileController> {
               padding: const EdgeInsets.only(
                   bottom: Constants.bottomNavbarHeight * 2 / 3),
               children: [
-                DividerTitle('medals'.tr.toUpperCase()),
+                DividerTitle(S.of(context).medals.toUpperCase()),
                 Skeletonizer(
                     enabled: controller.isLoadingNumCatture.value,
                     child: Obx(() => MedaglieRowWidget(
@@ -30,7 +31,7 @@ class MedaglieBody extends GetView<ProfileController> {
                                   .user.value?.profile?.numMotoCatturate ??
                               0,
                         ))),
-                DividerTitle('cockades'.tr.toUpperCase()),
+                DividerTitle(S.of(context).cockades.toUpperCase()),
                 Skeletonizer(
                     enabled: controller.isLoadingCoccarde.value,
                     child: const CoccardeGridWidget())

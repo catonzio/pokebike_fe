@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:moto_hunters/app/data/models/moto/moto.dart';
 import 'package:moto_hunters/app/modules/profile/views/classifica/statistics_row.dart';
+import 'package:get/get.dart';
 
 class MotoDetailsStato extends StatelessWidget {
   final Moto moto;

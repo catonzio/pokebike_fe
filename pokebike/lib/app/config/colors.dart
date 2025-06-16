@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:get/get.dart';
 
 class MColors {
   static const Color bottomNavbarColor = Color(0xDF000000);

@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/mbutton.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 Future<ImageSource?> selectImageSource(BuildContext context) async {
   final ImageSource? source = await showModalBottomSheet<ImageSource>(
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: context.height * 0.3,
+          height: Get.context!.height * 0.3,
           padding: const EdgeInsets.all(16),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text('whereSelectImg'.tr),
+                Text(S.of(context).whereSelectImg),
                 Row(
                   children: [
                     Expanded(
@@ -23,18 +25,25 @@ Future<ImageSource?> selectImageSource(BuildContext context) async {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: MButton(
-                              label: 'camera'.tr,
+                              label: S.of(context).camera,
                               onTap: () =>
-                                  context.navigator.pop(ImageSource.camera)),
+                                  Get.context!.navigator.pop(ImageSource.camera)),
                         )),
                     Expanded(
                         flex: 2,
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: MButton(
-                              label: 'gallery'.tr,
-                              onTap: () =>
-                                  context.navigator.pop(ImageSource.gallery)),
+                              label: S.of(context).gallery,
+                              onTap: () {
+                                if (Get.currentRoute != Routes.GARAGE) {
+                                  Get.back();
+                                  Get.snackbar('', S.of(context).galleryLockedMessage,
+                                      snackPosition: SnackPosition.BOTTOM);
+                                } else {
+                                  Get.back(result: ImageSource.gallery);
+                                }
+                              }),
                         ))
                   ],
                 )

@@ -47,7 +47,7 @@ class BottomNavbarButton extends StatelessWidget {
     //     : mIcon;
     // return mIcon;
     return Container(
-      width: context.width * 0.9 * 0.2,
+      width: Get.context!.width * 0.9 * 0.2,
       alignment: Alignment.bottomCenter,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -64,7 +64,7 @@ class BottomNavbarButton extends StatelessWidget {
           AutoSizeText(
             item.label,
             maxLines: 1,
-            style: context.textTheme.bodyMedium
+            style: Get.context!.textTheme.bodyMedium
                 ?.copyWith(color: isSelected ? selectedColor : unselectedColor),
           )
         ],

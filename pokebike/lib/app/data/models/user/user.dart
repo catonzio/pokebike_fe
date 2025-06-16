@@ -1,6 +1,8 @@
 // This file is "main.dart"
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:moto_hunters/app/data/models/api_media/api_media.dart';
 import 'package:moto_hunters/app/data/models/profile/profile.dart';
 import 'package:moto_hunters/app/shared/utils/mimage_provider.dart';
 
@@ -21,8 +23,8 @@ class User with _$User {
     required String username,
     required String email,
     required DateTime birthdate,
-    required String avatar,
-    required String motoFavoritaAvatar,
+    ApiMedia? avatar,
+    ApiMedia? motoFavoritaAvatar,
     required int profileId,
     Profile? profile,
   }) = _User;
@@ -36,8 +38,10 @@ class User with _$User {
         email: "email$index@email.com",
         username: "user.$index.name",
         birthdate: DateTime.now(),
-        avatar: MImageProvider.getImageUrl(index: index),
-        motoFavoritaAvatar: MImageProvider.getImageUrl(index: index),
+        avatar:
+            ApiMedia(id: index, url: MImageProvider.getImageUrl(index: index)),
+        motoFavoritaAvatar:
+            ApiMedia(id: index, url: MImageProvider.getImageUrl(index: index)),
         profileId: index,
         profile: null, // Profile.fake(index),
       );

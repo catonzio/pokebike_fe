@@ -22,7 +22,7 @@ class FilterModalBox extends StatelessWidget {
             ),
             padding: const EdgeInsets.all(8),
             child: DefaultTextStyle(
-              style: context.textTheme.bodyLarge!.copyWith(color: Colors.white),
+              style: Get.context!.textTheme.bodyLarge!.copyWith(color: Colors.white),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

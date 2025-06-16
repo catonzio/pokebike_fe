@@ -17,6 +17,7 @@ import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../controllers/profile_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -46,7 +47,7 @@ class ProfileView extends StatelessWidget {
             ? [
                 MIcon(
                   name: "Option icon",
-                  onTap: () => context.navigator
+                  onTap: () => Get.context!.navigator
                       .pushNamed(Routes.SETTINGS,
                           arguments: controller.user.value)
                       .then((value) => controller.user.value =
@@ -68,8 +69,10 @@ class ProfileView extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: SizedBox(
-                          height: context.height * 0.15,
-                          child: ProfileHeader(user: controller.user.value)),
+                          height: Get.context!.height * 0.15,
+                          child: ProfileHeader(
+                              user: controller.user.value,
+                              isCurrentUser: controller.isOwnProfile.value)),
                     ),
                     PaginationRow(key: UniqueKey(), items: controller.items),
                     const ProfileBody()
@@ -83,7 +86,9 @@ class ProfileView extends StatelessWidget {
 
 class ProfileHeader extends StatelessWidget {
   final User? user;
-  const ProfileHeader({super.key, required this.user});
+  final bool isCurrentUser;
+  const ProfileHeader(
+      {super.key, required this.user, required this.isCurrentUser});
 
   @override
   Widget build(BuildContext context) {
@@ -94,8 +99,9 @@ class ProfileHeader extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         MCircularAvatar(
-          radius: context.width * 0.1,
-          imagePath: user!.avatar,
+          radius: Get.context!.width * 0.1,
+          avatar: user!.avatar,
+          canReport: !isCurrentUser,
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -106,23 +112,26 @@ class ProfileHeader extends StatelessWidget {
                 ShimmerTitle.light(
                     text: fullName(user!),
                     // colors: [Colors.white, Colors.grey, Colors.white],
-                    style: context.textTheme.headlineSmall!.copyWith(
+                    style: Get.context!.textTheme.headlineSmall!.copyWith(
                       fontWeight: FontWeight.bold,
                     )),
                 Text(
-                    'numMotosCaptured'.trParams(
-                        {'howMany': numMotoCatturate?.toString() ?? '-'}),
-                    style: context.textTheme.bodyLarge),
+                    S
+                        .of(context)
+                        .numMotosCaptured(numMotoCatturate?.toString() ?? '-'),
+                    style: Get.context!.textTheme.bodyLarge),
                 Tooltip(
                   triggerMode: TooltipTriggerMode.tap,
-                  message: 'medal'.trParams(
-                      {'name': medagliaName(numMotoCatturate ?? 0).name.tr}),
+                  message: S
+                      .of(context)
+                      .medal(medagliaName(numMotoCatturate ?? 0).name.tr),
                   child: MIcon(
                     name:
                         "Medal icon ${medagliaName(numMotoCatturate ?? 0).iconName}"
                             .trim(),
-                    size:
-                        Size(context.width, context.height).shortestSide * 0.1,
+                    size: Size(Get.context!.width, Get.context!.height)
+                            .shortestSide *
+                        0.1,
                   ),
                 )
               ]),
@@ -138,7 +147,7 @@ class ProfileBody extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: context.height * 0.5,
+      height: Get.context!.height * 0.5,
       child: Obx(
         () => AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),

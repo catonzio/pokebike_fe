@@ -11,7 +11,7 @@ class PaginationRow extends GetView<PaginationController> {
 
   @override
   Widget build(BuildContext context) {
-    final double height = context.height * 0.04;
+    final double height = Get.context!.height * 0.04;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),

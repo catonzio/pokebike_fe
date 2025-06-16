@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/mbutton.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class MotoDetailChosen extends StatelessWidget {
   const MotoDetailChosen({super.key});
@@ -11,16 +12,16 @@ class MotoDetailChosen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding:
-          EdgeInsets.only(left: 16, right: 16, bottom: context.height * 0.2),
+          EdgeInsets.only(left: 16, right: 16, bottom: Get.context!.height * 0.2),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
-            'motoRegistered'.tr,
-            style: context.textTheme.titleLarge,
+            S.of(context).motoRegistered,
+            style: Get.context!.textTheme.titleLarge,
             textAlign: TextAlign.center,
           ),
-          MButton(label: 'backHome'.tr, onTap: () => _tornaAllaHome(context))
+          MButton(label: S.of(context).backHome, onTap: () => _tornaAllaHome(context))
         ],
       ),
     );
@@ -28,6 +29,6 @@ class MotoDetailChosen extends StatelessWidget {
 
   void _tornaAllaHome(BuildContext context) {
     // controller.reset();
-    context.navigator.pushReplacementNamed(Routes.HOME);
+    Get.context!.navigator.pushReplacementNamed(Routes.HOME);
   }
 }

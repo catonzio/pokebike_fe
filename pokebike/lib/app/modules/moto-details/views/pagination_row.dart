@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:moto_hunters/app/config/colors.dart';
 
 import '../controllers/moto_details_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class PaginationRow extends GetView<MotoDetailsController> {
   const PaginationRow({
@@ -19,8 +20,8 @@ class PaginationRow extends GetView<MotoDetailsController> {
             TextButton(
                 onPressed: () => controller.toggleShowingInfo(value: true),
                 child: Text(
-                  'info'.tr,
-                  style: context.textTheme.bodyMedium?.copyWith(
+                  S.of(context).info,
+                  style: Get.context!.textTheme.bodyMedium?.copyWith(
                       color: controller.isShowingInfo.value
                           ? MColors.secondaryDark
                           : Colors.white),
@@ -28,8 +29,8 @@ class PaginationRow extends GetView<MotoDetailsController> {
             TextButton(
                 onPressed: () => controller.toggleShowingInfo(value: false),
                 child: Text(
-                  'state'.tr,
-                  style: context.textTheme.bodyMedium?.copyWith(
+                  S.of(context).state,
+                  style: Get.context!.textTheme.bodyMedium?.copyWith(
                       color: controller.isShowingInfo.value
                           ? Colors.white
                           : MColors.secondaryDark),
