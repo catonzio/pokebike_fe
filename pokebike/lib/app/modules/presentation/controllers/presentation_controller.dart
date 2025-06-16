@@ -35,9 +35,9 @@ class PresentationController extends GetxController {
     S.of(Get.context!).presentation3Subtitle1,
   ];
 
-  Rx<DynamicImage> get image => imagesPaths[index].obs;
-  RxString get title => titles[index].obs;
-  RxString get subtitle => subtitles[index].obs;
+  DynamicImage get image => imagesPaths[index];
+  String get title => titles[index];
+  String get subtitle => subtitles[index];
 
   next() {
     if (index < 2) {

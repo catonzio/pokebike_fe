@@ -38,9 +38,10 @@ class PresentationView extends GetView<PresentationController> {
             Obx(() => PresentationContainer(
                   height: Get.context!.height * 0.855,
                   onNext: () => _onNext(context),
-                  image: controller.image.value,
-                  title: controller.title.value,
-                  subtitle: controller.subtitle.value,
+                  onPrevious: () => controller.previous(),
+                  image: controller.image,
+                  title: controller.title,
+                  subtitle: controller.subtitle,
                 )),
             Positioned(
               bottom: Get.context!.height * 0.05,
@@ -52,9 +53,12 @@ class PresentationView extends GetView<PresentationController> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ...controller.imagesPaths.indexed.map(
-                      ((int, DynamicImage) e) => Obx(() => CirclePageIndicator(
-                            selected: e.$1 == controller.index,
-                            width: Get.context!.width * 0.02,
+                      ((int, DynamicImage) e) => Obx(() => GestureDetector(
+                            onTap: () => controller.index = e.$1,
+                            child: CirclePageIndicator(
+                              selected: e.$1 == controller.index,
+                              width: Get.context!.width * 0.02,
+                            ),
                           ))),
                   SizedBox(width: Get.context!.width * 0.3),
                   InkWell(

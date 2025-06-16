@@ -10,6 +10,7 @@ class PresentationContainer extends StatelessWidget {
   final String subtitle;
   final double height;
   final Function() onNext;
+  final Function()? onPrevious;
 
   const PresentationContainer(
       {super.key,
@@ -17,11 +18,21 @@ class PresentationContainer extends StatelessWidget {
       required this.title,
       required this.subtitle,
       required this.height,
-      required this.onNext});
+      required this.onNext,
+      this.onPrevious});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+        onHorizontalDragEnd: (details) {
+          if (details.primaryVelocity == null) return;
+          // Negative dx -> swipe left -> next, Positive -> previous
+          if (details.primaryVelocity! < 0) {
+            onNext();
+          } else if (details.primaryVelocity! > 0 && onPrevious != null) {
+            onPrevious!();
+          }
+        },
         onTap: onNext,
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
