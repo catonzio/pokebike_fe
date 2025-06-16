@@ -4,11 +4,9 @@ import 'dart:io';
 
 class Constants {
   // static const String baseUrl = "https://danilocatone.com/moto_hunters";
-  static const bool isLocal = true;
+  static const bool isLocal = false;
   static final String baseUrl = isLocal
-      ? (Platform.isAndroid
-          ? "http://10.0.2.2:8080"
-          : "http://127.0.0.1:8080")
+      ? (Platform.isAndroid ? "http://10.0.2.2:8080" : "http://127.0.0.1:8080")
       : "http://console.motohunters.it";
   static final String apiBaseUrl = "$baseUrl/api";
   static final String apiStorageUrl = "$baseUrl/storage";

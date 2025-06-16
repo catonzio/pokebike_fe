@@ -66,13 +66,14 @@ class MCircularAvatar extends StatelessWidget {
                         child: file != null
                             ? LocalImage(file: file)
                             : CachedNetworkImage(
-                                imageUrl: Constants.isLocal &&
+                                imageUrl: /* Constants.isLocal &&
                                         avatar!.url
                                             .startsWith('http://localhost:8080')
                                     ? avatar!.url.replaceFirst(
                                         'http://localhost:8080',
                                         Constants.baseUrl)
-                                    : avatar!.url,
+                                    : */
+                                    avatar!.url,
                                 width: 195,
                                 height: 195,
                                 maxWidthDiskCache: 195,

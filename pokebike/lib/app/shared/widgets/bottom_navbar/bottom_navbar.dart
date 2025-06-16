@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -9,6 +11,7 @@ import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/bottom_navbar/bottom_navbar_button.dart';
 import 'package:moto_hunters/app/shared/widgets/bottom_navbar/bottom_navbar_controller.dart';
 import 'package:moto_hunters/app/shared/widgets/bottom_navbar/navbar_item.dart';
+import 'package:moto_hunters/app/modules/garage/controllers/garage_controller.dart';
 
 class BottomNavbar extends GetView<BottomNavbarController> {
   const BottomNavbar({super.key});
@@ -67,18 +70,31 @@ class BottomNavbar extends GetView<BottomNavbarController> {
 
   void _onTap(BuildContext context, int newIndex) {
     int oldIndex = controller.currentIndex.value;
-    // Fotocamera route
+    // Fotocamera route: se cliccato due volte di fila non fare nulla
     if (newIndex == 2 && oldIndex == 2) {
       return;
     }
+
     controller.currentIndex.value = newIndex;
     final bottomNavbarItem = bottomNavbarItems[newIndex];
     final navigatorFunc = bottomNavbarItem.shouldPop
         ? Get.context!.navigator.popAndPushNamed
         : Get.context!.pushNamed;
-    navigatorFunc(bottomNavbarItem.route).then((_) {
-      controller.currentIndex.value = oldIndex;
-    });
+    navigatorFunc(bottomNavbarItem.route);
+
+    // Se abbiamo selezionato il Garage lanciamo il refresh dopo un frame così siamo sicuri che il controller esista
+    if (newIndex == 1) {
+      Future.delayed(Duration(milliseconds: 100), () {
+        if (Get.isRegistered<GarageController>()) {
+          log('GarageController trovato');
+          Get.find<GarageController>().refreshList();
+        } else {
+          log('GarageController non trovato');
+        }
+      });
+    }
+
+    controller.currentIndex.value = oldIndex;
   }
 
   // Positioned _upperCircle(double height) {

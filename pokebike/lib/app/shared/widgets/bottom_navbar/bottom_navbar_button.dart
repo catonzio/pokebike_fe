@@ -30,7 +30,9 @@ class BottomNavbarButton extends StatelessWidget {
         ? item.routes!.contains(Get.currentRoute)
         : Get.currentRoute == item.route;
     // final Color color = isSelected ? selectedColor : unselectedColor;
-    final String addName = isSelected ? " red" : "";
+    final bool isLogo = item.iconName.toLowerCase().contains('logo');
+    // Se è il logo centrale non aggiungiamo la variante "red" quando è selezionato
+    final String addName = (isSelected && !isLogo) ? " red" : "";
     // item.iconName.toLowerCase().contains("foto")
     Widget mIcon = MIcon(
       name: item.iconName + addName,
