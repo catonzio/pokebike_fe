@@ -123,8 +123,10 @@ final Map<String, String> itItTranslations = {
   'noCockades': 'Non hai vinto ancora nessuna coccarda',
   'numMotosCaptured': '@howMany moto catturate',
   'errorLoadingPartecipation': 'Errore caricamento partecipazione',
-  'youNoTournamentsPartecipations': 'Non hai ancora partecipato a nessun torneo',
-  'heNoTournamentsPartecipations': 'L\'utente non ha ancora partecipato a nessun torneo',
+  'youNoTournamentsPartecipations':
+      'Non hai ancora partecipato a nessun torneo',
+  'heNoTournamentsPartecipations':
+      'L\'utente non ha ancora partecipato a nessun torneo',
   'partecipateTournaments': 'Partecipa al torneo',
   'wins': 'Vittorie',
   'topMoto': 'Top moto',

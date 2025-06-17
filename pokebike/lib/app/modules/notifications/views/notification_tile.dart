@@ -14,7 +14,7 @@ class NotificationTile extends GetView<NotificationsController> {
   @override
   Widget build(BuildContext context) {
     final double circleSize =
-        Size(context.width * 0.02, context.height * 0.02).shortestSide;
+        Size(Get.context!.width * 0.02, Get.context!.height * 0.02).shortestSide;
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Dismissible(

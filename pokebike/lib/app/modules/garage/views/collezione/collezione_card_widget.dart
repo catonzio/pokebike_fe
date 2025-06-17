@@ -105,7 +105,7 @@ class CollezioneCardWidget extends StatelessWidget {
 
     if (collezioneMoto.moto != null) {
       child = MimageNetwork(
-        path: collezioneMoto.moto!.avatar,
+        path: collezioneMoto.moto!.avatar?.url ?? '',
         borderRadius: borderRadius,
         cacheHeight: 500,
         cacheWidth: 500,
@@ -118,7 +118,7 @@ class CollezioneCardWidget extends StatelessWidget {
         ),
         alignment: Alignment.center,
         child: GradientText(collezioneMoto.id.toString(),
-            style: context.textTheme.headlineMedium
+            style: Get.context!.textTheme.headlineMedium
                 ?.copyWith(fontWeight: FontWeight.bold),
             gradient: gradient),
       );

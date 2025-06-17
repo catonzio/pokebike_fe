@@ -16,6 +16,28 @@ class Storage {
   bool get hasSeenPresentation => _hasSeenPresentation.val;
   set hasSeenPresentation(bool value) => _hasSeenPresentation.val = value;
 
+  // flag per mostrare info introduttive (solo una volta)
+  final ReadWriteValue<bool> _hasSeenGarageInfo =
+      false.val('seenGarageInfo', getBox: _box);
+  bool get hasSeenGarageInfo => _hasSeenGarageInfo.val;
+  set hasSeenGarageInfo(bool value) => _hasSeenGarageInfo.val = value;
+
+  final ReadWriteValue<bool> _hasSeenCollectionInfo =
+      false.val('seenCollectionInfo', getBox: _box);
+  bool get hasSeenCollectionInfo => _hasSeenCollectionInfo.val;
+  set hasSeenCollectionInfo(bool value) => _hasSeenCollectionInfo.val = value;
+
+  final ReadWriteValue<bool> _hasSeenMedaglieInfo =
+      false.val('seenMedaglieInfo', getBox: _box);
+  bool get hasSeenMedaglieInfo => _hasSeenMedaglieInfo.val;
+  set hasSeenMedaglieInfo(bool value) => _hasSeenMedaglieInfo.val = value;
+
+  // flag per mostrare info introduttive del Tournament (solo una volta)
+  final ReadWriteValue<bool> _hasSeenTournamentInfo =
+      false.val('seenTournamentInfo', getBox: _box);
+  bool get hasSeenTournamentInfo => _hasSeenTournamentInfo.val;
+  set hasSeenTournamentInfo(bool value) => _hasSeenTournamentInfo.val = value;
+
   final ReadWriteValue<String> _currentLocale =
       (Get.deviceLocale?.countryCode?.toLowerCase() ?? 'en')
           .val('currentLocale', getBox: _box);

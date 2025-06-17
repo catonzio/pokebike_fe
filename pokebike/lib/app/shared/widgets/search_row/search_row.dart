@@ -4,6 +4,7 @@ import 'package:moto_hunters/app/data/search_options.dart';
 import 'package:moto_hunters/app/shared/widgets/search_row/filter_modal_sheet.dart';
 import 'package:moto_hunters/app/shared/widgets/search_row/search_text_field.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
+import 'package:get/get.dart';
 
 class SearchRow extends StatelessWidget {
   final Function(String) onSearchField;

@@ -7,6 +7,7 @@ import 'package:moto_hunters/app/shared/widgets/classifica_profile_row.dart';
 import 'package:moto_hunters/app/modules/profile/views/classifica/statistics_row.dart';
 import 'package:moto_hunters/app/modules/profile/views/classifica/top_moto.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class ClassificaBody extends GetView<ProfileController> {
   const ClassificaBody({super.key});
@@ -26,14 +27,14 @@ class ClassificaBody extends GetView<ProfileController> {
               itemBuilder: (context, index) {
                 if (index == 0) {
                   return Container(
-                    height: context.height * 0.13,
+                    height: Get.context!.height * 0.13,
                     padding:
-                        EdgeInsets.fromLTRB(8, context.height * 0.05, 8, 0),
+                        EdgeInsets.fromLTRB(8, Get.context!.height * 0.05, 8, 0),
                     child: Obx(() => Skeletonizer(
                           enabled: controller.isFetchingClassificaTile.value,
                           child: controller.classificaTile.value == null
                               ? Center(
-                                  child: Text('errorLoadingPartecipation'.tr))
+                                  child: Text(S.of(context).errorLoadingPartecipation))
                               : ClassificaProfileRow(
                                   classificaTile:
                                       controller.classificaTile.value!,
@@ -59,7 +60,7 @@ class ClassificaBody extends GetView<ProfileController> {
               },
               separatorBuilder: (context, index) {
                 return SizedBox(
-                  height: context.height * 0.05,
+                  height: Get.context!.height * 0.05,
                 );
               },
               itemCount: 3),

@@ -11,6 +11,7 @@ import 'package:moto_hunters/app/modules/settings/providers/settings_provider.da
 import 'package:moto_hunters/app/shared/controllers/storage.dart';
 import 'package:moto_hunters/app/shared/extensions/date_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class SettingsController extends GetxController {
   static SettingsController get to => Get.find<SettingsController>();
@@ -115,36 +116,36 @@ class SettingsController extends GetxController {
 
   String? oldPasswordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'insertOldPassword'.tr;
+      return S.of(Get.context!).insertOldPassword;
     }
     if (value.length < 8) {
-      return 'pwd8chars'.tr;
+      return S.of(Get.context!).pwd8chars;
     }
     return null;
   }
 
   String? newPasswordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'insertNewPassword'.tr;
+      return S.of(Get.context!).insertNewPassword;
     }
     if (value.length < 8) {
-      return 'pwd8chars'.tr;
+      return S.of(Get.context!).pwd8chars;
     }
     if (value.trim() != confirmPasswordController.text.trim()) {
-      return 'pwdNoCoincide'.tr;
+      return S.of(Get.context!).pwdNoCoincide;
     }
     return null;
   }
 
   String? confirmPasswordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'insertConfirmPassword'.tr;
+      return S.of(Get.context!).insertConfirmPassword;
     }
     if (value.length < 8) {
-      return 'pwd8chars'.tr;
+      return S.of(Get.context!).pwd8chars;
     }
     if (value.trim() != newPasswordController.text.trim()) {
-      return 'pwdNoCoincide'.tr;
+      return S.of(Get.context!).pwdNoCoincide;
     }
     return null;
   }
@@ -190,7 +191,7 @@ class SettingsController extends GetxController {
     if (user.value != null) {
       return provider.deleteUser(user.value!.id);
     } else {
-      return ApiResponse.error(message: 'noInternet'.tr, data: {});
+      return ApiResponse.error(message: S.of(Get.context!).noInternet, data: {});
     }
   }
 

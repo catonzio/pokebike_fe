@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:moto_hunters/app/data/enums/order_by.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class SearchOptions {
   final OrderBy orderBy;
@@ -14,7 +15,10 @@ class SearchOptions {
 
   @override
   String toString() {
-    return {'orderBy'.tr: orderBy.name, 'type'.tr: tipo, 'brand'.tr: marca}
-        .toString();
+    return {
+      S.of(Get.context!).orderBy: orderBy.name,
+      S.of(Get.context!).type: tipo,
+      S.of(Get.context!).brand: marca
+    }.toString();
   }
 }

@@ -17,12 +17,12 @@ class MotoDetailsInfoRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-              flex: 4, child: Text(label, style: context.textTheme.bodyLarge)),
+              flex: 4, child: Text(label, style: Get.context!.textTheme.bodyLarge)),
           Expanded(
               flex: 6,
               child: Text(
                 value,
-                style: context.textTheme.bodyLarge,
+                style: Get.context!.textTheme.bodyLarge,
                 textAlign: TextAlign.left,
               ))
         ],

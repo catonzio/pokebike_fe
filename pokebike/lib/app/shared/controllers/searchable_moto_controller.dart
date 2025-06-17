@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moto_hunters/app/data/enums/order_by.dart';
 import 'package:moto_hunters/app/data/models/moto/moto.dart';
 import 'package:moto_hunters/app/shared/controllers/searchable_list_controller.dart';
+import 'package:get/get.dart';
 
 class SearchableMotoController extends SearchableListController<Moto> {
   final Future<List<Moto>> Function(int?, int?) fetchFunction;

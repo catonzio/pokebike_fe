@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 extension ContextUtils on BuildContext {
   ScaffoldMessengerState get scaffold => ScaffoldMessenger.of(this);
@@ -18,7 +19,7 @@ extension ContextUtils on BuildContext {
       elevation: 30,
       action: action ??
           SnackBarAction(
-            label: 'ok'.tr,
+            label: S.of(Get.context!).ok,
             onPressed: () => scaffold.clearSnackBars(),
           ),
     ));

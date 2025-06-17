@@ -12,7 +12,7 @@ class MCheckbox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double size =
-        Size(context.width * 0.07, context.height * 0.07).shortestSide;
+        Size(Get.context!.width * 0.07, Get.context!.height * 0.07).shortestSide;
 
     return Obx(() => InkWell(
         onTap: () => onChanged(!isChecked.value),

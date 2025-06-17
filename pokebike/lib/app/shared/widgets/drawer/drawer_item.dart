@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:moto_hunters/app/data/enums/garage_type.dart';
 import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class DrawerItem {
   final String title;
@@ -17,48 +18,48 @@ class DrawerItem {
 
 List<DrawerItem> drawerItems = [
   DrawerItem(
-    title: 'home'.tr,
+    title: S.of(Get.context!).home,
     icon: "Home icon white",
     path: Routes.HOME,
   ),
   DrawerItem(
-      title: 'myGarage'.tr,
+      title: S.of(Get.context!).myGarage,
       icon: "Garage icon white",
       path: Routes.GARAGE,
       arguments: GarageType.garage),
   DrawerItem(
-    title: 'tournament'.tr,
+    title: S.of(Get.context!).tournament,
     icon: "Torneo icon white",
     path: Routes.TORNEO,
   ),
   DrawerItem(
-    title: 'community'.tr,
+    title: S.of(Get.context!).community,
     icon: "Community icon white",
     path: Routes.COMMUNITY,
   ),
   DrawerItem(
-      title: 'collection'.tr,
+      title: S.of(Get.context!).collection,
       icon: "Collection icon white",
       path: Routes.GARAGE,
       arguments: GarageType.collection),
   DrawerItem(
-      title: 'leaderboard'.tr,
+      title: S.of(Get.context!).leaderboard,
       icon: "Classifica icon white",
       path: Routes.LEADERBOARD),
   DrawerItem(
-    title: 'profile'.tr,
+    title: S.of(Get.context!).profile,
     icon: "Profile icon white",
     path: Routes.PROFILE,
   ),
   DrawerItem(
-    title: 'notifications'.tr,
+    title: S.of(Get.context!).notifications,
     icon: "Notification icon white",
     path: Routes.NOTIFICATIONS,
   )
 ];
 
 DrawerItem drawerItemLogout = DrawerItem(
-  title: 'logout'.tr,
+  title: S.of(Get.context!).logout,
   icon: "Logout icon white",
   path: Routes.LOGIN,
 );

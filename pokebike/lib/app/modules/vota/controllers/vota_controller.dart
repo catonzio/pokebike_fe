@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:moto_hunters/app/data/api_response.dart';
 import 'package:moto_hunters/app/data/models/turno/turno.dart';
 import 'package:moto_hunters/app/modules/vota/providers/vota_provider.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class VotaController extends GetxController {
   final VotaProvider provider;
@@ -38,9 +39,14 @@ class VotaController extends GetxController {
     isFetchingTurno = false;
   }
 
+  Future<ApiResponse> report(int mediaId) async {
+    return await provider.report(mediaId);
+  }
+
   Future<ApiResponse> vota(int toPartecipazioneId) async {
     if (hasVoted.value) {
-      return ApiResponse.error(message: 'alreadyVoted'.tr, data: null);
+      return ApiResponse.error(
+          message: S.of(Get.context!).alreadyVoted, data: null);
     }
 
     ApiResponse response =

@@ -9,6 +9,7 @@ import 'package:moto_hunters/app/shared/widgets/default_dialog.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../controllers/notifications_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class NotificationsView extends GetView<NotificationsController> {
   const NotificationsView({super.key});
@@ -30,7 +31,7 @@ class NotificationsView extends GetView<NotificationsController> {
           iconSize: 24,
         )
       ],
-      title: 'notifications'.tr,
+      title: S.of(context).notifications,
       backButton: true,
       body: Obx(() => controller.list.isNotEmpty || controller.isFetching
           ? Skeletonizer(
@@ -61,17 +62,17 @@ class NotificationsView extends GetView<NotificationsController> {
         builder: (context) {
           return Dialog(
             child: DefaultDialog(
-                title: 'deleteNotifications'.tr,
-                message: 'deleteNotificationsSure'.tr,
-                redTitle: 'delete'.tr,
+                title: S.of(context).deleteNotifications,
+                message: S.of(context).deleteNotificationsSure,
+                redTitle: S.of(context).delete,
                 redAction: (context) async {
                   await controller.deleteAll();
-                  if (context.mounted) {
-                    context.navigator.pop();
+                  if (Get.context!.mounted) {
+                    Get.context!.navigator.pop();
                   }
                 },
-                whiteTitle: 'nullify'.tr,
-                whiteAction: (context) => context.navigator.pop()),
+                whiteTitle: S.of(context).nullify,
+                whiteAction: (context) => Get.context!.navigator.pop()),
           );
         });
   }
@@ -83,12 +84,12 @@ class EmptyNotificheBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: context.height * 0.2),
+      padding: EdgeInsets.only(top: Get.context!.height * 0.2),
       child: Align(
         alignment: Alignment.topCenter,
         child: Text(
-          'noNewNotifications'.tr,
-          style: context.textTheme.displaySmall,
+          S.of(context).noNewNotifications,
+          style: Get.context!.textTheme.displaySmall,
           textAlign: TextAlign.center,
         ),
       ),

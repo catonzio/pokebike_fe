@@ -16,6 +16,7 @@ import 'package:moto_hunters/app/shared/widgets/utils/loading_stack.dart';
 import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
 
 import '../controllers/login_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({super.key});
@@ -26,7 +27,7 @@ class LoginView extends GetView<LoginController> {
         resizeToAvoidBottomInset: false,
         appBar: BaseAppBar(
             onBackPressed: () =>
-                context.navigator.popAndPushNamed(Routes.LOGIN_REGISTER)),
+                Get.context!.navigator.popAndPushNamed(Routes.LOGIN_REGISTER)),
         body: Container(
           width: double.infinity,
           height: double.infinity,
@@ -47,9 +48,9 @@ class LoginView extends GetView<LoginController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        ShimmerTitle.dark(text: 'welcomeBack'.tr),
+        ShimmerTitle.dark(text: S.of(context).welcomeBack),
         SizedBox(
-          height: context.height * 0.25,
+          height: Get.context!.height * 0.25,
           child: Form(
               key: controller.formKey,
               child: DefaultTextStyle(
@@ -66,7 +67,7 @@ class LoginView extends GetView<LoginController> {
                     ? null
                     : () => _login(context),
                 backgroundColor: MColors.secondaryDark,
-                child: Text('access'.tr),
+                child: Text(S.of(context).access),
               ),
             ),
             SizedBox(
@@ -75,7 +76,8 @@ class LoginView extends GetView<LoginController> {
                 onTap: controller.isPerformingLogin.value
                     ? null
                     : () => _onRegister(context),
-                child: Text('noAccount'.tr, textAlign: TextAlign.center),
+                child:
+                    Text(S.of(context).noAccount, textAlign: TextAlign.center),
               ),
             ),
           ],
@@ -89,7 +91,7 @@ class LoginView extends GetView<LoginController> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Text('email'.tr),
+        Text(S.of(context).email),
         TextFormField(
             key: controller.emailFormKey,
             controller: controller.emailController,
@@ -98,8 +100,8 @@ class LoginView extends GetView<LoginController> {
             style: Themes.darkFormTextStyle,
             validator: controller.emailValidator,
             keyboardType: TextInputType.emailAddress,
-            decoration: lightInputDecoration('email'.tr)),
-        Text('password'.tr),
+            decoration: lightInputDecoration(S.of(context).email)),
+        Text(S.of(context).password),
         Obx(() => TextFormField(
             controller: controller.passwordController,
             obscureText: controller.obscurePassword,
@@ -107,7 +109,7 @@ class LoginView extends GetView<LoginController> {
             maxLines: 1,
             style: Themes.darkFormTextStyle,
             validator: controller.passwordValidator,
-            decoration: lightInputDecoration('password'.tr,
+            decoration: lightInputDecoration(S.of(context).password,
                 isPassword: true,
                 toggleObscurePassword: controller.toggleObscurePassword))),
         SizedBox(
@@ -116,7 +118,7 @@ class LoginView extends GetView<LoginController> {
             onTap: controller.isPerformingLogin.value
                 ? null
                 : () => _passwordForgotten(context),
-            child: Text('pwdForgot'.tr,
+            child: Text(S.of(context).pwdForgot,
                 textAlign: TextAlign.end,
                 style: const TextStyle(
                     color: Colors.white,
@@ -131,18 +133,18 @@ class LoginView extends GetView<LoginController> {
   _login(BuildContext context) async {
     if (controller.formKey.currentState?.validate() ?? false) {
       controller.login().then((ApiResponse response) {
-        if (context.mounted) {
+        if (Get.context!.mounted) {
           handleApiResponse(context, response, onSuccess: (dynamic data) {
             Storage.to.apiToken = data;
-            controller.checkToken().then((bool value) => !context.mounted
+            controller.checkToken().then((bool value) => !Get.context!.mounted
                 ? null
                 : value
-                    ? context.navigator
+                    ? Get.context!.navigator
                         .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
-                    : context.navigator.pushNamedAndRemoveUntil(
+                    : Get.context!.navigator.pushNamedAndRemoveUntil(
                         Routes.CONFIRM_REGISTER,
                         (r) => r.settings.name == Routes.LOGIN_REGISTER));
-            // context.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
+            // Get.context!.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
           });
         }
       });
@@ -152,19 +154,18 @@ class LoginView extends GetView<LoginController> {
   _passwordForgotten(BuildContext context) {
     if (controller.emailFormKey.currentState?.validate() ?? false) {
       controller.passwordForgot().then((ApiResponse value) {
-        if (context.mounted) {
+        if (Get.context!.mounted) {
           handleApiResponse(context, value,
-              successMessage: 'resetEmailSent'.trParams({
-                'status': value.message.contains('throttled')
-                    ? '${'already'.tr} '
-                    : ''
-              }));
+              successMessage: S.of(Get.context!).resetEmailSent(
+                  value.message.contains('throttled')
+                      ? '${S.of(Get.context!).already} '
+                      : ''));
         }
       });
     }
   }
 
   _onRegister(BuildContext context) {
-    context.navigator.popAndPushNamed(Routes.REGISTER);
+    Get.context!.navigator.popAndPushNamed(Routes.REGISTER);
   }
 }

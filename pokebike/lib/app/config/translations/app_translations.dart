@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+import 'package:get/get_navigation/src/root/internacionalization.dart';
 import 'package:moto_hunters/app/config/translations/en_usuk.dart';
 import 'package:moto_hunters/app/config/translations/es_es.dart';
 import 'package:moto_hunters/app/config/translations/fr_fr.dart';

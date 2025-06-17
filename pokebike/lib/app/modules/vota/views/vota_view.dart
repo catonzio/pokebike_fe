@@ -9,6 +9,7 @@ import 'package:moto_hunters/app/shared/widgets/utils/loading_stack.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../controllers/vota_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class VotaView extends GetView<VotaController> {
   const VotaView({super.key});
@@ -17,7 +18,7 @@ class VotaView extends GetView<VotaController> {
   Widget build(BuildContext context) {
     return DefaultPage(
         backButton: true,
-        title: 'vote'.tr,
+        title: S.of(context).vote,
         body: Padding(
           padding: const EdgeInsets.fromLTRB(
               16.0, 16.0, 16.0, Constants.bottomNavbarHeight),
@@ -30,7 +31,7 @@ class VotaView extends GetView<VotaController> {
                   topper: Center(
                       child: Text(
                     controller.errorMessage,
-                    style: context.textTheme.headlineLarge,
+                    style: Get.context!.textTheme.headlineLarge,
                     textAlign: TextAlign.center,
                   )),
                   child: Column(
@@ -42,7 +43,7 @@ class VotaView extends GetView<VotaController> {
                       ),
                       Text(
                         "VS",
-                        style: context.textTheme.displaySmall?.copyWith(
+                        style: Get.context!.textTheme.displaySmall?.copyWith(
                           color: Colors.white.withValues(alpha: 0.3),
                           fontWeight: FontWeight.normal,
                         ),

@@ -17,10 +17,10 @@ class ElementCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double width = context.width * 0.42;
-    final double height = context.height * 0.22;
+    final double width = Get.context!.width * 0.42;
+    final double height = Get.context!.height * 0.22;
     return GestureDetector(
-      onTap: () => context.pushNamed(Routes.PROFILE,
+      onTap: () => Get.context!.pushNamed(Routes.PROFILE,
           arguments: ProfileArguments(profileId: element.id)),
       child: Container(
           width: width,
@@ -30,7 +30,7 @@ class ElementCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             image: DecorationImage(
                 image: Image.network(
-                  element.user.avatar,
+                  element.user.avatar?.url ?? '',
                   cacheHeight: 500,
                   cacheWidth: 500,
                 ).image,
@@ -50,13 +50,13 @@ class ElementCard extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   child: Text(
                     index.toString(),
-                    style: context.textTheme.titleLarge?.copyWith(
+                    style: Get.context!.textTheme.titleLarge?.copyWith(
                         color: Colors.black, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
               DefaultTextStyle(
-                style: context.textTheme.bodyLarge!
+                style: Get.context!.textTheme.bodyLarge!
                     .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
                 child: Container(
                   width: double.maxFinite,

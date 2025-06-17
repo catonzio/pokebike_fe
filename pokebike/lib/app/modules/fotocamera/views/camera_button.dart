@@ -12,13 +12,13 @@ class CameraButton extends StatelessWidget {
       customBorder: const CircleBorder(),
       onTap: onTap,
       child: Container(
-          height: context.height * 0.09,
-          width: context.height * 0.09,
+          height: Get.context!.height * 0.09,
+          width: Get.context!.height * 0.09,
           decoration: const BoxDecoration(
             color: Colors.white,
             shape: BoxShape.circle,
           ),
-          padding: EdgeInsets.all(context.height * 0.01),
+          padding: EdgeInsets.all(Get.context!.height * 0.01),
           alignment: Alignment.center,
           child: Container(
             decoration: const BoxDecoration(

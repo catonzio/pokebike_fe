@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:moto_hunters/app/data/models/api_media/api_media.dart';
 
 class VotaPlayerRow extends StatelessWidget {
   final double height;
   final bool reversed;
   final String playerName;
-  final String playerAvatar;
+  final ApiMedia? playerAvatar;
 
   const VotaPlayerRow(
       {super.key,
@@ -20,8 +21,14 @@ class VotaPlayerRow extends StatelessWidget {
     final Widget playerNameText = Padding(
       padding: EdgeInsets.only(
           left: reversed ? 0 : 16.0, right: reversed ? 16.0 : 0),
-      child: Text(playerName, style: context.textTheme.titleLarge),
+      child: Text(playerName, style: Get.context!.textTheme.titleLarge),
     );
+
+    // Converti URL localhost per emulatore Android
+    final avatarUrl = playerAvatar?.url ?? '';
+    final convertedUrl = avatarUrl.contains('localhost')
+        ? avatarUrl.replaceAll('localhost:8080', '10.0.2.2:8080')
+        : avatarUrl;
 
     return SizedBox(
         height: height,
@@ -32,7 +39,7 @@ class VotaPlayerRow extends StatelessWidget {
             if (reversed) playerNameText,
             CircleAvatar(
               radius: height * 0.5,
-              backgroundImage: NetworkImage(playerAvatar),
+              backgroundImage: NetworkImage(convertedUrl),
             ),
             if (!reversed) playerNameText
           ],

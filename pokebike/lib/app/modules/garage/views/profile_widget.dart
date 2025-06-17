@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:moto_hunters/app/data/models/api_media/api_media.dart';
 import 'package:moto_hunters/app/shared/widgets/mcircular_avatar.dart';
 import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
+import 'package:get/get.dart';
 
 class ProfileWidget extends StatelessWidget {
   final String text;
-  final String imagePath;
+  final ApiMedia? image;
   final double radius;
 
   const ProfileWidget({
     super.key,
     required this.radius,
-    required this.imagePath,
+    required this.image,
     required this.text,
   });
 
@@ -44,7 +46,7 @@ class ProfileWidget extends StatelessWidget {
         // ),
         MCircularAvatar(
           radius: radius,
-          imagePath: imagePath,
+          avatar: image,
           padding: 8,
         ),
         ShimmerTitle.light(

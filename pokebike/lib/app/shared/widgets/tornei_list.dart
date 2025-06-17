@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/tornei_tile.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class TorneiList extends StatelessWidget {
   final double itemExtent;
@@ -21,23 +22,23 @@ class TorneiList extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: TorneiTile(
-            text: 'partecipateTournaments'.tr,
+            text: S.of(context).partecipateTournaments,
             imageName: "partecipa_al_torneo.jpg",
-            onTap: () => context.pushNamed(Routes.PARTECIPA_TORNEO)),
+            onTap: () => Get.context!.pushNamed(Routes.PARTECIPA_TORNEO)),
       ),
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: TorneiTile(
-            text: 'vote'.tr,
+            text: S.of(context).vote,
             imageName: "vota.jpg",
-            onTap: () => context.pushNamed(Routes.VOTA)),
+            onTap: () => Get.context!.pushNamed(Routes.VOTA)),
       ),
       Padding(
           padding: const EdgeInsets.all(8.0),
           child: TorneiTile(
-              text: 'leaderboard'.tr,
+              text: S.of(context).leaderboard,
               imageName: "classifica.jpg",
-              onTap: () => context.pushNamed(Routes.LEADERBOARD)))
+              onTap: () => Get.context!.pushNamed(Routes.LEADERBOARD)))
     ];
 
     if (scroll) {

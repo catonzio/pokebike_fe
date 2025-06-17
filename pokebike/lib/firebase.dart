@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:moto_hunters/firebase_options_danilocatonecom.dart';
+import 'package:get/get.dart';
 
 class FirebaseInitializer {
   static Future<String?> initialize() async {

@@ -8,6 +8,7 @@ import 'package:moto_hunters/app/shared/widgets/drawer/drawer_item.dart';
 import 'package:moto_hunters/app/shared/widgets/drawer/drawer_item_widget.dart';
 import 'package:moto_hunters/app/shared/widgets/default_dialog.dart';
 import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class Mdrawer extends StatelessWidget {
   const Mdrawer({super.key});
@@ -27,9 +28,10 @@ class Mdrawer extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(
-                top: context.height * 0.1, bottom: context.height * 0.03),
+                top: Get.context!.height * 0.1,
+                bottom: Get.context!.height * 0.03),
             child: ShimmerTitle.light(
-              text: 'helloBiker'.tr,
+              text: S.of(context).helloBiker,
             ),
           ),
           ...drawerItems.map((e) => Padding(
@@ -49,7 +51,7 @@ class Mdrawer extends StatelessWidget {
 
   void _onTap(BuildContext context, String path, dynamic arguments) {
     final MDrawerController controller = Get.find<MDrawerController>();
-    context.pushNamed(path, arguments: arguments);
+    Get.context!.pushNamed(path, arguments: arguments);
     controller.toggleDrawer();
   }
 
@@ -57,12 +59,12 @@ class Mdrawer extends StatelessWidget {
     Dialog alert = Dialog(
       backgroundColor: MColors.grey,
       child: DefaultDialog(
-          title: 'logoutTitle'.tr,
-          message: 'logoutMessage'.tr,
-          redTitle: 'exit'.tr,
+          title: S.of(context).logoutTitle,
+          message: S.of(context).logoutMessage,
+          redTitle: S.of(context).exit,
           redAction: _dialogEsciTap,
-          whiteTitle: 'nullify'.tr,
-          whiteAction: (BuildContext context) => context.navigator.pop()),
+          whiteTitle: S.of(context).nullify,
+          whiteAction: (BuildContext context) => Get.context!.navigator.pop()),
     );
 
     // show the dialog
@@ -77,7 +79,7 @@ class Mdrawer extends StatelessWidget {
   _dialogEsciTap(BuildContext context) {
     final MDrawerController controller = Get.find<MDrawerController>();
     controller.logout();
-    context.navigator
+    Get.context!.navigator
         .pushNamedAndRemoveUntil(Routes.LOGIN_REGISTER, (_) => false);
   }
 }

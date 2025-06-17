@@ -85,5 +85,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'pokebike-9ac6c.appspot.com',
     measurementId: 'G-VNMZQE8DBC',
   );
-
 }

@@ -1,5 +1,6 @@
 import 'package:moto_hunters/app/data/models/collezione_moto/collezione_moto.dart';
 import 'package:moto_hunters/app/data/models/moto/moto.dart';
+import 'package:get/get.dart';
 
 class MotoDetailsArguments {
   final CollezioneMoto? collezioneMoto;

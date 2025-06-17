@@ -30,7 +30,9 @@ class BottomNavbarButton extends StatelessWidget {
         ? item.routes!.contains(Get.currentRoute)
         : Get.currentRoute == item.route;
     // final Color color = isSelected ? selectedColor : unselectedColor;
-    final String addName = isSelected ? " red" : "";
+    final bool isLogo = item.iconName.toLowerCase().contains('logo');
+    // Se è il logo centrale non aggiungiamo la variante "red" quando è selezionato
+    final String addName = (isSelected && !isLogo) ? " red" : "";
     // item.iconName.toLowerCase().contains("foto")
     Widget mIcon = MIcon(
       name: item.iconName + addName,
@@ -47,7 +49,7 @@ class BottomNavbarButton extends StatelessWidget {
     //     : mIcon;
     // return mIcon;
     return Container(
-      width: context.width * 0.9 * 0.2,
+      width: Get.context!.width * 0.9 * 0.2,
       alignment: Alignment.bottomCenter,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -64,7 +66,7 @@ class BottomNavbarButton extends StatelessWidget {
           AutoSizeText(
             item.label,
             maxLines: 1,
-            style: context.textTheme.bodyMedium
+            style: Get.context!.textTheme.bodyMedium
                 ?.copyWith(color: isSelected ? selectedColor : unselectedColor),
           )
         ],

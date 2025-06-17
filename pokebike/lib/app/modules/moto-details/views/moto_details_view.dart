@@ -6,6 +6,7 @@ import 'package:moto_hunters/app/config/colors.dart';
 import 'package:moto_hunters/app/config/constants.dart';
 import 'package:moto_hunters/app/data/api_response.dart';
 import 'package:moto_hunters/app/data/models/collezione_moto/collezione_moto.dart';
+import 'package:moto_hunters/app/data/models/moto/moto.dart';
 import 'package:moto_hunters/app/modules/moto-details/moto_details_arguments.dart';
 
 import 'package:moto_hunters/app/modules/moto-details/views/moto_details_info.dart';
@@ -16,9 +17,11 @@ import 'package:moto_hunters/app/modules/moto-details/views/pagination_row.dart'
 import 'package:moto_hunters/app/shared/default_page.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/utils/api_utils.dart';
+import 'package:moto_hunters/app/shared/widgets/image_gallery.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
 
 import '../controllers/moto_details_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class MotoDetailsView extends StatelessWidget {
   const MotoDetailsView({super.key});
@@ -45,6 +48,11 @@ class MotoDetailsView extends StatelessWidget {
 
   DefaultPage _buildPage(
       MotoDetailsController controller, BuildContext context) {
+    final moto = (controller.collezioneMoto?.moto == null
+        ? controller.moto != null
+            ? controller.moto!
+            : Moto.fake(0)
+        : controller.collezioneMoto!.moto!);
     return DefaultPage(
         backButton: true,
         backgroundColor: Colors.black,
@@ -83,32 +91,32 @@ class MotoDetailsView extends StatelessWidget {
             slivers: [
               SliverAppBar(
                 automaticallyImplyLeading: false,
-                expandedHeight: context.height * 0.25,
+                expandedHeight: Get.context!.height * 0.25,
                 backgroundColor: Colors.black,
                 snap: false,
                 pinned: false,
                 floating: true,
                 surfaceTintColor: Colors.transparent,
                 flexibleSpace: FlexibleSpaceBar(
-                  background: MotoMainPhoto(
-                    collezioneMoto: controller.collezioneMoto ??
-                        CollezioneMoto.fake(0).copyWith(moto: controller.moto!),
+                  background: ImageGallery(
+                    images: moto.photos,
+                    canReport: !controller.isOwnMoto.value,
                   ),
                 ),
               ),
               controller.moto != null
                   ? SliverPadding(
                       padding: EdgeInsets.only(
-                          bottom: context.keyboardHeight == 0
+                          bottom: Get.context!.keyboardHeight == 0
                               ? Constants.bottomNavbarHeight
-                              : context.keyboardHeight),
+                              : Get.context!.keyboardHeight),
                       sliver: SliverList(
                         delegate: SliverChildListDelegate(
                           [
                             Center(
                               child: Text(
                                 controller.moto!.nome,
-                                style: context.textTheme.displaySmall,
+                                style: Get.context!.textTheme.displaySmall,
                               ),
                             ),
                             const PaginationRow(),
@@ -142,9 +150,9 @@ class MotoDetailsView extends StatelessWidget {
 
   _setFavorita(BuildContext context, MotoDetailsController controller) async {
     final ApiResponse response = await controller.setFavorita();
-    if (context.mounted) {
+    if (Get.context!.mounted) {
       handleApiResponse(context, response,
-          successMessage: 'favouriteMotoSaved'.tr);
+          successMessage: S.of(context).favouriteMotoSaved);
     }
   }
 }

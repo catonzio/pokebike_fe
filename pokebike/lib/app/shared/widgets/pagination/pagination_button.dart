@@ -29,7 +29,7 @@ class PaginationButton extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: context.textTheme.bodySmall!
+          style: Get.context!.textTheme.bodySmall!
               .copyWith(color: isSelected ? Colors.white : Colors.grey),
         ),
       ),

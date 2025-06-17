@@ -6,6 +6,7 @@ import 'package:moto_hunters/app/shared/controllers/filter_sheet_controller.dart
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/mbutton.dart';
 import 'package:moto_hunters/app/shared/widgets/search_row/filter_modal_box.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class FilterModalSheet extends GetView<FilterSheetController> {
   final Function(SearchOptions) onSave;
@@ -15,7 +16,7 @@ class FilterModalSheet extends GetView<FilterSheetController> {
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        height: context.height * 0.7,
+        height: Get.context!.height * 0.7,
         padding: const EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -34,11 +35,11 @@ class FilterModalSheet extends GetView<FilterSheetController> {
             Padding(
               padding: const EdgeInsets.only(top: 8.0, bottom: 16),
               child: MButton(
-                  label: 'apply'.tr, onTap: () => _applicaClicked(context)),
+                  label: S.of(context).apply, onTap: () => _applicaClicked(context)),
             ),
             MButton(
-              label: 'cancel'.tr,
-              onTap: () => context.navigator.pop(),
+              label: S.of(context).cancel,
+              onTap: () => Get.context!.navigator.pop(),
               color: Colors.white,
               textColor: MColors.primary,
             ),
@@ -51,6 +52,6 @@ class FilterModalSheet extends GetView<FilterSheetController> {
     print(options);
     onSave(options);
     // controller.reset();
-    context.navigator.pop();
+    Get.context!.navigator.pop();
   }
 }

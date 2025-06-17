@@ -23,7 +23,7 @@ class MainBodyList extends GetView<LeaderboardController> {
                   enabled: controller.isFetching,
                   child: ListView(
                     controller: controller.scrollController,
-                    itemExtent: context.height * 0.1,
+                    itemExtent: Get.context!.height * 0.1,
                     // padding: const EdgeInsets.only(bottom: 24),
                     padding: const EdgeInsets.only(
                         bottom: Constants.bottomNavbarHeight),

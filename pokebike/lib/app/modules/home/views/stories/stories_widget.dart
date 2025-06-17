@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moto_hunters/app/data/models/api_media/api_media.dart';
 import 'package:moto_hunters/app/modules/home/controllers/home_controller.dart';
 import 'package:moto_hunters/app/shared/widgets/mcircular_avatar.dart';
 import 'package:moto_hunters/app/shared/utils/mimage_provider.dart';
@@ -19,7 +20,7 @@ class StoriesWidget extends GetView<HomeController> {
             enabled: controller.isLoadingStories,
             child: ListView(
                 scrollDirection: Axis.horizontal,
-                itemExtent: context.width * 0.25,
+                itemExtent: Get.context!.width * 0.25,
                 children: (controller.isLoadingStories
                         ? controller.fakeStories
                         : controller.stories)
@@ -28,7 +29,9 @@ class StoriesWidget extends GetView<HomeController> {
                         padding: const EdgeInsets.all(8.0),
                         child: MCircularAvatar(
                             // index: e.$1,
-                            imagePath: MImageProvider.getImageUrl(index: e.$1),
+                            avatar: ApiMedia(
+                                id: e.$1,
+                                url: MImageProvider.getImageUrl(index: e.$1)),
                             radius: height * 0.3,
                             text: e.$2,
                             onTap: () => "Story ${e.$2} tapped")))

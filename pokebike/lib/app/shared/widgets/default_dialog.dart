@@ -23,8 +23,8 @@ class DefaultDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: context.height * 0.3,
-      width: context.width * 0.4,
+      height: Get.context!.height * 0.3,
+      width: Get.context!.width * 0.4,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -34,13 +34,13 @@ class DefaultDialog extends StatelessWidget {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: context.textTheme.bodyLarge!
+              style: Get.context!.textTheme.bodyLarge!
                   .copyWith(fontWeight: FontWeight.bold),
             ),
             Text(
               message,
               textAlign: TextAlign.center,
-              style: context.textTheme.bodySmall,
+              style: Get.context!.textTheme.bodySmall,
             ),
             MButton(label: redTitle, onTap: () => redAction(context)),
             MButton(

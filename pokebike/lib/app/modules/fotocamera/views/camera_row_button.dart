@@ -28,7 +28,7 @@ class CameraRowButton extends StatelessWidget {
           child: AutoSizeText(
             text,
             maxLines: 1,
-            style: context.theme.textTheme.labelLarge!
+            style: Get.context!.theme.textTheme.labelLarge!
                 .copyWith(color: isSelected ? Colors.white : Colors.grey),
           )),
     );

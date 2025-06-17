@@ -17,8 +17,8 @@ class UpperButton extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(16),
       child: Container(
-        width: context.width * 0.4,
-        height: context.height * 0.1,
+        width: Get.context!.width * 0.4,
+        height: Get.context!.height * 0.1,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: MColors.containerRed,

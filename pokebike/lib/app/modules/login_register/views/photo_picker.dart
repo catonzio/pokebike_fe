@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/mbutton.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class PhotoPicker extends StatelessWidget {
   final String text;
@@ -26,20 +29,32 @@ class PhotoPicker extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             InkWell(
-              onTap: () => _selectAvatar(context),
+              onTap: () => _selectAvatar(context, field),
               child: Container(
-                height: context.height * 0.08,
+                height: field.value != null
+                    ? Get.context!.width
+                    : Get.context!.height * 0.08,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(32),
                   border: Border.all(color: MColors.secondary, width: 3),
+                  image: field.value != null
+                      ? DecorationImage(
+                          image: FileImage(File(field.value!.path)),
+                          fit: BoxFit.cover,
+                        )
+                      : null,
                 ),
                 alignment: Alignment.center,
-                padding: const EdgeInsets.all(16),
-                child: Text(
-                  text,
-                  textAlign: TextAlign.center,
-                ),
+                child: field.value == null
+                    ? Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Text(
+                          text,
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    : null,
               ),
             ),
             if (field.errorText != null)
@@ -61,13 +76,13 @@ class PhotoPicker extends StatelessWidget {
         context: context,
         builder: (BuildContext context) {
           return Container(
-            height: context.height * 0.3,
+            height: Get.context!.height * 0.3,
             padding: const EdgeInsets.all(16),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text('whereSelectImg'.tr),
+                  Text(S.of(context).whereSelectImg),
                   Row(
                     children: [
                       Expanded(
@@ -75,18 +90,27 @@ class PhotoPicker extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: MButton(
-                                label: 'camera'.tr,
-                                onTap: () =>
-                                    context.navigator.pop(ImageSource.camera)),
+                                label: S.of(context).camera,
+                                onTap: () => Get.context!.navigator
+                                    .pop(ImageSource.camera)),
                           )),
                       Expanded(
                           flex: 2,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: MButton(
-                                label: 'gallery'.tr,
-                                onTap: () =>
-                                    context.navigator.pop(ImageSource.gallery)),
+                                label: S.of(context).gallery,
+                                onTap: () {
+                                  if (false /* Get.currentRoute != Routes.GARAGE */) {
+                                    Get.context!.navigator.pop();
+                                    Get.snackbar(
+                                        '', S.of(context).galleryLockedMessage,
+                                        snackPosition: SnackPosition.BOTTOM);
+                                  } else {
+                                    Get.context!.navigator
+                                        .pop(ImageSource.gallery);
+                                  }
+                                }),
                           ))
                     ],
                   )
@@ -98,15 +122,15 @@ class PhotoPicker extends StatelessWidget {
     return source;
   }
 
-  _selectAvatar(BuildContext context) async {
+  _selectAvatar(BuildContext context, FormFieldState<XFile> field) async {
     final ImageSource? source = await _selectImageSource(context);
     if (source != null) {
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: source);
       if (image != null) {
+        field.didChange(image);
         print(image.path);
         onSuccess(image);
-        // controller.avatar = image.path;
       }
     }
   }

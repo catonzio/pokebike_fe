@@ -11,6 +11,7 @@ import 'package:moto_hunters/app/shared/utils/decoration_image.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../controllers/login_register_controller.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class LoginRegisterView extends GetView<LoginRegisterController> {
   const LoginRegisterView({super.key});
@@ -27,7 +28,7 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SizedBox(
-          height: context.height * 0.4,
+          height: Get.context!.height * 0.4,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,14 +62,14 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
         children: [
           Image.asset(
             "assets/icons/google.png",
-            height: context.height * 0.03,
+            height: Get.context!.height * 0.03,
             fit: BoxFit.contain,
           ),
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: Text(
-              'registerGoogle'.tr,
-              style: context.textTheme.bodySmall
+              S.of(context).registerGoogle,
+              style: Get.context!.textTheme.bodySmall
                   ?.copyWith(color: MColors.primaryDark),
             ),
           )
@@ -85,15 +86,15 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
           child: MButton(
             onPressed: () => _access(context),
             backgroundColor: MColors.secondary,
-            child: Text('access'.tr, style: context.textTheme.bodySmall),
+            child: Text(S.of(context).access, style: Get.context!.textTheme.bodySmall),
           ),
         ),
         MButton(
           onPressed: () => _register(context),
           backgroundColor: Colors.white,
           child: Text(
-            'registerYou'.tr,
-            style: context.textTheme.bodySmall!
+            S.of(context).registerYou,
+            style: Get.context!.textTheme.bodySmall!
                 .copyWith(color: MColors.primaryDark),
           ),
         ),
@@ -102,34 +103,34 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
   }
 
   _access(BuildContext context) {
-    context.pushNamed(Routes.LOGIN);
+    Get.context!.pushNamed(Routes.LOGIN);
   }
 
   _register(BuildContext context) {
-    context.pushNamed(Routes.REGISTER);
+    Get.context!.pushNamed(Routes.REGISTER);
   }
 
   _socialRegister(
       BuildContext context, Future<ApiResponse> Function() func) async {
     ApiResponse response = await func(); // controller.googleRegister();
     if (!response.success && response.status == 410) {
-      if (context.mounted) {
-        context.pushNamed(Routes.REGISTER, arguments: response.data);
+      if (Get.context!.mounted) {
+        Get.context!.pushNamed(Routes.REGISTER, arguments: response.data);
       }
       return;
     }
     if (response.success) {
       Storage.to.apiToken = response.data;
-      controller.checkToken().then((bool value) => !context.mounted
+      controller.checkToken().then((bool value) => !Get.context!.mounted
           ? null
           : value
-              ? context.navigator
+              ? Get.context!.navigator
                   .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
-              : context.navigator.pushNamedAndRemoveUntil(
+              : Get.context!.navigator.pushNamedAndRemoveUntil(
                   Routes.CONFIRM_REGISTER,
                   (r) => r.settings.name == Routes.LOGIN_REGISTER));
-      // if (context.mounted) {
-      //   context.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
+      // if (Get.context!.mounted) {
+      //   Get.context!.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
       // }
     } else {
       if (context.mounted) {
@@ -189,9 +190,9 @@ class OppureRow extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'or'.tr,
+                S.of(context).or,
                 textAlign: TextAlign.center,
-                style: context.textTheme.titleMedium,
+                style: Get.context!.textTheme.titleMedium,
               ),
             ),
           ),

@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 
 const Color grey900 = Color(0xFF212121);
 const Color grey600 = Color(0xFF757575);

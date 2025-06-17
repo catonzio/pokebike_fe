@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:moto_hunters/app/config/colors.dart';
+import 'package:get/get.dart';
 
 class MRadioButton<T> extends StatelessWidget {
   final T value;

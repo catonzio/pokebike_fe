@@ -3,6 +3,7 @@ import 'package:moto_hunters/app/data/api_response.dart';
 import 'package:moto_hunters/app/data/models/notifica/notifica.dart';
 import 'package:moto_hunters/app/modules/notifications/providers/notifica_provider.dart';
 import 'package:moto_hunters/app/shared/controllers/api_pagination_controller.dart';
+import 'package:get/get.dart';
 
 class NotificationsController extends ApiPaginationController<Notifica> {
   final NotificaProvider provider;

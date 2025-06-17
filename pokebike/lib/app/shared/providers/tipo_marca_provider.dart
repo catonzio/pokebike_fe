@@ -3,6 +3,7 @@ import 'package:moto_hunters/app/config/constants.dart';
 import 'package:moto_hunters/app/data/api_response.dart';
 import 'package:moto_hunters/app/data/models/marca_moto/marca_moto.dart';
 import 'package:moto_hunters/app/data/models/tipo_moto/tipo_moto.dart';
+import 'package:moto_hunters/app/data/models/collezione_moto/collezione_moto.dart';
 import 'package:moto_hunters/app/shared/utils/api_utils.dart';
 
 class TipoMarcaProvider extends GetConnect {
@@ -73,6 +74,17 @@ class TipoMarcaProvider extends GetConnect {
       return TipoMoto.fromJson(response.data);
     } else {
       return const TipoMoto(id: 0, nome: "");
+    }
+  }
+
+  Future<CollezioneMoto?> fetchCollezioneMotoFromMarcaModello(
+      int marcaId, String modello) async {
+    ApiResponse response = await handleApiEndpoint(request, "get",
+        "/collezione-motos?marcaId=$marcaId&modello=$modello");
+    if (response.success && response.data is List && (response.data as List).isNotEmpty) {
+      return CollezioneMoto.fromJson((response.data as List).first);
+    } else {
+      return null;
     }
   }
 }

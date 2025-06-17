@@ -1,26 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
-import 'package:moto_hunters/app/shared/widgets/utils/mimage_network.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/dynamic_image.dart';
+import 'package:get/get.dart';
 
 class PresentationContainer extends StatelessWidget {
-  final String imagePath;
+  final DynamicImage image;
   final String title;
   final String subtitle;
   final double height;
   final Function() onNext;
+  final Function()? onPrevious;
 
   const PresentationContainer(
       {super.key,
-      required this.imagePath,
+      required this.image,
       required this.title,
       required this.subtitle,
       required this.height,
-      required this.onNext});
+      required this.onNext,
+      this.onPrevious});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+        onHorizontalDragEnd: (details) {
+          if (details.primaryVelocity == null) return;
+          // Negative dx -> swipe left -> next, Positive -> previous
+          if (details.primaryVelocity! < 0) {
+            onNext();
+          } else if (details.primaryVelocity! > 0 && onPrevious != null) {
+            onPrevious!();
+          }
+        },
         onTap: onNext,
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
@@ -32,8 +44,8 @@ class PresentationContainer extends StatelessWidget {
           },
           // child: Container(child: MimageNetwork(path: imagePath)),
           child: Container(
-            key: ValueKey(imagePath),
-            width: context.width,
+            key: ValueKey(image),
+            width: Get.context!.width,
             height: height,
             decoration: BoxDecoration(
                 // image: getDarkDecorationImageApi(imagePath, 0.2),
@@ -44,17 +56,12 @@ class PresentationContainer extends StatelessWidget {
             child: Stack(
               children: [
                 Positioned.fill(
-                  child: ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                        bottomRight: Radius.circular(100),
-                      ),
-                      child: MimageNetwork(
-                        path: imagePath,
-                        lightLevel: 0.7,
-                        cacheWidth: 1080,
-                        cacheHeight: 2018,
-                      )),
-                ),
+                    child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    bottomRight: Radius.circular(100),
+                  ),
+                  child: image,
+                )),
                 InternalText(title: title, subtitle: subtitle),
               ],
             ),
@@ -84,12 +91,12 @@ class InternalText extends StatelessWidget {
           ShimmerTitle.dark(text: title),
           // Text(
           //   title,
-          //   style: context.textTheme.displaySmall
+          //   style: Get.context!.textTheme.displaySmall
           //       ?.copyWith(fontWeight: FontWeight.bold),
           // ),
           ...[
             for (String text in subtitle.split("\n"))
-              Text(text, style: context.textTheme.bodyLarge)
+              Text(text, style: Get.context!.textTheme.bodyLarge)
           ]
         ],
       ),

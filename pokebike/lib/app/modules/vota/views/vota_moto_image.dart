@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:moto_hunters/app/config/colors.dart';
+import 'package:moto_hunters/app/data/models/api_media/api_media.dart';
 import 'package:moto_hunters/app/modules/vota/controllers/vota_controller.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/mimage_network.dart';
 
 class VotaMotoImage extends GetView<VotaController> {
   final double height;
-  final String motoAvatar;
+  final ApiMedia? motoAvatar;
   final bool reversed;
 
   const VotaMotoImage(
@@ -39,7 +40,7 @@ class VotaMotoImage extends GetView<VotaController> {
             alignment: Alignment.center,
             children: [
               MimageNetwork(
-                path: motoAvatar,
+                path: motoAvatar?.url ?? '',
                 borderRadius: BorderRadius.circular(16),
                 lightLevel: controller.hasVoted.value ? 0.4 : 1,
                 cacheHeight: 106,
@@ -50,7 +51,7 @@ class VotaMotoImage extends GetView<VotaController> {
                 duration: const Duration(seconds: 1),
                 child: Text(
                   "${((reversed ? 1 - controller.percentage.value : controller.percentage.value) * 100).toPrecision(2)}%",
-                  style: context.textTheme.displaySmall,
+                  style: Get.context!.textTheme.displaySmall,
                 ),
               )
             ],

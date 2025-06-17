@@ -17,8 +17,8 @@ class Indicator extends StatelessWidget {
           child: Transform(
             transform: Matrix4.rotationZ(0.3),
             child: Container(
-              height: context.height * 0.033,
-              width: context.width * 0.025,
+              height: Get.context!.height * 0.033,
+              width: Get.context!.width * 0.025,
               decoration: BoxDecoration(
                   color: i * (100 / 15) < (percentage * 100)
                       ? MColors.secondaryDark

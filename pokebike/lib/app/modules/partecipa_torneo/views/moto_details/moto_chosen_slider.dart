@@ -7,6 +7,7 @@ import 'package:moto_hunters/app/modules/partecipa_torneo/controllers/partecipa_
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/utils/api_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/default_dialog.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class MotoChosenButton extends GetView<PartecipaTorneoController> {
   final int motoId;
@@ -20,7 +21,7 @@ class MotoChosenButton extends GetView<PartecipaTorneoController> {
       child: MButton.red(
         onPressed: () => _showDialog(context),
         padding: const EdgeInsets.all(8),
-        child: Text('chooseYou'.tr),
+        child: Text(S.of(context).chooseYou),
       ),
     );
     // return GestureDetector(
@@ -33,8 +34,8 @@ class MotoChosenButton extends GetView<PartecipaTorneoController> {
     //     }
     //   },
     //   child: Container(
-    //     width: context.width * 0.13,
-    //     height: context.height * 0.2,
+    //     width: Get.context!.width * 0.13,
+    //     height: Get.context!.height * 0.2,
     //     decoration: const BoxDecoration(
     //       color: Colors.white,
     //       borderRadius: BorderRadius.only(
@@ -74,12 +75,12 @@ class MotoChosenButton extends GetView<PartecipaTorneoController> {
     Dialog alert = Dialog(
       backgroundColor: MColors.grey,
       child: DefaultDialog(
-          title: 'motoForRaceTitle'.tr,
-          message: 'motoForRaceMessage'.tr,
-          redTitle: 'choose'.tr,
+          title: S.of(context).motoForRaceTitle,
+          message: S.of(context).motoForRaceMessage,
+          redTitle: S.of(context).choose,
           redAction: _dialogOkTap,
-          whiteTitle: 'nullify'.tr,
-          whiteAction: (BuildContext context) => context.navigator.pop()),
+          whiteTitle: S.of(context).nullify,
+          whiteAction: (BuildContext context) => Get.context!.navigator.pop()),
     );
 
     // show the dialog
@@ -93,11 +94,11 @@ class MotoChosenButton extends GetView<PartecipaTorneoController> {
 
   _dialogOkTap(BuildContext context) async {
     ApiResponse response = await controller.chooseMoto(motoId);
-    if (context.mounted) {
+    if (Get.context!.mounted) {
       handleApiResponse(context, response,
-          successMessage: 'selectedMoto'.tr,
-          errorMessage: 'selectedMotoError'.tr);
-      context.navigator.pop();
+          successMessage: S.of(context).selectedMoto,
+          errorMessage: S.of(context).selectedMotoError);
+      Get.context!.navigator.pop();
     }
   }
 }

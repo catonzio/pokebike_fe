@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class NavbarItem {
   final String label;
@@ -20,26 +21,26 @@ class NavbarItem {
 
 final List<NavbarItem> bottomNavbarItems = [
   NavbarItem(
-    label: 'home'.tr,
+    label: S.of(Get.context!).home,
     iconName: "Home icon",
     size: 30,
     route: Routes.HOME,
   ),
   NavbarItem(
-    label: 'garage'.tr,
+    label: S.of(Get.context!).garage,
     iconName: "Garage icon",
     size: 30,
     route: Routes.GARAGE,
   ),
   NavbarItem(
-    label: 'photocamera'.tr,
+    label: S.of(Get.context!).photocamera,
     iconName: "Logo",
     size: 70,
     route: Routes.FOTOCAMERA,
     // shouldPop: false,
   ),
   NavbarItem(
-    label: 'tournament'.tr,
+    label: S.of(Get.context!).tournament,
     iconName: "Torneo icon",
     size: 30,
     route: Routes.TORNEO,
@@ -51,7 +52,7 @@ final List<NavbarItem> bottomNavbarItems = [
     ],
   ),
   NavbarItem(
-    label: 'profile'.tr,
+    label: S.of(Get.context!).profile,
     iconName: "Profile icon",
     size: 30,
     route: Routes.PROFILE,

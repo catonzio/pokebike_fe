@@ -12,6 +12,7 @@ import 'package:moto_hunters/app/shared/utils/api_utils.dart';
 import 'package:moto_hunters/app/modules/community/views/community_tile.dart';
 import 'package:moto_hunters/app/shared/widgets/paginator_widget.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class CommunityList extends StatelessWidget {
   final bool isHorizontal;
@@ -35,11 +36,11 @@ class CommunityList extends StatelessWidget {
                     child: CommunityTile(
                       index: e.id,
                       text: fullName(e),
-                      imagePath: e.motoFavoritaAvatar,
-                      profileImagePath: e.avatar,
+                      image: e.motoFavoritaAvatar,
+                      profileImage: e.avatar,
                       onTap: () {
                         controller.focusNode.unfocus();
-                        context.pushNamed(
+                        Get.context!.pushNamed(
                           Routes.PROFILE,
                           arguments: ProfileArguments(user: e),
                         );
@@ -53,7 +54,7 @@ class CommunityList extends StatelessWidget {
             child: children.isEmpty
                 ? Align(
                     alignment: Alignment.topCenter,
-                    child: Text('emptyCommunity'.tr))
+                    child: Text(S.of(context).emptyCommunity))
                 : isHorizontal
                     ? HorizontalCommunityList(children: children)
                     : RefreshIndicator.adaptive(
@@ -104,7 +105,7 @@ class HorizontalCommunityList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-        itemExtent: context.width * 0.45,
+        itemExtent: Get.context!.width * 0.45,
         scrollDirection: Axis.horizontal,
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
         children: children.sublist(

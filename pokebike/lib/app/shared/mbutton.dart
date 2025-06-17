@@ -23,7 +23,7 @@ class MButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle = context.textTheme.bodyMedium!;
+    TextStyle textStyle = Get.context!.textTheme.bodyMedium!;
     if (textColor != null) {
       textStyle = textStyle.copyWith(color: textColor);
     }

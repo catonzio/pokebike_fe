@@ -5,6 +5,9 @@ import 'package:moto_hunters/app/data/models/user/user.dart';
 import 'package:moto_hunters/app/modules/profile/profile_arguments.dart';
 import 'package:moto_hunters/app/modules/profile/providers/profile_provider.dart';
 import 'package:moto_hunters/app/shared/widgets/pagination/pagination_item.dart';
+import 'package:moto_hunters/generated/l10n.dart';
+import 'package:moto_hunters/app/shared/widgets/info_dialog.dart';
+import 'package:moto_hunters/app/shared/controllers/storage.dart';
 
 class ProfileController extends GetxController {
   ProfileArguments? argumentUser = Get.arguments as ProfileArguments?;
@@ -74,14 +77,18 @@ class ProfileController extends GetxController {
         (arguments.user == null && arguments.profileId == null)) {
       isOwnProfile.value = true;
       isFetchingUser.value = true;
-      user.value = await provider.fetchUserMe();
+      // Richiedo i dati dell'utente; se null evito crash
+      final fetchedUser = await provider.fetchUserMe();
       isFetchingUser.value = false;
-      setUserProfile();
+      if (fetchedUser == null) return;
+      user.value = fetchedUser;
+      // Recupero il profilo solo se utente valido
+      await setUserProfile();
 
       // se negli arguments c'e lo user
     } else if (arguments.user != null) {
       user.value = arguments.user;
-      setUserProfile();
+      await setUserProfile();
       isOwnProfile.value = false;
       // se negli arguments c'e il profileId
     } else if (arguments.user == null && arguments.profileId != null) {
@@ -100,9 +107,18 @@ class ProfileController extends GetxController {
 
   Future<void> setUserProfile() async {
     isFetchingProfile.value = true;
-    user.value = user.value!
-        .copyWith(profile: await provider.fetchProfile(user.value!.profileId));
+    // Protezione: esco se user null
+    final currentUser = user.value;
+    if (currentUser == null) {
+      isFetchingProfile.value = false;
+      return;
+    }
+    // Recupero profilo; se null mantengo utente corrente
+    final profile = await provider.fetchProfile(currentUser.profileId);
     isFetchingProfile.value = false;
+    if (profile != null) {
+      user.value = currentUser.copyWith(profile: profile);
+    }
   }
 
   Future<void> fetchTopMotos() async {
@@ -122,10 +138,14 @@ class ProfileController extends GetxController {
 
   Future<void> fetchCoccarde() async {
     isLoadingCoccarde.value = true;
-    final Map<String, int> coccarde =
-        await provider.fetchCockades(user.value!.profileId);
-    coccardeScore.value = coccarde;
-    isLoadingCoccarde.value = false;
+    try {
+      final fetched = await provider.fetchCockades(user.value?.profileId ?? 0);
+      coccardeScore.value = fetched;
+    } catch (e) {
+      coccardeScore.value = {};
+    } finally {
+      isLoadingCoccarde.value = false;
+    }
   }
 
   // bool get isGarage => selectedIndex.value == 0;
@@ -133,20 +153,24 @@ class ProfileController extends GetxController {
   bool get isClassifica => selectedIndex.value == 1;
 
   List<PaginationItem> get items => [
-        // PaginationItem(
-        //     text: "Collezione",
-        //     index: 0,
-        //     leftPadding: 0.0,
-        //     rightPadding: 8.0,
-        //     onPressed: () => changeIndex(0)),
         PaginationItem(
-            text: 'medals'.tr,
-            index: 0,
-            leftPadding: 8.0,
-            rightPadding: 8.0,
-            onPressed: () => changeIndex(0)),
+          text: S.of(Get.context!).medals,
+          index: 0,
+          leftPadding: 8.0,
+          rightPadding: 8.0,
+          onPressed: () {
+            changeIndex(0);
+            if (!Storage.to.hasSeenMedaglieInfo) {
+              showInfoDialog(
+                Get.context!,
+                S.of(Get.context!).medaglieInfoMessage,
+                onNeverShowAgain: () => Storage.to.hasSeenMedaglieInfo = true,
+              );
+            }
+          },
+        ),
         PaginationItem(
-            text: 'leaderboard'.tr,
+            text: S.of(Get.context!).leaderboard,
             index: 1,
             leftPadding: 8.0,
             rightPadding: 0.0,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moto_hunters/app/shared/widgets/shimmer_title.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class CommunityTitle extends StatelessWidget {
   final Function()? onTap;
@@ -16,16 +17,16 @@ class CommunityTitle extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           ShimmerTitle.light(
-            text: 'community'.tr,
-            style: context.textTheme.headlineLarge!
+            text: S.of(context).community,
+            style: Get.context!.textTheme.headlineLarge!
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           if (onTap != null)
             InkWell(
               onTap: onTap,
               child: Text(
-                'seeAll'.tr,
-                style: context.textTheme.bodySmall,
+                S.of(context).seeAll,
+                style: Get.context!.textTheme.bodySmall,
               ),
             )
         ],

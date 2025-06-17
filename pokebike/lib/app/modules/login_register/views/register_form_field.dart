@@ -19,10 +19,14 @@ class RegisterFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 8,
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Text(model.label),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(model.label),
+        ),
         model.isPassword
             ? Obx(() => TextFormField(
                 controller: model.controller,

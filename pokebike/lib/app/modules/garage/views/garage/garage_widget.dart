@@ -13,6 +13,7 @@ import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/search_row/search_row.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class GarageWidget extends GetView<GarageWController> {
   const GarageWidget({super.key});
@@ -41,7 +42,7 @@ class GarageWidget extends GetView<GarageWController> {
               focusNode: controller.focusNode),
         ),
         elements.isEmpty
-            ? Center(child: Text('noMotoFoundFilter'.tr))
+            ? Center(child: Text(S.of(Get.context!).noMotoFoundFilter))
             : GridView.builder(
                 gridDelegate: Constants.gridDelegate,
                 shrinkWrap: true,
@@ -64,7 +65,7 @@ class GarageWidget extends GetView<GarageWController> {
     controller.focusNode.unfocus();
     // final bool isGarage = controller.isShowingGarage.value;
     if (m != null) {
-      context.pushNamed(Routes.MOTO_DETAILS,
+      Get.context!.pushNamed(Routes.MOTO_DETAILS,
           arguments: MotoDetailsArguments(
               moto: m, isOwnMoto: true, canSetFavourite: true));
       // .then((value) => controller.isShowingGarage.value = isGarage);

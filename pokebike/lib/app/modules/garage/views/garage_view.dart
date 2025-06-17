@@ -9,7 +9,10 @@ import 'package:moto_hunters/app/modules/garage/views/profile_widget.dart';
 import 'package:moto_hunters/app/shared/controllers/api_pagination_controller.dart';
 import 'package:moto_hunters/app/shared/default_page.dart';
 import 'package:moto_hunters/app/shared/widgets/sliver_refresh.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:moto_hunters/app/shared/widgets/info_dialog.dart';
+import 'package:moto_hunters/app/shared/controllers/storage.dart';
 
 import '../controllers/garage_controller.dart';
 
@@ -17,22 +20,44 @@ class GarageView extends GetView<GarageController> {
   const GarageView({super.key});
   @override
   Widget build(BuildContext context) {
+    // mostra dialog info Garage o Collezione al cambio se non già mostrato
     final ApiPaginationController apiController =
         (controller.isShowingGarage.value
             ? controller.garageWController
             : controller.collezioneController as ApiPaginationController);
-    return Obx(() => DefaultPage(
-          backButton: true,
-          body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: _mainBody(apiController, context),
-          ),
-          fabOnTap: apiController.showFAB
-              ? () => apiController.scrollController.animateTo(0,
-                  duration: Duration(milliseconds: 500),
-                  curve: Curves.decelerate)
-              : null,
-        ));
+    return Obx(() {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!controller.hasShownInitialInfo.value) {
+          controller.hasShownInitialInfo.value = true;
+          if (controller.isShowingGarage.value &&
+              !Storage.to.hasSeenGarageInfo) {
+            showInfoDialog(
+              context,
+              S.of(context).garageInfoMessage,
+              onNeverShowAgain: () => Storage.to.hasSeenGarageInfo = true,
+            );
+          } else if (!controller.isShowingGarage.value &&
+              !Storage.to.hasSeenCollectionInfo) {
+            showInfoDialog(
+              context,
+              S.of(context).collectionInfoMessage,
+              onNeverShowAgain: () => Storage.to.hasSeenCollectionInfo = true,
+            );
+          }
+        }
+      });
+      return DefaultPage(
+        backButton: true,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: _mainBody(apiController, context),
+        ),
+        fabOnTap: apiController.showFAB
+            ? () => apiController.scrollController.animateTo(0,
+                duration: Duration(milliseconds: 500), curve: Curves.decelerate)
+            : null,
+      );
+    });
   }
 
   Widget _mainBody(
@@ -47,7 +72,7 @@ class GarageView extends GetView<GarageController> {
       slivers: [
         SliverAppBar(
           automaticallyImplyLeading: false,
-          expandedHeight: context.height * 0.295,
+          expandedHeight: Get.context!.height * 0.295,
           snap: false,
           pinned: false,
           floating: false,
@@ -60,9 +85,9 @@ class GarageView extends GetView<GarageController> {
                       enabled: controller.user.value == null,
                       child: controller.user.value != null
                           ? ProfileWidget(
-                              radius: context.height * 0.07,
+                              radius: Get.context!.height * 0.07,
                               text: fullName(controller.user.value!),
-                              imagePath: controller.user.value!.avatar,
+                              image: controller.user.value!.avatar,
                             )
                           : const SizedBox.shrink(),
                     )),
@@ -87,8 +112,8 @@ class GarageView extends GetView<GarageController> {
     //           right: 100,
     //           bottom: Constants.bottomNavbarHeight * 2,
     //           // right: 100,
-    //           // height: context.height * 0.01,
-    //           // width: context.width * 0.01,
+    //           // height: Get.context!.height * 0.01,
+    //           // width: Get.context!.width * 0.01,
     //           child: AnimatedSwitcher(
     //             duration: Duration(milliseconds: 300),
     //             child: apiController.showFAB

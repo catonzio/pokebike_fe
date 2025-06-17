@@ -63,9 +63,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '776310891261',
     projectId: 'pokebike-1fc5d',
     storageBucket: 'pokebike-1fc5d.firebasestorage.app',
-    androidClientId: '776310891261-3rqig8972hj76co96ie4ouogvteqfphc.apps.googleusercontent.com',
-    iosClientId: '776310891261-64dv07g5f1726nn87lk2rsaurev0ernk.apps.googleusercontent.com',
+    androidClientId:
+        '776310891261-3rqig8972hj76co96ie4ouogvteqfphc.apps.googleusercontent.com',
+    iosClientId:
+        '776310891261-64dv07g5f1726nn87lk2rsaurev0ernk.apps.googleusercontent.com',
     iosBundleId: 'com.resmedia.pokebike',
   );
-
 }

@@ -5,6 +5,7 @@ import 'package:moto_hunters/app/modules/profile/views/medaglie/medaglia_widget.
 import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/extensions/nums_utils.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 Medals medagliaName(int numCatture) {
   if (numCatture.inRange(lb: Medals.none.lb, ub: Medals.none.ub, lbe: true)) {
@@ -44,7 +45,7 @@ class MedaglieRowWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 32),
       child: GestureDetector(
-        onTap: () => context.navigator
+        onTap: () => Get.context!.navigator
             .pushNamed(Routes.MEDALS_DETAILS, arguments: numCatture),
         behavior: HitTestBehavior.opaque,
         child: Row(
@@ -53,18 +54,18 @@ class MedaglieRowWidget extends StatelessWidget {
             children: [
               MedagliaWidget(
                   numCatture >= Medals.bronzo.ub! ? "bronzo" : "none",
-                  'bronze'.tr),
+                  S.of(context).bronze),
               MedagliaWidget(
                   numCatture >= Medals.argento.ub! ? "argento" : "none",
-                  'silver'.tr),
+                  S.of(context).silver),
               MedagliaWidget(
-                  numCatture >= Medals.oro.ub! ? "oro" : "none", 'gold'.tr),
+                  numCatture >= Medals.oro.ub! ? "oro" : "none", S.of(context).gold),
               MedagliaWidget(
                   numCatture >= Medals.platino.ub! ? "platino" : "none",
-                  'platinum'.tr),
+                  S.of(context).platinum),
               MedagliaWidget(
                   numCatture >= Medals.diamante.ub! ? "diamante" : "none",
-                  'diamond'.tr),
+                  S.of(context).diamond),
             ]),
       ),
     );

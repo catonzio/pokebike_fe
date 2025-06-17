@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moto_hunters/app/config/colors.dart';
 import 'package:moto_hunters/app/shared/widgets/paginator_widget.dart';
+import 'package:get/get.dart';
 
 class MimageNetworkOld extends StatelessWidget {
   final String path;

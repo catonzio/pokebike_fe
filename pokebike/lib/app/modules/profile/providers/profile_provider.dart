@@ -13,6 +13,7 @@ class ProfileProvider extends GetConnect {
   @override
   void onInit() {
     httpClient.baseUrl = Constants.apiBaseUrl;
+    httpClient.timeout = const Duration(seconds: 30);
   }
 
   Future<ApiResponse> fetchUserMeEndpoint() async {

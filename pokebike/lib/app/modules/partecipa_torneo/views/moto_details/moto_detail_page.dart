@@ -4,6 +4,7 @@ import 'package:moto_hunters/app/data/models/moto/moto.dart';
 import 'package:moto_hunters/app/modules/partecipa_torneo/controllers/partecipa_torneo_controller.dart';
 import 'package:moto_hunters/app/modules/partecipa_torneo/views/moto_details/moto_detail_body.dart';
 import 'package:moto_hunters/app/modules/partecipa_torneo/views/moto_details/moto_detail_chosen.dart';
+import 'package:moto_hunters/app/shared/widgets/image_gallery.dart';
 import 'package:moto_hunters/app/shared/widgets/photo_detail.dart';
 import 'package:moto_hunters/app/shared/default_page.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
@@ -44,18 +45,18 @@ class MotoDetailPage extends GetView<PartecipaTorneoController> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
-                  onTap: () => context.navigator.push(
+                  onTap: () => Get.context!.navigator.push(
                     MaterialPageRoute(
                         builder: (context) => PhotoDetail(
-                            tag: moto.id.toString(), avatarUrl: moto.avatar)),
+                            tag: moto.id.toString(), avatar: moto.avatar)),
                   ),
                   child: AspectRatio(
                     aspectRatio: 16 / 9,
-                    child: MimageNetwork(
-                      borderRadius: BorderRadius.circular(16),
-                      path: moto.avatar,
-                      cacheHeight: 1038,
-                      cacheWidth: 583,
+                    child: ImageGallery(
+                      images: moto.photos,
+                      height: 250,
+                      aspectRatio: 16 / 9,
+                      canReport: false,
                     ),
                   ),
                 ),
@@ -113,6 +114,6 @@ class MotoDetailPage extends GetView<PartecipaTorneoController> {
         );
       },
     );
-    context.navigator.pushReplacement(builder);
+    Get.context!.navigator.pushReplacement(builder);
   }
 }

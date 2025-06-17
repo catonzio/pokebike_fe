@@ -1,9 +1,11 @@
 // import 'dart:math';
 
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moto_hunters/app/data/api_response.dart';
 import 'package:moto_hunters/app/shared/providers/auth_provider.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class LoginController extends GetxController {
   final RxBool _obscurePassword = true.obs;
@@ -25,20 +27,20 @@ class LoginController extends GetxController {
 
   String? emailValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'emailNoEmpty'.tr;
+      return S.of(Get.context!).emailNoEmpty;
     }
     if (!value.isEmail) {
-      return 'emailNotValid'.tr;
+      return S.of(Get.context!).emailNotValid;
     }
     return null;
   }
 
   String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return 'pwdNoEmpty'.tr;
+      return S.of(Get.context!).pwdNoEmpty;
     }
     if (value.length < 8) {
-      return 'pwd8chars'.tr;
+      return S.of(Get.context!).pwd8chars;
     }
     return null;
   }
@@ -59,7 +61,8 @@ class LoginController extends GetxController {
 
   Future<bool> checkToken() async {
     ApiResponse result = await provider.checkToken();
-    return result.success;
+    // Consider HTTP 200 as success if API does not return a 'success' flag
+    return result.success || result.status == HttpStatus.ok;
   }
 
   Future<ApiResponse> passwordForgot() async {

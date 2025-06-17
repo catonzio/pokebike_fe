@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moto_hunters/app/config/colors.dart';
+import 'package:get/get.dart';
 
 InputDecoration transparentInputDecoration(String hintText,
     {bool isPassword = false,

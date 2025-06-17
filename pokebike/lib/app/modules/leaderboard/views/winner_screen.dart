@@ -7,6 +7,7 @@ import 'package:moto_hunters/app/shared/widgets/giant_title.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/loading_stack.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/mimage_network.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class WinnerScreen extends StatelessWidget {
   const WinnerScreen({super.key});
@@ -22,12 +23,12 @@ class WinnerScreen extends StatelessWidget {
           enabled: controller.isFetchingWinner,
           child: controller.winner.value == null
               // ? Container(
-              //     height: context.height * 0.3,
+              //     height: Get.context!.height * 0.3,
               //     color: Colors.blue,
               //     alignment: Alignment.center,
               //     child: Text(
-              //       'noWinner'.tr,
-              //       style: context.textTheme.displaySmall,
+              //       S.of(context).noWinner,
+              //       style: Get.context!.textTheme.displaySmall,
               //       textAlign: TextAlign.center,
               //     ))
               // : _getBody(controller.winner.value!)
@@ -36,11 +37,11 @@ class WinnerScreen extends StatelessWidget {
                   sigmaY: 8,
                   isLoading: (controller.winner.value == null).obs,
                   topper: Container(
-                      height: context.height * 0.3,
+                      height: Get.context!.height * 0.3,
                       alignment: Alignment.center,
                       child: Text(
-                        'noWinner'.tr,
-                        style: context.textTheme.displaySmall,
+                        S.of(context).noWinner,
+                        style: Get.context!.textTheme.displaySmall,
                         textAlign: TextAlign.center,
                       )),
                   child: SizedBox.shrink(), // _getBody(User.fake(1)),
@@ -57,7 +58,7 @@ class WinnerScreen extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text('winnerIs'.tr),
+          child: Text(S.of(Get.context!).winnerIs),
         ),
         Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16),
@@ -65,7 +66,7 @@ class WinnerScreen extends StatelessWidget {
               aspectRatio: 16 / 9,
               child: SizedBox(
                 child: MimageNetwork(
-                  path: user.avatar,
+                  path: user.avatar?.url ?? '',
                   borderRadius: BorderRadius.circular(16),
                 ),
               ),

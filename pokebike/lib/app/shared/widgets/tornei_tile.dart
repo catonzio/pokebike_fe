@@ -47,14 +47,14 @@ class TorneiTile extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: AutoSizeText(
                     text,
-                    style: context.textTheme.bodyLarge!,
+                    style: Get.context!.textTheme.bodyLarge!,
                     maxLines: 1,
                   )),
             ),
           ),
           Positioned(
-            width: context.width * 0.08,
-            height: context.width * 0.08,
+            width: Get.context!.width * 0.08,
+            height: Get.context!.width * 0.08,
             right: 10,
             bottom: 10,
             child: Container(

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moto_hunters/app/data/models/api_media/api_media.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/back_button.dart';
 // import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/mimage_network.dart';
+import 'package:moto_hunters/app/shared/widgets/photo_report_menu.dart';
 
 class InteractiveController extends GetxController {
   final RxBool isZoomed = false.obs;
@@ -37,9 +39,14 @@ class InteractiveController extends GetxController {
 
 class PhotoDetail extends StatelessWidget {
   final String tag;
-  final String avatarUrl;
+  final ApiMedia? avatar;
+  final bool canReport;
 
-  const PhotoDetail({super.key, required this.tag, required this.avatarUrl});
+  const PhotoDetail(
+      {super.key,
+      required this.tag,
+      required this.avatar,
+      this.canReport = true});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +58,7 @@ class PhotoDetail extends StatelessWidget {
       onInteractionEnd: interactiveController.checkIfZoomed,
       child: MimageNetwork(
         fit: BoxFit.contain,
-        path: avatarUrl,
+        path: avatar?.url ?? '',
       ),
     );
 
@@ -66,7 +73,7 @@ class PhotoDetail extends StatelessWidget {
               // onVerticalDragEnd: (details) {
               //   if (!interactiveController.isZoomed.value &&
               //       details.primaryVelocity! != 0) {
-              //     context.navigator.pop();
+              //     Get.context!.navigator.pop();
               //   }
               // },
               onDoubleTapDown: (details) =>
@@ -79,10 +86,19 @@ class PhotoDetail extends StatelessWidget {
               child: Material(
                 color: Colors.transparent,
                 child: MBackButton(
-                  onPressed: () => context.navigator.pop(),
+                  onPressed: () => Get.context!.navigator.pop(),
                 ),
               ),
-            )
+            ),
+            if (avatar != null && canReport)
+              Positioned(
+                top: 10,
+                right: 10,
+                child: PhotoReportMenu(
+                  //photoId: int.parse(tag),
+                  media: avatar!,
+                ),
+              )
           ],
         ),
       ),

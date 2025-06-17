@@ -6,6 +6,7 @@ import 'package:moto_hunters/app/config/constants.dart';
 import 'package:moto_hunters/app/config/medals_cockades_enums.dart';
 import 'package:moto_hunters/app/shared/default_page.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class MedalsDetails extends StatelessWidget {
   const MedalsDetails({super.key});
@@ -16,9 +17,9 @@ class MedalsDetails extends StatelessWidget {
 
     return DefaultPage(
       backButton: true,
-      title: 'capturedMotos'.tr,
+      title: S.of(context).capturedMotos,
       body: ListView(
-        itemExtent: context.height * 0.2,
+        itemExtent: Get.context!.height * 0.2,
         padding: const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
         children: Medals.values
             .sublist(1)
@@ -45,16 +46,16 @@ class SingleMedagliaDetail extends StatelessWidget {
     int realNum = medaglia.ub == null
         ? numCatturate
         : min<int>(numCatturate, medaglia.ub!);
-    final double medalSize = Size(context.width, context.height).shortestSide;
+    final double medalSize = Size(Get.context!.width, Get.context!.height).shortestSide;
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Text(
-          'percMotosCaptured'.trParams({
-            'realNum': realNum.toString(),
-            'limit': medaglia.ub == null ? "" : "/${medaglia.ub}"
-          }),
-          style: context.textTheme.titleMedium,
+          S.of(context).percMotosCaptured(
+            realNum.toString(),
+            medaglia.ub == null ? "" : "/${medaglia.ub}"
+          ),
+          style: Get.context!.textTheme.titleMedium,
         ),
         Stack(
           alignment: AlignmentDirectional.center,

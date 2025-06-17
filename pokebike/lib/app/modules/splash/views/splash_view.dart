@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:moto_hunters/app/shared/utils/ui_images.dart';
+import 'package:moto_hunters/app/shared/widgets/utils/dynamic_image.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:moto_hunters/app/modules/splash/controllers/splash_controller.dart';
 import 'package:moto_hunters/app/routes/app_pages.dart';
@@ -27,7 +29,7 @@ class SplashViewState extends State<SplashView> {
       await TipoMarcaController.to.initialize();
 
       if (mounted) {
-        context.navigator.pushReplacementNamed(route);
+        Get.context!.navigator.pushReplacementNamed(route);
       }
     });
 
@@ -38,12 +40,13 @@ class SplashViewState extends State<SplashView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF08080a),
-      body: Image.asset(
-        "assets/images/splash_old.png",
-        width: context.width,
-        height: context.height,
-        fit: BoxFit.cover,
-        alignment: Alignment.center,
+      body: SizedBox(
+        height: Get.context!.height,
+        width: Get.context!.width,
+        child: DynamicImage(
+          keyName: UIImageKey.splash,
+          fit: BoxFit.cover,
+        ),
       ),
       // body: SvgPicture.asset(
       //   "assets/images/splash.svg",

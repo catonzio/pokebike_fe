@@ -8,6 +8,7 @@ import 'package:moto_hunters/app/modules/partecipa_torneo/views/moto_details/mot
 import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/giant_title.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 
 class MotoDetailBody extends StatelessWidget {
   final Moto moto;
@@ -32,7 +33,7 @@ class MotoDetailBody extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(4.0),
           child: SizedBox(
-            height: context.height * 0.1,
+            height: Get.context!.height * 0.1,
             child: GiantTitle(
               title: moto.nome,
             ),
@@ -41,7 +42,7 @@ class MotoDetailBody extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(4.0),
           child: SizedBox(
-            height: context.height * 0.1,
+            height: Get.context!.height * 0.1,
             child: AutoSizeText(
               moto.descrizione,
               maxLines: 10,
@@ -52,13 +53,13 @@ class MotoDetailBody extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: InkWell(
-              onTap: () => context.pushNamed(Routes.MOTO_DETAILS,
+              onTap: () => Get.context!.pushNamed(Routes.MOTO_DETAILS,
                   arguments: MotoDetailsArguments(moto: moto)),
               child: Hero(
                 tag: "visualizza_moto",
                 child: Text(
-                  'seeInfo'.tr,
-                  style: context.textTheme.bodyMedium
+                  S.of(context).seeInfo,
+                  style: Get.context!.textTheme.bodyMedium
                       ?.copyWith(color: Colors.amber),
                 ),
               )),
@@ -69,7 +70,7 @@ class MotoDetailBody extends StatelessWidget {
           child: Material(
             type: MaterialType.transparency,
             child: SizedBox(
-              height: context.height * 0.23,
+              height: Get.context!.height * 0.23,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,7 +89,7 @@ class MotoDetailBody extends StatelessWidget {
                   Expanded(
                       flex: 4,
                       child: SizedBox(
-                          height: context.height * 0.05,
+                          height: Get.context!.height * 0.05,
                           child: MotoChosenButton(motoId: moto.id))),
                   Expanded(
                       flex: 3,
