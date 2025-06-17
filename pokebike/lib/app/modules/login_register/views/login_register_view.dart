@@ -8,6 +8,7 @@ import 'package:moto_hunters/app/routes/app_pages.dart';
 import 'package:moto_hunters/app/shared/controllers/storage.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/utils/decoration_image.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../controllers/login_register_controller.dart';
 
@@ -33,7 +34,16 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
             children: [
               _accessRegisterColumn(context),
               const OppureRow(),
-              _googleAccessButton(context)
+              _googleAccessButton(context),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: SignInWithAppleButton(
+                  onPressed: () =>
+                      _socialRegister(context, controller.loginWithApple),
+                  height: context.height * 0.065,
+                  borderRadius: BorderRadius.circular(64),
+                ),
+              )
             ],
           ),
         ),
@@ -43,7 +53,7 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
 
   MButton _googleAccessButton(BuildContext context) {
     return MButton(
-      onPressed: () => _googleRegister(context),
+      onPressed: () => _socialRegister(context, controller.googleRegister),
       backgroundColor: Colors.white,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -99,12 +109,14 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
     context.pushNamed(Routes.REGISTER);
   }
 
-  _googleRegister(BuildContext context) async {
-    ApiResponse response = await controller.googleRegister();
+  _socialRegister(
+      BuildContext context, Future<ApiResponse> Function() func) async {
+    ApiResponse response = await func(); // controller.googleRegister();
     if (!response.success && response.status == 410) {
       if (context.mounted) {
         context.pushNamed(Routes.REGISTER, arguments: response.data);
       }
+      return;
     }
     if (response.success) {
       Storage.to.apiToken = response.data;
@@ -119,8 +131,40 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
       // if (context.mounted) {
       //   context.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
       // }
+    } else {
+      if (context.mounted) {
+        context.createSnackbar(
+          response.message,
+          // title: 'error'.tr,
+          // message: response.message,
+          // duration: const Duration(seconds: 3),
+        );
+      }
     }
   }
+
+  // _appleRegister(BuildContext context) async {
+  //   ApiResponse response = await controller.loginWithApple();
+  //   if (!response.success && response.status == 410) {
+  //     if (context.mounted) {
+  //       context.pushNamed(Routes.REGISTER, arguments: response.data);
+  //     }
+  //   }
+  //   if (response.success) {
+  //     Storage.to.apiToken = response.data;
+  //     controller.checkToken().then((bool value) => !context.mounted
+  //         ? null
+  //         : value
+  //             ? context.navigator
+  //                 .pushNamedAndRemoveUntil(Routes.HOME, (_) => false)
+  //             : context.navigator.pushNamedAndRemoveUntil(
+  //                 Routes.CONFIRM_REGISTER,
+  //                 (r) => r.settings.name == Routes.LOGIN_REGISTER));
+  //     // if (context.mounted) {
+  //     //   context.pushNamedAndRemoveUntil(Routes.HOME, (_) => false);
+  //     // }
+  //   }
+  // }
 }
 
 class OppureRow extends StatelessWidget {

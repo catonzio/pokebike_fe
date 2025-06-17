@@ -14,15 +14,31 @@ class AuthProvider extends GetConnect {
 
   Future<ApiResponse> googleLogin(GoogleSignInAccount googleUser) async {
     String? token = (await googleUser.authentication).accessToken;
-    ApiResponse response =
-        await handleApiEndpoint(request, "post", "/google/login",
-            data: {
-              'email': googleUser.email,
-              'name_surname': googleUser.displayName,
-              'avatarUrl': googleUser.photoUrl,
-              'token': token
-            },
-            auth: false);
+    ApiResponse response = await handleApiEndpoint(
+      request,
+      "post",
+      "/google/login",
+      data: {
+        'email': googleUser.email,
+        'name_surname': googleUser.displayName,
+        'avatarUrl': googleUser.photoUrl,
+        'token': token
+      },
+      auth: false,
+    );
+    return response;
+  }
+
+  Future<ApiResponse> appleLogin(
+      String email, String fullName, String token) async {
+    // String? token = (await googleUser.authentication).accessToken;
+    ApiResponse response = await handleApiEndpoint(
+      request,
+      "post",
+      "/google/login",
+      data: {'email': email, 'name_surname': fullName, 'token': token},
+      auth: false,
+    );
     return response;
   }
 
