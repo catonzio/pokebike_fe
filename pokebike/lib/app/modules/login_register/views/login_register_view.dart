@@ -9,6 +9,7 @@ import 'package:moto_hunters/app/shared/controllers/storage.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/utils/decoration_image.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'dart:io' show Platform;
 
 import '../controllers/login_register_controller.dart';
 import 'package:moto_hunters/generated/l10n.dart';
@@ -36,15 +37,16 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
               _accessRegisterColumn(context),
               const OppureRow(),
               _googleAccessButton(context),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
-                child: SignInWithAppleButton(
-                  onPressed: () =>
-                      _socialRegister(context, controller.loginWithApple),
-                  height: context.height * 0.065,
-                  borderRadius: BorderRadius.circular(64),
+              if (Platform.isIOS)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: SignInWithAppleButton(
+                    onPressed: () =>
+                        _socialRegister(context, controller.loginWithApple),
+                    height: context.height * 0.065,
+                    borderRadius: BorderRadius.circular(64),
+                  ),
                 ),
-              )
             ],
           ),
         ),
@@ -86,7 +88,8 @@ class LoginRegisterView extends GetView<LoginRegisterController> {
           child: MButton(
             onPressed: () => _access(context),
             backgroundColor: MColors.secondary,
-            child: Text(S.of(context).access, style: Get.context!.textTheme.bodySmall),
+            child: Text(S.of(context).access,
+                style: Get.context!.textTheme.bodySmall),
           ),
         ),
         MButton(
