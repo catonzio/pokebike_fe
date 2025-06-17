@@ -18,6 +18,20 @@ class BottomNavbar extends GetView<BottomNavbarController> {
 
   @override
   Widget build(BuildContext context) {
+    // Remove the left/right padding that SafeArea adds on iPads so that the
+    // Material that paints the background can stretch to the screen edges.
+    return MediaQuery.removePadding(
+      context: context,
+      removeLeft: true,
+      removeRight: true,
+      child: _buildContent(context),
+    );
+  }
+
+  /// Real body of the navbar, extracted to `_buildContent` so that we can wrap
+  /// it in `MediaQuery.removePadding` above without indenting the original
+  /// implementation.
+  Widget _buildContent(BuildContext context) {
     return Hero(
       tag: "navbar",
       child: Material(

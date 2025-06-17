@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -84,7 +85,8 @@ class LoginRegisterController extends GetxController {
       ApiResponse response =
           await provider.appleLogin(userData['email'], '', userData['token']);
       return response;
-    } on Exception {
+    } on Exception catch (e) {
+      log("Apple Sign-In failed: $e");
       return ApiResponse.error(message: "User closed poupup", data: null);
     }
   }
