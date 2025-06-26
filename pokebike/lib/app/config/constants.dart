@@ -19,7 +19,7 @@ class Constants {
   static const int numCommunityHome = 7;
 
   static const String iubendaUrl =
-      "https://www.iubenda.com/privacy-policy/21057524";
+      "https://www.iubenda.com/privacy-policy/12390454";
 
   static const SliverGridDelegate gridDelegate =
       SliverGridDelegateWithFixedCrossAxisCount(

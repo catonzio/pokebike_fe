@@ -41,7 +41,7 @@ class MotoDetailPage extends GetView<PartecipaTorneoController> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Hero(
-              tag: moto.id,
+              tag: moto.id.toString(),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(

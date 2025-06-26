@@ -6,6 +6,7 @@ import 'package:moto_hunters/app/data/api_response.dart';
 import 'package:moto_hunters/app/data/models/collezione_moto/collezione_moto.dart';
 import 'package:moto_hunters/app/data/models/marca_moto/marca_moto.dart';
 import 'package:moto_hunters/app/data/models/moto/moto.dart';
+import 'package:moto_hunters/app/data/models/api_media/api_media.dart';
 import 'package:moto_hunters/app/data/models/tipo_moto/tipo_moto.dart';
 import 'package:moto_hunters/app/modules/moto-details/moto_details_arguments.dart';
 import 'package:moto_hunters/app/shared/controllers/tipo_marca_controller.dart';
@@ -55,6 +56,12 @@ class MotoDetailsController extends GetxController {
   final RxList<XFile> galleryImages = <XFile>[].obs;
   final RxList<int> existingPhotosToKeep = <int>[].obs;
 
+  // Ordinamento immagini
+  final RxList<ApiMedia> orderedPhotos = <ApiMedia>[].obs;
+  // Lista mista che rappresenta l’ordine effettivo mostrato in UI
+  final RxList<dynamic> mixedPhotos = <dynamic>[].obs;
+  final RxBool orderChanged = false.obs;
+
   final MotoProvider provider;
 
   MotoDetailsController({required this.provider});
@@ -70,11 +77,15 @@ class MotoDetailsController extends GetxController {
 
     if (moto != null) {
       existingPhotosToKeep.addAll(moto!.photos.map((p) => p.id));
+      orderedPhotos.assignAll(moto!.photos);
+      // Inizializza mixedPhotos con foto esistenti + nuove foto
+      mixedPhotos.clear();
+      mixedPhotos.addAll([...orderedPhotos, ...galleryImages]);
       isFavorita.value = moto!.isFavorita;
       marcaController.text = moto!.marcaMoto.nome;
       modelloController.text = moto!.nome;
       tipoController.text = moto!.tipoMoto.nome;
-      annoController.text = moto!.anno.toString();
+      annoController.text = moto!.anno == null ? '' : moto!.anno.toString();
       dataController.text = moto!.dataCattura.toFormattedString();
       luogoController.text = moto!.luogo;
       descrizioneController.text = moto!.descrizione;
@@ -97,6 +108,70 @@ class MotoDetailsController extends GetxController {
     } else {
       isShowingInfo.toggle();
     }
+  }
+
+  // Riordino misto (foto esistenti + nuove gallery)
+  void _syncListsFromMixed() {
+    orderedPhotos
+      ..clear()
+      ..addAll(mixedPhotos.whereType<ApiMedia>());
+    galleryImages
+      ..clear()
+      ..addAll(mixedPhotos.whereType<XFile>());
+  }
+
+  // Metodo helper per sincronizzare mixedPhotos dalle liste separate
+  void _syncMixedFromLists() {
+    mixedPhotos
+      ..clear()
+      ..addAll([...orderedPhotos, ...galleryImages]);
+  }
+
+  void reorderMixedPhotos(int oldIndex, int newIndex) {
+    // Controlli di sicurezza per evitare RangeError
+    if (mixedPhotos.isEmpty) {
+      log('mixedPhotos è vuota, impossibile riordinare');
+      return;
+    }
+    
+    if (oldIndex < 0 || oldIndex >= mixedPhotos.length) {
+      log('oldIndex $oldIndex fuori range (0-${mixedPhotos.length - 1})');
+      return;
+    }
+
+    if (newIndex < 0) {
+      newIndex = 0;
+    }
+    if (newIndex >= mixedPhotos.length) {
+      newIndex = mixedPhotos.length - 1;
+    }
+
+    // Se gli indici sono uguali, non fare nulla
+    if (oldIndex == newIndex) {
+      return;
+    }
+
+    if (newIndex > oldIndex) newIndex -= 1;
+
+    log('Riordinamento: da $oldIndex a $newIndex, lista ha ${mixedPhotos.length} elementi');
+
+    // Rimuovi l'elemento dall'indice vecchio e inseriscilo nel nuovo
+    final dynamic item = mixedPhotos.removeAt(oldIndex);
+    mixedPhotos.insert(newIndex, item);
+
+    _syncListsFromMixed();
+    orderChanged.value = true;
+    
+    log('Riordinamento completato: ${mixedPhotos.length} elementi nella lista mista');
+  }
+
+  void reorderExistingPhoto(int oldIndex, int newIndex) {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    final ApiMedia item = orderedPhotos.removeAt(oldIndex);
+    orderedPhotos.insert(newIndex, item);
+    orderChanged.value = true;
   }
 
   void toggleEditingMoto({bool? value}) async {
@@ -147,6 +222,7 @@ class MotoDetailsController extends GetxController {
           final XFile xfile =
               XFile.fromData(bytes, name: name, mimeType: 'image/jpeg');
           galleryImages.add(xfile);
+        mixedPhotos.add(xfile);
           log('Aggiunta foto esistente: $name');
         } else {
           log('Impossibile scaricare ${downloadUrl} (status ${response.statusCode})');
@@ -168,6 +244,7 @@ class MotoDetailsController extends GetxController {
         await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image != null) {
       galleryImages.add(image);
+      _syncMixedFromLists(); // Sincronizza mixedPhotos
     }
   }
 
@@ -185,6 +262,7 @@ class MotoDetailsController extends GetxController {
           await ImagePicker().pickImage(source: ImageSource.camera);
       if (image != null) {
         galleryImages.add(image);
+        _syncMixedFromLists(); // Sincronizza mixedPhotos
       }
     } catch (e) {
       Get.snackbar('Errore', 'Impossibile scattare la foto: $e',
@@ -223,15 +301,30 @@ class MotoDetailsController extends GetxController {
   }
 
   void removeGalleryImage(int index) {
-    // Non permettere di rimuovere l'ultima immagine rimasta
-    if (galleryImages.length <= 1) {
+    // Prevenzione rimozione ultima foto
+    if (orderedPhotos.length + galleryImages.length <= 1) {
+      Get.snackbar('', 'È richiesta almeno una foto della moto', 
+          snackPosition: SnackPosition.BOTTOM);
       return;
     }
-    galleryImages.removeAt(index);
+    
+    if (index >= 0 && index < galleryImages.length) {
+      galleryImages.removeAt(index);
+      _syncMixedFromLists(); // Sincronizza mixedPhotos
+    }
   }
 
   void removeExistingPhoto(int photoId) {
+    // Prevenzione rimozione ultima foto
+    if (orderedPhotos.length + galleryImages.length <= 1) {
+      Get.snackbar('', 'È richiesta almeno una foto della moto', 
+          snackPosition: SnackPosition.BOTTOM);
+      return;
+    }
+    
     existingPhotosToKeep.remove(photoId);
+    orderedPhotos.removeWhere((photo) => photo.id == photoId);
+    _syncMixedFromLists(); // Sincronizza mixedPhotos
   }
 
   String? marcaValidator(dynamic value) {
@@ -249,23 +342,23 @@ class MotoDetailsController extends GetxController {
   }
 
   String? annoValidator(String? value) {
-    if (value == null || value.isEmpty) {
+    /* if (value == null || value.isEmpty) {
       return S.of(Get.context!).insertYear;
-    }
+    } */
     return null;
   }
 
   String? luogoValidator(String? value) {
-    if (value == null || value.isEmpty) {
+    /*  if (value == null || value.isEmpty) {
       return S.of(Get.context!).insertLocation;
-    }
+    } */
     return null;
   }
 
   String? descrizioneValidator(String? value) {
-    if (value == null || value.isEmpty) {
+    /* if (value == null || value.isEmpty) {
       return 'Inserisci la descrizione';
-    }
+    } */
     return null;
   }
 
@@ -274,7 +367,8 @@ class MotoDetailsController extends GetxController {
       'marca': marcaController.text.trim(),
       'nome': modelloController.text.trim(),
       'tipo': tipoController.text.trim(),
-      'anno': annoController.text.trim(),
+      'anno':
+          annoController.text.trim().isEmpty ? '' : annoController.text.trim(),
       'luogo': luogoController.text.trim(),
       'descrizione': descrizioneController.text.trim(),
       'is_garage': isGarage.value,
@@ -333,6 +427,7 @@ class MotoDetailsController extends GetxController {
     }
 
     // 3. Aggiungi le nuove immagini singolarmente (compressione prima dell'upload)
+    // Mantieni l'ordine di caricamento seguendo l'ordine in mixedPhotos
     for (final XFile img in galleryImages) {
       final XFile compressed = await compressImage(img);
       await provider.addMotoImage(moto!.id, compressed);
@@ -348,131 +443,82 @@ class MotoDetailsController extends GetxController {
         ..addAll(moto!.photos.map((p) => p.id));
     }
 
+    // 5. SOLO ORA ordina le foto usando l'ordine scelto dall'utente in mixedPhotos
+    if (orderChanged.value && mixedPhotos.length > 1) {
+      log('Ordinamento richiesto. mixedPhotos.length: ${mixedPhotos.length}');
+      
+      // Costruisci lista ID seguendo la sequenza scelta dall'utente in mixedPhotos
+      final List<int> order = [];
+      
+      // Mappa ogni elemento di mixedPhotos al suo ID nella moto aggiornata
+      for (final element in mixedPhotos) {
+        if (element is ApiMedia) {
+          // Foto esistente - usa l'ID direttamente se è ancora presente
+          if (moto!.photos.any((p) => p.id == element.id)) {
+            order.add(element.id);
+          }
+        } else if (element is XFile) {
+          // Nuova foto - trova l'ApiMedia corrispondente nella moto aggiornata
+          // Uso l'indice nell'ordine di upload come fallback
+          final int xFileIndex = galleryImages.indexWhere((img) => img.path == element.path);
+          if (xFileIndex != -1) {
+            // Trova le foto che non erano presenti prima del refresh
+            final Set<int> newPhotoIds = moto!.photos.map((p) => p.id).toSet().difference(toKeep);
+            final List<int> newPhotoIdsList = newPhotoIds.toList()..sort();
+            
+            if (xFileIndex < newPhotoIdsList.length) {
+              order.add(newPhotoIdsList[xFileIndex]);
+            }
+          }
+        }
+      }
+      
+      log('Ordine calcolato: $order, moto.photos.length: ${moto!.photos.length}');
+      
+      // Applica l'ordinamento solo se abbiamo tutti gli ID
+      if (order.length == moto!.photos.length && order.isNotEmpty) {
+        final ApiResponse orderResp = await provider.orderMotoImages(moto!.id, order);
+        if (orderResp.success) {
+          log('Ordinamento applicato con successo');
+          orderChanged.value = false;
+          
+          // Ricarica la moto per riflettere il nuovo ordine
+          final Moto? finalRefresh = await provider.fetchMoto(moto!.id);
+          if (finalRefresh != null) {
+            moto = finalRefresh;
+            orderedPhotos.assignAll(moto!.photos);
+            _syncMixedFromLists(); // Sincronizza mixedPhotos con il nuovo ordine
+          }
+        } else {
+          log('Errore durante l\'ordinamento: ${orderResp.message}');
+          // In caso di errore ripristina orderedPhotos
+          orderedPhotos.assignAll(moto!.photos);
+          _syncMixedFromLists();
+        }
+      } else {
+        log('Impossibile ordinare: order.length=${order.length}, photos.length=${moto!.photos.length}');
+        // Ripristina l'ordine originale
+        orderedPhotos.assignAll(moto!.photos);
+        _syncMixedFromLists();
+      }
+    }
+
     // Pulisci stato locale
     galleryImages.clear();
+    _syncMixedFromLists(); // Sincronizza dopo la pulizia
     isSendingData.value = false;
     return baseResponse;
   }
-    
-/*
-    log('Foto esistenti da mantenere: ${existingPhotosToKeep.length}');
-    log('Gallery images: ${galleryImages.length}');
-    log('hasExistingPhotos: $hasExistingPhotos');
-    log('hasGalleryImages: $hasGalleryImages');
-    
-    if (!hasExistingPhotos && !hasGalleryImages) {
-      return ApiResponse.error(
-          message: 'È richiesta almeno una foto della moto', data: null);
-    }
-
-    isSendingData.value = true;
-
-    final Map<String, dynamic> updateData = getData();
-
-    ApiResponse response;
-    if (galleryImages.isNotEmpty) {
-      // Aggiungi sempre gli ID delle foto esistenti così il backend le mantiene
-      if (existingPhotosToKeep.isNotEmpty) {
-        // Uso formato existing_ids[] e lascio che GetConnect gestisca l'array
-        updateData['existing_ids[]'] = existingPhotosToKeep.map((id) => id.toString()).toList();
-        log('Aggiunti existing_ids[]: ${updateData['existing_ids[]']}');
-      }
-
-      // Se ci sono nuove immagini dalla gallery, usa updateMotoWithImages
-      updateData['images'] = galleryImages;
-      log('Usando updateMotoWithImages con ${galleryImages.length} nuove foto');
-      log('Payload keys: ${updateData.keys.toList()}');
-      response = await provider.updateMotoWithImages(moto!.id, updateData);
-      
-      log('=== RESPONSE updateMotoWithImages ===');
-      log('Success: ${response.success}');
-      log('Message: ${response.message}');
-      if (response.data != null) {
-        log('Response data type: ${response.data.runtimeType}');
-        log('Response data: ${response.data.toString()}');
-      }
-    } else {
-      // Nessuna nuova immagine: invia solo gli ID delle foto da mantenere
-      if (existingPhotosToKeep.isNotEmpty) {
-        // Per update normale (non multipart), invia come lista
-        updateData['existing_ids'] = existingPhotosToKeep.map((id) => id.toString()).toList();
-        log('Aggiunti existing_ids per update normale: '+updateData['existing_ids'].toString());
-      }
-      // Se non ci sono nuove immagini, usa update normale
-      log('Usando updateMoto normale');
-      response = await provider.updateMoto(moto!.id, updateData);
-      
-      log('=== RESPONSE updateMoto ===');
-      log('Success: ${response.success}');
-      log('Message: ${response.message}');
-      if (response.data != null) {
-        log('Response data type: ${response.data.runtimeType}');
-        log('Response data: ${response.data.toString()}');
-      }
-    }
-
-    log('Response success: ${response.success}');
-    if (!response.success) {
-      log('Response error: ${response.message}');
-    }
-
-    if (response.success) {
-      if (response.data is Map &&
-          (response.data as Map).containsKey('photos')) {
-        final photos = (response.data as Map)['photos'];
-        log('Response photos count: ${photos is List ? photos.length : photos}');
-      }
-      moto = Moto.fromJson(response.data);
-      // Pulisci la gallery dopo il salvataggio riuscito
-      galleryImages.clear();
-      log('Gallery pulita dopo salvataggio riuscito');
-    }
-
-    isSendingData.value = true;
-
-    final Map<String, dynamic> updateData = getData();
-
-    // 1. Aggiorna i dati testuali della moto (senza immagini)
-    ApiResponse response = await provider.updateMoto(moto!.id, updateData);
-
-    if (!response.success) {
-      isSendingData.value = false;
-        }
-
-    // 2. Elimina le foto deselezionate
-    final Set<int> originalIds = moto!.photos.map((p) => p.id).toSet();
-    final Set<int> toKeep = existingPhotosToKeep.toSet();
-    final Set<int> toDelete = originalIds.difference(toKeep);
-
-    for (final int photoId in toDelete) {
-      await provider.deleteMotoImage(moto!.id, photoId);
-    }
-
-    // 3. Aggiungi le nuove immagini
-    for (final XFile img in galleryImages) {
-      await provider.addMotoImage(moto!.id, img);
-    }
-
-    // 4. Ricarica la moto aggiornata
-    final Moto? refreshed = await provider.fetchMoto(moto!.id);
-    if (refreshed != null) {
-      moto = refreshed;
-    }
-
-    // Pulisci la gallery e stato
-    galleryImages.clear();
-    isSendingData.value = false;
-*/
 
   Future<ApiResponse> setFavorita() async {
-  if (moto != null) {
-    final ApiResponse response = await provider.setFavorita(moto!.id);
-    isFavorita.value = true;
-    moto = moto?.copyWith(isFavorita: true);
-    return response;
-  } else {
-    return ApiResponse.error(
-      message: S.of(Get.context!).noInternet, data: null);
+    if (moto != null) {
+      final ApiResponse response = await provider.setFavorita(moto!.id);
+      isFavorita.value = true;
+      moto = moto?.copyWith(isFavorita: true);
+      return response;
+    } else {
+      return ApiResponse.error(
+          message: S.of(Get.context!).noInternet, data: null);
+    }
   }
-}
 }

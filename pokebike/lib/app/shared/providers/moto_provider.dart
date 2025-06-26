@@ -133,6 +133,11 @@ class MotoProvider extends GetConnect {
     }
   }
 
+  Future<ApiResponse> orderMotoImages(int motoId, List<int> order) async {
+    final payload = { 'order': order };
+    return handleApiEndpoint(request, 'put', '/motos/$motoId/images/order', data: jsonEncode(payload), contentType: 'application/json');
+  }
+
   Future<ApiResponse> checkMotoDuplicate(
       int marcaMotoId, int tipoMotoId, String nome) {
     return handleApiEndpoint(request, "post", "/motos/check-exists", data: {
@@ -146,9 +151,22 @@ class MotoProvider extends GetConnect {
     return handleApiEndpoint(request, "get", "/motos/set-favorita/$motoId");
   }
 
-  Future<ApiResponse> createPartecipazione(int motoId, {int? profileId}) {
-    return handleApiEndpoint(request, "post",
-        "/partecipaziones?moto_id=$motoId${profileId != null ? "&profile_id=$profileId" : ""}");
+  Future<ApiResponse> createPartecipazione(int motoId, {int? profileId}) async {
+    final payload = {
+      'moto_id': motoId,
+      if (profileId != null) 'profile_id': profileId,
+    };
+    log('createPartecipazione payload -> $payload');
+
+    ApiResponse response = await handleApiEndpoint(
+      request,
+      "post",
+      "/partecipaziones",
+      data: payload,
+    );
+
+    log('createPartecipazione response -> success: ${response.success} | status: ${response.status} | message: ${response.message}');
+    return response;
   }
 
   Future<Moto?> checkAlreadyChosen() async {

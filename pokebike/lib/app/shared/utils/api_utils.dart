@@ -154,11 +154,11 @@ Future<ApiResponse> handleApiEndpointIsolate(Map<String, dynamic> args) async {
 Map<String, dynamic> castXFileMultipart(Map<String, dynamic> data) {
   log('=== CAST XFILE MULTIPART ===');
   log('Input data keys: ${data.keys.toList()}');
-  
+
   final Map<String, dynamic> newData = {};
   data.forEach((key, value) {
     log('Processing key: $key, value type: ${value.runtimeType}');
-    
+
     if (value is XFile) {
       final file = File(value.path);
       log('Converting single XFile: ${value.name} -> key: $key');
@@ -192,7 +192,7 @@ Map<String, dynamic> castXFileMultipart(Map<String, dynamic> data) {
       newData[key] = value;
     }
   });
-  
+
   log('Output data keys: ${newData.keys.toList()}');
   return newData;
 }

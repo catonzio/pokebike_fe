@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moto_hunters/app/config/colors.dart';
@@ -63,11 +62,8 @@ class BottomNavbarButton extends StatelessWidget {
           //   size: item.size,
           // ),
           mIcon,
-          AutoSizeText(
-            item.label,
-            maxLines: 1,
-            style: Get.context!.textTheme.bodyMedium
-                ?.copyWith(color: isSelected ? selectedColor : unselectedColor),
+          SizedBox(
+            height: 14,
           )
         ],
       ),

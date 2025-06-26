@@ -20,7 +20,8 @@ class PartecipaTorneoController extends SearchableMotoController {
 
   @override
   Future<void> onReady() async {
-    super.onReady();
+    // Ricarica sempre la lista delle moto dal backend
+    await initialFetch(reload: true);
     await setIsChosen();
   }
 

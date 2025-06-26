@@ -26,7 +26,8 @@ class MotoDetailsInfo extends StatelessWidget {
         MotoDetailsInfoRow(
             label: S.of(context).type, value: moto.tipoMoto.nome),
         MotoDetailsInfoRow(
-            label: S.of(context).year, value: moto.anno.toString()),
+            label: S.of(context).year,
+            value: moto.anno == null ? '' : moto.anno.toString()),
         MotoDetailsInfoRow(label: 'CV', value: moto.cv.toString()),
         MotoDetailsInfoRow(label: 'CC', value: moto.cc.toString()),
         MotoDetailsInfoRow(label: S.of(context).location, value: moto.luogo),

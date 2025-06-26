@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -24,10 +25,12 @@ class LoginRegisterController extends GetxController {
       }
 
       ApiResponse response = await provider.googleLogin(googleUser);
+      // Loggo il risultato per debugging
+      log('googleLogin response -> success: \\${response.success} | status: \\${response.status} | message: \\${response.message} | data: \\${response.data}');
       return response;
     } on Exception catch (e) {
       // TODO
-      print('exception->$e');
+      log('googleLogin exception -> $e');
     }
     return ApiResponse.error(message: "Error", data: null);
   }

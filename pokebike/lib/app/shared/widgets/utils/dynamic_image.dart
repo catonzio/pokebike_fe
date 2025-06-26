@@ -24,7 +24,9 @@ class DynamicImage extends StatelessWidget {
       if (media != null && media.url.isNotEmpty) {
         return CachedNetworkImage(
           imageUrl: '${Constants.baseUrl}${media.url}',
-          placeholder: (_, __) => Image.asset(keyName.fallbackAsset, fit: fit),
+          placeholder: (_, __) => Container(color: Colors.black),
+          fadeInDuration: const Duration(milliseconds: 120),
+          fadeOutDuration: const Duration(milliseconds: 80),
           fit: fit,
         );
       }

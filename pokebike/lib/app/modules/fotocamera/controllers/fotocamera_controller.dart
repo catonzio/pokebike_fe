@@ -7,6 +7,7 @@ import 'package:moto_hunters/app/data/api_response.dart';
 import 'package:moto_hunters/app/shared/providers/moto_provider.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/image_picker.dart';
 import 'package:moto_hunters/app/shared/utils/image_compress_helper.dart';
+import 'package:moto_hunters/generated/l10n.dart';
 import 'package:moto_hunters/initializer.dart';
 
 class FotocameraController extends GetxController {
@@ -71,10 +72,19 @@ class FotocameraController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    cameraController?.dispose();
+    scrollController.dispose();
+    super.onClose();
+  }
+
   makePhoto(BuildContext context) async {
     // Verifica limite foto
     if (galleryImages.length >= 5) {
-      Get.snackbar('', 'Hai raggiunto il limite di 5 foto. Elimina una per aggiungerne una nuova.', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('',
+          'Hai raggiunto il limite di 5 foto. Elimina una per aggiungerne una nuova.',
+          snackPosition: SnackPosition.BOTTOM);
       isCapturing = false;
       return;
     }
@@ -97,14 +107,27 @@ class FotocameraController extends GetxController {
 
   void takePhotoFromGallery(BuildContext context) async {
     if (galleryImages.length >= 5) {
-      Get.snackbar('', 'Hai raggiunto il limite di 5 foto. Elimina una per aggiungerne una nuova.', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('',
+          'Hai raggiunto il limite di 5 foto. Elimina una per aggiungerne una nuova.',
+          snackPosition: SnackPosition.BOTTOM);
       return;
     }
-    final XFile? picked = await selectAvatar(context, source: ImageSource.gallery);
+    final XFile? picked =
+        await selectAvatar(context, source: ImageSource.gallery);
     if (picked != null) {
       galleryImages.add(picked);
       image = picked;
       isCapturing = false;
+    }
+  }
+
+  void reorderGalleryImage(int oldIndex, int newIndex) {
+    if (newIndex > oldIndex) newIndex -= 1;
+    final XFile item = galleryImages.removeAt(oldIndex);
+    galleryImages.insert(newIndex, item);
+    // Aggiorna l'immagine principale per coerenza UI
+    if (galleryImages.isNotEmpty) {
+      image = galleryImages.first;
     }
   }
 
@@ -114,7 +137,7 @@ class FotocameraController extends GetxController {
       return;
     }
     galleryImages.removeAt(index);
-    
+
     // Se non ci sono più immagini nella gallery, imposta l'ultima come image principale
     if (galleryImages.isNotEmpty) {
       image = galleryImages.last;
@@ -150,48 +173,68 @@ class FotocameraController extends GetxController {
   }
 
   void showPhotoActionSheet(BuildContext context) {
-  if (galleryImages.length >= 5) {
-    Get.snackbar('', 'Hai raggiunto il limite di 5 foto. Elimina una per aggiungerne una nuova.', snackPosition: SnackPosition.BOTTOM);
-    return;
+    if (galleryImages.length >= 5) {
+      Get.snackbar('',
+          'Hai raggiunto il limite di 5 foto. Elimina una per aggiungerne una nuova.',
+          snackPosition: SnackPosition.BOTTOM);
+      return;
+    }
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext ctx) {
+        return SafeArea(
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title: Text(S.of(context).photocamera),
+                onTap: () async {
+                  Navigator.pop(ctx);
+                  final XFile? picked =
+                      await selectAvatar(context, source: ImageSource.camera);
+                  if (picked != null) {
+                    galleryImages.add(picked);
+                    image = picked;
+                    isCapturing = false;
+                  }
+                },
+              ),
+              ListTile(
+                leading: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(Icons.photo_library),
+                    if (selectedIndex != 0)
+                      const Padding(
+                        padding: EdgeInsets.only(left: 4.0),
+                        child: Icon(Icons.lock, size: 16),
+                      ),
+                  ],
+                ),
+                title: Text(S.of(context).gallery),
+                enabled: true,
+                onTap: () async {
+                  if (selectedIndex != 0) {
+                    Get.snackbar('', S.of(context).galleryLockedMessage,
+                        snackPosition: SnackPosition.BOTTOM);
+                    return;
+                  }
+                  Navigator.pop(ctx);
+                  final XFile? picked =
+                      await selectAvatar(context, source: ImageSource.gallery);
+                  if (picked != null) {
+                    galleryImages.add(picked);
+                    image = picked;
+                    isCapturing = false;
+                  }
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
-  showModalBottomSheet(
-    context: context,
-    builder: (BuildContext ctx) {
-      return SafeArea(
-        child: Wrap(
-          children: [
-            ListTile(
-              leading: const Icon(Icons.camera_alt),
-              title: const Text('Scatta foto'),
-              onTap: () async {
-                Navigator.pop(ctx);
-                final XFile? picked = await selectAvatar(context, source: ImageSource.camera);
-                if (picked != null) {
-                  galleryImages.add(picked);
-                  image = picked;
-                  isCapturing = false;
-                }
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.photo_library),
-              title: const Text('Scegli dalla galleria'),
-              onTap: () async {
-                Navigator.pop(ctx);
-                final XFile? picked = await selectAvatar(context, source: ImageSource.gallery);
-                if (picked != null) {
-                  galleryImages.add(picked);
-                  image = picked;
-                  isCapturing = false;
-                }
-              },
-            ),
-          ],
-        ),
-      );
-    },
-  );
-}
 
   Future<ApiResponse> checkMotoDuplicate(Map<String, dynamic> data) async {
     final ApiResponse result = await provider.checkMotoDuplicate(

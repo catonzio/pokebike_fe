@@ -113,9 +113,9 @@ class AddMotoFormController extends GetxController {
   }
 
   String? annoValidator(String? value) {
-    if (value == null || value.isEmpty) {
+    /* if (value == null || value.isEmpty) {
       return S.of(Get.context!).insertYear;
-    }
+    } */
     return null;
   }
 
@@ -127,9 +127,9 @@ class AddMotoFormController extends GetxController {
   }
 
   String? descrizioneValidator(String? value) {
-    if (value == null || value.isEmpty) {
+    /*  if (value == null || value.isEmpty) {
       return 'Inserisci la descrizione';
-    }
+    } */
     return null;
   }
 

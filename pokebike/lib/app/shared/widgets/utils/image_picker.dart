@@ -26,8 +26,8 @@ Future<ImageSource?> selectImageSource(BuildContext context) async {
                           padding: const EdgeInsets.all(8.0),
                           child: MButton(
                               label: S.of(context).camera,
-                              onTap: () =>
-                                  Get.context!.navigator.pop(ImageSource.camera)),
+                              onTap: () => Get.context!.navigator
+                                  .pop(ImageSource.camera)),
                         )),
                     Expanded(
                         flex: 2,
@@ -36,9 +36,12 @@ Future<ImageSource?> selectImageSource(BuildContext context) async {
                           child: MButton(
                               label: S.of(context).gallery,
                               onTap: () {
-                                if (Get.currentRoute != Routes.GARAGE) {
+                                if (Get.currentRoute != Routes.GARAGE &&
+                                    Get.currentRoute != Routes.PROFILE &&
+                                    Get.currentRoute != Routes.SETTINGS) {
                                   Get.back();
-                                  Get.snackbar('', S.of(context).galleryLockedMessage,
+                                  Get.snackbar(
+                                      '', S.of(context).galleryLockedMessage,
                                       snackPosition: SnackPosition.BOTTOM);
                                 } else {
                                   Get.back(result: ImageSource.gallery);

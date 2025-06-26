@@ -29,7 +29,7 @@ class PartecipaTorneoGrid extends GetView<PartecipaTorneoController> {
   List<Widget> mapListToWidget(BuildContext context, List<Moto> list) {
     return list.indexed
         .map(((int, Moto) indexMoto) => Hero(
-              tag: indexMoto.$2.id,
+              tag: indexMoto.$2.id.toString(),
               child: GarageCardWidget(
                   index: indexMoto.$1,
                   moto: indexMoto.$2,

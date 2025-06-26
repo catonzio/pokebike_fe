@@ -51,48 +51,58 @@ class AddMotoView extends GetView<FotocameraController> {
                 final total = count + (showAdd ? 1 : 0);
                 return SizedBox(
                   height: 100,
-                  child: ListView.builder(
+                  child: ReorderableListView.builder(
                     scrollDirection: Axis.horizontal,
+                    onReorder: controller.reorderGalleryImage,
+                    buildDefaultDragHandles: false,
                     itemCount: total,
                     itemBuilder: (context, index) {
                       if (index < count) {
                         final file = controller.galleryImages[index];
-                        return Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Stack(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.file(File(file.path),
-                                    width: 100, height: 100, fit: BoxFit.cover),
-                              ),
-                              Positioned(
-                                top: 4,
-                                right: 4,
-                                child: GestureDetector(
-                                  onTap: () =>
-                                      controller.removeGalleryImage(index),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(2),
-                                    decoration: BoxDecoration(
-                                      color: Colors.black54,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: const Icon(Icons.close,
-                                        size: 16, color: Colors.white),
+                        return ReorderableDelayedDragStartListener(
+                          key: ValueKey('gallery_$index'),
+                          index: index,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.file(
+                                    File(file.path),
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
-                              ),
-                            ],
+                                if (count > 1)
+                                  Positioned(
+                                    top: 4,
+                                    right: 4,
+                                    child: GestureDetector(
+                                      onTap: () =>
+                                          controller.removeGalleryImage(index),
+                                      child: Container(
+                                        padding: const EdgeInsets.all(2),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.black54,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: const Icon(Icons.close,
+                                            size: 16, color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
                           ),
                         );
                       } else {
                         return Padding(
+                          key: const ValueKey('add_btn'),
                           padding: const EdgeInsets.all(16),
                           child: GestureDetector(
-                            onTap: () {
-                              controller.showPhotoActionSheet(context);
-                            },
+                            onTap: () => controller.showPhotoActionSheet(context),
                             child: Container(
                               width: 100,
                               height: 100,

@@ -99,7 +99,7 @@ class GarageView extends GetView<GarageController> {
         SliverRefresh(onRefresh: controller.refreshList),
         Obx(() => controller.isShowingGarage.value
             ? const GarageWidget()
-            : const CollezioneWidget())
+            : const CollezioneWidget()),
       ],
     );
     // return Obx(() => Stack(
