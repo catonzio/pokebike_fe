@@ -28,7 +28,11 @@ void handleApiResponse(BuildContext context, ApiResponse response,
         Get.context!.createSnackbar(errorMessage);
       }
     } else {
-      Get.context!.createSnackbar(errorMessage ?? response.message);
+      String messageToShow = errorMessage ??
+          (response.data is String && (response.data as String).isNotEmpty
+              ? response.data as String
+              : response.message);
+      Get.context!.createSnackbar(messageToShow);
       // Get.context!.scaffold.showSnackBar(SnackBar(
       //   content: Text(response.message),
       //   action: SnackBarAction(

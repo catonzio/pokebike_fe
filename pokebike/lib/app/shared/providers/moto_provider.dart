@@ -21,7 +21,7 @@ class MotoProvider extends GetConnect {
     if (profileId != null) params.add("profile_id=$profileId");
     if (limit != null) params.add("limit=$limit");
     if (skip != null) params.add("skip=$skip");
-    //if (isGarage) params.add("is_garage=$isGarage");
+    if (isGarage) params.add("is_garage=1");
     final query = params.isNotEmpty ? "?${params.join("&")}" : "";
     final ApiResponse response =
         await handleApiEndpoint(request, "get", "/motos$query");

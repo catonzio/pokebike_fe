@@ -52,18 +52,23 @@ class AuthProvider extends GetConnect {
   }
 
   Future<ApiResponse> register(String email, String nome, String cognome,
-      String username, String password, String birthdate, XFile avatar) async {
-    ApiResponse response = await handleApiEndpoint(request, "post", "/register",
-        data: {
+      String username, String password, String birthdate, XFile? avatar) async {
+    final Map<String, dynamic> data = {
           'name': nome,
           'surname': cognome,
           'username': username,
           'email': email,
           'password': password,
           'birthdate': birthdate,
-          'avatar': avatar
-        },
-        contentType: 'multipart/form-data',
+        };
+    String contentType = 'application/json';
+    if (avatar != null) {
+      data['avatar'] = avatar;
+      contentType = 'multipart/form-data';
+    }
+    ApiResponse response = await handleApiEndpoint(request, "post", "/register",
+        data: data,
+        contentType: contentType,
         auth: false);
     return response;
   }

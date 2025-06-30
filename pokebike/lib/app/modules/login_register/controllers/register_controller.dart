@@ -132,9 +132,7 @@ class RegisterController extends GetxController {
   }
 
   String? avatarValidator(XFile? value) {
-    if (value == null && avatar.value == null) {
-      return S.of(Get.context!).mustSelectAvatar;
-    }
+    // L'avatar non è più obbligatorio
     if (fieldsUniqueValidationFail['avatar']!) {
       fieldsUniqueValidationFail['avatar'] = false;
       return S.of(Get.context!).avatarTooBig;
@@ -150,6 +148,10 @@ class RegisterController extends GetxController {
     isPerformingRegister.value = true;
     try {
       log('Register request payload: email=${emailController.text.trim()}, nome=${nomeController.text.trim()}, cognome=${cognomeController.text.trim()}, username=${usernameController.text.trim()}, birthdate=${birthdateController.text.trim()}, avatar=${avatar.value?.path}');
+      XFile? avatarFile = avatar.value;
+      if (avatarFile != null) {
+        avatarFile = await compressImage(avatarFile);
+      }
       ApiResponse response = await provider.register(
         emailController.text.trim(),
         nomeController.text.trim(),
@@ -157,13 +159,14 @@ class RegisterController extends GetxController {
         usernameController.text.trim(),
         passwordController.text.trim(),
         birthdateController.text.trim(),
-        await compressImage(avatar.value!),
+        avatarFile,
       );
       if (!response.success) {
         log('Register failed: status=${response.status}, message=${response.message}, data=${response.data}');
       }
-      if (response.status == 422 && response.message.contains("validation")) {
-        final Map<String, dynamic> data = response.data;
+      if (response.status == 422 && response.message.contains("validation") &&
+          response.data is Map<String, dynamic>) {
+        final Map<String, dynamic> data = response.data as Map<String, dynamic>;
         for (MapEntry<String, dynamic> validations in data.entries) {
           fieldsUniqueValidationFail[validations.key] = true;
         }

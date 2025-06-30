@@ -70,7 +70,8 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
   Future<void> _afterInit() async {
     if (list.isEmpty) return;
     // final GarageWController controller = GarageWController.to;
-    List<Moto> motos = await provider.fetchMotos(isGarage: false);
+    // Carica tutte le moto (garage e non)
+    List<Moto> motos = await provider.fetchMotos();
     // _processList([list, motos]);
 
     print("START");

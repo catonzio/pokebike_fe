@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:moto_hunters/app/config/colors.dart';
-import 'package:moto_hunters/app/config/constants.dart';
+
 import 'package:moto_hunters/app/data/models/api_media/api_media.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/image_picker.dart';
@@ -38,7 +38,9 @@ class MCircularAvatar extends StatelessWidget {
     return Column(
       children: [
         Hero(
-          tag: avatar?.url ?? file?.path ?? "error",
+          tag: (avatar != null && avatar!.url.isNotEmpty)
+                ? avatar!.url
+                : (file?.path ?? "placeholder"),
           child: Stack(
             children: [
               Material(
@@ -65,7 +67,8 @@ class MCircularAvatar extends StatelessWidget {
                       child: InteractiveViewer(
                         child: file != null
                             ? LocalImage(file: file)
-                            : CachedNetworkImage(
+                            : (avatar != null && avatar!.url.isNotEmpty)
+                                ? CachedNetworkImage(
                                 imageUrl: /* Constants.isLocal &&
                                         avatar!.url
                                             .startsWith('http://localhost:8080')
@@ -91,7 +94,12 @@ class MCircularAvatar extends StatelessWidget {
                                     value: progress.progress,
                                   ),
                                 ),
-                              ),
+                              )
+                                : CircleAvatar(
+                                    radius: radius,
+                                    backgroundColor: Colors.white,
+                                    child: Icon(Icons.person, size: radius),
+                                  ),
                       )),
                 ),
               ),
@@ -122,11 +130,11 @@ class MCircularAvatar extends StatelessWidget {
     if (onModify != null) {
       XFile? file = await selectAvatar(context);
       onModify?.call(file);
-    } else {
+    } else if (avatar != null && avatar!.url.isNotEmpty) {
       Get.context!.navigator.push(
         MaterialPageRoute(
             builder: (context) => PhotoDetail(
-                  tag: avatar?.url ?? file?.path ?? "error",
+                  tag: avatar!.url,
                   avatar: avatar!,
                   canReport: canReport,
                 )),
