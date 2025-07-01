@@ -7,10 +7,12 @@ class MotoDetailsArguments {
   final Moto? moto;
   final bool isOwnMoto;
   final bool canSetFavourite;
+  final int? collectionIndex;
 
   const MotoDetailsArguments(
       {this.moto,
       this.collezioneMoto,
+      this.collectionIndex,
       this.isOwnMoto = false,
       this.canSetFavourite = false});
 }

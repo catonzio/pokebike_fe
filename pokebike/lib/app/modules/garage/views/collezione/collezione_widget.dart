@@ -55,14 +55,14 @@ class CollezioneWidget extends GetView<CollezioneController> {
                 return CollezioneCardWidget(
                     index: index + 1,
                     collezioneMoto: collezioneMoto,
-                    onTap: () => _onTapElement(context, collezioneMoto));
+                    onTap: () => _onTapElement(context, collezioneMoto, index + 1));
               },
               itemCount: elements.length,
             )
     ]));
   }
 
-  void _onTapElement(BuildContext context, CollezioneMoto collezioneMoto) {
+  void _onTapElement(BuildContext context, CollezioneMoto collezioneMoto, int collectionIndex) {
     controller.focusNode.unfocus();
     // final bool isGarage = controller.isShowingGarage.value;
     // if (m != null) {
@@ -70,6 +70,7 @@ class CollezioneWidget extends GetView<CollezioneController> {
         arguments: MotoDetailsArguments(
             moto: collezioneMoto.moto,
             collezioneMoto: collezioneMoto,
+            collectionIndex: collectionIndex,
             isOwnMoto: true,
             canSetFavourite: false));
     // .then((value) => controller.isShowingGarage.value = isGarage);

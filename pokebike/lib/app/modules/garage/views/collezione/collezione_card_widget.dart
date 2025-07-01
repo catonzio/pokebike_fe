@@ -117,7 +117,7 @@ class CollezioneCardWidget extends StatelessWidget {
           borderRadius: borderRadius,
         ),
         alignment: Alignment.center,
-        child: GradientText(collezioneMoto.id.toString(),
+        child: GradientText((index).toString(),
             style: Get.context!.textTheme.headlineMedium
                 ?.copyWith(fontWeight: FontWeight.bold),
             gradient: gradient),

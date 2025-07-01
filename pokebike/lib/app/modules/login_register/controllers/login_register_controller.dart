@@ -59,24 +59,11 @@ class LoginRegisterController extends GetxController {
         throw Exception('Apple Sign-In failed: No identity token received');
       }
 
-      String base64EncodedString = credential.identityToken!.split('.')[1];
-
-      // Calculate the number of padding characters needed
-      int paddingNeeded = 4 - (base64EncodedString.length % 4);
-
-      // Add padding characters to the Base64 string
-      for (int i = 0; i < paddingNeeded; i++) {
-        base64EncodedString += "=";
-      }
-
-      // Decode the Base64-encoded string
-      List<int> decodedBytes = base64.decode(base64EncodedString);
-
-      // Convert the decoded bytes to a string
-      String decodedString = utf8.decode(decodedBytes);
-
-      // Parse the JSON string into a Dart object
-      Map<String, dynamic> decodedJson = json.decode(decodedString);
+      // Il token JWT di Apple è codificato in Base64URL; usiamo il decoder appropriato
+      final String payloadBase64 = credential.identityToken!.split('.')[1];
+      final String normalized = base64Url.normalize(payloadBase64);
+      final Map<String, dynamic> decodedJson = json
+          .decode(utf8.decode(base64Url.decode(normalized))) as Map<String, dynamic>;
 
       final userData = {
         'id': credential.authorizationCode,
@@ -89,7 +76,7 @@ class LoginRegisterController extends GetxController {
       return response;
     } on Exception catch (e) {
       log("Apple Sign-In failed: $e");
-      return ApiResponse.error(message: "User closed poupup", data: null);
+      return ApiResponse.error(message: e.toString(), data: null);
     }
   }
 }

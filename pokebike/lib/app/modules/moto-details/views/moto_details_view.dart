@@ -19,6 +19,7 @@ import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/utils/api_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/image_gallery.dart';
 import 'package:moto_hunters/app/shared/widgets/utils/micon.dart';
+import 'package:moto_hunters/app/modules/garage/views/collezione/collezione_card_widget.dart';
 
 import '../controllers/moto_details_controller.dart';
 import 'package:moto_hunters/generated/l10n.dart';
@@ -58,15 +59,16 @@ class MotoDetailsView extends StatelessWidget {
         backgroundColor: Colors.black,
         bottomAppbarActions: controller.isOwnMoto.value
             ? [
-                Obx(() => AnimatedOpacity(
-                      duration: 300.ms,
-                      opacity: controller.isShowingInfo.value ? 1 : 0,
-                      child: MIcon(
-                        name:
-                            "Edit icon ${controller.isEditingMoto.value ? 'red' : 'white'}",
-                        onTap: controller.toggleEditingMoto,
-                      ),
-                    )),
+                if (controller.collezioneMoto?.moto != null)
+                  Obx(() => AnimatedOpacity(
+                        duration: 300.ms,
+                        opacity: controller.isShowingInfo.value ? 1 : 0,
+                        child: MIcon(
+                          name:
+                              "Edit icon ${controller.isEditingMoto.value ? 'red' : 'white'}",
+                          onTap: controller.toggleEditingMoto,
+                        ),
+                      )),
                 if (controller.canSetFavourite.value)
                   Obx(() => IconButton(
                         onPressed: () => _setFavorita(context, controller),
@@ -98,10 +100,16 @@ class MotoDetailsView extends StatelessWidget {
                 floating: true,
                 surfaceTintColor: Colors.transparent,
                 flexibleSpace: FlexibleSpaceBar(
-                  background: ImageGallery(
-                    images: moto.photos,
-                    canReport: !controller.isOwnMoto.value,
-                  ),
+                  background: (controller.collezioneMoto != null && controller.collezioneMoto!.moto == null)
+                      ? CollezioneCardWidget(
+                          index: (controller.arguments.collectionIndex ?? 0),
+                          collezioneMoto: controller.collezioneMoto!,
+                          onTap: null,
+                        )
+                      : ImageGallery(
+                          images: moto.photos,
+                          canReport: !controller.isOwnMoto.value,
+                        ),
                 ),
               ),
               controller.moto != null

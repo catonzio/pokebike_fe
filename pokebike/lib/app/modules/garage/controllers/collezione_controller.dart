@@ -46,7 +46,16 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
               values.contains(el.marcaMoto.nome),
           tipoFilterFunc: (CollezioneMoto el, List<String> values) =>
               values.contains(el.tipoMoto.nome),
-          orderByFilterFunc: (List<CollezioneMoto> els, OrderBy orderBy) => els,
+          orderByFilterFunc: (List<CollezioneMoto> els, OrderBy orderBy) {
+            if (orderBy == OrderBy.alphabet) {
+              // Return a new sorted list without mutating the original one
+              final ordered = List<CollezioneMoto>.from(els)
+                ..sort((a, b) => a.modello.toLowerCase().compareTo(b.modello.toLowerCase()));
+              return ordered;
+            }
+            // Fallback: no particular ordering
+            return els;
+          },
           providerFunc: provider.fetchCollezioneMoto,
         ) {
     afterInit = _afterInit;
