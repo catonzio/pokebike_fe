@@ -19,7 +19,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Inizializza AdMob
   await AdService.initialize(
-      testDeviceIds: ['63EFAD8CCA907ACC3B963F9AE1B11537']);
+      );
   // inizializza Storage e altri servizi con InitialBindings
   InitialBindings().dependencies();
   if (Constants.isLocal) {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:moto_hunters/app/shared/ads/ad_service.dart';
@@ -28,6 +30,7 @@ class _AppBannerAdState extends State<AppBannerAd> {
       listener: BannerAdListener(
         onAdLoaded: (ad) => setState(() => _isLoaded = true),
         onAdFailedToLoad: (ad, error) {
+          log('Banner ad failed to load: $error', name: 'AppBannerAd');
           ad.dispose();
           // Non logghiamo errori troppo rumorosi in produzione
         },
