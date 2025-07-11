@@ -31,6 +31,8 @@ List<CollezioneMoto> _processList(List args) {
 }
 
 class CollezioneController extends SearchableListController<CollezioneMoto> {
+  // Controller per mantenere il testo del campo ricerca anche quando il widget viene ricostruito
+  final TextEditingController searchController = TextEditingController();
   final MotoProvider provider;
   final List<CollezioneMoto> fakeList =
       List.generate(3, (index) => CollezioneMoto.fake(index));
@@ -63,6 +65,8 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
 
   @override
   Future<void> onInit() async {
+    // Imposta valore iniziale del controller se già presente
+    searchController.text = lastSearch;
     scrollController = ScrollController();
     skip = 0;
     super.onInit();
@@ -70,6 +74,12 @@ class CollezioneController extends SearchableListController<CollezioneMoto> {
 
   late Worker listWorker;
   late Worker motosWorker;
+
+  @override
+  void onClose() {
+    searchController.dispose();
+    super.onClose();
+  }
 
   @override
   Future<List<CollezioneMoto>> fetchOthers() async {

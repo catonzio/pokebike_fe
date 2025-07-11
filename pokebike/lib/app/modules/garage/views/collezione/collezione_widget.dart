@@ -35,6 +35,7 @@ class CollezioneWidget extends GetView<CollezioneController> {
           onSearchField: _onSearchField,
           onSave: _onSave,
           focusNode: controller.focusNode,
+          controller: controller.searchController,
         ),
       ),
       elements.isEmpty
@@ -52,10 +53,12 @@ class CollezioneWidget extends GetView<CollezioneController> {
                   const EdgeInsets.only(bottom: Constants.bottomNavbarHeight),
               itemBuilder: (BuildContext context, int index) {
                 CollezioneMoto collezioneMoto = elements[index];
+                // Calcoliamo l'indice originale rispetto alla lista completa per mantenere la numerazione costante
+                final originalIndex = controller.list.indexOf(collezioneMoto) + 1;
                 return CollezioneCardWidget(
-                    index: index + 1,
+                    index: originalIndex,
                     collezioneMoto: collezioneMoto,
-                    onTap: () => _onTapElement(context, collezioneMoto, index + 1));
+                    onTap: () => _onTapElement(context, collezioneMoto, originalIndex));
               },
               itemCount: elements.length,
             )

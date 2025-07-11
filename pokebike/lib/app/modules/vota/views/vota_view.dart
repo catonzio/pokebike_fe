@@ -40,6 +40,7 @@ class VotaView extends GetView<VotaController> {
                         partecipazione:
                             controller.turno.value?.partecipazione1 ??
                                 Partecipazione.fake(1),
+                        reversed: false,
                       ),
                       Text(
                         "VS",

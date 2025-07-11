@@ -14,6 +14,7 @@ class FotocameraView extends GetView<FotocameraController> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => DefaultPage(
+          showBanner: false,
           useAppbar: false,
           backButton: true,
           bottomBar: !controller.isCapturing,
@@ -29,8 +30,8 @@ class FotocameraView extends GetView<FotocameraController> {
                 Positioned(
                     top: 0,
                     left: 0,
-                    child:
-                        MBackButton(onPressed: () => Get.context!.navigator.pop()))
+                    child: MBackButton(
+                        onPressed: () => Get.context!.navigator.pop()))
               ],
             ),
           ),

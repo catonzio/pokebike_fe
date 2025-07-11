@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:moto_hunters/app/config/colors.dart';
 import 'package:moto_hunters/app/config/constants.dart';
 import 'package:moto_hunters/app/routes/app_pages.dart';
+import 'package:moto_hunters/app/shared/ads/app_banner_ad.dart';
 import 'package:moto_hunters/app/shared/extensions/context_utils.dart';
 import 'package:moto_hunters/app/shared/widgets/back_button.dart';
 import 'package:moto_hunters/app/shared/widgets/bottom_navbar/bottom_navbar.dart';
@@ -25,6 +26,7 @@ class DefaultPage extends GetView<MDrawerController> {
   final List<Widget>? bottomAppbarActions;
   final Widget? fab;
   final Future<void>? Function()? fabOnTap;
+  final bool showBanner;
 
   const DefaultPage(
       {super.key,
@@ -39,7 +41,8 @@ class DefaultPage extends GetView<MDrawerController> {
       this.backgroundColor = Colors.black,
       this.bottomAppbarActions,
       this.fab,
-      this.fabOnTap});
+      this.fabOnTap,
+      this.showBanner = true});
 
   @override
   Widget build(BuildContext context) {
@@ -48,16 +51,28 @@ class DefaultPage extends GetView<MDrawerController> {
       extendBodyBehindAppBar: false,
       backgroundColor: backgroundColor,
       appBar: useAppbar ? (appBar ?? _createAppbar(context)) : null,
-      body: (backButton && !useAppbar)
-          ? Stack(
-              children: [
-                body,
-                // Positioned(
-                //   child: _createBackButton(context),
-                // ),
-              ],
-            )
-          : body,
+      body: Column(
+        children: [
+          showBanner
+              ? Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: AppBannerAd(),
+                )
+              : const SizedBox.shrink(),
+          Expanded(
+            child: (backButton && !useAppbar)
+                ? Stack(
+                    children: [
+                      body,
+                      // Positioned(
+                      //   child: _createBackButton(context),
+                      // ),
+                    ],
+                  )
+                : body,
+          )
+        ],
+      ),
       bottomNavigationBar: bottomBar ? const BottomNavbar() : null,
       resizeToAvoidBottomInset: false,
     );
@@ -149,10 +164,13 @@ class DefaultPage extends GetView<MDrawerController> {
                 onTap: () => _tapCommunity(context),
               ),
             ),
-            MIcon(
-              name:
-                  "Notification icon ${Get.currentRoute == Routes.NOTIFICATIONS ? "red" : "white"}",
-              onTap: () => _tapNotifications(context),
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: MIcon(
+                name:
+                    "Notification icon ${Get.currentRoute == Routes.NOTIFICATIONS ? "red" : "white"}",
+                onTap: () => _tapNotifications(context),
+              ),
             )
           ],
       bottom: PreferredSize(

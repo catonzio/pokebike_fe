@@ -7,6 +7,7 @@ import 'package:moto_hunters/app/shared/bindings/initial_bindings.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:moto_hunters/app/shared/controllers/ui_images_controller.dart';
 import 'package:moto_hunters/app/shared/providers/ui_images_provider.dart';
+import 'package:moto_hunters/app/shared/ads/ad_service.dart';
 import 'package:moto_hunters/generated/l10n.dart';
 
 import 'app/routes/app_pages.dart';
@@ -16,6 +17,9 @@ import 'package:moto_hunters/app/config/constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Inizializza AdMob
+  await AdService.initialize(
+      testDeviceIds: ['63EFAD8CCA907ACC3B963F9AE1B11537']);
   // inizializza Storage e altri servizi con InitialBindings
   InitialBindings().dependencies();
   if (Constants.isLocal) {

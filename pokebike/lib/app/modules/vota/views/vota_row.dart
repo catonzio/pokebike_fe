@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moto_hunters/app/config/colors.dart';
@@ -11,6 +13,7 @@ import 'package:moto_hunters/app/shared/widgets/photo_action_menu.dart';
 import 'package:moto_hunters/app/shared/widgets/image_gallery.dart';
 import 'package:moto_hunters/app/shared/widgets/photo_report_menu.dart';
 import 'package:moto_hunters/generated/l10n.dart';
+import 'dart:ui';
 
 class VotaRow extends GetView<VotaController> {
   final Partecipazione partecipazione;
@@ -21,9 +24,9 @@ class VotaRow extends GetView<VotaController> {
 
   @override
   Widget build(BuildContext context) {
-    final double totalHeight = Get.context!.height * 0.285;
-    final double playerRowHeight = totalHeight * 0.15;
-    final double motoImageHeight = totalHeight * 0.7;
+    final double totalHeight = Get.context!.height * 0.26;
+    final double playerRowHeight = totalHeight * 0.14;
+    final double motoImageHeight = totalHeight * 0.72;
 
     final VotaPlayerRow playerRow = VotaPlayerRow(
       height: playerRowHeight,
@@ -50,10 +53,35 @@ class VotaRow extends GetView<VotaController> {
                     blurStyle: BlurStyle.normal),
               ],
             ),
-            child: ImageGallery(
-              images: partecipazione.motoPhotos,
-              height: motoImageHeight,
-              aspectRatio: 4 / 3,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                controller.hasVoted.value
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: ImageFiltered(
+                          imageFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                          child: ImageGallery(
+                            images: partecipazione.motoPhotos,
+                            height: motoImageHeight,
+                            aspectRatio: 4 / 3,
+                          ),
+                        ),
+                      )
+                    : ImageGallery(
+                        images: partecipazione.motoPhotos,
+                        height: motoImageHeight,
+                        aspectRatio: 4 / 3,
+                      ),
+                AnimatedOpacity(
+                  opacity: controller.hasVoted.value ? 1 : 0,
+                  duration: const Duration(seconds: 1),
+                  child: Text(
+                    "${((reversed ? 1 - controller.percentage.value : controller.percentage.value) * 100).toPrecision(2)}%",
+                    style: Get.context!.textTheme.displaySmall,
+                  ),
+                ),
+              ],
             ),
           )
         : VotaMotoImage(
@@ -100,7 +128,7 @@ class VotaRow extends GetView<VotaController> {
                             handleApiResponse(context, response,
                                 successMessage: S.of(context).pointGained);
                           }
-                          Navigator.pop(context);
+                          //Navigator.pop(context);
                         },
                         onReport: () => PhotoReportMenu.onReport(
                             context,

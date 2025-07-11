@@ -11,13 +11,15 @@ class SearchRow extends StatelessWidget {
   final Function(SearchOptions) onSave;
   final bool showButton;
   final FocusNode? focusNode;
+  final TextEditingController? controller;
 
   const SearchRow(
       {super.key,
       required this.onSearchField,
       required this.onSave,
       this.showButton = true,
-      this.focusNode});
+      this.focusNode,
+      this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class SearchRow extends StatelessWidget {
       children: [
         Expanded(
           flex: 8,
-          child: SearchTextField(onSearch: onSearchField, focusNode: focusNode),
+          child: SearchTextField(onSearch: onSearchField, focusNode: focusNode, controller: controller),
         ),
         if (showButton)
           Expanded(

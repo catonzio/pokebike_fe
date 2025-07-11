@@ -147,7 +147,7 @@ class ProfileBody extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: Get.context!.height * 0.5,
+      height: Get.context!.height * 0.49,
       child: Obx(
         () => AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),

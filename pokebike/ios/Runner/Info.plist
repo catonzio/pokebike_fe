@@ -39,6 +39,30 @@
 	<false/>
 	<key>GIDClientID</key>
 	<string>776310891261-64dv07g5f1726nn87lk2rsaurev0ernk.apps.googleusercontent.com</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-9794798397206358~8919809567</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Utilizziamo l'ID pubblicitario per mostrarti annunci pertinenti e supportare lo sviluppo dell'app.</string>
+	<key>SKAdNetworkItems</key>
+	<array>
+		<dict><key>SKAdNetworkIdentifier</key><string>cstr6suwn9.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>4fzdc2evr5.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>2fnua5tdw4.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>4pfyvq9l8r.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>2u9pt9hc89.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>ydx93a7ass.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>5a6flpkh64.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>p78axxw29g.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>v72qych5uu.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>lxd4fuhd8h.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>3qy4746246.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>f38h382jlk.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>hs6bdukanm.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>prcb7njmu6.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>wzmmz9fp6w.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>97r2b46745.skadnetwork</string></dict>
+		<dict><key>SKAdNetworkIdentifier</key><string>kbd757ywx3.skadnetwork</string></dict>
+	</array>
 	<key>LSApplicationQueriesSchema</key>
 	<array>
 		<string>sms</string>

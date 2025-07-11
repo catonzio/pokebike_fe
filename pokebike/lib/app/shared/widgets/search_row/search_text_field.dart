@@ -7,11 +7,13 @@ import 'package:moto_hunters/generated/l10n.dart';
 class SearchTextField extends StatelessWidget {
   final Function(String) onSearch;
   final FocusNode? focusNode;
-  const SearchTextField({super.key, required this.onSearch, this.focusNode});
+  final TextEditingController? controller;
+  const SearchTextField({super.key, required this.onSearch, this.focusNode, this.controller});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: controller,
       focusNode: focusNode,
       decoration: InputDecoration(
         hintText: S.of(context).search,

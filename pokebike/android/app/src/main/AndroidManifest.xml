@@ -1,12 +1,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Permesso obbligatorio per advertising ID su Android 13+ -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <application
         android:label="MotoHunters"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_launcher">
+        <!-- App ID AdMob di TEST. Sostituire con quello di produzione quando disponibile -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9794798397206358~2596643054" />
         android:enableOnBackInvokedCallback="true">
         <activity
             android:name=".MainActivity"
