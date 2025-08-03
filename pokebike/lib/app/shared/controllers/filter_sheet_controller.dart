@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 
 class FilterSheetController extends GetxController {
   final Map<String, FilterBoxController> controllers;
+  final RxBool possedute = false.obs;
 
   FilterSheetController({required this.controllers});
 
@@ -14,13 +15,15 @@ class FilterSheetController extends GetxController {
     for (var controller in controllers.values) {
       controller.reset();
     }
+    possedute.value = false;
   }
 
   SearchOptions getOptions() {
     return SearchOptions(
         // orderBy: controllers['ordinaPer']?.selectedOptions ?? OrderBy.none,
         tipo: controllers['tipo']?.selectedOptions,
-        marca: controllers['marca']?.selectedOptions);
+        marca: controllers['marca']?.selectedOptions,
+        possedute: possedute.value);
     // return {
     //   for (var controller in controllers)
     //     controller.title: controller.selectedOptions

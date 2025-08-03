@@ -1443,6 +1443,11 @@ class S {
       args: [],
     );
   }
+
+  /// `Possessed`
+  String get possessed {
+    return Intl.message('Possessed', name: 'possessed', desc: '', args: []);
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

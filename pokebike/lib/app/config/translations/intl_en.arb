@@ -183,5 +183,6 @@
   "galleryLimitExceededMessage": "You have reached the 5-photo limit; delete a photo to add a new one.",
   "reportReason": "Report reason",
   "enterReasonOptional": "Enter an optional reason",
-  "reportConfirmation": "Do you really want to report this photo?"
+  "reportConfirmation": "Do you really want to report this photo?",
+  "possessed": "Possessed"
 }

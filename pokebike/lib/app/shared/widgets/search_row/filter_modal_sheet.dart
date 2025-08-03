@@ -23,19 +23,44 @@ class FilterModalSheet extends GetView<FilterSheetController> {
           children: [
             Expanded(
                 flex: 3,
-                child: ListView(
-                    children: controller.controllers.values
-                        .map((e) => Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: FilterModalBox(
-                                controller: e,
-                              ),
-                            ))
-                        .toList())),
+                child: ListView(children: [
+                  // Filtri esistenti
+                  ...controller.controllers.values
+                      .map((e) => Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: FilterModalBox(
+                              controller: e,
+                            ),
+                          ))
+                      .toList(),
+                  // Checkbox Possedute
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: Obx(() => CheckboxListTile(
+                          dense: true,
+                          title: Text(
+                            "Possedute",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          value: controller.possedute.value,
+                          onChanged: (value) {
+                            controller.possedute.value = value ?? false;
+                          },
+                          activeColor: Colors.white,
+                          checkColor: MColors.primary,
+                          controlAffinity: ListTileControlAffinity.leading,
+                        )),
+                  ),
+                ])),
             Padding(
               padding: const EdgeInsets.only(top: 8.0, bottom: 16),
               child: MButton(
-                  label: S.of(context).apply, onTap: () => _applicaClicked(context)),
+                  label: S.of(context).apply,
+                  onTap: () => _applicaClicked(context)),
             ),
             MButton(
               label: S.of(context).cancel,

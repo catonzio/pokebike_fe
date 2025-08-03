@@ -126,6 +126,8 @@ class SettingsEditWidget extends GetView<SettingsController> {
               successMessage: S.of(context).savingCompleted, onSuccess: (_) {
               controller.editing = false;
               controller.user.value = User.fromJson(response.data);
+              // Reset newAvatar per mostrare l'avatar aggiornato dal server
+              controller.newAvatar.value = null;
             });
     });
   }

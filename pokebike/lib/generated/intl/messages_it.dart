@@ -263,6 +263,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Hai guadagnato un punto!",
     ),
     "points": m3,
+    "possessed": MessageLookupByLibrary.simpleMessage("Possedute"),
     "presentation1Subtitle1": MessageLookupByLibrary.simpleMessage(
       "Colleziona le moto che più ti\npiacciono con un click",
     ),

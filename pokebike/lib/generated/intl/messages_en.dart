@@ -255,6 +255,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "platinum": MessageLookupByLibrary.simpleMessage("Platinum"),
     "pointGained": MessageLookupByLibrary.simpleMessage("You earned a point!"),
     "points": m3,
+    "possessed": MessageLookupByLibrary.simpleMessage("Possessed"),
     "presentation1Subtitle1": MessageLookupByLibrary.simpleMessage(
       "Collect the bikes you like\nwith a click",
     ),

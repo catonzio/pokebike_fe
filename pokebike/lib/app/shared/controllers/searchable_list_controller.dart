@@ -64,11 +64,13 @@ class SearchableListController<T> extends ApiPaginationController<T> {
 
     final bool hasTipo = searchOptions.tipo.isNotEmpty;
     final bool hasMarca = searchOptions.marca.isNotEmpty;
+    final bool filtraPossedute = searchOptions.possedute;
 
     result = result
         .where((el) =>
             (hasTipo ? tipoFilterFunc(el, searchOptions.tipo) : true) &&
-            (hasMarca ? marcaFilterFunc(el, searchOptions.marca) : true))
+            (hasMarca ? marcaFilterFunc(el, searchOptions.marca) : true) &&
+            (filtraPossedute ? (el as dynamic).moto != null : true))
         .toList();
 
     if (searchOptions.orderBy != OrderBy.none) {

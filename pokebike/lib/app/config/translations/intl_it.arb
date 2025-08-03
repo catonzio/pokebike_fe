@@ -183,5 +183,6 @@
   "galleryLimitExceededMessage": "Hai raggiunto il limite di 5 foto; elimina una foto per aggiungerne una nuova.",
   "reportReason": "Motivo della segnalazione",
   "enterReasonOptional": "Inserisci un motivo opzionale",
-  "reportConfirmation": "Vuoi davvero segnalare questa foto?"
+  "reportConfirmation": "Vuoi davvero segnalare questa foto?",
+  "possessed": "Possedute"
 }
