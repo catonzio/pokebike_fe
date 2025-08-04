@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:moto_hunters/app/data/models/classifica_tile/classifica_tile.dart';
 import 'package:moto_hunters/app/data/models/moto/moto.dart';
@@ -179,5 +181,10 @@ class ProfileController extends GetxController {
 
   void changeIndex(int index) {
     selectedIndex.value = index;
+
+    // Refresh automatico dei dati delle medaglie quando si seleziona la tab Medaglie
+    if (index == 0 && user.value != null) {
+      fetchCoccarde();
+    }
   }
 }

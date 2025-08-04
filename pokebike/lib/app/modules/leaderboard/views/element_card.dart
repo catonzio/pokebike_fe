@@ -68,17 +68,14 @@ class ElementCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Expanded(
-                        flex: 8,
                         child: AutoSizeText(
                           fullName(element.user),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      Expanded(
-                          flex: 1,
-                          child: AutoSizeText(element.puntiTotali.toString(),
-                              textAlign: TextAlign.end, maxLines: 1)),
+                      Text(element.puntiTotali.toString(),
+                          textAlign: TextAlign.end, maxLines: 1),
                     ],
                   ),
                 ),
