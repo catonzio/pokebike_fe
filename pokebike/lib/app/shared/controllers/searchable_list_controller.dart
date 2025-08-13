@@ -7,6 +7,7 @@ import 'package:moto_hunters/app/shared/controllers/api_pagination_controller.da
 
 class SearchableListController<T> extends ApiPaginationController<T> {
   final FocusNode focusNode = FocusNode();
+  final TextEditingController searchController = TextEditingController();
 
   String lastSearch = "";
   SearchOptions lastOptions = const SearchOptions();
@@ -80,11 +81,10 @@ class SearchableListController<T> extends ApiPaginationController<T> {
   }
 
   void filter({String? searchS, SearchOptions? options}) {
+    if (searchS != null && searchController.text != searchS) {
+      searchController.text = searchS;
+    }
     filteredList.value = filterSearch(value: searchS);
     filteredList.value = sortAndFilter(options: options, list: filteredList);
-    // if (searchS != null) {
-    // }
-    // if (options != null) {
-    // }
   }
 }
