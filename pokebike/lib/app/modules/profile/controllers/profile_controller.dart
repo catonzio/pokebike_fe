@@ -37,7 +37,7 @@ class ProfileController extends GetxController {
   final Rxn<User> user = Rxn<User>();
   // final Rxn<Torneo> torneo = Rxn<Torneo>();
 
-  final List<Moto> fakeMotos = List.generate(3, (index) => Moto.fake(3));
+  final List<Moto> fakeMotos = List.generate(3, (index) => Moto.fake(index));
   final RxList<Moto> topMotos = <Moto>[].obs;
 
   int get numPartecipazioni =>
@@ -125,7 +125,7 @@ class ProfileController extends GetxController {
 
   Future<void> fetchTopMotos() async {
     isFetchingTopMotos.value = true;
-    List<Moto> motos = await provider.fetchTopMotos(user.value!.id);
+    List<Moto> motos = await provider.fetchTopMotos(user.value!.profileId);
     isFetchingTopMotos.value = false;
     topMotos.clear();
     topMotos.addAll(motos);

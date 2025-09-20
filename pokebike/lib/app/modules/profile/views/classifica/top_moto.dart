@@ -15,11 +15,6 @@ class TopMoto extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetX<ProfileController>(
-      initState: (state) {
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          state.controller?.fetchTopMotos();
-        });
-      },
       builder: (controller) {
         return Column(
           children: [
@@ -36,7 +31,7 @@ class TopMoto extends StatelessWidget {
                 // scrollDirection: Axis.horizontal,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: (controller.topMotos.isEmpty
+                children: (controller.isFetchingTopMotos.value
                         ? controller.fakeMotos
                         : controller.topMotos)
                     .map((e) => SizedBox(
