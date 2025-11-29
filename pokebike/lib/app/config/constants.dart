@@ -10,6 +10,8 @@ class Constants {
       : "http://console.motohunters.it";
   static final String apiBaseUrl = "$baseUrl/api";
   static final String apiStorageUrl = "$baseUrl/storage";
+  static const String googleServerClientIdAndroid =
+      '776310891261-0e8pmdce9cvu33oqsarmt8t1n22c1la9.apps.googleusercontent.com';
   // static const String apiBaseUrl = "http://127.0.0.1:8080/api";
 
   static const String settingsStorage = "settings";

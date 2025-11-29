@@ -62,6 +62,9 @@ class MotoDetailsController extends GetxController {
   final RxList<dynamic> mixedPhotos = <dynamic>[].obs;
   final RxBool orderChanged = false.obs;
 
+  final RxList<Moto> _myMotos = <Moto>[].obs;
+  bool _hasLoadedMyMotos = false;
+
   final MotoProvider provider;
 
   MotoDetailsController({required this.provider});
@@ -100,6 +103,36 @@ class MotoDetailsController extends GetxController {
     moto = arguments?.moto;
     isOwnMoto.value = arguments?.isOwnMoto ?? false;
     canSetFavourite.value = arguments?.canSetFavourite ?? false;
+
+    if (!isOwnMoto.value) {
+      _loadMyMotos();
+    }
+  }
+
+  Future<void> _loadMyMotos() async {
+    if (_hasLoadedMyMotos) return;
+    _hasLoadedMyMotos = true;
+    try {
+      final List<Moto> result = await provider.fetchMotos();
+      _myMotos
+        ..clear()
+        ..addAll(result);
+    } catch (_) {
+      _myMotos.clear();
+    }
+  }
+
+  bool hasUnlockedSpecsForMoto(Moto motoToShow) {
+    if (isOwnMoto.value) {
+      return true;
+    }
+    if (_myMotos.isEmpty) {
+      return false;
+    }
+    return _myMotos.any((m) =>
+        m.marcaMoto.id == motoToShow.marcaMoto.id &&
+        m.tipoMoto.id == motoToShow.tipoMoto.id &&
+        m.nome.toLowerCase() == motoToShow.nome.toLowerCase());
   }
 
   void toggleShowingInfo({bool? value}) {
@@ -133,7 +166,7 @@ class MotoDetailsController extends GetxController {
       log('mixedPhotos è vuota, impossibile riordinare');
       return;
     }
-    
+
     if (oldIndex < 0 || oldIndex >= mixedPhotos.length) {
       log('oldIndex $oldIndex fuori range (0-${mixedPhotos.length - 1})');
       return;
@@ -161,7 +194,7 @@ class MotoDetailsController extends GetxController {
 
     _syncListsFromMixed();
     orderChanged.value = true;
-    
+
     log('Riordinamento completato: ${mixedPhotos.length} elementi nella lista mista');
   }
 
@@ -222,7 +255,7 @@ class MotoDetailsController extends GetxController {
           final XFile xfile =
               XFile.fromData(bytes, name: name, mimeType: 'image/jpeg');
           galleryImages.add(xfile);
-        mixedPhotos.add(xfile);
+          mixedPhotos.add(xfile);
           log('Aggiunta foto esistente: $name');
         } else {
           log('Impossibile scaricare ${downloadUrl} (status ${response.statusCode})');
@@ -303,11 +336,11 @@ class MotoDetailsController extends GetxController {
   void removeGalleryImage(int index) {
     // Prevenzione rimozione ultima foto
     if (orderedPhotos.length + galleryImages.length <= 1) {
-      Get.snackbar('', 'È richiesta almeno una foto della moto', 
+      Get.snackbar('', 'È richiesta almeno una foto della moto',
           snackPosition: SnackPosition.BOTTOM);
       return;
     }
-    
+
     if (index >= 0 && index < galleryImages.length) {
       galleryImages.removeAt(index);
       _syncMixedFromLists(); // Sincronizza mixedPhotos
@@ -317,11 +350,11 @@ class MotoDetailsController extends GetxController {
   void removeExistingPhoto(int photoId) {
     // Prevenzione rimozione ultima foto
     if (orderedPhotos.length + galleryImages.length <= 1) {
-      Get.snackbar('', 'È richiesta almeno una foto della moto', 
+      Get.snackbar('', 'È richiesta almeno una foto della moto',
           snackPosition: SnackPosition.BOTTOM);
       return;
     }
-    
+
     existingPhotosToKeep.remove(photoId);
     orderedPhotos.removeWhere((photo) => photo.id == photoId);
     _syncMixedFromLists(); // Sincronizza mixedPhotos
@@ -446,10 +479,10 @@ class MotoDetailsController extends GetxController {
     // 5. SOLO ORA ordina le foto usando l'ordine scelto dall'utente in mixedPhotos
     if (orderChanged.value && mixedPhotos.length > 1) {
       log('Ordinamento richiesto. mixedPhotos.length: ${mixedPhotos.length}');
-      
+
       // Costruisci lista ID seguendo la sequenza scelta dall'utente in mixedPhotos
       final List<int> order = [];
-      
+
       // Mappa ogni elemento di mixedPhotos al suo ID nella moto aggiornata
       for (final element in mixedPhotos) {
         if (element is ApiMedia) {
@@ -460,28 +493,31 @@ class MotoDetailsController extends GetxController {
         } else if (element is XFile) {
           // Nuova foto - trova l'ApiMedia corrispondente nella moto aggiornata
           // Uso l'indice nell'ordine di upload come fallback
-          final int xFileIndex = galleryImages.indexWhere((img) => img.path == element.path);
+          final int xFileIndex =
+              galleryImages.indexWhere((img) => img.path == element.path);
           if (xFileIndex != -1) {
             // Trova le foto che non erano presenti prima del refresh
-            final Set<int> newPhotoIds = moto!.photos.map((p) => p.id).toSet().difference(toKeep);
+            final Set<int> newPhotoIds =
+                moto!.photos.map((p) => p.id).toSet().difference(toKeep);
             final List<int> newPhotoIdsList = newPhotoIds.toList()..sort();
-            
+
             if (xFileIndex < newPhotoIdsList.length) {
               order.add(newPhotoIdsList[xFileIndex]);
             }
           }
         }
       }
-      
+
       log('Ordine calcolato: $order, moto.photos.length: ${moto!.photos.length}');
-      
+
       // Applica l'ordinamento solo se abbiamo tutti gli ID
       if (order.length == moto!.photos.length && order.isNotEmpty) {
-        final ApiResponse orderResp = await provider.orderMotoImages(moto!.id, order);
+        final ApiResponse orderResp =
+            await provider.orderMotoImages(moto!.id, order);
         if (orderResp.success) {
           log('Ordinamento applicato con successo');
           orderChanged.value = false;
-          
+
           // Ricarica la moto per riflettere il nuovo ordine
           final Moto? finalRefresh = await provider.fetchMoto(moto!.id);
           if (finalRefresh != null) {

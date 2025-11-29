@@ -4,8 +4,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:moto_hunters/app/data/models/marca_moto/marca_moto.dart';
 import 'package:moto_hunters/app/data/models/tipo_moto/tipo_moto.dart';
 import 'package:moto_hunters/app/data/models/collezione_moto/collezione_moto.dart';
+import 'package:moto_hunters/app/data/models/moto/moto.dart';
 import 'package:moto_hunters/app/shared/controllers/tipo_marca_controller.dart';
 import 'package:moto_hunters/app/shared/providers/tipo_marca_provider.dart';
+import 'package:moto_hunters/app/shared/providers/moto_provider.dart';
 import 'package:moto_hunters/generated/l10n.dart';
 
 class AddMotoFormController extends GetxController {
@@ -26,6 +28,9 @@ class AddMotoFormController extends GetxController {
   final TextEditingController ccController = TextEditingController();
 
   final TipoMarcaProvider provider;
+  final MotoProvider motoProvider;
+
+  List<Moto> myMotos = [];
 
   TipoMoto get tipoMotoString =>
       availableTipos.where((p0) => p0.nome == tipoController.text.trim()).first;
@@ -33,7 +38,7 @@ class AddMotoFormController extends GetxController {
       .where(((p0) => p0.nome == marcaController.text.trim()))
       .first;
 
-  AddMotoFormController({required this.provider});
+  AddMotoFormController({required this.provider, required this.motoProvider});
 
   @override
   void onInit() {
@@ -43,6 +48,7 @@ class AddMotoFormController extends GetxController {
     marcaController.addListener(_marcaOnChanged);
     modelloController.addListener(_modelloOnChanged);
     // availableNames.addAll(tipoMarcaController.modelli);
+    _loadMyMotos();
   }
 
   @override
@@ -56,6 +62,14 @@ class AddMotoFormController extends GetxController {
     descrizioneController.dispose();
     cvController.dispose();
     ccController.dispose();
+  }
+
+  Future<void> _loadMyMotos() async {
+    try {
+      myMotos = await motoProvider.fetchMotos();
+    } catch (_) {
+      myMotos = [];
+    }
   }
 
   Future<void> _marcaOnChanged() async {
@@ -84,10 +98,20 @@ class AddMotoFormController extends GetxController {
       availableTipos.clear();
       availableTipos.add(collezioneMoto.tipoMoto);
 
-      // TODO: Uncomment after running build_runner to regenerate models
-      // Popola automaticamente cc e cv se disponibili
-      ccController.text = collezioneMoto.cc;
-      cvController.text = collezioneMoto.cv;
+      // Determina se l'utente ha già catturato almeno una moto
+      // associata a questa specifica CollezioneMoto (stessa marca, tipo e modello)
+      final bool hasCapture = myMotos.any((moto) =>
+          moto.marcaMoto.id == collezioneMoto.marcaMoto.id &&
+          moto.tipoMoto.id == collezioneMoto.tipoMoto.id &&
+          moto.nome.toLowerCase() == collezioneMoto.modello.toLowerCase());
+
+      if (hasCapture) {
+        ccController.text = collezioneMoto.cc;
+        cvController.text = collezioneMoto.cv;
+      } else {
+        ccController.text = '??';
+        cvController.text = '??';
+      }
     } else {
       // Fallback al metodo precedente se non trovato
       TipoMoto tipo = await provider.fetchTipoFromMarcaModello(

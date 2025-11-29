@@ -13,7 +13,10 @@ class FotocameraBinding extends Bindings {
         Get.put<TipoMarcaProvider>(TipoMarcaProvider());
     Get.lazyPut<FotocameraController>(() => FotocameraController(provider));
     Get.lazyPut<AddMotoFormController>(
-        () => AddMotoFormController(provider: tipoMarcaProvider),
+        () => AddMotoFormController(
+              provider: tipoMarcaProvider,
+              motoProvider: provider,
+            ),
         fenix: true);
   }
 }

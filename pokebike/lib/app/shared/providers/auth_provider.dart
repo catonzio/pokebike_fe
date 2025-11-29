@@ -13,7 +13,8 @@ class AuthProvider extends GetConnect {
   }
 
   Future<ApiResponse> googleLogin(GoogleSignInAccount googleUser) async {
-    String? token = (await googleUser.authentication).accessToken;
+    final GoogleSignInAuthentication googleAuth = googleUser.authentication;
+    final String? idToken = googleAuth.idToken;
     ApiResponse response = await handleApiEndpoint(
       request,
       "post",
@@ -22,7 +23,7 @@ class AuthProvider extends GetConnect {
         'email': googleUser.email,
         'name_surname': googleUser.displayName,
         'avatarUrl': googleUser.photoUrl,
-        'token': token
+        'token': idToken
       },
       auth: false,
     );
@@ -54,22 +55,20 @@ class AuthProvider extends GetConnect {
   Future<ApiResponse> register(String email, String nome, String cognome,
       String username, String password, String birthdate, XFile? avatar) async {
     final Map<String, dynamic> data = {
-          'name': nome,
-          'surname': cognome,
-          'username': username,
-          'email': email,
-          'password': password,
-          'birthdate': birthdate,
-        };
+      'name': nome,
+      'surname': cognome,
+      'username': username,
+      'email': email,
+      'password': password,
+      'birthdate': birthdate,
+    };
     String contentType = 'application/json';
     if (avatar != null) {
       data['avatar'] = avatar;
       contentType = 'multipart/form-data';
     }
     ApiResponse response = await handleApiEndpoint(request, "post", "/register",
-        data: data,
-        contentType: contentType,
-        auth: false);
+        data: data, contentType: contentType, auth: false);
     return response;
   }
 

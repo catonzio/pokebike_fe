@@ -18,8 +18,7 @@ import 'package:moto_hunters/app/config/constants.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Inizializza AdMob
-  await AdService.initialize(
-      );
+  await AdService.initialize();
   // inizializza Storage e altri servizi con InitialBindings
   InitialBindings().dependencies();
   if (Constants.isLocal) {
@@ -60,6 +59,9 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: Themes.dark(),
       locale: Get.deviceLocale,
+      builder: (context, child) {
+        return SafeArea(child: child ?? SizedBox());
+      },
       fallbackLocale: const Locale('en'),
       //translations: AppTranslations(),
       localizationsDelegates: [
